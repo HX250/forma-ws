@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/api/**'
+      - 'libs/**'
+      - 'package*.json'
+      - 'nx.json'
   workflow_dispatch:
 
 jobs:
@@ -78,9 +83,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A5416CA96DD54D35A85318DA8343CBE4 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FDE3EF381A6241F4AEC849EC8C2A4BD2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C1F02B39EE29429A97D7D0DBE711EDD2 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
