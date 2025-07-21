@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
-      - 'package*.json'
-      - 'nx.json'
   workflow_dispatch:
 
 jobs:
