@@ -75,6 +75,16 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      - name: Debug - Check if secrets are available
+        run: |
+          echo "Client ID length: ${#AZURE_CLIENT_ID}"
+          echo "Tenant ID length: ${#AZURE_TENANT_ID}"  
+          echo "Subscription ID length: ${#AZURE_SUBSCRIPTION_ID}"
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
