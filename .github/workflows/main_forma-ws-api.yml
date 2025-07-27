@@ -82,7 +82,7 @@ jobs:
 
   deploy-backend:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-backend
     permissions:
       id-token: write
       contents: read
