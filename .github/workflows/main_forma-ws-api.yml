@@ -7,7 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  nx-cloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci --legacy-peer-deps
+
+      - run: npx nx run-many -t lint test build
+      - run: npx nx fix-ci
+        if: always()
+
+  build-backend:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,19 +53,14 @@ jobs:
 
       - name: Prepare deployment structure
         run: |
-          # Create a clean deployment directory
           mkdir -p deploy
 
-          # Copy the built app files to root level (Azure expects main.js in root)
           cp -r dist/apps/api/* deploy/
 
-          # Copy package files
           cp package*.json deploy/
 
-          # Copy prisma schema and migrations
           cp -r apps/api/prisma deploy/
 
-          # Copy the generated Prisma client
           mkdir -p deploy/node_modules/.prisma
           cp -r node_modules/.prisma/client deploy/node_modules/.prisma/
 
@@ -66,7 +80,7 @@ jobs:
           name: node-app
           path: release.zip
 
-  deploy:
+  deploy-backend:
     runs-on: ubuntu-latest
     needs: build
     permissions:
