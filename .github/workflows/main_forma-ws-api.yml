@@ -141,6 +141,12 @@ jobs:
       - name: Build Angular app with Nx
         run: npx nx build web --prod
 
+      - name: List downloaded files for debugging
+        run: |
+          echo "--- Listing files in current directory (.): ---"
+          ls -R .
+          echo "----------------------------------------------"
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
