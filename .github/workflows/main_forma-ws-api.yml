@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'apps/api/**'
-      - 'libs/**'
-      - 'package*.json'
-      - 'nx.json'
   workflow_dispatch:
 
 jobs:
@@ -27,7 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Generate Prisma Client
         run: npx prisma generate --schema=apps/api/prisma/schema.prisma
@@ -37,22 +32,33 @@ jobs:
       - name: Build NestJS API with Nx
         run: npx nx build api --prod
 
-      - name: Copy necessary files to dist
+      - name: Prepare deployment structure
         run: |
-          cp package*.json dist/apps/api/
-          cp -r apps/api/prisma dist/apps/api/
-          mkdir -p dist/apps/api/node_modules/.prisma
-          cp -r node_modules/.prisma/client dist/apps/api/node_modules/.prisma/
+          # Create a clean deployment directory
+          mkdir -p deploy
 
-      - name: Install production dependencies in dist
+          # Copy the built app files to root level (Azure expects main.js in root)
+          cp -r dist/apps/api/* deploy/
+
+          # Copy package files
+          cp package*.json deploy/
+
+          # Copy prisma schema and migrations
+          cp -r apps/api/prisma deploy/
+
+          # Copy the generated Prisma client
+          mkdir -p deploy/node_modules/.prisma
+          cp -r node_modules/.prisma/client deploy/node_modules/.prisma/
+
+      - name: Install production dependencies
         run: |
-          cd dist/apps/api
-          npm ci --only=production
+          cd deploy
+          npm ci --only=production --legacy-peer-deps
 
       - name: Zip artifact for deployment
         run: |
-          cd dist/apps/api
-          zip -r ../../../release.zip ./*
+          cd deploy
+          zip -r ../release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
