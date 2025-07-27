@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - forma-ws-api
+name: Build and deploy NestJS and Angular app to Azure - Forma
 
 on:
   push:
