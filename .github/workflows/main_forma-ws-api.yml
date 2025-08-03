@@ -16,7 +16,6 @@ jobs:
       - name: Check for schema changes
         id: check-schema
         run: |
-          # Use git diff to see if the schema file changed between the current and previous commit
           if git diff --name-only HEAD^ HEAD | grep "apps/api/prisma/schema.prisma"; then
             echo "schema_changed=true" >> $GITHUB_OUTPUT
           else
