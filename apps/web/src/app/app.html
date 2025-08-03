@@ -1,8 +1,7 @@
-<main
-  class="flex-col flex items-center gap-8 justify-center h-screen bg-gray-100"
->
-  <div class="text-red-500 w-fit animate-heartbeat text-9xl">❤️</div>
-  <p class="text-pink-500 w-fit font-semibold text-lg animate-heartbeat">
-    You're the sparkle in my everyday, my love! ✨
-  </p>
-</main>
+<input
+  type="text"
+  placeholder="Enter your name"
+  [(ngModel)]="name"
+  class="p-2 border border-gray-300 rounded-md"
+/>
+<button (click)="click()">Click</button>
