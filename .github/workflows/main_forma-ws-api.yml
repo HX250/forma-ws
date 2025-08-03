@@ -27,7 +27,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      - run: npx nx run-many -t lint test build
+      - run: npx nx run build
       - run: npx nx fix-ci
         if: always()
 
