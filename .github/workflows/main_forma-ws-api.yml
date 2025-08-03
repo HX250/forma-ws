@@ -23,15 +23,18 @@ jobs:
             echo "schema_changed=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Install Prisma CLI
+        run: npm install prisma
+
       - name: Run Prisma Migrations
         if: steps.check-schema.outputs.schema_changed == 'true'
-        run: prisma migrate deploy --schema=./apps/api/prisma/schema.prisma
+        run: npx prisma migrate deploy --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Generate Prisma Client (Post-Migration)
         if: steps.check-schema.outputs.schema_changed == 'true'
-        run: prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
