@@ -49,16 +49,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Generate Prisma Migrations
-        run: npx prisma migrate deploy --schema=apps/api/prisma/schema.prisma
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Run Prisma generate
-        run: npx prisma generate --schema=apps/api/prisma/schema.prisma
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
       - name: Build NestJS API with Nx
         run: npx nx build api --prod
 
@@ -111,12 +101,39 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      - name: Debug - Check deployment structure and environment
+        run: |
+          echo "=== Current directory contents ==="
+          ls -la
+          echo "=== Looking for Prisma schema ==="
+          find . -name "schema.prisma" -type f
+          echo "=== Checking DATABASE_URL (first 20 chars only) ==="
+          echo $DATABASE_URL | cut -c1-20
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Run Prisma Migrations
+        run: |
+          SCHEMA_PATH=$(find . -name "schema.prisma" -type f | head -1)
+          echo "Using schema at: $SCHEMA_PATH"
+          npx prisma migrate deploy --schema="$SCHEMA_PATH"
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Generate Prisma Client (Post-Migration)
+        run: |
+          SCHEMA_PATH=$(find . -name "schema.prisma" -type f | head -1)
+          echo "Using schema at: $SCHEMA_PATH"
+          npx prisma generate --schema="$SCHEMA_PATH"
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
