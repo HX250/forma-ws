@@ -61,9 +61,7 @@ jobs:
           cp -r apps/api/prisma deploy/
 
           cd deploy
-          npm ci --omit=dev
-
-          cd ..
+          npm install --production
 
       - name: Zip artifact for deployment
         run: |
