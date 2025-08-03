@@ -107,6 +107,8 @@ jobs:
           ls -la
           echo "=== Looking for Prisma schema ==="
           find . -name "schema.prisma" -type f
+          echo "=== Checking prisma directory ==="
+          ls -la prisma/ || echo "No prisma directory found"
           echo "=== Checking DATABASE_URL (first 20 chars only) ==="
           echo $DATABASE_URL | cut -c1-20
         env:
@@ -120,18 +122,12 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Run Prisma Migrations
-        run: |
-          SCHEMA_PATH=$(find . -name "schema.prisma" -type f | head -1)
-          echo "Using schema at: $SCHEMA_PATH"
-          npx prisma migrate deploy --schema="$SCHEMA_PATH"
+        run: npx prisma migrate deploy --schema=./prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Generate Prisma Client (Post-Migration)
-        run: |
-          SCHEMA_PATH=$(find . -name "schema.prisma" -type f | head -1)
-          echo "Using schema at: $SCHEMA_PATH"
-          npx prisma generate --schema="$SCHEMA_PATH"
+        run: npx prisma generate --schema=./prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
