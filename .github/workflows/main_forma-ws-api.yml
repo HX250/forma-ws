@@ -115,8 +115,11 @@ jobs:
 
   build-frontend:
     runs-on: ubuntu-latest
+    needs: database-migration-and-generate
     steps:
       - uses: actions/checkout@v4
+
+      - run: npm ci --legacy-peer-deps
 
       - name: Build Angular app with Nx
         run: npx nx build web --prod
