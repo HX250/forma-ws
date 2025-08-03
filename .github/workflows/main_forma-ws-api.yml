@@ -121,13 +121,24 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Setup Node.js for deployment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install Prisma CLI fresh
+        run: |
+          npm install -g prisma@latest
+          npm install -g @prisma/client@latest
+
       - name: Run Prisma Migrations
-        run: npx prisma migrate deploy --schema=./prisma/schema.prisma
+        run: prisma migrate deploy --schema=./prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Generate Prisma Client (Post-Migration)
-        run: npx prisma generate --schema=./prisma/schema.prisma
+        run: prisma generate --schema=./prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
