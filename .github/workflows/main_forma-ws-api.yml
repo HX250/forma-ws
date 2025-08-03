@@ -12,16 +12,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          filter: tree:0
-          fetch-depth: 0
+          fetch-depth: 2
 
-      - name: Setup Node.js and Cache
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+
+      - name: Cache Node.js modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci --legacy-peer-deps
 
       - name: Check for schema.prisma changes
@@ -60,11 +68,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js and Cache
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Build NestJS API with Nx
         run: npx nx build api --prod
@@ -75,7 +90,7 @@ jobs:
           cp -r dist/apps/api/* deploy/
           cp package*.json deploy/
           cp -r apps/api/prisma deploy/
-          npm ci --only=production --prefix deploy
+          cp -r node_modules deploy/node_modules
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -109,11 +124,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js and Cache
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Build and Deploy Frontend to Static Web App
         id: builddeploy
