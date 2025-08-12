@@ -71,6 +71,7 @@ jobs:
         with:
           name: node-app
           path: release.zip
+          retention-days: 3
 
   deploy-backend:
     runs-on: ubuntu-latest
@@ -130,6 +131,7 @@ jobs:
         with:
           name: frontend-build
           path: dist/apps/web/browser
+          retention-days: 3
 
   deploy-frontend:
     runs-on: ubuntu-latest

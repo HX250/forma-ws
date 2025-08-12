@@ -77,11 +77,10 @@ This project is built as a **monorepo** using **Nx Workspace** to manage all app
 
 ## Project Structure
 
-- `/apps/frontend`: The Angular application.
-- `/apps/backend`: The NestJS API.
-- `/libs`: Shared libraries and data models.
-- `/prisma`: The Prisma schema and migration files.
-- `/env`: Environment configuration files for different applications and environments.
+- `/apps/web`: The Angular application.
+- `/apps/api`: The NestJS API.
+- `/apps/libs`: Shared libraries and data models.
+- `/apps/api/prisma`: The Prisma schema and migration files.
 
 ## Future Enhancements (MVP Exclusions)
 
