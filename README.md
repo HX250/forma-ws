@@ -1,82 +1,93 @@
-# FormaWs
+# Forma Project - Fitness Coaching App
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## Overview
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Forma is a modern, coach-centric fitness coaching platform designed to streamline client management and progress tracking. It provides coaches with the tools to create and manage client profiles, set personalized goals, and track key metrics. Clients, in turn, get a straightforward interface to log their progress based on the permissions set by their coach.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Technical Stack
 
-## Finish your CI setup
+This project is built as a **monorepo** using **Nx Workspace** to manage all applications and shared libraries.
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/RHX3CaH3SG)
+- **Frontend**: An **Angular 20** application, deployed to **Azure Static Web Apps**.
+- **Backend**: A **NestJS** API server, deployed to **Azure App Service**.
+- **Database**: **PostgreSQL**, managed by **Prisma** for schema management and migrations.
+- **ORM**: **Prisma**, which provides type-safe database access and is configured with a `schema.prisma` file.
 
+## Features
 
-## Run tasks
+### Coach Features
 
-To run the dev server for your app, use:
+- **Client Management**: Create, view, and delete client profiles.
+- **Client Profile**: Set up complete client profiles with personal details, medical conditions, and fitness experience.
+- **Permission System**: Toggle client tracking permissions for exercise, sleep, nutrition, and water intake.
+- **Goal Setting**: Assign various goal types (e.g., weight loss, muscle gain) and automatically generate calorie and macro targets.
+- **Analytics**: A basic dashboard to monitor client progress trends.
+- **Check-ins**: Schedule weekly weigh-ins and check-ins with clients.
 
-```sh
-npx nx serve forma
-```
+### Client Features
 
-To create a production bundle:
+- **Secure Access**: Log in with a one-time password and set a permanent password on the first login.
+- **Permission-Based Tracking**: Log details for exercise, sleep, nutrition, and water intake based on coach-enabled permissions.
+- **Progress Viewing**: View goals, calorie targets, and macro goals assigned by the coach.
+- **Weigh-ins**: Track weekly weight and optional body composition data.
 
-```sh
-npx nx build forma
-```
+## Getting Started
 
-To see all available targets to run for a project, run:
+### Prerequisites
 
-```sh
-npx nx show project forma
-```
+- Node.js (LTS version)
+- npm or yarn
+- A running PostgreSQL instance (either local or cloud-based)
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Installation
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1.  **Clone the repository**:
 
-## Add new projects
+    ```bash
+    git clone [repository-url]
+    cd forma-project
+    ```
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+2.  **Install dependencies**:
 
-Use the plugin's generator to create new projects.
+    ```bash
+    npm install
+    ```
 
-To generate a new application, use:
+3.  **Configure environment variables**:
+    Create `.env` files for the frontend and backend based on the examples in the `/env` folder. Be sure to configure your `DATABASE_URL` to point to your PostgreSQL instance.
 
-```sh
-npx nx g @nx/angular:app demo
-```
+4.  **Run Prisma migrations**:
 
-To generate a new library, use:
+    ```bash
+    # Apply the initial database schema from prisma/schema.prisma
+    npx nx prisma migrate dev --name init
+    ```
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+5.  **Start the applications**:
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+    ```bash
+    # To run all applications (frontend and backend)
+    npx nx serve
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+    # Or, to run a specific application
+    npx nx serve frontend
+    npx nx serve backend
+    ```
 
+## Project Structure
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- `/apps/frontend`: The Angular application.
+- `/apps/backend`: The NestJS API.
+- `/libs`: Shared libraries and data models.
+- `/prisma`: The Prisma schema and migration files.
+- `/env`: Environment configuration files for different applications and environments.
 
-## Install Nx Console
+## Future Enhancements (MVP Exclusions)
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+The following features were intentionally excluded from the initial release but are planned for future development:
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Messaging system** between coaches and clients.
+- **Photo uploads** for progress tracking.
+- **Workout plan templates** and assignment.
+- **Certificate verification** for coaches.

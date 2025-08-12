@@ -3,6 +3,226 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum ActivityLevel {
+  SEDENTARY
+  LIGHTLY_ACTIVE
+  MODERATELY_ACTIVE
+  VERY_ACTIVE
+  EXTREMELY_ACTIVE
+}
+
+enum FitnessExperience {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum GoalType {
+  LOSE_WEIGHT
+  GAIN_WEIGHT
+  MAINTAIN_WEIGHT
+  BUILD_MUSCLE
+  IMPROVE_ENDURANCE
+  GENERAL_FITNESS
+}
+
+enum SpecializationField {
+  POWERLIFTING
+  CROSSFIT
+  BODYBUILDING
+  WEIGHT_LOSS
+  STRENGTH_TRAINING
+  CARDIO
+  YOGA
+  PILATES
+  SPORTS_PERFORMANCE
+  REHABILITATION
+  NUTRITION
+}
+
+enum CommunicationMethod {
+  EMAIL
+  PHONE
+  TEXT_MESSAGE
+  IN_APP_MESSAGING
+}
+
+model Coach {
+  id                     String                 @id @default(cuid())
+  email                  String                 @unique
+  password               String
+  firstName              String
+  lastName               String
+  gender                 Gender
+  yearsOfExperience      Int
+  specializationFields   SpecializationField[]
+  certificates           String[]               
+  profilePhoto           String?               
+  bio                    String?
+  pricing                Decimal?               @db.Decimal(10, 2)
+  availability           String?                
+  timezone               String?
+  communicationMethods   CommunicationMethod[]
+  
+  clients                Client[]
+  
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+
+  @@map("coaches")
+}
+
+model Client {
+  id                     String                 @id @default(cuid())
+  email                  String                 @unique
+  oneTimePassword        String?              
+  password               String?               
+  isFirstLogin           Boolean                @default(true)
+  firstName              String
+  lastName               String
+  gender                 Gender
+  birthDate              DateTime
+  currentWeight          Decimal                @db.Decimal(5, 2)
+  height                 Decimal                @db.Decimal(5, 2) 
+  activityLevel          ActivityLevel
+  medicalConditions      String?                
+  fitnessExperience      FitnessExperience
+  
+
+  coachId                String
+  coach                  Coach                  @relation(fields: [coachId], references: [id], onDelete: Cascade)
+  
+  canTrackExercise       Boolean                @default(false)
+  canTrackSleep          Boolean                @default(false)
+  canTrackNutrition      Boolean                @default(false)
+  canTrackWater          Boolean                @default(false)
+  
+  goals                  ClientGoal?
+  
+  exerciseEntries        ExerciseEntry[]
+  sleepEntries           SleepEntry[]
+  nutritionEntries       NutritionEntry[]
+  waterEntries           WaterEntry[]
+  weighIns               WeighIn[]
+  
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+
+  @@map("clients")
+}
+
+model ClientGoal {
+  id                     String                 @id @default(cuid())
+  clientId               String                 @unique
+  client                 Client?                @relation(fields: [clientId], references: [id])
+  
+  goalType               GoalType[]
+  targetWeight           Decimal?               @db.Decimal(5, 2)
+  targetDate             DateTime?
+  calorieTarget          Int?                   
+  proteinTarget          Decimal?               @db.Decimal(6, 2) 
+  carbTarget             Decimal?               @db.Decimal(6, 2) 
+  fatTarget              Decimal?               @db.Decimal(6, 2) 
+  isActive               Boolean                @default(true)
+  
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+
+  @@map("client_goals")
+}
+
+model ExerciseEntry {
+  id                     String                 @id @default(cuid())
+  clientId               String
+  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  exerciseName           String
+  sets                   Int?
+  reps                   Int?
+  weight                 Decimal?               @db.Decimal(6, 2)
+  duration               Int?                   
+  notes                  String?
+  date                   DateTime               @default(now())
+  
+  createdAt              DateTime               @default(now())
+
+  @@map("exercise_entries")
+}
+
+model SleepEntry {
+  id                     String                 @id @default(cuid())
+  clientId               String
+  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  bedTime                DateTime
+  wakeTime               DateTime
+  hoursSlept             Decimal                @db.Decimal(4, 2)
+  sleepQuality           Int?                 
+  notes                  String?
+  date                   DateTime               @default(now()) @db.Date
+  
+  createdAt              DateTime               @default(now())
+  
+
+  @@map("sleep_entries")
+}
+
+model NutritionEntry {
+  id                     String                 @id @default(cuid())
+  clientId               String
+  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  foodName               String
+  calories               Int
+  protein                Decimal?               @db.Decimal(6, 2)
+  carbs                  Decimal?               @db.Decimal(6, 2)
+  fat                    Decimal?               @db.Decimal(6, 2)
+  servingSize            String?
+  mealType               String?                
+  date                   DateTime               @default(now()) @db.Date
+  
+  createdAt              DateTime               @default(now())
+
+  @@map("nutrition_entries")
+}
+
+model WaterEntry {
+  id                     String                 @id @default(cuid())
+  clientId               String
+  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  amount                 Decimal                @db.Decimal(6, 2) 
+  date                   DateTime               @default(now()) @db.Date
+  
+  createdAt              DateTime               @default(now())
+
+  @@map("water_entries")
+}
+
+model WeighIn {
+  id                     String                 @id @default(cuid())
+  clientId               String
+  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  weight                 Decimal                @db.Decimal(5, 2) 
+  bodyFatPercentage      Decimal?               @db.Decimal(5, 2)
+  muscleMass             Decimal?               @db.Decimal(5, 2)
+  notes                  String?
+  date                   DateTime               @default(now()) @db.Date
+  
+  createdAt              DateTime               @default(now())
+
+  @@map("weigh_ins")
 }
