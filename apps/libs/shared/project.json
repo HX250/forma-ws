@@ -1,0 +1,21 @@
+{
+  "name": "shared",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/libs/shared/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/libs/shared",
+        "main": "apps/libs/shared/src/index.ts",
+        "tsConfig": "apps/libs/shared/tsconfig.lib.json",
+        "assets": ["apps/libs/shared/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}

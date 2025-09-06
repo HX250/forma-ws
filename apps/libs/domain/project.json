@@ -1,0 +1,21 @@
+{
+  "name": "domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/libs/domain/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/libs/domain",
+        "main": "apps/libs/domain/src/index.ts",
+        "tsConfig": "apps/libs/domain/tsconfig.lib.json",
+        "assets": ["apps/libs/domain/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}
