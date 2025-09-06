@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@forma-ws/domain": ["apps/libs/domain/src/index.ts"],
+      "@forma-ws/shared": ["apps/libs/shared/src/index.ts"],
+      "@forma-ws/types": ["apps/libs/types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
