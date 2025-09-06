@@ -76,6 +76,11 @@ jobs:
           cp package*.json deploy/
           cp -r apps/api/prisma deploy/
 
+      - name: Install production dependencies in deploy folder
+        run: |
+          cd deploy
+          npm ci --omit=dev --legacy-peer-deps
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
