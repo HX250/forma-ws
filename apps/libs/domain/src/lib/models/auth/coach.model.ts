@@ -9,7 +9,6 @@ import { RegisterCoachDto } from '@forma-ws/shared';
 
 export class Coach {
   constructor(
-    public readonly id: string,
     public readonly email: string,
     private password: string,
     public readonly firstName: string,
@@ -25,7 +24,8 @@ export class Coach {
     public readonly availability?: string,
     public readonly timezone?: string,
     public readonly createdAt: Date = new Date(),
-    public readonly updatedAt: Date = new Date()
+    public readonly updatedAt: Date = new Date(),
+    public readonly id?: string
   ) {}
 
   async validatePassword(plainPassword: string): Promise<boolean> {
@@ -33,11 +33,9 @@ export class Coach {
   }
 
   static async createWithHashedPassword(
-    coachId: string,
     coach: RegisterCoachDto
   ): Promise<Coach> {
     return new Coach(
-      coachId,
       coach.email,
       await bcrypt.hash(coach.password, 12),
       coach.firstName,
@@ -68,7 +66,6 @@ export class Coach {
   }
 
   toPrisma(): {
-    id: string;
     email: string;
     password: string;
     firstName: string;
@@ -85,7 +82,6 @@ export class Coach {
     communicationMethods: CommunicationMethod[];
   } {
     return {
-      id: this.id,
       email: this.email,
       password: this.password,
       firstName: this.firstName,

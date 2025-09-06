@@ -87,6 +87,8 @@ export class RegisterCoachDto {
 }
 
 export class RegisterClientDto {
+  id!: string;
+
   @IsEmail()
   email!: string;
 

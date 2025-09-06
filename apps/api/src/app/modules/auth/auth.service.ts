@@ -34,14 +34,12 @@ export class AuthService {
 
     if (userType === UserType.COACH) {
       user = await this.coachRepository.findByEmail(email);
-      if (!user) {
-        throw new UnauthorizedException('Invalid credentials');
-      }
     } else {
       user = await this.clientRepository.findByEmail(email);
-      if (!user) {
-        throw new UnauthorizedException('Invalid credentials');
-      }
+    }
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const isValidPassword = await user.validatePassword(password);
@@ -65,8 +63,7 @@ export class AuthService {
       throw new ConflictException('Coach with this email already exists');
     }
 
-    const coachId = this.generateId();
-    const coach = await Coach.createWithHashedPassword(coachId, registerDto);
+    const coach = await Coach.createWithHashedPassword(registerDto);
 
     const savedCoach = await this.coachRepository.save(coach);
 
@@ -88,11 +85,9 @@ export class AuthService {
       throw new ConflictException('Client with this email already exists');
     }
 
-    const clientId = this.generateId();
     const oneTimePassword = this.generateOneTimePassword();
 
     const client = await Client.createWithOneTimePassword(
-      clientId,
       registerDto.email,
       registerDto.coachId,
       registerDto.firstName,
@@ -179,11 +174,7 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  generateOneTimePassword(): string {
+  private generateOneTimePassword(): string {
     return randomBytes(4).toString('hex').toUpperCase();
-  }
-
-  private generateId(): string {
-    return randomBytes(12).toString('hex');
   }
 }

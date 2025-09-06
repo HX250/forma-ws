@@ -9,12 +9,13 @@ import { AuthService } from './auth.service';
 import { CoachRepository } from '../../repositories/auth/coach.repository';
 import { ClientRepository } from '../../repositories/auth/client.repository';
 import { JwtStrategy } from '../strategies/jwt.strategy';
-import { DatabaseService } from 'apps/api/src/database/database.service';
+import { DatabaseModule } from 'apps/api/src/database/database.module';
 
 @Module({
   imports: [
     ConfigModule,
     PassportModule,
+    DatabaseModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -27,13 +28,7 @@ import { DatabaseService } from 'apps/api/src/database/database.service';
     }),
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    CoachRepository,
-    ClientRepository,
-    JwtStrategy,
-    DatabaseService,
-  ],
+  providers: [AuthService, CoachRepository, ClientRepository, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

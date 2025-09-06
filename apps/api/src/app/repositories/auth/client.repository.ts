@@ -40,40 +40,15 @@ export class ClientRepository {
   }
 
   async save(client: Client): Promise<Client> {
-    const data = {
-      id: client.id,
-      email: client.email,
-      coachId: client.coachId,
-      password: client.getPasswordHash(),
-      oneTimePassword: client.getOneTimePassword(),
-      isFirstLogin: client.isFirstLogin,
-      firstName: client.firstName,
-      lastName: client.lastName,
-      gender: client.gender,
-      birthDate: client.birthDate,
-      currentWeight: client.currentWeight,
-      height: client.height,
-      activityLevel: client.activityLevel,
-      medicalConditions: client.medicalConditions,
-      fitnessExperience: client.fitnessExperience,
-      canTrackExercise: client.canTrackExercise,
-      canTrackSleep: client.canTrackSleep,
-      canTrackNutrition: client.canTrackNutrition,
-      canTrackWater: client.canTrackWater,
-    };
+    const data = client.toPrisma();
 
-    const savedClient = await this.prisma.client.upsert({
-      where: { id: client.id },
-      update: data,
-      create: data,
-    });
+    const savedClient = await this.prisma.client.create({ data });
 
     return this.getParsedClient(savedClient);
   }
 
   private getParsedClient(client: any): Client {
     return new Client(
-      client.id,
       client.email,
       client.coachId,
       client.password,
@@ -83,8 +58,8 @@ export class ClientRepository {
       client.lastName,
       client.gender,
       client.birthDate,
-      Number(client.currentWeight),
-      Number(client.height),
+      client.currentWeight.toNumber(),
+      client.height.toNumber(),
       client.activityLevel,
       client.fitnessExperience,
       client.canTrackExercise,
@@ -93,7 +68,8 @@ export class ClientRepository {
       client.canTrackWater,
       client.medicalConditions,
       client.createdAt,
-      client.updatedAt
+      client.updatedAt,
+      client.id
     );
   }
 }

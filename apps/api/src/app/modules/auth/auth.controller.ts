@@ -19,6 +19,7 @@ import {
   RegisterClientDto,
   SetClientPasswordDto,
 } from '@forma-ws/shared';
+import { AuthTokens } from '@forma-ws/types';
 
 @Controller('auth')
 export class AuthController {
@@ -56,7 +57,9 @@ export class AuthController {
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  async refreshTokens(@Body() refreshDto: RefreshTokenDto) {
+  async refreshTokens(
+    @Body() refreshDto: RefreshTokenDto
+  ): Promise<AuthTokens> {
     return this.authService.refreshTokens(refreshDto.refreshToken);
   }
 }

@@ -29,18 +29,13 @@ export class CoachRepository {
   async save(coach: Coach): Promise<Coach> {
     const data = coach.toPrisma();
 
-    const savedCoach = await this.prisma.coach.upsert({
-      where: { id: coach.id },
-      update: data,
-      create: data,
-    });
+    const savedCoach = await this.prisma.coach.create({ data });
 
     return this.getParsedCoach(savedCoach);
   }
 
   private getParsedCoach(coach: any): Coach {
     return new Coach(
-      coach.id,
       coach.email,
       coach.password,
       coach.firstName,
@@ -52,11 +47,12 @@ export class CoachRepository {
       coach.communicationMethods,
       coach.profilePhoto,
       coach.bio,
-      Number(coach.pricing),
+      coach.pricing.toNumber(),
       coach.availability,
       coach.timezone,
       coach.createdAt,
-      coach.updatedAt
+      coach.updatedAt,
+      coach.id
     );
   }
 }

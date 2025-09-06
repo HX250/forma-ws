@@ -5,14 +5,26 @@ import { AppService } from './app.service';
 import { DatabaseModule } from '../database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 
+const getEnvFilePath = () => {
+  const nodeEnv = process.env.NODE_ENV || 'development';
+
+  switch (nodeEnv) {
+    case 'production':
+      return 'env/env-be/backend/prod.env';
+    case 'development':
+    default:
+      return 'env/env-be/backend/dev.env';
+  }
+};
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['env/env-be/backend/dev.env', 'env/env-be/backend/prod.env'],
+      envFilePath: [getEnvFilePath()],
     }),
-    DatabaseModule, 
-    AuthModule
+    DatabaseModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,9 +4,9 @@ export interface AuthTokens {
 }
 
 export interface AuthPayload {
-  sub: string;
+  sub?: string;
   email: string;
-  userType: 'COACH' | 'CLIENT';
+  userType: UserType;
   coachId?: string;
 }
 
