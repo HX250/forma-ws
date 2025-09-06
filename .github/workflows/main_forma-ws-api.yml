@@ -71,11 +71,10 @@ jobs:
       - name: Prepare deployment structure
         run: |
           mkdir -p deploy
-          cp -r dist/apps/api/* deploy/          
-          cp package*.json deploy/             
-          cp -r apps/api/prisma deploy/        
-          cd deploy
-          npm ci --omit=dev --legacy-peer-deps
+
+          cp -r dist/apps/api/* deploy/
+          cp package*.json deploy/
+          cp -r apps/api/prisma deploy/
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -101,6 +100,8 @@ jobs:
 
   build-and-deploy-frontend:
     runs-on: ubuntu-latest
+    needs: database-migration-and-generate
+
     permissions:
       id-token: write
       contents: read
