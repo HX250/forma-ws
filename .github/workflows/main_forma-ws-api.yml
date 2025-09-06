@@ -33,7 +33,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Generate Prisma Client
-        if: steps.check-schema.outputs.schema_changed == 'true'
         run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -127,4 +126,3 @@ jobs:
           api_location: ''
           output_location: ''
           skip_app_build: true
-
