@@ -6,10 +6,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
-import { CoachRepository } from '../../repositories/auth/coach.repository';
-import { ClientRepository } from '../../repositories/auth/client.repository';
+import { CoachRepository } from '@forma-ws/domain';
+import { ClientRepository } from '@forma-ws/domain';
 import { JwtStrategy } from '../strategies/jwt.strategy';
-import { DatabaseModule } from 'apps/api/src/database/database.module';
+import { DatabaseModule } from '@forma-ws/shared';
 
 @Module({
   imports: [

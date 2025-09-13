@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
 import { Coach } from '@forma-ws/domain';
-import { DatabaseService } from 'apps/api/src/database/database.service';
+import { DatabaseService } from '@forma-ws/shared';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CoachRepository {

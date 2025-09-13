@@ -6,8 +6,8 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { randomBytes } from 'crypto';
-import { CoachRepository } from '../../repositories/auth/coach.repository';
-import { ClientRepository } from '../../repositories/auth/client.repository';
+import { CoachRepository } from '@forma-ws/domain';
+import { ClientRepository } from '@forma-ws/domain';
 import { Client, Coach } from '@forma-ws/domain';
 import { AuthPayload, AuthTokens, UserType } from '@forma-ws/types';
 import {
