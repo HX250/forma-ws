@@ -14,7 +14,7 @@ import { DatabaseModule } from 'apps/api/src/database/database.module';
 @Module({
   imports: [
     ConfigModule,
-    PassportModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     DatabaseModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -29,6 +29,6 @@ import { DatabaseModule } from 'apps/api/src/database/database.module';
   ],
   controllers: [AuthController],
   providers: [AuthService, CoachRepository, ClientRepository, JwtStrategy],
-  exports: [AuthService],
+  exports: [AuthService, PassportModule],
 })
 export class AuthModule {}
