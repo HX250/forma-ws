@@ -9,14 +9,14 @@ import {
   IsArray,
   Min,
 } from 'class-validator';
-import { UserType } from '@forma-ws/types';
 import {
+  UserType,
   Gender,
   ActivityLevel,
   FitnessExperience,
   SpecializationField,
   CommunicationMethod,
-} from '@forma-ws/domain';
+} from '../../enums';
 
 export class LoginDto {
   @IsEmail()

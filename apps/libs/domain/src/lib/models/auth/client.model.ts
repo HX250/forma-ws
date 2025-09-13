@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
-import { UserType } from '@forma-ws/types';
+import { UserType } from '@forma-ws/shared';
 import { AuthPayload } from '@forma-ws/types';
-import { Gender, ActivityLevel, FitnessExperience } from '@forma-ws/domain';
+import { Gender, ActivityLevel, FitnessExperience } from '@forma-ws/shared';
 
 export class Client {
   constructor(

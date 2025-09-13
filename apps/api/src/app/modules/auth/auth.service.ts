@@ -9,13 +9,14 @@ import { randomBytes } from 'crypto';
 import { CoachRepository } from '../../repositories/auth/coach.repository';
 import { ClientRepository } from '../../repositories/auth/client.repository';
 import { Client, Coach } from '@forma-ws/domain';
-import { AuthPayload, AuthTokens, UserType } from '@forma-ws/types';
+import { AuthPayload, AuthTokens } from '@forma-ws/types';
 import {
   AuthResponseDto,
   LoginDto,
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
+  UserType,
 } from '@forma-ws/shared';
 
 @Injectable()

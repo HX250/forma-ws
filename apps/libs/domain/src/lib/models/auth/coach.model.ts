@@ -1,10 +1,11 @@
 import * as bcrypt from 'bcrypt';
-import { AuthPayload, UserType } from '@forma-ws/types';
+import { AuthPayload } from '@forma-ws/types';
+import { UserType } from '@forma-ws/shared';
 import {
   Gender,
   SpecializationField,
   CommunicationMethod,
-} from '@forma-ws/domain';
+} from '@forma-ws/shared';
 import { RegisterCoachDto } from '@forma-ws/shared';
 
 export class Coach {
