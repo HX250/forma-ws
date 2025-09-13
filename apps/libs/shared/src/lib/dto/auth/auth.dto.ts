@@ -9,8 +9,8 @@ import {
   IsArray,
   Min,
 } from 'class-validator';
+import { UserType } from '@forma-ws/types';
 import {
-  UserType,
   Gender,
   ActivityLevel,
   FitnessExperience,

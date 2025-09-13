@@ -1,6 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { AuthPayload } from '@forma-ws/types';
-import { UserType } from '@forma-ws/shared';
+import { AuthPayload, UserType } from '@forma-ws/types';
 import {
   Gender,
   SpecializationField,

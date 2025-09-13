@@ -1,4 +1,7 @@
-import { UserType } from '@forma-ws/shared';
+export enum UserType {
+  COACH = 'COACH',
+  CLIENT = 'CLIENT',
+}
 
 export interface AuthTokens {
   accessToken: string;
