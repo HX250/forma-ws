@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import { UserType } from '@forma-ws/types';
 import { AuthPayload } from '@forma-ws/types';
-import { Gender, ActivityLevel, FitnessExperience } from '@prisma/client';
+import { Gender, ActivityLevel, FitnessExperience } from '@forma-ws/domain';
 
 export class Client {
   constructor(

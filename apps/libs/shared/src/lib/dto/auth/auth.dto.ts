@@ -16,7 +16,7 @@ import {
   FitnessExperience,
   SpecializationField,
   CommunicationMethod,
-} from '@prisma/client';
+} from '@forma-ws/domain';
 
 export class LoginDto {
   @IsEmail()

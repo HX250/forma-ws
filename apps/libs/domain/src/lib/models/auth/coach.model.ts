@@ -4,7 +4,7 @@ import {
   Gender,
   SpecializationField,
   CommunicationMethod,
-} from '@prisma/client';
+} from '@forma-ws/domain';
 import { RegisterCoachDto } from '@forma-ws/shared';
 
 export class Coach {
