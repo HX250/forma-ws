@@ -41,7 +41,7 @@ export class AuthController {
   @Post('register/client')
   async registerClient(
     @Body() registerDto: RegisterClientDto
-  ): Promise<AuthResponseDto> {
+  ): Promise<{ userId: string }> {
     return this.authService.registerClient(registerDto);
   }
 
