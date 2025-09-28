@@ -6,15 +6,11 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Get the ConfigService instance to access environment variables.
   const configService = app.get(ConfigService);
 
-  // --- BEGIN DEBUGGING CODE ---
-  // Log the value of the JWT_SECRET to see what the application is reading.
-  // This will confirm if the variable is being correctly loaded at startup.
   const jwtSecret = configService.get<string>('JWT_SECRET');
   Logger.log(`[DEBUG] JWT_SECRET value: "${jwtSecret}"`, 'Bootstrap');
-  // --- END DEBUGGING CODE ---
+  console.log(process.env.DATABASE_URL);
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
