@@ -6,10 +6,6 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const configService = app.get(ConfigService);
-
-  const jwtSecret = configService.get<string>('JWT_SECRET');
-  Logger.log(`[DEBUG] JWT_SECRET value: "${jwtSecret}"`, 'Bootstrap');
   const databaseUrl = (process.env.DATABASE_URL || '').trim();
   console.log('DATABASE_URL:', JSON.stringify(databaseUrl));
 
