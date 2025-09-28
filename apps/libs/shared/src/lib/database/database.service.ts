@@ -12,4 +12,12 @@ export class DatabaseService implements OnModuleInit {
   async onModuleDestroy() {
     await this.prisma.$disconnect();
   }
+
+  get client() {
+    return this.prisma.client;
+  }
+
+  get coach() {
+    return this.prisma.coach;
+  }
 }
