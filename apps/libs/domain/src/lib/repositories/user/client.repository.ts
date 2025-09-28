@@ -1,4 +1,5 @@
-import { BaseRepository, Client } from '@forma-ws/domain';
+import { Client } from '../../models/auth/client.model';
+import { BaseRepository } from '../base.repository';
 import { DatabaseService } from '@forma-ws/shared';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';

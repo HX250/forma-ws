@@ -1,4 +1,5 @@
-import { BaseRepository, Coach } from '@forma-ws/domain';
+import { Coach } from '../../models/auth/coach.model';
+import { BaseRepository } from '../base.repository';
 import { DatabaseService } from '@forma-ws/shared';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
