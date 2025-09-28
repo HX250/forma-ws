@@ -1,13 +1,9 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  const databaseUrl = (process.env.DATABASE_URL || '').trim();
-  console.log('DATABASE_URL:', JSON.stringify(databaseUrl));
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);

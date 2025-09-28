@@ -1,23 +1,13 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { prisma } from './bootstrap-prisma';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class DatabaseService implements OnModuleInit {
-  private prisma = prisma;
-
+export class DatabaseService extends PrismaClient implements OnModuleInit {
   async onModuleInit() {
-    await this.prisma.$connect();
+    await this.$connect();
   }
 
   async onModuleDestroy() {
-    await this.prisma.$disconnect();
-  }
-
-  get client() {
-    return this.prisma.client;
-  }
-
-  get coach() {
-    return this.prisma.coach;
+    await this.$disconnect();
   }
 }
