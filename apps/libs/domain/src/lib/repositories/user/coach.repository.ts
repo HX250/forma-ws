@@ -1,40 +1,47 @@
-import { Coach } from '@forma-ws/domain';
+import { BaseRepository, Coach } from '@forma-ws/domain';
 import { DatabaseService } from '@forma-ws/shared';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class CoachRepository {
-  constructor(private prisma: DatabaseService) {}
+export class CoachRepository extends BaseRepository<Coach> {
+  constructor(private prisma: DatabaseService) {
+    super();
+  }
 
-  async findById(id: string): Promise<Coach | null> {
+  override async findById(id: string): Promise<Coach | null> {
     const coach = await this.prisma.coach.findUnique({
       where: { id },
     });
 
     if (!coach) return null;
 
-    return this.getParsedCoach(coach);
+    return this.parseEntity(coach);
   }
 
-  async findByEmail(email: string): Promise<Coach | null> {
+  override async findByEmail(email: string): Promise<Coach | null> {
     const coach = await this.prisma.coach.findUnique({
       where: { email },
     });
 
     if (!coach) return null;
 
-    return this.getParsedCoach(coach);
+    return this.parseEntity(coach);
   }
 
-  async save(coach: Coach): Promise<Coach> {
+  override async save(coach: Coach): Promise<Coach> {
     const data = coach.toPrisma();
 
     const savedCoach = await this.prisma.coach.create({ data });
 
-    return this.getParsedCoach(savedCoach);
+    return this.parseEntity(savedCoach);
   }
 
-  private getParsedCoach(coach: any): Coach {
+  protected override get prismaModel(): Prisma.CoachDelegate {
+    return this.prisma.coach;
+  }
+
+  protected override parseEntity(coach: any): Coach {
     return new Coach(
       coach.email,
       coach.password,

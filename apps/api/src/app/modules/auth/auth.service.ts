@@ -77,7 +77,7 @@ export class AuthService {
 
   async registerClient(
     registerDto: RegisterClientDto
-  ): Promise<AuthResponseDto> {
+  ): Promise<{ userId: string }> {
     const existingClient = await this.clientRepository.findByEmail(
       registerDto.email
     );
@@ -104,10 +104,7 @@ export class AuthService {
 
     const savedClient = await this.clientRepository.save(client);
 
-    const tokens = await this.generateTokens(savedClient.getAuthPayload());
-
     return {
-      ...tokens,
       userId: savedClient.id,
     };
   }

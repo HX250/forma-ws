@@ -9,4 +9,8 @@ import { RouterModule } from '@angular/router';
 })
 export class App {
   protected title = 'Forma';
+
+  toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+  }
 }

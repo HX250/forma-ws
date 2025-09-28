@@ -1,32 +1,43 @@
-import { Client } from '@forma-ws/domain';
+import { BaseRepository, Client } from '@forma-ws/domain';
 import { DatabaseService } from '@forma-ws/shared';
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class ClientRepository {
-  constructor(private prisma: DatabaseService) {}
+export class ClientRepository extends BaseRepository<Client> {
+  constructor(private prisma: DatabaseService) {
+    super();
+  }
 
-  async findById(id: string): Promise<Client | null> {
+  override async findById(id: string): Promise<Client | null> {
     const client = await this.prisma.client.findUnique({
       where: { id },
     });
 
     if (!client) return null;
 
-    return this.getParsedClient(client);
+    return this.parseEntity(client);
   }
 
-  async findByEmail(email: string): Promise<Client | null> {
+  override async findByEmail(email: string): Promise<Client | null> {
     const client = await this.prisma.client.findUnique({
       where: { email },
     });
 
     if (!client) return null;
 
-    return this.getParsedClient(client);
+    return this.parseEntity(client);
   }
 
-  async updateAfterPasswordSet(client: Client): Promise<Client> {
+  override async save(client: Client): Promise<Client> {
+    const data = client.toPrisma();
+
+    const savedClient = await this.prisma.client.create({ data });
+
+    return this.parseEntity(savedClient);
+  }
+
+ async updateAfterPasswordSet(client: Client): Promise<Client> {
     const updated = await this.prisma.client.update({
       where: { id: client.id },
       data: {
@@ -36,18 +47,13 @@ export class ClientRepository {
       },
     });
 
-    return this.getParsedClient(updated);
+    return this.parseEntity(updated);
   }
 
-  async save(client: Client): Promise<Client> {
-    const data = client.toPrisma();
-
-    const savedClient = await this.prisma.client.create({ data });
-
-    return this.getParsedClient(savedClient);
+  protected override get prismaModel(): Prisma.ClientDelegate {
+    return this.prisma.client;
   }
-
-  private getParsedClient(client: any): Client {
+  protected override parseEntity(client: any): Client {
     return new Client(
       client.email,
       client.coachId,
@@ -72,4 +78,6 @@ export class ClientRepository {
       client.id
     );
   }
+
+
 }
