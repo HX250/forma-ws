@@ -39,7 +39,7 @@ module.exports = {
           900: '#14532D',
         },
         // Text roles
-        primary: { DEFAULT: '#18181B', dark: '#FAFAFA' },
+        primary: { DEFAULT: '#FAFAFA', dark: '#18181B' },
         secondary: { DEFAULT: '#52525B', dark: '#D4D4D8' },
         muted: { DEFAULT: '#A1A1AA', dark: '#71717A' },
         inverse: { DEFAULT: '#FAFAFA', dark: '#18181B' },

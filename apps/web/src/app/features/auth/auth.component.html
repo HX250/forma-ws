@@ -1,0 +1,27 @@
+<div
+  class="max-w-md mx-auto mt-10 p-6 bg-bg-secondary dark:bg-bg-secondary-dark border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg"
+>
+  <form class="flex flex-col gap-8">
+    <app-page-input
+      [control]="form.controls.email"
+      [label]="'Email'"
+      [required]="true"
+    />
+    <app-page-input
+      [control]="form.controls.password"
+      [label]="'Password'"
+      [required]="true"
+    />
+    <app-page-select
+      [items]="userTypeOptions"
+      [control]="form.controls.userType"
+      [required]="true"
+      [label]="'Who am i'"
+    />
+    <app-button
+      [text]="'Submit'"
+      [variant]="'secondary'"
+      (clicked)="onSubmit()"
+    />
+  </form>
+</div>

@@ -6,10 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
-import { CoachRepository } from '@forma-ws/domain';
-import { ClientRepository } from '@forma-ws/domain';
 import { JwtStrategy } from '../strategies/jwt.strategy';
-import { DatabaseModule } from '@forma-ws/shared';
+import {
+  DatabaseModule,
+  ClientRepository,
+  CoachRepository,
+} from '@forma-ws/backend-shared';
 
 @Module({
   imports: [

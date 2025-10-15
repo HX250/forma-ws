@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DarkLightButton } from './layout/dark-light-button/dark-light-button.component';
+import { AuthService } from './core/auth/auth.service';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, DarkLightButton],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -10,7 +12,9 @@ import { RouterModule } from '@angular/router';
 export class App {
   protected title = 'Forma';
 
-  toggleTheme() {
-    document.documentElement.classList.toggle('dark');
+  constructor(private authService: AuthService) {}
+
+  get isLoggedIn() {
+    return this.authService.getIsLoggedIn();
   }
 }

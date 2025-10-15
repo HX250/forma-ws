@@ -1,2 +1,4 @@
-export { Client, Coach } from './lib/models';
-export * from './lib/repositories';
+export * from './lib/dto';
+export * from './lib/enums';
+export * from './lib/auth';
+export * from './lib/guards';

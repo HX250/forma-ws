@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from '../../../libs/shared/src/lib/database/database.module';
+import { DatabaseModule } from '@forma-ws/backend-shared';
 import { AuthModule } from './modules/auth/auth.module';
 
 const getEnvFilePath = () => {

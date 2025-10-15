@@ -18,8 +18,8 @@ import {
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
-} from '@forma-ws/shared';
-import { AuthTokens } from '@forma-ws/types';
+  AuthTokens,
+} from '@forma-ws/domain';
 
 @Controller('auth')
 export class AuthController {
