@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  API_END_POINT: 'test',
+  API_END_POINT: '',
 };
