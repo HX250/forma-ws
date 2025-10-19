@@ -108,8 +108,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    env:
-      API_END_POINT: ${{ secrets.PROD_API_ENDPOINT }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -139,3 +138,5 @@ jobs:
           api_location: ''
           output_location: ''
           skip_app_build: true
+        env:
+          API_END_POINT: ${{ secrets.PROD_API_ENDPOINT }}
