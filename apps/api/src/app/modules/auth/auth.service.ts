@@ -6,17 +6,23 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { randomBytes } from 'crypto';
-import { CoachRepository } from '@forma-ws/domain';
-import { ClientRepository } from '@forma-ws/domain';
-import { Client, Coach } from '@forma-ws/domain';
-import { AuthPayload, AuthTokens, UserType } from '@forma-ws/types';
+
+import {
+  Client,
+  Coach,
+  CoachRepository,
+  ClientRepository,
+} from '@forma-ws/backend-shared';
 import {
   AuthResponseDto,
   LoginDto,
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
-} from '@forma-ws/shared';
+  AuthPayload,
+  AuthTokens,
+  UserType,
+} from '@forma-ws/domain';
 
 @Injectable()
 export class AuthService {

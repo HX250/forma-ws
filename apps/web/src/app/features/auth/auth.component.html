@@ -1,0 +1,44 @@
+<div class="max-w-md mx-auto mt-10 p-6">
+  <form class="flex flex-col gap-6">
+    <div class="w-full flex justify-between gap-4">
+      <app-button
+        [text]="'AUTH.CLIENT'"
+        [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+        class="w-full"
+        [ngClass]="
+          form.controls.userType.value === UserType.CLIENT
+            ? 'opacity-100'
+            : 'opacity-50'
+        "
+        (clicked)="changeRole(UserType.CLIENT)"
+      /><app-button
+        [text]="'AUTH.COACH'"
+        [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+        class="w-full"
+        [ngClass]="
+          form.controls.userType.value === UserType.COACH
+            ? 'opacity-100'
+            : 'opacity-50'
+        "
+        (clicked)="changeRole(UserType.COACH)"
+      />
+    </div>
+    <app-page-input
+      [control]="form.controls.email"
+      [label]="'AUTH.EMAIL'"
+      [required]="true"
+    />
+    <app-page-input
+      [control]="form.controls.password"
+      [label]="'AUTH.PASSWORD'"
+      [type]="'password'"
+      [required]="true"
+    />
+    <app-button
+      [text]="'AUTH.LOGIN_BUTTON'"
+      [loading]="this.form.formLoader()"
+      [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+      (clicked)="onSubmit()"
+    />
+  </form>
+</div>

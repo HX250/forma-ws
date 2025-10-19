@@ -1,0 +1,52 @@
+<div class="space-y-2">
+  @if (label()) {
+  <label
+    class="block text-sm font-medium text-secondary dark:text-secondary-dark"
+  >
+    {{ label() | translate }}
+    @if (required()) {
+    <span class="text-utils-error">*</span>
+    }
+  </label>
+  }
+
+  <div class="relative">
+    <input
+      [type]="type()"
+      [placeholder]="placeholder()"
+      [name]="name()"
+      [required]="required()"
+      [readonly]="readonly()"
+      [formControl]="control()"
+      class="w-full px-3 py-2 text-base text-primary-dark dark:text-primary bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-sm placeholder:text-muted dark:placeholder:text-muted-dark focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent disabled:bg-muted dark:disabled:bg-muted-dark disabled:text-muted dark:disabled:text-muted-dark disabled:cursor-not-allowed readonly:bg-secondary dark:readonly:bg-secondary-dark readonly:cursor-default transition-colors duration-200"
+      [class.border-utils-error]="control().invalid && control().touched"
+      [class.dark:border-utils-error]="control().invalid && control().touched"
+      [class.focus:ring-utils-error]="control().invalid && control().touched"
+      [class.focus:border-utils-error]="control().invalid && control().touched"
+      (input)="onInput($event)"
+      (focus)="focus.emit($event)"
+      (blur)="blur.emit($event)"
+      (keydown.enter)="enter.emit($event)"
+    />
+  </div>
+
+  @if ((control().invalid && control().touched) && control().errors) {
+  <div class="text-sm text-utils-error">
+    @if (control().errors?.['required']) {
+    <span>This field is required</span>
+    } @if (control().errors?.['email']) {
+    <span>Please enter a valid email address</span>
+    } @if (control().errors?.['minlength']) {
+    <span
+      >Minimum length is
+      {{ control().errors?.['minlength'].requiredLength }} characters</span
+    >
+    } @if (control().errors?.['maxlength']) {
+    <span
+      >Maximum length is
+      {{ control().errors?.['maxlength'].requiredLength }} characters</span
+    >
+    }
+  </div>
+  }
+</div>

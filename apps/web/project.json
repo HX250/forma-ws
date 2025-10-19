@@ -37,8 +37,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/web/env/environment.dev.ts",
-              "with": "apps/web/env/environment.prod.ts"
+              "replace": "apps/web/env/dev.env.ts",
+              "with": "apps/web/env/prod.env.ts"
             }
           ],
           "outputHashing": "all"
@@ -69,6 +69,17 @@
       "options": {
         "buildTarget": "web:build"
       }
+    },
+    "merge-translations": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ./apps/web/scripts/merge-translations.js",
+        "cwd": "./",
+        "parallel": false
+      },
+      "outputs": [
+        "{workspaceRoot}/apps/web/public/assets/lang/merged-translations/*"
+      ]
     },
     "lint": {
       "executor": "@nx/eslint:lint"

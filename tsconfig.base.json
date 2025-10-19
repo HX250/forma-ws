@@ -15,9 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@forma-ws/backend-shared": ["apps/libs/backend-shared/src/index.ts"],
+      "@forma-ws/frontend-shared": ["apps/libs/frontend-shared/src/index.ts"],
       "@forma-ws/domain": ["apps/libs/domain/src/index.ts"],
-      "@forma-ws/shared": ["apps/libs/shared/src/index.ts"],
-      "@forma-ws/types": ["apps/libs/types/src/index.ts"]
+      "@forma-ws/frontend/domain": ["apps/libs/domain/src/frontend.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
