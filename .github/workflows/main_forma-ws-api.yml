@@ -125,6 +125,13 @@ jobs:
       - name: Merge translations
         run: npx nx run web:merge-translations
 
+      - name: Write prod environment file
+        run: |
+          echo "export const environment = {" > apps/web/env/prod.env.ts
+          echo "  production: true," >> apps/web/env/prod.env.ts
+          echo "  API_END_POINT: '${{ env.API_END_POINT }}'," >> apps/web/env/prod.env.ts
+          echo "};" >> apps/web/env/prod.env.ts
+
       - name: Build Angular app with Nx
         run: npx nx build web --prod
 
