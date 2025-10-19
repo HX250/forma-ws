@@ -11,6 +11,7 @@ export class AuthResourceService {
   endpoint = environment.API_END_POINT;
 
   login(form: LoginDto) {
+    console.log('API_END_POINT:', this.endpoint);
     return this.http.post<AuthResponseDto>(this.endpoint + '/auth/login', form);
   }
 
