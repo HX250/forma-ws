@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponseDto, LoginDto } from '@forma-ws/frontend/domain';
-import { environment } from '../../../../../env/dev.env';
+import { environment } from '../../../../../env';
 @Injectable({
   providedIn: 'root',
 })

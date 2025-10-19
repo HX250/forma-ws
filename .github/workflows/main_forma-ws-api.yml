@@ -108,8 +108,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    env:
-      API_END_POINT: ${{ secrets.PROD_API_ENDPOINT }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -124,6 +123,17 @@ jobs:
 
       - name: Merge translations
         run: npx nx run web:merge-translations
+
+      - name: Create production environment file for Angular
+        run: |
+          # Create prod.env.ts from the API_END_POINT env variable so the built bundle contains the correct API URL
+          mkdir -p apps/web/env
+          cat > apps/web/env/prod.env.ts <<'EOF'
+          export const environment = {
+            production: true,
+            API_END_POINT: '${API_END_POINT}',
+          };
+          EOF
 
       - name: Build Angular app with Nx
         run: npx nx build web --prod
