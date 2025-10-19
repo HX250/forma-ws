@@ -44,7 +44,6 @@ export class AuthComponent
   }
 
   onSubmit() {
-    console.log(this.form.value);
     this.sendRequest(
       this.authResourceService.login(this.form.getRawValue())
     ).subscribe((res) => {});

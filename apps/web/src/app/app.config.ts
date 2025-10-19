@@ -10,13 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return provideTranslateHttpLoader({
-    prefix: '/assets/lang/merged-adminapp/',
-    suffix: '.json',
-  });
-}
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),

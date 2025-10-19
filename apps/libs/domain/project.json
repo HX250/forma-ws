@@ -1,7 +1,7 @@
 {
   "name": "domain",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/libs/types/src",
+  "sourceRoot": "apps/libs/domain/src",
   "projectType": "library",
   "tags": [],
   "targets": {

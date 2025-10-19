@@ -20,7 +20,6 @@ export class PageSelect {
   disabled = input<boolean>(false);
   label = input<string>('Select...');
   required = input<boolean>(false);
-  multiple = input<boolean>(false);
   control = input.required<FormControl<any>>();
 
   onSelect(event: Event) {

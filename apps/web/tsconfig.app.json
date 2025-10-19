@@ -4,11 +4,7 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
-  "include": [
-    "src/**/*.ts",
-    "src/app/core/utils/form/page-form.ts",
-    "../libs/shared/src/lib/utils/forms/forms.ts"
-  ],
+  "include": ["src/**/*.ts"],
   "exclude": [
     "jest.config.ts",
     "src/test-setup.ts",
