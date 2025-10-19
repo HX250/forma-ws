@@ -44,6 +44,11 @@ export class AuthComponent
   }
 
   onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     this.sendRequest(
       this.authResourceService.login(this.form.getRawValue())
     ).subscribe((res) => {});

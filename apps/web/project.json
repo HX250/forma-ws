@@ -37,7 +37,7 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/web/env/index.ts",
+              "replace": "apps/web/env/dev.env.ts",
               "with": "apps/web/env/prod.env.ts"
             }
           ],
