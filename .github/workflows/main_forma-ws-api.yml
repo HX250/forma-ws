@@ -139,4 +139,4 @@ jobs:
           output_location: ''
           skip_app_build: true
         env:
-          API_END_POINT: ${{ secrets.PROD_API_ENDPOINT }}
+          API_END_POINT: ${{ secrets.API_END_POINT }}
