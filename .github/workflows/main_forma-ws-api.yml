@@ -108,6 +108,8 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    env:
+      API_END_POINT: ${{ secrets.PROD_API_ENDPOINT }}
     steps:
       - uses: actions/checkout@v4
 
@@ -119,6 +121,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
+
+      - name: Merge translations
+        run: npx nx run web:merge-translations
 
       - name: Build Angular app with Nx
         run: npx nx build web --prod

@@ -6,22 +6,22 @@ import {
   input,
   output,
 } from '@angular/core';
-
-type ButtonVariant = 'primary' | 'secondary';
-type ButtonSize = 'sm' | 'md' | 'lg';
-type ButtonType = 'button' | 'submit' | 'reset';
+import { ButtonProperties } from './buttonProperties.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  variant = input<ButtonVariant>('primary');
-  size = input<ButtonSize>('md');
-  type = input<ButtonType>('button');
+  variant = input<ButtonProperties.ButtonVariant>(
+    ButtonProperties.ButtonVariant.PRIMARY
+  );
+  size = input<ButtonProperties.ButtonSize>(ButtonProperties.ButtonSize.MEDIUM);
+  type = input<ButtonProperties.ButtonType>(ButtonProperties.ButtonType.BUTTON);
   disabled = input<boolean>(false);
   loading = input<boolean>(false);
   icon = input<string>('');
@@ -35,16 +35,17 @@ export class ButtonComponent {
       'items-center',
       'justify-center',
       'gap-2',
-      'rounded-lg',
-      'font-medium',
+      'w-full',
+      'rounded-md',
+      'font-bold',
       'transition-colors',
       'duration-150',
       'focus-visible:outline-none',
       'focus-visible:ring-2',
-      'focus-visible:ring-accent-500',
+      'focus-visible:ring-accent',
       'focus-visible:ring-offset-2',
-      'focus-visible:ring-offset-bg-primary',
-      'dark:focus-visible:ring-offset-bg-primary-dark',
+      'focus-visible:ring-offset-primary',
+      'dark:focus-visible:ring-offset-primary-dark',
       'cursor-pointer',
     ];
 
@@ -56,25 +57,28 @@ export class ButtonComponent {
     const variant = this.variant();
     if (variant === 'secondary') {
       base.push(
-        'bg-neutral-950',
-        'text-secondary',
+        'bg-secondary',
+        'text-primary',
         'border',
-        'border-neutral-300',
-        'hover:bg-bg-muted',
-        'dark:bg-neutral-800',
-        'dark:text-secondary-dark',
-        'dark:border-neutral-700',
-        'dark:hover:bg-bg-muted-dark'
+        'border-secondary',
+        'hover:bg-muted',
+        'dark:bg-secondary-dark',
+        'dark:text-primary-dark',
+        'dark:border-secondary-dark',
+        'dark:hover:bg-muted-dark'
       );
     } else {
       base.push(
-        'bg-accent-600',
-        'text-white',
-        'hover:bg-accent-700',
-        'active:bg-accent-700/90',
+        'bg-accent',
+        'text-primary',
+        'hover:bg-accent/80',
+        'active:bg-accent/80',
         'shadow-sm',
         'hover:shadow-md',
-        'dark:shadow-none'
+        'dark:bg-accent-dark',
+        'dark:text-primary-dark',
+        'dark:shadow-none',
+        'dark:hover:bg-accent-dark/80'
       );
     }
 
@@ -82,19 +86,21 @@ export class ButtonComponent {
       base.push('cursor-not-allowed');
       if (variant === 'secondary') {
         base.push(
-          'bg-bg-muted',
+          'bg-muted',
           'text-muted',
-          'border-neutral-200',
-          'dark:bg-neutral-800',
+          'border-secondary',
+          'dark:bg-muted-dark',
           'dark:text-muted-dark',
-          'dark:border-neutral-700'
+          'dark:border-secondary-dark'
         );
       } else {
         base.push(
-          'bg-accent-600/60',
-          'text-white/90',
+          'bg-accent/60',
+          'text-primary/90',
           'shadow-none',
-          'hover:bg-accent-600/60'
+          'hover:bg-accent/60',
+          'dark:bg-accent-dark/60',
+          'dark:text-primary-dark/90'
         );
       }
     }

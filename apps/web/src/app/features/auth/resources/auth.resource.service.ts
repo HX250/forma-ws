@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponseDto, LoginDto } from '@forma-ws/frontend/domain';
-
+import { environment } from '../../../../../env/dev.env';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthResourceService {
   constructor(private http: HttpClient) {}
 
+  endpoint = environment.API_END_POINT;
+
   login(form: LoginDto) {
-    return this.http.post<AuthResponseDto>('/api/auth/login', form);
+    return this.http.post<AuthResponseDto>(this.endpoint + '/auth/login', form);
   }
 
   logout() {

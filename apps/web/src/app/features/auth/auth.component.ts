@@ -6,15 +6,13 @@ import {
   ButtonComponent,
   FormUtils,
   PageInput,
-  PageSelect,
 } from '@forma-ws/frontend-shared';
-import { PageFormComponent } from '@forma-ws/frontend-shared';
+import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
 import { AuthModel } from './models/auth.model';
 import { UserType } from '@forma-ws/frontend/domain';
-
 @Component({
   selector: 'app-auth',
-  imports: [CommonModule, PageInput, PageSelect, ButtonComponent],
+  imports: [CommonModule, PageInput, ButtonComponent],
   templateUrl: './auth.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +25,8 @@ export class AuthComponent
     { label: 'Client', value: UserType.CLIENT },
     { label: 'Coach', value: UserType.COACH },
   ];
+  readonly ButtonProperties = ButtonProperties;
+  readonly UserType = UserType;
 
   constructor(
     private fb: FormBuilder,
@@ -39,8 +39,8 @@ export class AuthComponent
     this.form = this.buildForm();
   }
 
-  request() {
-    this.form.formLoader.set(false);
+  changeRole(role: UserType) {
+    this.form.controls.userType.setValue(role);
   }
 
   onSubmit() {

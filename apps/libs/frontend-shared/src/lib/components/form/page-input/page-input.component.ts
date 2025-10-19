@@ -4,12 +4,13 @@ import {
   input,
   output,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-page-input',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   standalone: true,
   templateUrl: './page-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

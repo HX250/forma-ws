@@ -1,0 +1,9 @@
+{
+  "AUTH": {
+    "CLIENT": "Client",
+    "COACH": "Coach",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Password",
+    "LOGIN_BUTTON": "Log In"
+  }
+}
