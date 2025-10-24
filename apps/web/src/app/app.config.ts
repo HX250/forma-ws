@@ -8,10 +8,20 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { HttpInterceptor } from './core/auth/http-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptor,
+      multi: true,
+    },
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(appRoutes),
@@ -21,5 +31,6 @@ export const appConfig: ApplicationConfig = {
       prefix: '/assets/lang/merged-adminapp/',
       suffix: '.json',
     }),
+    provideHttpClient(withInterceptorsFromDi()),
   ],
 };

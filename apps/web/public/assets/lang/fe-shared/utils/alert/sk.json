@@ -1,11 +1,4 @@
 {
-  "AUTH": {
-    "CLIENT": "Klient",
-    "COACH": "Trenér",
-    "EMAIL": "E-mail",
-    "PASSWORD": "Heslo",
-    "LOGIN_BUTTON": "Prihlásiť sa"
-  },
   "ALERT": {
     "SUCCESS": "Úspech",
     "ERROR": "Chyba",

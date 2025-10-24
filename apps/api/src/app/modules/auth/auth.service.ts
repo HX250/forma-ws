@@ -23,6 +23,7 @@ import {
   AuthTokens,
   UserType,
 } from '@forma-ws/domain';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -33,9 +34,11 @@ export class AuthService {
     private clientRepository: ClientRepository
   ) {}
 
-  async login(loginDto: LoginDto): Promise<AuthResponseDto> {
+  async login(
+    loginDto: LoginDto,
+    response: Response
+  ): Promise<AuthResponseDto> {
     const { email, password, userType } = loginDto;
-
     let user: Coach | Client;
 
     if (userType === UserType.COACH) {
@@ -55,13 +58,19 @@ export class AuthService {
 
     const tokens = await this.generateTokens(user.getAuthPayload());
 
+    this.setCookies(response, tokens);
+
     return {
-      ...tokens,
       userId: user.id,
+      email: user.email,
+      userType: userType,
     };
   }
 
-  async registerCoach(registerDto: RegisterCoachDto): Promise<AuthResponseDto> {
+  async registerCoach(
+    registerDto: RegisterCoachDto,
+    response: Response
+  ): Promise<AuthResponseDto> {
     const existingCoach = await this.coachRepository.findByEmail(
       registerDto.email
     );
@@ -70,14 +79,15 @@ export class AuthService {
     }
 
     const coach = await Coach.createWithHashedPassword(registerDto);
-
     const savedCoach = await this.coachRepository.save(coach);
-
     const tokens = await this.generateTokens(savedCoach.getAuthPayload());
 
+    this.setCookies(response, tokens);
+
     return {
-      ...tokens,
       userId: savedCoach.id,
+      email: savedCoach.email,
+      userType: UserType.COACH,
     };
   }
 
@@ -117,7 +127,8 @@ export class AuthService {
 
   async setClientPassword(
     clientId: string,
-    setPasswordDto: SetClientPasswordDto
+    setPasswordDto: SetClientPasswordDto,
+    response: Response
   ): Promise<AuthResponseDto> {
     const client = await this.clientRepository.findById(clientId);
     if (!client) {
@@ -129,34 +140,68 @@ export class AuthService {
     }
 
     await client.setPermamentPassword(setPasswordDto.newPassword);
-
     const updatedClient = await this.clientRepository.updateAfterPasswordSet(
       client
     );
-
     const tokens = await this.generateTokens(updatedClient.getAuthPayload());
 
+    this.setCookies(response, tokens);
+
     return {
-      ...tokens,
       userId: updatedClient.id,
+      email: updatedClient.email,
+      userType: UserType.CLIENT,
     };
   }
 
-  async refreshTokens(refreshToken: string): Promise<AuthTokens> {
+  async refreshTokens(
+    refreshToken: string,
+    response: Response
+  ): Promise<AuthResponseDto> {
     try {
       const payload = this.jwtService.verify(refreshToken, {
         secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
       });
 
-      return await this.generateTokens({
+      const tokens = await this.generateTokens({
         sub: payload.sub,
         email: payload.email,
         userType: payload.userType,
         coachId: payload.coachId,
       });
+
+      this.setCookies(response, tokens);
+
+      return {
+        userId: payload.sub,
+        email: payload.email,
+        userType: payload.userType,
+      };
     } catch (error) {
       throw new UnauthorizedException('Invalid refresh token');
     }
+  }
+
+  private async setCookies(response: Response, tokens: AuthTokens) {
+    response.cookie('accessToken', tokens.accessToken, {
+      httpOnly: true,
+      secure: this.configService.get<boolean>('COOKIE_SECURE', true),
+      sameSite: 'lax',
+      maxAge: this.configService.get<number>(
+        'JWT_ACCESS_EXPIRES_IN_MS',
+        15 * 60 * 1000
+      ),
+    });
+
+    response.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      secure: this.configService.get<boolean>('COOKIE_SECURE', true),
+      sameSite: 'lax',
+      maxAge: this.configService.get<number>(
+        'JWT_REFRESH_EXPIRES_IN_MS',
+        7 * 24 * 60 * 60 * 1000
+      ),
+    });
   }
 
   private async generateTokens(payload: AuthPayload): Promise<AuthTokens> {

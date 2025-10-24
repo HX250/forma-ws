@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DarkLightButton } from './layout/dark-light-button/dark-light-button.component';
-import { AuthService } from './core/auth/auth.service';
-import { LanguageSwitcher } from './layout/language-switcher/language-switcher.component';
+import { SecurityService } from './core/auth/security.service';
+import {
+  AlertComponent,
+  DarkLightButton,
+  LanguageSwitcher,
+} from '@forma-ws/frontend-shared';
 
 @Component({
-  imports: [RouterModule, DarkLightButton, LanguageSwitcher],
+  imports: [RouterModule, DarkLightButton, LanguageSwitcher, AlertComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -13,7 +16,7 @@ import { LanguageSwitcher } from './layout/language-switcher/language-switcher.c
 export class App {
   protected title = 'Forma';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: SecurityService) {}
 
   get isLoggedIn() {
     return this.authService.getIsLoggedIn();
