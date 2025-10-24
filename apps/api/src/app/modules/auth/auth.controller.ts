@@ -6,20 +6,19 @@ import {
   Req,
   HttpCode,
   HttpStatus,
+  Res,
+  UnauthorizedException,
 } from '@nestjs/common';
-import { Request } from 'express';
-
+import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import {
   AuthResponseDto,
-  JwtAuthGuard,
   LoginDto,
-  RefreshTokenDto,
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
-  AuthTokens,
 } from '@forma-ws/domain';
+import { JwtAuthGuard } from '@forma-ws/backend-shared';
 
 @Controller('auth')
 export class AuthController {
@@ -27,15 +26,19 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  async login(@Body() loginDto: LoginDto): Promise<AuthResponseDto> {
-    return this.authService.login(loginDto);
+  async login(
+    @Body() loginDto: LoginDto,
+    @Res({ passthrough: true }) response: Response
+  ): Promise<AuthResponseDto> {
+    return this.authService.login(loginDto, response);
   }
 
   @Post('register/coach')
   async registerCoach(
-    @Body() registerDto: RegisterCoachDto
+    @Body() registerDto: RegisterCoachDto,
+    @Res({ passthrough: true }) response: Response
   ): Promise<AuthResponseDto> {
-    return this.authService.registerCoach(registerDto);
+    return this.authService.registerCoach(registerDto, response);
   }
 
   @Post('register/client')
@@ -49,17 +52,37 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async setClientPassword(
     @Req() req: Request,
-    @Body() setPasswordDto: SetClientPasswordDto
+    @Body() setPasswordDto: SetClientPasswordDto,
+    @Res({ passthrough: true }) response: Response
   ): Promise<AuthResponseDto> {
     const clientId = req.user['sub'];
-    return this.authService.setClientPassword(clientId, setPasswordDto);
+    return this.authService.setClientPassword(
+      clientId,
+      setPasswordDto,
+      response
+    );
   }
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   async refreshTokens(
-    @Body() refreshDto: RefreshTokenDto
-  ): Promise<AuthTokens> {
-    return this.authService.refreshTokens(refreshDto.refreshToken);
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response
+  ): Promise<AuthResponseDto> {
+    const refreshToken = request.cookies['refreshToken'];
+
+    if (!refreshToken) {
+      throw new UnauthorizedException('No refresh token provided');
+    }
+
+    return this.authService.refreshTokens(refreshToken, response);
+  }
+
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  logout(@Res({ passthrough: true }) response: Response): { success: boolean } {
+    response.clearCookie('accessToken');
+    response.clearCookie('refreshToken');
+    return { success: true };
   }
 }

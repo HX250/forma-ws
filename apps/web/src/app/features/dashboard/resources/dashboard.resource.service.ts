@@ -5,20 +5,17 @@ import { environment } from '../../../../../env/dev.env';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthResourceService {
+export class DashboardResourceService {
   constructor(private http: HttpClient) {}
 
   endpoint = environment.API_END_POINT;
 
-  login(form: LoginDto) {
-    return this.http.post<AuthResponseDto>(this.endpoint + '/auth/login', form);
-  }
+  setClientPassword(newPassword: string) {
+    const body = { newPassword: newPassword };
 
-  logout() {
-    return this.http.post('/api/auth/logout', {});
-  }
-
-  register(email: string, password: string) {
-    return this.http.post('/api/auth/register', { email, password });
+    return this.http.post<AuthResponseDto>(
+      this.endpoint + '/auth/client/set-password',
+      body
+    );
   }
 }

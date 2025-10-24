@@ -138,7 +138,7 @@ export class RefreshTokenDto {
 }
 
 export interface AuthResponseDto {
-  accessToken: string;
-  refreshToken: string;
   userId: string;
+  email: string;
+  userType: UserType;
 }

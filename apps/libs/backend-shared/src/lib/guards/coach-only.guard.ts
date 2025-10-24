@@ -1,10 +1,10 @@
+import { UserType } from '@forma-ws/domain';
 import {
   Injectable,
   CanActivate,
   ExecutionContext,
   ForbiddenException,
 } from '@nestjs/common';
-import { UserType } from '../../auth';
 
 @Injectable()
 export class CoachOnlyGuard implements CanActivate {

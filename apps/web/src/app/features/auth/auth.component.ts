@@ -10,11 +10,15 @@ import {
 import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
 import { AuthModel } from './models/auth.model';
 import { UserType } from '@forma-ws/frontend/domain';
+import { SecurityService } from '../../core/auth/security.service';
+import { Router } from '@angular/router';
+import { AlertService } from '@forma-ws/frontend-shared';
+import { AlertType } from 'apps/libs/frontend-shared/src/lib/utils/components/alert/alert.model';
+
 @Component({
   selector: 'app-auth',
   imports: [CommonModule, PageInput, ButtonComponent],
   templateUrl: './auth.component.html',
-  styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthComponent
@@ -30,7 +34,10 @@ export class AuthComponent
 
   constructor(
     private fb: FormBuilder,
-    private authResourceService: AuthResourceService
+    private authResourceService: AuthResourceService,
+    private securityService: SecurityService,
+    private router: Router,
+    private alertService: AlertService
   ) {
     super();
   }
@@ -51,7 +58,14 @@ export class AuthComponent
 
     this.sendRequest(
       this.authResourceService.login(this.form.getRawValue())
-    ).subscribe((res) => {});
+    ).subscribe({
+      next: (res) => {
+        this.securityService.setLoggedIn(true);
+        this.securityService.setCurrentUser(res.userId);
+        this.alertService.show(AlertType.SUCCESS, 'Login successful');
+        this.router.navigateByUrl('/dashboard');
+      },
+    });
   }
 
   private buildForm() {
