@@ -11,11 +11,14 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   const allowedOrigin = 'http://localhost:4200';
   app.enableCors({
-    origin: allowedOrigin,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    // 🔑 THIS MUST BE TRUE for the browser to send cookies
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      return callback(null, origin);
+    },
+
     credentials: true,
   });
   app.use(cookieParser());

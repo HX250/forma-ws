@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthResourceService } from './resources/auth.resource.service';
 import {
+  AlertType,
   ButtonComponent,
   FormUtils,
   PageInput,
@@ -13,7 +14,6 @@ import { UserType } from '@forma-ws/frontend/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { Router } from '@angular/router';
 import { AlertService } from '@forma-ws/frontend-shared';
-import { AlertType } from 'apps/libs/frontend-shared/src/lib/utils/components/alert/alert.model';
 
 @Component({
   selector: 'app-auth',

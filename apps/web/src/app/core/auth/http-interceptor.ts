@@ -6,8 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertService } from '@forma-ws/frontend-shared';
-import { AlertType } from 'apps/libs/frontend-shared/src/lib/utils/components/alert/alert.model';
+import { AlertService, AlertType } from '@forma-ws/frontend-shared';
 import { Observable, tap } from 'rxjs';
 
 @Injectable()
