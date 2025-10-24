@@ -183,10 +183,13 @@ export class AuthService {
   }
 
   private async setCookies(response: Response, tokens: AuthTokens) {
+    const isProduction =
+      this.configService.get<string>('NODE_ENV') === 'production';
+
     response.cookie('accessToken', tokens.accessToken, {
       httpOnly: true,
       secure: this.configService.get<boolean>('COOKIE_SECURE', true),
-      sameSite: 'lax',
+      sameSite: isProduction ? 'strict' : 'lax',
       maxAge: this.configService.get<number>(
         'JWT_ACCESS_EXPIRES_IN_MS',
         15 * 60 * 1000
@@ -196,7 +199,7 @@ export class AuthService {
     response.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: this.configService.get<boolean>('COOKIE_SECURE', true),
-      sameSite: 'lax',
+      sameSite: isProduction ? 'strict' : 'lax',
       maxAge: this.configService.get<number>(
         'JWT_REFRESH_EXPIRES_IN_MS',
         7 * 24 * 60 * 60 * 1000
