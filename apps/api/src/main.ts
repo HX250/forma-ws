@@ -6,6 +6,8 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const expressApp = app.getHttpAdapter().getInstance();
+  expressApp.set('trust proxy', 1);
 
   const configService = app.get(ConfigService);
 
@@ -23,8 +25,6 @@ async function bootstrap() {
   app.enableCors({
     origin: frontendUrl,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   app.use(cookieParser());
