@@ -1,0 +1,93 @@
+<div class="space-y-4">
+  @if (label()) {
+  <label
+    class="block text-sm font-medium text-secondary dark:text-secondary-dark"
+  >
+    {{ label() | translate }}
+    @if (control().hasError('required') && control().touched) {
+    <span class="text-utils-error">*</span>
+    }
+  </label>
+  }
+
+  <div class="space-y-3 border border-secondary dark:border-secondary-dark rounded-md p-4">
+    @for (day of days(); track day.day; let dayIndex = $index) {
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            [checked]="day.enabled"
+            (change)="toggleDay(dayIndex)"
+            class="w-4 h-4 text-accent border-secondary dark:border-secondary-dark rounded focus:ring-accent focus:ring-2"
+          />
+          <span class="text-sm font-medium text-secondary dark:text-secondary-dark">
+            {{ 'AUTH.REGISTER_COACH.AVAILABILITY_DAYS.' + day.day | translate }}
+          </span>
+        </label>
+      </div>
+
+      @if (day.enabled) {
+      <div class="ml-6 space-y-2">
+        @for (slot of day.timeSlots; track $index; let slotIndex = $index) {
+        <div class="flex items-center gap-2">
+          <input
+            type="time"
+            [value]="slot.start"
+            (change)="
+              updateTimeSlot(
+                dayIndex,
+                slotIndex,
+                'start',
+                $any($event.target).value
+              )
+            "
+            class="px-3 py-2 text-sm border border-secondary dark:border-secondary-dark rounded-md bg-primary dark:bg-primary-dark text-primary-dark dark:text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+          />
+          <span class="text-sm text-muted dark:text-muted-dark">-</span>
+          <input
+            type="time"
+            [value]="slot.end"
+            (change)="
+              updateTimeSlot(
+                dayIndex,
+                slotIndex,
+                'end',
+                $any($event.target).value
+              )
+            "
+            class="px-3 py-2 text-sm border border-secondary dark:border-secondary-dark rounded-md bg-primary dark:bg-primary-dark text-primary-dark dark:text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+          />
+          @if (day.timeSlots.length > 1) {
+          <button
+            type="button"
+            (click)="removeTimeSlot(dayIndex, slotIndex)"
+            class="px-2 py-1 text-sm text-utils-error hover:bg-secondary/50 dark:hover:bg-secondary-dark/50 rounded transition-colors"
+          >
+            {{ 'AUTH.REGISTER_COACH.AVAILABILITY_ACTIONS.REMOVE' | translate }}
+          </button>
+          }
+        </div>
+        }
+        @if (canAddTimeSlot(dayIndex)) {
+        <button
+          type="button"
+          (click)="addTimeSlot(dayIndex)"
+          class="text-sm text-accent hover:text-accent/80 underline"
+        >
+          {{ 'AUTH.REGISTER_COACH.AVAILABILITY_ACTIONS.ADD_TIME_SLOT' | translate }}
+        </button>
+        }
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+  @if (control().invalid && control().touched && control().hasError('required')) {
+  <div class="text-sm text-utils-error">
+    {{ 'COMPONENTS.FORM.ERRORS.REQUIRED' | translate }}
+  </div>
+  }
+</div>
+

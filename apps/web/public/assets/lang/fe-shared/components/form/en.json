@@ -1,0 +1,17 @@
+{
+  "COMPONENTS": {
+    "FORM": {
+      "ERRORS": {
+        "REQUIRED": "This field is required",
+        "EMAIL": "Please enter a valid email address",
+        "MIN_LENGTH": "Minimum length is {{requiredLength}} characters",
+        "MAX_LENGTH": "Maximum length is {{requiredLength}} characters"
+      },
+      "SELECT": {
+        "NO_ITEMS": "No items available",
+        "SELECTED_COUNT": "{{count}} selected"
+      }
+    }
+  }
+}
+

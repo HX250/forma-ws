@@ -1,0 +1,26 @@
+<div class="space-y-4">
+  <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+    {{ 'AUTH.REGISTER_COACH.AVAILABILITY_COMMUNICATION' | translate }}
+  </h2>
+
+  <app-availability-selector
+    [control]="availability()"
+    [label]="'AUTH.REGISTER_COACH.AVAILABILITY'"
+  />
+
+  <app-page-input
+    [control]="timezone()"
+    [label]="'AUTH.REGISTER_COACH.TIMEZONE'"
+    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.TIMEZONE'"
+  />
+
+  <app-page-select
+    [control]="communicationMethods()"
+    [items]="communicationOptions"
+    [label]="'AUTH.REGISTER_COACH.COMMUNICATION_METHODS'"
+    [placeholder]="'AUTH.REGISTER_COACH.SELECT_COMMUNICATION_METHODS'"
+    [required]="true"
+    [multiple]="true"
+  />
+</div>
+

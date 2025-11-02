@@ -6,7 +6,8 @@ import {
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormProperties } from '../../../core/forms/form-properties';
 
 @Component({
   selector: 'app-page-input',
@@ -15,9 +16,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './page-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageInput {
+export class PageInput extends FormProperties {
   control = input.required<FormControl<any>>();
-  required = input<boolean>(false);
   type = input<string>('text');
   placeholder = input<string>('');
   label = input<string>('');
@@ -32,6 +32,13 @@ export class PageInput {
 
   onInput(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.valueChange.emit(target.value);
+    let value: any = target.value;
+
+    if (this.type() === 'number' && value !== '') {
+      value = Number(value);
+    }
+
+    this.control().setValue(value);
+    this.valueChange.emit(value);
   }
 }

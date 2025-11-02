@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize, Observable } from 'rxjs';
 import { FormaFormContainer } from './forms';
 
@@ -25,5 +25,3 @@ export class PageFormComponent<TFormGroup extends FormGroup<any>> {
     return req;
   }
 }
-
-/** TU SPRAVIT METODY KTORE BUDE POUZIVAT KAZDY JEDEN FORM, PUZIVAT SIGNALY!!!!! */

@@ -1,10 +1,10 @@
-<div class="space-y-2">
+<div class="my-4">
   @if (label()) {
   <label
     class="block text-sm font-medium text-secondary dark:text-secondary-dark"
   >
     {{ label() | translate }}
-    @if (required()) {
+    @if (getRequiredControls(control())) {
     <span class="text-utils-error">*</span>
     }
   </label>
@@ -13,9 +13,9 @@
   <div class="relative">
     <input
       [type]="type()"
-      [placeholder]="placeholder()"
+      [placeholder]="placeholder() | translate"
       [name]="name()"
-      [required]="required()"
+      [required]="getRequiredControls(control())"
       [readonly]="readonly()"
       [formControl]="control()"
       class="w-full px-3 py-2 text-base text-primary-dark dark:text-primary bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-sm placeholder:text-muted dark:placeholder:text-muted-dark focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent disabled:bg-muted dark:disabled:bg-muted-dark disabled:text-muted dark:disabled:text-muted-dark disabled:cursor-not-allowed readonly:bg-secondary dark:readonly:bg-secondary-dark readonly:cursor-default transition-colors duration-200"
@@ -33,18 +33,16 @@
   @if ((control().invalid && control().touched) && control().errors) {
   <div class="text-sm text-utils-error">
     @if (control().errors?.['required']) {
-    <span>This field is required</span>
+    <span>{{ 'COMPONENTS.FORM.ERRORS.REQUIRED' | translate }}</span>
     } @if (control().errors?.['email']) {
-    <span>Please enter a valid email address</span>
+    <span>{{ 'COMPONENTS.FORM.ERRORS.EMAIL' | translate }}</span>
     } @if (control().errors?.['minlength']) {
     <span
-      >Minimum length is
-      {{ control().errors?.['minlength'].requiredLength }} characters</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MIN_LENGTH' | translate: { requiredLength: control().errors?.['minlength'].requiredLength } }}</span
     >
     } @if (control().errors?.['maxlength']) {
     <span
-      >Maximum length is
-      {{ control().errors?.['maxlength'].requiredLength }} characters</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MAX_LENGTH' | translate: { requiredLength: control().errors?.['maxlength'].requiredLength } }}</span
     >
     }
   </div>

@@ -1,0 +1,17 @@
+{
+  "COMPONENTS": {
+    "FORM": {
+      "ERRORS": {
+        "REQUIRED": "Toto pole je povinné",
+        "EMAIL": "Prosím zadajte platnú e-mailovú adresu",
+        "MIN_LENGTH": "Minimálna dĺžka je {{requiredLength}} znakov",
+        "MAX_LENGTH": "Maximálna dĺžka je {{requiredLength}} znakov"
+      },
+      "SELECT": {
+        "NO_ITEMS": "Žiadne položky nie sú k dispozícii",
+        "SELECTED_COUNT": "{{count}} vybraných"
+      }
+    }
+  }
+}
+

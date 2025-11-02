@@ -5,7 +5,8 @@ import { securityGuard } from '@forma-ws/frontend-shared';
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: AuthComponent,
+    loadChildren: () =>
+      import('./features/auth/auth.routes').then((m) => m.AuthRoutingModule),
   },
 
   {

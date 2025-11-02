@@ -4,7 +4,98 @@
     "COACH": "Trenér",
     "EMAIL": "E-mail",
     "PASSWORD": "Heslo",
-    "LOGIN_BUTTON": "Prihlásiť sa"
+    "LOGIN_BUTTON": "Prihlásiť sa",
+    "REGISTER_COACH": {
+      "REDIRECT": "Chceš byť trenérom? Zaregistruj sa teraz!",
+      "FIRST_NAME": "Meno",
+      "LAST_NAME": "Priezvisko",
+      "GENDER": "Pohlavie",
+      "YEARS_OF_EXPERIENCE": "Roky skúseností",
+      "SPECIALIZATION_FIELDS": "Oblasti špecializácie",
+      "CERTIFICATES": "Certifikáty",
+      "PROFILE_PHOTO": "Profilová fotka",
+      "BIO": "O mne",
+      "PRICING": "Cena (za hodinu)",
+      "AVAILABILITY": "Dostupnosť",
+      "AVAILABILITY_DAYS": {
+        "MONDAY": "Pondelok",
+        "TUESDAY": "Utorok",
+        "WEDNESDAY": "Streda",
+        "THURSDAY": "Štvrtok",
+        "FRIDAY": "Piatok",
+        "SATURDAY": "Sobota",
+        "SUNDAY": "Nedeľa"
+      },
+      "AVAILABILITY_ACTIONS": {
+        "ADD_TIME_SLOT": "Pridať časový slot",
+        "REMOVE": "Odstrániť"
+      },
+      "TIMEZONE": "Časové pásmo",
+      "COMMUNICATION_METHODS": "Spôsoby komunikácie",
+      "REGISTER_BUTTON": "Registrovať",
+      "CANCEL": "Zrušiť",
+      "PREVIOUS": "Predchádzajúci",
+      "NEXT": "Ďalší",
+      "TITLE": "Registrácia ako trenér",
+      "PERSONAL_INFORMATION": "Osobné údaje",
+      "ACCOUNT_INFORMATION": "Informácie o účte",
+      "PROFESSIONAL_INFORMATION": "Profesionálne informácie",
+      "AVAILABILITY_COMMUNICATION": "Dostupnosť a komunikácia",
+      "SELECT_SPECIALIZATION_FIELDS": "Vyberte oblasti špecializácie",
+      "SELECT_COMMUNICATION_METHODS": "Vyberte spôsoby komunikácie",
+      "PLACEHOLDERS": {
+        "FIRST_NAME": "Zadajte vaše meno",
+        "LAST_NAME": "Zadajte vaše priezvisko",
+        "SELECT_GENDER": "Vyberte vaše pohlavie",
+        "ENTER_EMAIL": "Zadajte váš e-mail",
+        "ENTER_PASSWORD": "Zadajte vaše heslo",
+        "YEARS_OF_EXPERIENCE": "Roky skúseností",
+        "CERTIFICATES": "Zadajte certifikáty (oddelené čiarkou)",
+        "BIO": "Povedzte nám o sebe",
+        "PRICING": "Hodinová sadzba (USD)",
+        "AVAILABILITY": "napr. Pondelok-Piatok 9:00-17:00",
+        "TIMEZONE": "napr. UTC, EST, PST"
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Muž",
+        "FEMALE": "Žena",
+        "OTHER": "Iné",
+        "PREFER_NOT_TO_SAY": "Nechcem uviesť"
+      },
+      "SPECIALIZATION_FIELDS_OPTIONS": {
+        "POWERLIFTING": "Silový trojboj",
+        "CROSSFIT": "CrossFit",
+        "BODYBUILDING": "Bodybuilding",
+        "WEIGHT_LOSS": "Chudnutie",
+        "STRENGTH_TRAINING": "Silový tréning",
+        "CARDIO": "Kardio",
+        "YOGA": "Jóga",
+        "PILATES": "Pilates",
+        "SPORTS_PERFORMANCE": "Športový výkon",
+        "REHABILITATION": "Rehabilitácia",
+        "NUTRITION": "Výživa"
+      },
+      "COMMUNICATION_METHODS_OPTIONS": {
+        "EMAIL": "E-mail",
+        "PHONE": "Telefón",
+        "TEXT_MESSAGE": "Textová správa",
+        "IN_APP_MESSAGING": "Správa v aplikácii"
+      }
+    }
+  },
+  "COMPONENTS": {
+    "FORM": {
+      "ERRORS": {
+        "REQUIRED": "Toto pole je povinné",
+        "EMAIL": "Prosím zadajte platnú e-mailovú adresu",
+        "MIN_LENGTH": "Minimálna dĺžka je {{requiredLength}} znakov",
+        "MAX_LENGTH": "Maximálna dĺžka je {{requiredLength}} znakov"
+      },
+      "SELECT": {
+        "NO_ITEMS": "Žiadne položky nie sú k dispozícii",
+        "SELECTED_COUNT": "{{count}} vybraných"
+      }
+    }
   },
   "ALERT": {
     "SUCCESS": "Úspech",

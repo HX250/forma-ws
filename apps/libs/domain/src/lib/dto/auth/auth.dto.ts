@@ -67,7 +67,6 @@ export class RegisterCoachDto {
   @IsString()
   bio?: string;
 
-  @IsOptional()
   @IsNumber()
   @Min(0)
   pricing?: number;
@@ -80,7 +79,6 @@ export class RegisterCoachDto {
   @IsString()
   timezone?: string;
 
-  @IsOptional()
   @IsArray()
   @IsEnum(CommunicationMethod, { each: true })
   communicationMethods?: CommunicationMethod[] = [];

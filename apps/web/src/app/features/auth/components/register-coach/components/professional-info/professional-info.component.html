@@ -1,0 +1,40 @@
+<div class="space-y-4">
+  <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+    {{ 'AUTH.REGISTER_COACH.PROFESSIONAL_INFORMATION' | translate }}
+  </h2>
+
+  <app-page-input
+    [control]="yearsOfExperience()"
+    [label]="'AUTH.REGISTER_COACH.YEARS_OF_EXPERIENCE'"
+    [type]="'number'"
+    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.YEARS_OF_EXPERIENCE'"
+  />
+
+  <app-page-select
+    [control]="specializationFields()"
+    [items]="specializationOptions"
+    [label]="'AUTH.REGISTER_COACH.SPECIALIZATION_FIELDS'"
+    [placeholder]="'AUTH.REGISTER_COACH.SELECT_SPECIALIZATION_FIELDS'"
+    [required]="true"
+    [multiple]="true"
+  />
+
+  <app-page-input
+    [control]="certificates()"
+    [label]="'AUTH.REGISTER_COACH.CERTIFICATES'"
+    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.CERTIFICATES'"
+  />
+
+  <app-page-input
+    [control]="bio()"
+    [label]="'AUTH.REGISTER_COACH.BIO'"
+    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.BIO'"
+  />
+
+  <app-page-input
+    [control]="pricing()"
+    [label]="'AUTH.REGISTER_COACH.PRICING'"
+    [type]="'number'"
+    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.PRICING'"
+  />
+</div>
