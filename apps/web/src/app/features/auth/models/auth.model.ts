@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import {
+  AvailabilityModel,
   CommunicationMethod,
   Gender,
   SpecializationField,
@@ -22,11 +23,9 @@ export namespace AuthModel {
       gender: FormControl<Gender>;
       yearsOfExperience: FormControl<number>;
       specializationFields: FormControl<SpecializationField[]>;
-      certificates: FormControl<string[]>;
       bio: FormControl<string>;
       pricing: FormControl<number>;
-      availability: FormControl<string>;
-      timezone: FormControl<string>;
+      availability: FormControl<AvailabilityModel[]>;
       communicationMethods: FormControl<CommunicationMethod[]>;
     }
   }

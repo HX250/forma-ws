@@ -8,12 +8,6 @@
     [label]="'AUTH.REGISTER_COACH.AVAILABILITY'"
   />
 
-  <app-page-input
-    [control]="timezone()"
-    [label]="'AUTH.REGISTER_COACH.TIMEZONE'"
-    [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.TIMEZONE'"
-  />
-
   <app-page-select
     [control]="communicationMethods()"
     [items]="communicationOptions"
@@ -23,4 +17,3 @@
     [multiple]="true"
   />
 </div>
-

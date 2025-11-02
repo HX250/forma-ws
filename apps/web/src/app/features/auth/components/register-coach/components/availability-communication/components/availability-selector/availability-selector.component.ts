@@ -2,25 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  output,
   signal,
-  computed,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
-export interface TimeSlot {
-  start: string;
-  end: string;
-}
-
-export interface DayAvailability {
-  day: string;
-  enabled: boolean;
-  timeSlots: TimeSlot[];
-}
+import { AvailabilityModel, DaysEnum } from '@forma-ws/frontend/domain';
 
 @Component({
   selector: 'app-availability-selector',
@@ -30,17 +18,45 @@ export interface DayAvailability {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvailabilitySelectorComponent implements OnInit {
-  control = input.required<FormControl<string>>();
+  control = input.required<FormControl<AvailabilityModel[]>>();
   label = input<string>('');
 
-  days = signal<DayAvailability[]>([
-    { day: 'MONDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'TUESDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'WEDNESDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'THURSDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'FRIDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'SATURDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
-    { day: 'SUNDAY', enabled: false, timeSlots: [{ start: '09:00', end: '17:00' }] },
+  days = signal<AvailabilityModel[]>([
+    {
+      day: DaysEnum.MONDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.TUESDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.WEDNESDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.THURSDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.FRIDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.SATURDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
+    {
+      day: DaysEnum.SUNDAY,
+      enabled: false,
+      time: [{ from: '09:00', to: '17:00' }],
+    },
   ]);
 
   ngOnInit(): void {
@@ -49,14 +65,8 @@ export class AvailabilitySelectorComponent implements OnInit {
 
   private loadFromControl(): void {
     const value = this.control().value;
-    if (value) {
-      try {
-        const parsed = JSON.parse(value);
-        if (Array.isArray(parsed)) {
-          this.days.set(parsed);
-        }
-      } catch {
-      }
+    if (value && Array.isArray(value) && value.length > 0) {
+      this.days.set(value);
     }
   }
 
@@ -73,15 +83,15 @@ export class AvailabilitySelectorComponent implements OnInit {
 
   addTimeSlot(dayIndex: number): void {
     const day = this.days()[dayIndex];
-    if (day.timeSlots.length >= 3) {
+    if (day.time.length >= 3) {
       return;
     }
-    
+
     const updated = this.days().map((day, index) => {
       if (index === dayIndex) {
         return {
           ...day,
-          timeSlots: [...day.timeSlots, { start: '09:00', end: '17:00' }],
+          time: [...day.time, { from: '09:00', to: '17:00' }],
         };
       }
       return day;
@@ -91,7 +101,7 @@ export class AvailabilitySelectorComponent implements OnInit {
   }
 
   canAddTimeSlot(dayIndex: number): boolean {
-    return this.days()[dayIndex].timeSlots.length < 3;
+    return this.days()[dayIndex].time.length < 3;
   }
 
   removeTimeSlot(dayIndex: number, slotIndex: number): void {
@@ -99,7 +109,7 @@ export class AvailabilitySelectorComponent implements OnInit {
       if (index === dayIndex) {
         return {
           ...day,
-          timeSlots: day.timeSlots.filter((_, i) => i !== slotIndex),
+          time: day.time.filter((_, i) => i !== slotIndex),
         };
       }
       return day;
@@ -111,14 +121,14 @@ export class AvailabilitySelectorComponent implements OnInit {
   updateTimeSlot(
     dayIndex: number,
     slotIndex: number,
-    field: 'start' | 'end',
+    field: 'from' | 'to',
     value: string
   ): void {
     const updated = this.days().map((day, index) => {
       if (index === dayIndex) {
         return {
           ...day,
-          timeSlots: day.timeSlots.map((slot, i) => {
+          time: day.time.map((slot, i) => {
             if (i === slotIndex) {
               return { ...slot, [field]: value };
             }
@@ -133,16 +143,13 @@ export class AvailabilitySelectorComponent implements OnInit {
   }
 
   private updateControl(): void {
-    const hasEnabledDay = this.days().some((day) => day.enabled);
-    
-    if (hasEnabledDay) {
-      const value = JSON.stringify(this.days());
-      this.control().setValue(value);
+    const enabledDays = this.days().filter((day) => day.enabled);
+
+    if (enabledDays.length > 0) {
+      this.control().setValue(enabledDays);
     } else {
-      this.control().setValue('');
+      this.control().setValue([]);
     }
-    
     this.control().markAsTouched();
   }
 }
-

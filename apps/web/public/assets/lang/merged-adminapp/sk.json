@@ -12,8 +12,6 @@
       "GENDER": "Pohlavie",
       "YEARS_OF_EXPERIENCE": "Roky skúseností",
       "SPECIALIZATION_FIELDS": "Oblasti špecializácie",
-      "CERTIFICATES": "Certifikáty",
-      "PROFILE_PHOTO": "Profilová fotka",
       "BIO": "O mne",
       "PRICING": "Cena (za hodinu)",
       "AVAILABILITY": "Dostupnosť",
@@ -30,7 +28,6 @@
         "ADD_TIME_SLOT": "Pridať časový slot",
         "REMOVE": "Odstrániť"
       },
-      "TIMEZONE": "Časové pásmo",
       "COMMUNICATION_METHODS": "Spôsoby komunikácie",
       "REGISTER_BUTTON": "Registrovať",
       "CANCEL": "Zrušiť",
@@ -50,11 +47,9 @@
         "ENTER_EMAIL": "Zadajte váš e-mail",
         "ENTER_PASSWORD": "Zadajte vaše heslo",
         "YEARS_OF_EXPERIENCE": "Roky skúseností",
-        "CERTIFICATES": "Zadajte certifikáty (oddelené čiarkou)",
         "BIO": "Povedzte nám o sebe",
         "PRICING": "Hodinová sadzba (USD)",
-        "AVAILABILITY": "napr. Pondelok-Piatok 9:00-17:00",
-        "TIMEZONE": "napr. UTC, EST, PST"
+        "AVAILABILITY": "napr. Pondelok-Piatok 9:00-17:00"
       },
       "GENDER_OPTIONS": {
         "MALE": "Muž",

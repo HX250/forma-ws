@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { HttpInterceptor } from './core/auth/http-interceptor';
+import { initializeAuth } from './app-initializer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,5 +34,6 @@ export const appConfig: ApplicationConfig = {
       suffix: '.json',
     }),
     provideHttpClient(withInterceptorsFromDi()),
+    provideAppInitializer(initializeAuth),
   ],
 };

@@ -11,31 +11,19 @@ export class ClientRepository extends BaseRepository<Client> {
   }
 
   override async findById(id: string): Promise<Client | null> {
-    const client = await this.prisma.client.findUnique({
-      where: { id },
-    });
-
-    if (!client) return null;
-
-    return this.parseEntity(client);
+    const client = await this.prisma.client.findUnique({ where: { id } });
+    return client ? Client.fromPrisma(client) : null;
   }
 
   override async findByEmail(email: string): Promise<Client | null> {
-    const client = await this.prisma.client.findUnique({
-      where: { email },
-    });
-
-    if (!client) return null;
-
-    return this.parseEntity(client);
+    const client = await this.prisma.client.findUnique({ where: { email } });
+    return client ? Client.fromPrisma(client) : null;
   }
 
   override async save(client: Client): Promise<Client> {
     const data = client.toPrisma();
-
     const savedClient = await this.prisma.client.create({ data });
-
-    return this.parseEntity(savedClient);
+    return Client.fromPrisma(savedClient);
   }
 
   async updateAfterPasswordSet(client: Client): Promise<Client> {
@@ -47,36 +35,14 @@ export class ClientRepository extends BaseRepository<Client> {
         isFirstLogin: false,
       },
     });
-
-    return this.parseEntity(updated);
+    return Client.fromPrisma(updated);
   }
 
   protected override get prismaModel(): Prisma.ClientDelegate {
     return this.prisma.client;
   }
+
   protected override parseEntity(client: any): Client {
-    return new Client(
-      client.email,
-      client.coachId,
-      client.password,
-      client.oneTimePassword,
-      client.isFirstLogin,
-      client.firstName,
-      client.lastName,
-      client.gender,
-      client.birthDate,
-      client.currentWeight.toNumber(),
-      client.height.toNumber(),
-      client.activityLevel,
-      client.fitnessExperience,
-      client.canTrackExercise,
-      client.canTrackSleep,
-      client.canTrackNutrition,
-      client.canTrackWater,
-      client.medicalConditions,
-      client.createdAt,
-      client.updatedAt,
-      client.id
-    );
+    return Client.fromPrisma(client);
   }
 }

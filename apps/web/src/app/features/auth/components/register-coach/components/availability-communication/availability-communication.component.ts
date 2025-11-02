@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RegisterCoachService } from '../../services/register-coach.service';
 import { AuthModel } from '../../../../models/auth.model';
 import { AvailabilitySelectorComponent } from './components/availability-selector/availability-selector.component';
+import { AvailabilityModel } from '@forma-ws/frontend/domain';
 
 @Component({
   selector: 'app-availability-communication',
@@ -18,7 +19,6 @@ import { AvailabilitySelectorComponent } from './components/availability-selecto
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PageInput,
     PageSelect,
     TranslateModule,
     AvailabilitySelectorComponent,
@@ -29,8 +29,7 @@ import { AvailabilitySelectorComponent } from './components/availability-selecto
 export class AvailabilityCommunicationComponent {
   private registerCoachService = inject(RegisterCoachService);
 
-  availability = input.required<FormControl<string>>();
-  timezone = input.required<FormControl<string>>();
+  availability = input.required<FormControl<AvailabilityModel[]>>();
   communicationMethods =
     input.required<
       FormControl<AuthModel.Form.registerCoach['communicationMethods']['value']>

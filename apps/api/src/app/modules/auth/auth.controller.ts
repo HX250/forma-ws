@@ -8,15 +8,16 @@ import {
   HttpStatus,
   Res,
   UnauthorizedException,
+  Get,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import {
-  AuthResponseDto,
   LoginDto,
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
+  AuthPayload,
 } from '@forma-ws/domain';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 
@@ -29,7 +30,7 @@ export class AuthController {
   async login(
     @Body() loginDto: LoginDto,
     @Res({ passthrough: true }) response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     return this.authService.login(loginDto, response);
   }
 
@@ -37,7 +38,7 @@ export class AuthController {
   async registerCoach(
     @Body() registerDto: RegisterCoachDto,
     @Res({ passthrough: true }) response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     return this.authService.registerCoach(registerDto, response);
   }
 
@@ -54,7 +55,7 @@ export class AuthController {
     @Req() req: Request,
     @Body() setPasswordDto: SetClientPasswordDto,
     @Res({ passthrough: true }) response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     const clientId = req.user['sub'];
     return this.authService.setClientPassword(
       clientId,
@@ -68,7 +69,7 @@ export class AuthController {
   async refreshTokens(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     const refreshToken = request.cookies['refreshToken'];
 
     if (!refreshToken) {
@@ -84,5 +85,15 @@ export class AuthController {
     response.clearCookie('accessToken');
     response.clearCookie('refreshToken');
     return { success: true };
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async getCurrentUser(@Req() req): Promise<AuthPayload> {
+    return {
+      sub: req.user.sub,  
+      email: req.user.email,
+      userType: req.user.userType,
+    };
   }
 }

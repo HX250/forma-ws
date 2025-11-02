@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponseDto, LoginDto } from '@forma-ws/frontend/domain';
 import { environment } from '../../../../../env/dev.env';
+import { AuthPayload } from '@forma-ws/frontend/domain';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +13,7 @@ export class DashboardResourceService {
   setClientPassword(newPassword: string) {
     const body = { newPassword: newPassword };
 
-    return this.http.post<AuthResponseDto>(
+    return this.http.post<AuthPayload>(
       this.endpoint + '/auth/client/set-password',
       body
     );

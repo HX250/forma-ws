@@ -12,8 +12,6 @@
       "GENDER": "Gender",
       "YEARS_OF_EXPERIENCE": "Years of Experience",
       "SPECIALIZATION_FIELDS": "Specialization Fields",
-      "CERTIFICATES": "Certificates",
-      "PROFILE_PHOTO": "Profile Photo",
       "BIO": "Bio",
       "PRICING": "Pricing (per hour)",
       "AVAILABILITY": "Availability",
@@ -30,7 +28,6 @@
         "ADD_TIME_SLOT": "Add time slot",
         "REMOVE": "Remove"
       },
-      "TIMEZONE": "Timezone",
       "COMMUNICATION_METHODS": "Communication Methods",
       "REGISTER_BUTTON": "Register",
       "CANCEL": "Cancel",
@@ -50,11 +47,9 @@
         "ENTER_EMAIL": "Enter your email",
         "ENTER_PASSWORD": "Enter your password",
         "YEARS_OF_EXPERIENCE": "Years of experience",
-        "CERTIFICATES": "Enter certificates (comma separated)",
         "BIO": "Tell us about yourself",
         "PRICING": "Hourly rate (USD)",
-        "AVAILABILITY": "e.g., Monday-Friday 9AM-5PM",
-        "TIMEZONE": "e.g., UTC, EST, PST"
+        "AVAILABILITY": "e.g., Monday-Friday 9AM-5PM"
       },
       "GENDER_OPTIONS": {
         "MALE": "Male",

@@ -30,7 +30,6 @@ export class ProfessionalInfoComponent {
     input.required<
       FormControl<AuthModel.Form.registerCoach['specializationFields']['value']>
     >();
-  certificates = input.required<FormControl<string[]>>();
   bio = input.required<FormControl<string>>();
   pricing = input.required<FormControl<number>>();
 

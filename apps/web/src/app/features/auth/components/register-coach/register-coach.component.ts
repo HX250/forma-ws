@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
+  AlertService,
+  AlertType,
   BreadcrumbItem,
   BreadcrumbsComponent,
   ButtonComponent,
@@ -18,6 +20,7 @@ import {
 } from '@forma-ws/frontend-shared';
 import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
 import {
+  AvailabilityModel,
   CommunicationMethod,
   Gender,
   SpecializationField,
@@ -28,6 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { ProfessionalInfoComponent } from './components/professional-info/professional-info.component';
 import { AvailabilityCommunicationComponent } from './components/availability-communication/availability-communication.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-coach',
@@ -49,6 +53,8 @@ export class RegisterCoachComponent
 {
   private fb = inject(FormBuilder);
   private authResourceService = inject(AuthResourceService);
+  private alertService = inject(AlertService);
+  private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
   private gender = Gender;
@@ -114,10 +120,9 @@ export class RegisterCoachComponent
 
     this.sendRequest(
       this.authResourceService.register(this.form.getRawValue())
-    ).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
+    ).subscribe(() => {
+      this.alertService.show(AlertType.SUCCESS, 'Coach Created successfully');
+      this.router.navigateByUrl('/');
     });
   }
 
@@ -163,14 +168,12 @@ export class RegisterCoachComponent
         return (
           this.form.controls.yearsOfExperience.valid &&
           this.form.controls.specializationFields.valid &&
-          this.form.controls.certificates.valid &&
           this.form.controls.bio.valid &&
           this.form.controls.pricing.valid
         );
       case 3:
         return (
           this.form.controls.availability.valid &&
-          this.form.controls.timezone.valid &&
           this.form.controls.communicationMethods.valid
         );
       default:
@@ -191,11 +194,9 @@ export class RegisterCoachComponent
           [this.specializationFields.BODYBUILDING],
           Validators.required,
         ],
-        certificates: [['']],
         bio: [''],
         pricing: [0, Validators.required],
-        availability: ['', Validators.required],
-        timezone: [''],
+        availability: [[] as AvailabilityModel[], [Validators.required]],
         communicationMethods: [
           [this.communicationMethod.EMAIL],
           Validators.required,

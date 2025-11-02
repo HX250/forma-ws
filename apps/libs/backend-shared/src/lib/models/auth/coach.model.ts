@@ -6,7 +6,9 @@ import {
   RegisterCoachDto,
   AuthPayload,
   UserType,
+  AvailabilityModel,
 } from '@forma-ws/domain';
+import { Prisma } from '@prisma/client';
 
 export class Coach {
   constructor(
@@ -17,13 +19,10 @@ export class Coach {
     public readonly gender: Gender,
     public readonly yearsOfExperience: number,
     public readonly specializationFields: SpecializationField[],
-    public readonly certificates: string[],
     public readonly communicationMethods: CommunicationMethod[],
-    public readonly profilePhoto?: string,
     public readonly bio?: string,
     public readonly pricing?: number,
-    public readonly availability?: string,
-    public readonly timezone?: string,
+    public readonly availability?: AvailabilityModel[],
     public readonly createdAt: Date = new Date(),
     public readonly updatedAt: Date = new Date(),
     public readonly id?: string
@@ -44,13 +43,10 @@ export class Coach {
       coach.gender,
       coach.yearsOfExperience,
       coach.specializationFields,
-      coach.certificates || [],
       coach.communicationMethods || [],
-      coach.profilePhoto,
       coach.bio,
       coach.pricing,
-      coach.availability,
-      coach.timezone
+      coach.availability
     );
   }
 
@@ -60,43 +56,36 @@ export class Coach {
 
   getAuthPayload(): AuthPayload {
     return {
-      sub: this.id,
+      sub: this.id!,
       email: this.email,
       userType: this.getUserType(),
     };
   }
 
-  toPrisma(): {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    gender: Gender;
-    yearsOfExperience: number;
-    specializationFields: SpecializationField[];
-    certificates: string[];
-    profilePhoto?: string;
-    bio?: string;
-    pricing?: number;
-    availability?: string;
-    timezone?: string;
-    communicationMethods: CommunicationMethod[];
-  } {
+  static fromPrisma(data: any): Coach {
+    return new Coach(
+      data.email,
+      data.password,
+      data.firstName,
+      data.lastName,
+      data.gender,
+      data.yearsOfExperience,
+      data.specializationFields,
+      data.communicationMethods,
+      data.bio,
+      data.pricing?.toNumber(),
+      data.availability as AvailabilityModel[],
+      data.createdAt,
+      data.updatedAt,
+      data.id
+    );
+  }
+
+  toPrisma() {
     return {
-      email: this.email,
+      ...this,
       password: this.password,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      yearsOfExperience: this.yearsOfExperience,
-      specializationFields: this.specializationFields,
-      certificates: this.certificates,
-      profilePhoto: this.profilePhoto,
-      bio: this.bio,
-      pricing: this.pricing,
-      availability: this.availability,
-      timezone: this.timezone,
-      communicationMethods: this.communicationMethods,
-    };
+      availability: this.availability as unknown as Prisma.InputJsonValue,
+    } as Prisma.CoachCreateInput;
   }
 }

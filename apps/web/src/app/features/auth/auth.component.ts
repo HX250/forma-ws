@@ -63,7 +63,7 @@ export class AuthComponent
     ).subscribe({
       next: (res) => {
         this.securityService.setLoggedIn(true);
-        this.securityService.setCurrentUser(res.userId);
+        this.securityService.setCurrentUser(res.sub);
         this.alertService.show(AlertType.SUCCESS, 'Login successful');
         this.router.navigateByUrl('/dashboard');
       },
