@@ -14,7 +14,6 @@ import {
   ClientRepository,
 } from '@forma-ws/backend-shared';
 import {
-  AuthResponseDto,
   LoginDto,
   RegisterCoachDto,
   RegisterClientDto,
@@ -34,10 +33,7 @@ export class AuthService {
     private clientRepository: ClientRepository
   ) {}
 
-  async login(
-    loginDto: LoginDto,
-    response: Response
-  ): Promise<AuthResponseDto> {
+  async login(loginDto: LoginDto, response: Response): Promise<AuthPayload> {
     const { email, password, userType } = loginDto;
     let user: Coach | Client;
 
@@ -61,7 +57,7 @@ export class AuthService {
     this.setCookies(response, tokens);
 
     return {
-      userId: user.id,
+      sub: user.id,
       email: user.email,
       userType: userType,
     };
@@ -70,7 +66,7 @@ export class AuthService {
   async registerCoach(
     registerDto: RegisterCoachDto,
     response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     const existingCoach = await this.coachRepository.findByEmail(
       registerDto.email
     );
@@ -85,7 +81,7 @@ export class AuthService {
     this.setCookies(response, tokens);
 
     return {
-      userId: savedCoach.id,
+      sub: savedCoach.id,
       email: savedCoach.email,
       userType: UserType.COACH,
     };
@@ -129,7 +125,7 @@ export class AuthService {
     clientId: string,
     setPasswordDto: SetClientPasswordDto,
     response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     const client = await this.clientRepository.findById(clientId);
     if (!client) {
       throw new UnauthorizedException('Client not found');
@@ -148,7 +144,7 @@ export class AuthService {
     this.setCookies(response, tokens);
 
     return {
-      userId: updatedClient.id,
+      sub: updatedClient.id,
       email: updatedClient.email,
       userType: UserType.CLIENT,
     };
@@ -157,7 +153,7 @@ export class AuthService {
   async refreshTokens(
     refreshToken: string,
     response: Response
-  ): Promise<AuthResponseDto> {
+  ): Promise<AuthPayload> {
     try {
       const payload = this.jwtService.verify(refreshToken, {
         secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
@@ -167,13 +163,12 @@ export class AuthService {
         sub: payload.sub,
         email: payload.email,
         userType: payload.userType,
-        coachId: payload.coachId,
       });
 
       this.setCookies(response, tokens);
 
       return {
-        userId: payload.sub,
+        sub: payload.sub,
         email: payload.email,
         userType: payload.userType,
       };

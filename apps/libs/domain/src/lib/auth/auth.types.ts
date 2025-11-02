@@ -9,8 +9,7 @@ export interface AuthTokens {
 }
 
 export interface AuthPayload {
-  sub?: string;
+  sub: string;
   email: string;
   userType: UserType;
-  coachId?: string;
 }

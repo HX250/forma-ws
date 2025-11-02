@@ -15,6 +15,7 @@ import {
   FitnessExperience,
   SpecializationField,
   CommunicationMethod,
+  DaysEnum,
 } from '../../enums';
 import { UserType } from '../../auth';
 
@@ -55,35 +56,19 @@ export class RegisterCoachDto {
   specializationFields!: SpecializationField[];
 
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  certificates?: string[] = [];
-
-  @IsOptional()
-  @IsString()
-  profilePhoto?: string;
-
-  @IsOptional()
   @IsString()
   bio?: string;
 
-  @IsOptional()
   @IsNumber()
   @Min(0)
-  pricing?: number;
+  pricing!: number;
 
   @IsOptional()
-  @IsString()
-  availability?: string;
+  availability?: AvailabilityModel[];
 
-  @IsOptional()
-  @IsString()
-  timezone?: string;
-
-  @IsOptional()
   @IsArray()
   @IsEnum(CommunicationMethod, { each: true })
-  communicationMethods?: CommunicationMethod[] = [];
+  communicationMethods: CommunicationMethod[] = [];
 }
 
 export class RegisterClientDto {
@@ -137,8 +122,13 @@ export class RefreshTokenDto {
   refreshToken!: string;
 }
 
-export interface AuthResponseDto {
-  userId: string;
-  email: string;
-  userType: UserType;
+export interface AvailabilityModel {
+  day: DaysEnum;
+  enabled: boolean;
+  time: BetweenTimeModel[];
+}
+
+export interface BetweenTimeModel {
+  from: string;
+  to: string;
 }

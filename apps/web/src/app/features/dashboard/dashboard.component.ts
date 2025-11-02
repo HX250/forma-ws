@@ -17,8 +17,6 @@ export class DashboardComponent {
   submitNewPassword() {
     this.dashboardService
       .setClientPassword(this.newPassword)
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe((res) => {});
   }
 }

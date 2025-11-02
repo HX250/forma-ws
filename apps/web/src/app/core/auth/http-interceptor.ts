@@ -5,13 +5,17 @@ import {
   HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AlertService, AlertType } from '@forma-ws/frontend-shared';
 import { Observable, tap } from 'rxjs';
+import { SecurityService } from './security.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpInterceptor implements HttpInterceptor {
-  constructor(private alertService: AlertService) {}
+  private alertService = inject(AlertService);
+  private securityService = inject(SecurityService);
+  private router = inject(Router);
 
   intercept(
     req: HttpRequest<any>,
@@ -25,10 +29,17 @@ export class HttpInterceptor implements HttpInterceptor {
       tap({
         next: (res) => {
           if (res instanceof HttpResponse) {
-            console.log(res.body);
           }
         },
         error: (err) => {
+          if (err.url?.includes('/auth/me')) {
+            return;
+          }
+
+          if (err.status === 401) {
+            this.securityService.clear();
+            this.router.navigateByUrl('/');
+          }
           this.errorHandling(err);
         },
       })

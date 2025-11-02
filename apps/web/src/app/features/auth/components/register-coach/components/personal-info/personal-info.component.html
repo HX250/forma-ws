@@ -1,0 +1,50 @@
+<div class="space-y-6">
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+      {{ 'AUTH.REGISTER_COACH.PERSONAL_INFORMATION' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-page-input
+        [control]="firstName()"
+        [label]="'AUTH.REGISTER_COACH.FIRST_NAME'"
+        [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.FIRST_NAME'"
+      />
+
+      <app-page-input
+        [control]="lastName()"
+        [label]="'AUTH.REGISTER_COACH.LAST_NAME'"
+        [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.LAST_NAME'"
+      />
+    </div>
+
+    <app-page-select
+      [control]="gender()"
+      [items]="genderOptions"
+      [label]="'AUTH.REGISTER_COACH.GENDER'"
+      [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.SELECT_GENDER'"
+      [required]="true"
+    />
+  </div>
+
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+      {{ 'AUTH.REGISTER_COACH.ACCOUNT_INFORMATION' | translate }}
+    </h2>
+
+    <app-page-input
+      [control]="email()"
+      [label]="'AUTH.EMAIL'"
+      [type]="'email'"
+      [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.ENTER_EMAIL'"
+    />
+
+    <app-page-input
+      [control]="password()"
+      [label]="'AUTH.PASSWORD'"
+      [type]="'password'"
+      [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.ENTER_PASSWORD'"
+    />
+  </div>
+</div>
+

@@ -43,24 +43,6 @@ export class CoachRepository extends BaseRepository<Coach> {
   }
 
   protected override parseEntity(coach: any): Coach {
-    return new Coach(
-      coach.email,
-      coach.password,
-      coach.firstName,
-      coach.lastName,
-      coach.gender,
-      coach.yearsOfExperience,
-      coach.specializationFields,
-      coach.certificates,
-      coach.communicationMethods,
-      coach.profilePhoto,
-      coach.bio,
-      coach.pricing.toNumber(),
-      coach.availability,
-      coach.timezone,
-      coach.createdAt,
-      coach.updatedAt,
-      coach.id
-    );
+    return Coach.fromPrisma(coach);
   }
 }

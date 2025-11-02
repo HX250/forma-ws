@@ -23,16 +23,11 @@
         (clicked)="changeRole(UserType.COACH)"
       />
     </div>
-    <app-page-input
-      [control]="form.controls.email"
-      [label]="'AUTH.EMAIL'"
-      [required]="true"
-    />
+    <app-page-input [control]="form.controls.email" [label]="'AUTH.EMAIL'" />
     <app-page-input
       [control]="form.controls.password"
       [label]="'AUTH.PASSWORD'"
       [type]="'password'"
-      [required]="true"
     />
     <app-button
       [text]="'AUTH.LOGIN_BUTTON'"
@@ -40,5 +35,12 @@
       [variant]="ButtonProperties.ButtonVariant.PRIMARY"
       (clicked)="onSubmit()"
     />
+    @if(form.controls.userType.value === UserType.COACH){
+    <app-button
+      [text]="'AUTH.REGISTER_COACH.REDIRECT'"
+      [variant]="ButtonProperties.ButtonVariant.SECONDARY"
+      routerLink="/register"
+    />
+    }
   </form>
 </div>

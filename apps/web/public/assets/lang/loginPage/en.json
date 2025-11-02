@@ -4,6 +4,78 @@
     "COACH": "Coach",
     "EMAIL": "E-mail",
     "PASSWORD": "Password",
-    "LOGIN_BUTTON": "Log In"
+    "LOGIN_BUTTON": "Log In",
+    "REGISTER_COACH": {
+      "REDIRECT": "Want to be a coach? Register now!",
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name",
+      "GENDER": "Gender",
+      "YEARS_OF_EXPERIENCE": "Years of Experience",
+      "SPECIALIZATION_FIELDS": "Specialization Fields",
+      "BIO": "Bio",
+      "PRICING": "Pricing (per hour)",
+      "AVAILABILITY": "Availability",
+      "AVAILABILITY_DAYS": {
+        "MONDAY": "Monday",
+        "TUESDAY": "Tuesday",
+        "WEDNESDAY": "Wednesday",
+        "THURSDAY": "Thursday",
+        "FRIDAY": "Friday",
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday"
+      },
+      "AVAILABILITY_ACTIONS": {
+        "ADD_TIME_SLOT": "Add time slot",
+        "REMOVE": "Remove"
+      },
+      "COMMUNICATION_METHODS": "Communication Methods",
+      "REGISTER_BUTTON": "Register",
+      "CANCEL": "Cancel",
+      "PREVIOUS": "Previous",
+      "NEXT": "Next",
+      "TITLE": "Register as Coach",
+      "PERSONAL_INFORMATION": "Personal Information",
+      "ACCOUNT_INFORMATION": "Account Information",
+      "PROFESSIONAL_INFORMATION": "Professional Information",
+      "AVAILABILITY_COMMUNICATION": "Availability & Communication",
+      "SELECT_SPECIALIZATION_FIELDS": "Select your specialization fields",
+      "SELECT_COMMUNICATION_METHODS": "Select communication methods",
+      "PLACEHOLDERS": {
+        "FIRST_NAME": "Enter your first name",
+        "LAST_NAME": "Enter your last name",
+        "SELECT_GENDER": "Select your gender",
+        "ENTER_EMAIL": "Enter your email",
+        "ENTER_PASSWORD": "Enter your password",
+        "YEARS_OF_EXPERIENCE": "Years of experience",
+        "BIO": "Tell us about yourself",
+        "PRICING": "Hourly rate (USD)",
+        "AVAILABILITY": "e.g., Monday-Friday 9AM-5PM"
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Male",
+        "FEMALE": "Female",
+        "OTHER": "Other",
+        "PREFER_NOT_TO_SAY": "Prefer not to say"
+      },
+      "SPECIALIZATION_FIELDS_OPTIONS": {
+        "POWERLIFTING": "Powerlifting",
+        "CROSSFIT": "CrossFit",
+        "BODYBUILDING": "Bodybuilding",
+        "WEIGHT_LOSS": "Weight Loss",
+        "STRENGTH_TRAINING": "Strength Training",
+        "CARDIO": "Cardio",
+        "YOGA": "Yoga",
+        "PILATES": "Pilates",
+        "SPORTS_PERFORMANCE": "Sports Performance",
+        "REHABILITATION": "Rehabilitation",
+        "NUTRITION": "Nutrition"
+      },
+      "COMMUNICATION_METHODS_OPTIONS": {
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "TEXT_MESSAGE": "Text Message",
+        "IN_APP_MESSAGING": "In-App Messaging"
+      }
+    }
   }
 }

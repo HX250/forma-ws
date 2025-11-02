@@ -1,0 +1,69 @@
+<div class="max-w-4xl mx-auto mt-10 p-6">
+  <h1 class="text-3xl font-bold text-primary-dark dark:text-primary mb-8">
+    {{ 'AUTH.REGISTER_COACH.TITLE' | translate }}
+  </h1>
+
+  <div class="mb-8">
+    <app-breadcrumbs
+      [items]="breadcrumbItems()"
+      [currentStep]="currentStep()"
+      [stepValidity]="stepValidity()"
+      (stepClick)="onStepClick($event)"
+    />
+  </div>
+
+  <form class="flex flex-col gap-6">
+    @switch (currentStep()) { @case (1) {
+    <app-personal-info
+      [firstName]="form.controls.firstName"
+      [lastName]="form.controls.lastName"
+      [gender]="form.controls.gender"
+      [email]="form.controls.email"
+      [password]="form.controls.password"
+    />
+    } @case (2) {
+    <app-professional-info
+      [yearsOfExperience]="form.controls.yearsOfExperience"
+      [specializationFields]="form.controls.specializationFields"
+      [bio]="form.controls.bio"
+      [pricing]="form.controls.pricing"
+    />
+    } @case (3) {
+    <app-availability-communication
+      [availability]="form.controls.availability"
+      [communicationMethods]="form.controls.communicationMethods"
+    />
+    } }
+
+    <div class="flex justify-between gap-4 mt-6">
+      <div>
+        @if (canGoPrevious()) {
+        <app-button
+          [text]="'AUTH.REGISTER_COACH.PREVIOUS'"
+          [variant]="ButtonProperties.ButtonVariant.SECONDARY"
+          (clicked)="previousStep()"
+        />
+        }
+      </div>
+
+      <div class="flex gap-4">
+        @if (!isLastStep()) {
+        <app-button
+          [text]="'AUTH.REGISTER_COACH.NEXT'"
+          [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+          [disabled]="!canGoNext()"
+          (clicked)="nextStep()"
+        />
+        } @else {
+        <app-button
+          [text]="'AUTH.REGISTER_COACH.REGISTER_BUTTON'"
+          [loading]="form.formLoader()"
+          [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+          [disabled]="form.invalid"
+          (clicked)="onSubmit()"
+        />
+        }
+      </div>
+    </div>
+  </form>
+</div>

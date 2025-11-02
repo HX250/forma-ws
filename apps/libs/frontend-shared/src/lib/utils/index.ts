@@ -3,3 +3,5 @@ export * from './components/alert/alert.service';
 export * from './components/alert/alert.model';
 export * from './components/dark-light-button/dark-light-button.component';
 export * from './components/language-switcher/language-switcher.component';
+export * from './directives/click-outside.directive';
+export * from './types/types.model';

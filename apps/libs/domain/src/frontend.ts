@@ -4,7 +4,7 @@ export type {
   RegisterClientDto,
   SetClientPasswordDto,
   RefreshTokenDto,
-  AuthResponseDto,
+  AvailabilityModel,
 } from './lib/dto';
 
 export * from './lib/enums';

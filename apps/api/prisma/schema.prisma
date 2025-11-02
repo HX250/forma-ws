@@ -68,12 +68,9 @@ model Coach {
   gender                 Gender
   yearsOfExperience      Int
   specializationFields   SpecializationField[]
-  certificates           String[]               
-  profilePhoto           String?               
   bio                    String?
   pricing                Decimal?               @db.Decimal(10, 2)
-  availability           String?                
-  timezone               String?
+  availability           Json?                
   communicationMethods   CommunicationMethod[]
   
   clients                Client[]

@@ -6,6 +6,7 @@ import {
   ActivityLevel,
   FitnessExperience,
 } from '@forma-ws/domain';
+import { Prisma } from '@prisma/client';
 
 export class Client {
   constructor(
@@ -87,50 +88,38 @@ export class Client {
     );
   }
 
-  toPrisma(): {
-    email: string;
-    coachId: string;
-    password: string | null;
-    oneTimePassword: string | null;
-    isFirstLogin: boolean;
-    firstName: string;
-    lastName: string;
-    gender: Gender;
-    birthDate: Date;
-    currentWeight: number;
-    height: number;
-    activityLevel: ActivityLevel;
-    fitnessExperience: FitnessExperience;
-    canTrackExercise: boolean;
-    canTrackSleep: boolean;
-    canTrackNutrition: boolean;
-    canTrackWater: boolean;
-    medicalConditions?: string;
-    createdAt: Date;
-    updatedAt: Date;
-  } {
+  static fromPrisma(data: any): Client {
+    return new Client(
+      data.email,
+      data.coachId,
+      data.password,
+      data.oneTimePassword,
+      data.isFirstLogin,
+      data.firstName,
+      data.lastName,
+      data.gender,
+      data.birthDate,
+      data.currentWeight.toNumber(),
+      data.height.toNumber(),
+      data.activityLevel,
+      data.fitnessExperience,
+      data.canTrackExercise,
+      data.canTrackSleep,
+      data.canTrackNutrition,
+      data.canTrackWater,
+      data.medicalConditions,
+      data.createdAt,
+      data.updatedAt,
+      data.id
+    );
+  }
+
+  toPrisma() {
     return {
-      email: this.email,
-      coachId: this.coachId,
+      ...this,
       password: this.password,
       oneTimePassword: this.oneTimePassword,
-      isFirstLogin: this.isFirstLogin,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      birthDate: this.birthDate,
-      currentWeight: this.currentWeight,
-      height: this.height,
-      activityLevel: this.activityLevel,
-      fitnessExperience: this.fitnessExperience,
-      canTrackExercise: this.canTrackExercise,
-      canTrackSleep: this.canTrackSleep,
-      canTrackNutrition: this.canTrackNutrition,
-      canTrackWater: this.canTrackWater,
-      medicalConditions: this.medicalConditions,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
-    };
+    } as Prisma.ClientCreateInput;
   }
 
   getUserType(): UserType {
@@ -139,10 +128,9 @@ export class Client {
 
   getAuthPayload(): AuthPayload {
     return {
-      sub: this.id,
+      sub: this.id!,
       email: this.email,
       userType: this.getUserType(),
-      coachId: this.coachId,
     };
   }
 

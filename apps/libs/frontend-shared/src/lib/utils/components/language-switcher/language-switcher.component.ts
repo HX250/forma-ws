@@ -8,7 +8,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, TranslateModule],
   template: `
     <button
-      class="absolute bottom-6 left-6 px-4 py-2 rounded-full font-semibold bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-400"
+      class="fixed bottom-6 left-6 px-4 py-2 rounded-full font-semibold bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-400"
       (click)="onChange(current)"
     >
       {{ current.toUpperCase() }}

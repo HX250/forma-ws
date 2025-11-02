@@ -1,11 +1,13 @@
 import { Route } from '@angular/router';
-import { AuthComponent } from './features/auth/auth.component';
-import { securityGuard } from '@forma-ws/frontend-shared';
+import { securityGuard } from './core/auth/auth.guard';
+import { loggedInGuard } from './core/auth/logged-in.guard';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: AuthComponent,
+    loadChildren: () =>
+      import('./features/auth/auth.routes').then((m) => m.AuthRoutingModule),
+    canActivate: [loggedInGuard],
   },
 
   {
@@ -14,5 +16,6 @@ export const appRoutes: Route[] = [
       import('./features/dashboard/dashboard.routes').then(
         (m) => m.DashboardRoutingModule
       ),
+    canActivate: [securityGuard],
   },
 ];

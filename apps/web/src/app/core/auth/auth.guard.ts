@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { SecurityService } from './security.service';
 
 export const securityGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
+  const securityService = inject(SecurityService);
 
-  const token = localStorage.getItem('authToken');
-
-  if (!token) {
+  if (!securityService.isAuthenticated()) {
     router.navigate(['/']);
     return false;
   }
