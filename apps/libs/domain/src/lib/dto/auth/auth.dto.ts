@@ -56,32 +56,19 @@ export class RegisterCoachDto {
   specializationFields!: SpecializationField[];
 
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  certificates?: string[] = [];
-
-  @IsOptional()
-  @IsString()
-  profilePhoto?: string;
-
-  @IsOptional()
   @IsString()
   bio?: string;
 
   @IsNumber()
   @Min(0)
-  pricing?: number;
+  pricing!: number;
 
   @IsOptional()
   availability?: AvailabilityModel[];
 
-  @IsOptional()
-  @IsString()
-  timezone?: string;
-
   @IsArray()
   @IsEnum(CommunicationMethod, { each: true })
-  communicationMethods?: CommunicationMethod[] = [];
+  communicationMethods: CommunicationMethod[] = [];
 }
 
 export class RegisterClientDto {
