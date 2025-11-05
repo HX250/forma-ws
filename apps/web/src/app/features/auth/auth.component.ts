@@ -61,11 +61,16 @@ export class AuthComponent
     this.sendRequest(
       this.authResourceService.login(this.form.getRawValue())
     ).subscribe({
-      next: (res) => {
-        this.securityService.setLoggedIn(true);
-        this.securityService.setCurrentUser(res.sub);
-        this.alertService.show(AlertType.SUCCESS, 'Login successful');
-        this.router.navigateByUrl('/dashboard');
+      next: (authPayload) => {
+        this.securityService.setAuthPayload(authPayload);
+
+        this.authResourceService.getCurrentUser().subscribe({
+          next: (user) => {
+            this.securityService.setCurrentUser(user);
+            this.alertService.show(AlertType.SUCCESS, 'Login successful');
+            this.router.navigateByUrl('/dashboard');
+          },
+        });
       },
     });
   }

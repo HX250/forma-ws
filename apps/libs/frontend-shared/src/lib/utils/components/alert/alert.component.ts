@@ -103,20 +103,20 @@ export class AlertComponent {
 
   getAlertClasses(type: AlertType): string {
     const typeClasses = {
-      success: 'bg-primary bg-accent/15',
-      error: 'bg-primary bg-utils-error/15',
-      warning: 'bg-primary bg-utils-warning/15',
-      info: 'bg-primary bg-utils-info/15',
+      success: 'bg-primary dark:bg-primary-dark border-2 border-accent/30 dark:border-accent-dark/30',
+      error: 'bg-primary dark:bg-primary-dark border-2 border-utils-error/30',
+      warning: 'bg-primary dark:bg-primary-dark border-2 border-utils-warning/30',
+      info: 'bg-primary dark:bg-primary-dark border-2 border-utils-info/30',
     };
     return `${typeClasses[type]}`;
   }
 
   getIconClasses(type: AlertType): string {
     const typeClasses = {
-      success: 'bg-utils/40 text-accent',
-      error: 'bg-utils-error/40 text-utils-error',
+      success: 'bg-accent/20 dark:bg-accent-dark/20 text-accent dark:text-accent-dark',
+      error: 'bg-utils-error/20 text-utils-error',
       warning: 'bg-utils-warning/20 text-utils-warning',
-      info: 'bg-utils-info/40 text-utils-info',
+      info: 'bg-utils-info/20 text-utils-info',
     };
     return typeClasses[type];
   }

@@ -87,15 +87,9 @@ export class AuthController {
     return { success: true };
   }
 
-  @Get('me')
+  @Get('getCurrentUser')
   @UseGuards(JwtAuthGuard)
-  async getCurrentUser(
-    @Req() req: { user: AuthPayload }
-  ): Promise<AuthPayload> {
-    return {
-      sub: req.user.sub,
-      email: req.user.email,
-      userType: req.user.userType,
-    };
+  async getCurrentUser(@Req() req: { user: AuthPayload }) {
+    return this.authService.getCurrentUser(req.user);
   }
 }

@@ -145,4 +145,9 @@ export class Client {
   getOneTimePassword(): string | null {
     return this.oneTimePassword;
   }
+
+  toJSON() {
+    const { password, oneTimePassword, ...rest } = this;
+    return rest;
+  }
 }

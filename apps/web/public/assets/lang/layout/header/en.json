@@ -1,0 +1,8 @@
+{
+  "HEADER": {
+    "DASHBOARD": "Dashboard",
+    "CLIENTS": "Clients",
+    "PROFILE": "Profile",
+    "LOGOUT": "Logout"
+  }
+}

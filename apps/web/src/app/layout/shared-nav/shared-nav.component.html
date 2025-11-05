@@ -1,0 +1,94 @@
+<nav class="hidden items-center gap-1 md:flex">
+  @for (link of navLinks; track link.route) {
+  <a
+    [routerLink]="link.route"
+    routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
+    [routerLinkActiveOptions]="link.exact ? { exact: true } : { exact: false }"
+    class="rounded-md px-4 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
+  >
+    {{ link.translationKey | translate }}
+  </a>
+  }
+</nav>
+
+@if(isMobileMenuOpen) {
+<div class="fixed inset-0 z-40 md:hidden" (click)="onCloseMobileMenu()" fadeIn>
+  <div
+    class="absolute inset-0 bg-secondary/20 backdrop-blur-sm dark:bg-secondary-dark/20"
+  ></div>
+
+  <div
+    class="absolute right-0 top-0 h-full w-full bg-primary shadow-modal dark:bg-primary-dark sm:w-80"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="flex h-16 items-center justify-end border-b border-secondary/20 px-4 dark:border-secondary-dark/20">
+      <button
+        (click)="onToggleMenu()"
+        class="flex h-10 w-10 items-center justify-center rounded-md text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
+        aria-label="Close menu"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col p-4">
+      <div
+        class="mb-6 flex items-center gap-3 rounded-lg border border-secondary/20 p-4 dark:border-secondary-dark/20"
+      >
+        <div
+          class="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary dark:bg-accent-dark dark:text-primary-dark"
+        >
+          <span class="text-lg font-semibold">
+            {{ currentUser.firstName?.charAt(0)?.toUpperCase() || 'U' }}
+          </span>
+        </div>
+        <div class="flex-1 overflow-hidden">
+          <p
+            class="truncate text-sm font-semibold text-secondary dark:text-secondary-dark"
+          >
+            {{ currentUser | userFullName }}
+          </p>
+          <p class="truncate text-xs text-muted dark:text-muted-dark">
+            {{ currentUser.email }}
+          </p>
+        </div>
+      </div>
+
+      @for (link of navLinks; track link.route; let isLast = $last) {
+      <a
+        [routerLink]="link.route"
+        routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
+        [routerLinkActiveOptions]="
+          link.exact ? { exact: true } : { exact: false }
+        "
+        (click)="onCloseMobileMenu()"
+        [class]="
+          'rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10 ' +
+          (isLast ? 'mb-6' : 'mb-2')
+        "
+      >
+        {{ link.translationKey | translate }}
+      </a>
+      }
+
+      <button
+        (click)="onLogout()"
+        class="rounded-md bg-secondary px-4 py-3 text-base font-medium text-primary transition-colors hover:bg-secondary/80 dark:bg-secondary-dark dark:text-primary-dark dark:hover:bg-secondary-dark/80"
+      >
+        {{ 'HEADER.LOGOUT' | translate }}
+      </button>
+    </nav>
+  </div>
+</div>
+}

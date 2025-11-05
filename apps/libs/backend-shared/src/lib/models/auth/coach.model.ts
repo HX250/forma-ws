@@ -88,4 +88,9 @@ export class Coach {
       availability: this.availability as unknown as Prisma.InputJsonValue,
     } as Prisma.CoachCreateInput;
   }
+
+  toJSON() {
+    const { password, ...rest } = this;
+    return rest;
+  }
 }
