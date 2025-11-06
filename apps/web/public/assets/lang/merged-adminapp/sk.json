@@ -105,5 +105,12 @@
     "INTERNAL_SERVER_ERROR": "Došlo k neočakávanej chybe servera. Prosím, skúste to znova neskôr.",
     "UNKNOWN_ERROR": "Došlo k neznámej chybe. Ak problém pretrvá, kontaktujte podporu.",
     "BAD_REQUEST": "Požiadavka bola neplatná alebo ju nemožno spracovať. Skontrolujte svoje vstupy."
+  },
+  "HEADER": {
+    "DASHBOARD": "Prehľad",
+    "CLIENTS": "Klienti",
+    "PROFILE": "Profil",
+    "SETTINGS": "Nastavenia",
+    "LOGOUT": "Odhlásiť sa"
   }
 }

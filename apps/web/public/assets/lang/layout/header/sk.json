@@ -1,0 +1,9 @@
+{
+  "HEADER": {
+    "DASHBOARD": "Prehľad",
+    "CLIENTS": "Klienti",
+    "PROFILE": "Profil",
+    "SETTINGS": "Nastavenia",
+    "LOGOUT": "Odhlásiť sa"
+  }
+}

@@ -22,7 +22,7 @@ export class SecurityService {
     return this.isLoggedIn.asReadonly();
   }
 
-  setCurrentUser(user: Coach | Client | null) {
+  setCurrentUser(user: Coach | Client) {
     this.currentUser.set(user);
   }
 
@@ -30,7 +30,7 @@ export class SecurityService {
     return this.currentUser.asReadonly();
   }
 
-  setAuthPayload(payload: AuthPayload | null) {
+  setAuthPayload(payload: AuthPayload) {
     this.authPayload.set(payload);
     this.setLoggedIn(!!payload);
   }

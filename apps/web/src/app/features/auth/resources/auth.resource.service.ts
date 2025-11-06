@@ -4,6 +4,8 @@ import {
   AuthPayload,
   LoginDto,
   RegisterCoachDto,
+  Coach,
+  Client,
 } from '@forma-ws/frontend/domain';
 import { GlobalAuthService } from '../../../core/auth/auth';
 @Injectable({
@@ -25,6 +27,8 @@ export class AuthResourceService extends GlobalAuthService {
   }
 
   getCurrentUser() {
-    return this.http.get<AuthPayload>(this.endpoint + '/auth/me');
+    return this.http.get<Coach | Client>(
+      this.endpoint + '/auth/getCurrentUser'
+    );
   }
 }

@@ -220,6 +220,22 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
+  async getCurrentUser(authPayload: AuthPayload): Promise<Client | Coach> {
+    const { sub, userType } = authPayload;
+
+    const repository =
+      userType === UserType.COACH
+        ? this.coachRepository
+        : this.clientRepository;
+    const user = await repository.findById(sub);
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return user.toJSON();
+  }
+
   private generateOneTimePassword(): string {
     return randomBytes(4).toString('hex').toUpperCase();
   }

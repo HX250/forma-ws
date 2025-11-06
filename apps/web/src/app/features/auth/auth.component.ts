@@ -19,6 +19,7 @@ import { UserType } from '@forma-ws/frontend/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '@forma-ws/frontend-shared';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -59,11 +60,13 @@ export class AuthComponent
     }
 
     this.sendRequest(
-      this.authResourceService.login(this.form.getRawValue())
+      this.authResourceService.login(this.form.getRawValue()).pipe(
+        tap((authPayload) => this.securityService.setAuthPayload(authPayload)),
+        switchMap(() => this.authResourceService.getCurrentUser()),
+        tap((user) => this.securityService.setCurrentUser(user))
+      )
     ).subscribe({
-      next: (res) => {
-        this.securityService.setLoggedIn(true);
-        this.securityService.setCurrentUser(res.sub);
+      next: () => {
         this.alertService.show(AlertType.SUCCESS, 'Login successful');
         this.router.navigateByUrl('/dashboard');
       },

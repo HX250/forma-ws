@@ -1,4 +1,59 @@
-<div>
-  <input type="text" [(ngModel)]="newPassword" />
-  <button (click)="submitNewPassword()">Sned</button>
+<div class="p-6 max-w-4xl mx-auto">
+  <h1 class="text-3xl font-bold text-secondary dark:text-secondary-dark mb-6">
+    Dashboard
+  </h1>
+
+  <!-- Alert Test Section -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark mb-4">
+      Test Alerts
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <button
+        (click)="showSuccessAlert()"
+        class="rounded-md bg-accent px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-accent/80 dark:bg-accent-dark dark:text-primary-dark dark:hover:bg-accent-dark/80"
+      >
+        Show Success Alert
+      </button>
+      <button
+        (click)="showErrorAlert()"
+        class="rounded-md bg-utils-error px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-utils-error/80"
+      >
+        Show Error Alert
+      </button>
+      <button
+        (click)="showWarningAlert()"
+        class="rounded-md bg-utils-warning px-4 py-3 text-sm font-medium text-secondary transition-colors hover:bg-utils-warning/80"
+      >
+        Show Warning Alert
+      </button>
+      <button
+        (click)="showInfoAlert()"
+        class="rounded-md bg-utils-info px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-utils-info/80"
+      >
+        Show Info Alert
+      </button>
+    </div>
+  </div>
+
+  <!-- Password Change Section -->
+  <div class="rounded-lg border border-secondary/20 bg-primary p-6 dark:border-secondary-dark/20 dark:bg-primary-dark">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark mb-4">
+      Change Password
+    </h2>
+    <div class="flex gap-3">
+      <input
+        type="text"
+        [(ngModel)]="newPassword"
+        placeholder="Enter new password"
+        class="flex-1 rounded-md border border-secondary/20 bg-primary px-4 py-2 text-sm text-secondary transition-colors focus:border-accent focus:outline-none dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark dark:focus:border-accent-dark"
+      />
+      <button
+        (click)="submitNewPassword()"
+        class="rounded-md bg-secondary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-secondary/80 dark:bg-secondary-dark dark:text-primary-dark dark:hover:bg-secondary-dark/80"
+      >
+        Send
+      </button>
+    </div>
+  </div>
 </div>

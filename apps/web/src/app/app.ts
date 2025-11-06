@@ -6,9 +6,16 @@ import {
   DarkLightButton,
   LanguageSwitcher,
 } from '@forma-ws/frontend-shared';
+import { HeaderComponent } from './layout/header/header.component';
 
 @Component({
-  imports: [RouterModule, DarkLightButton, LanguageSwitcher, AlertComponent],
+  imports: [
+    RouterModule,
+    DarkLightButton,
+    LanguageSwitcher,
+    AlertComponent,
+    HeaderComponent,
+  ],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',

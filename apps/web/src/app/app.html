@@ -2,9 +2,7 @@
   class="min-h-screen bg-primary dark:bg-primary-dark transition-colors duration-300"
 >
   @if(isLoggedIn()){
-  <header
-    class="flex items-center justify-between px-6 py-4 bg-primary dark:bg-primary-dark border-b border-secondary dark:border-secondary-dark"
-  ></header>
+  <app-header />
   }
   <main class="p-6">
     <router-outlet></router-outlet>
