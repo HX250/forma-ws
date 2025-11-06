@@ -98,7 +98,11 @@ export class Coach extends BaseMapper {
   }
 
   toPrisma() {
-    return BaseMapper['mapToPrisma'](this, Coach.mapperConfig) as Prisma.CoachCreateInput;
+    const mapped = BaseMapper['mapToPrisma'](this, Coach.mapperConfig);
+    return {
+      ...mapped,
+      password: this.password,
+    } as Prisma.CoachCreateInput;
   }
 
   toJSON() {

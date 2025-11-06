@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   SharedNavComponent,
@@ -13,9 +13,15 @@ import {
   styleUrls: ['./coach-header.component.css'],
 })
 export class CoachHeaderComponent {
+  linkClick = output<void>();
+
   navLinks: NavLink[] = [
     { route: '/dashboard', translationKey: 'HEADER.DASHBOARD', exact: true },
     { route: '/clients', translationKey: 'HEADER.CLIENTS' },
     { route: '/settings', translationKey: 'HEADER.SETTINGS' },
   ];
+
+  onLinkClick() {
+    this.linkClick.emit();
+  }
 }

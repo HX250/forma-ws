@@ -220,7 +220,7 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async getCurrentUser(authPayload: AuthPayload) {
+  async getCurrentUser(authPayload: AuthPayload): Promise<Client | Coach> {
     const { sub, userType } = authPayload;
 
     const repository =

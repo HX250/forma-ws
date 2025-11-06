@@ -51,12 +51,6 @@ export class RegisterCoachComponent
   extends PageFormComponent<FormGroup<AuthModel.Form.registerCoach>>
   implements OnInit
 {
-  private fb = inject(FormBuilder);
-  private authResourceService = inject(AuthResourceService);
-  private alertService = inject(AlertService);
-  private router = inject(Router);
-  private destroyRef = inject(DestroyRef);
-
   private gender = Gender;
   private specializationFields = SpecializationField;
   private communicationMethod = CommunicationMethod;
@@ -65,8 +59,13 @@ export class RegisterCoachComponent
   readonly totalSteps = 3;
 
   currentStep = signal<number>(1);
-
   formValidityTrigger = signal<number>(0);
+
+  private fb = inject(FormBuilder);
+  private authResourceService = inject(AuthResourceService);
+  private alertService = inject(AlertService);
+  private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   breadcrumbItems = signal<BreadcrumbItem[]>([
     { label: 'AUTH.REGISTER_COACH.PERSONAL_INFORMATION', step: 1 },

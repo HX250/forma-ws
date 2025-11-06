@@ -130,7 +130,12 @@ export class Client extends BaseMapper {
   }
 
   toPrisma() {
-    return BaseMapper['mapToPrisma'](this, Client.mapperConfig) as Prisma.ClientCreateInput;
+    const mapped = BaseMapper['mapToPrisma'](this, Client.mapperConfig);
+    return {
+      ...mapped,
+      password: this.password,
+      oneTimePassword: this.oneTimePassword,
+    } as Prisma.ClientCreateInput;
   }
 
   getUserType(): UserType {

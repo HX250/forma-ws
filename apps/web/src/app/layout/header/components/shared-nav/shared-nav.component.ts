@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,5 +17,10 @@ export interface NavLink {
   styleUrls: ['./shared-nav.component.css'],
 })
 export class SharedNavComponent {
-  @Input({ required: true }) navLinks: NavLink[] = [];
+  navLinks = input.required<NavLink[]>();
+  linkClick = output<void>();
+
+  onLinkClick() {
+    this.linkClick.emit();
+  }
 }

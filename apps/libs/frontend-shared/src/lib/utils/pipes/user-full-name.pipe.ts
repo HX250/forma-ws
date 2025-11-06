@@ -12,6 +12,6 @@ export class UserFullNamePipe implements PipeTransform {
       return '';
     }
 
-    return `${user?.firstName} ${user?.lastName}`;
+    return `${user.firstName} ${user.lastName}`;
   }
 }

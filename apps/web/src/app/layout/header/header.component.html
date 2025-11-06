@@ -13,11 +13,13 @@
       >
     </div>
 
-    @if(userType === 'COACH') {
-    <app-coach-header />
-    } @else if(userType === 'CLIENT') {
-    <app-client-header />
-    }
+    <div class="hidden md:block">
+      @if(userType === 'COACH') {
+      <app-coach-header />
+      } @else if(userType === 'CLIENT') {
+      <app-client-header />
+      }
+    </div>
 
     <div class="hidden items-center gap-2 md:flex">
       <button
@@ -122,43 +124,10 @@
       </div>
 
       @if(userType === 'COACH') {
-      <a
-        routerLink="/dashboard"
-        routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="closeMobileMenu()"
-        class="mb-2 rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
-      >
-        {{ 'HEADER.DASHBOARD' | translate }}
-      </a>
-      <a
-        routerLink="/clients"
-        routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
-        (click)="closeMobileMenu()"
-        class="mb-2 rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
-      >
-        {{ 'HEADER.CLIENTS' | translate }}
-      </a>
+      <app-coach-header (linkClick)="closeMobileMenu()" />
       } @else if(userType === 'CLIENT') {
-      <a
-        routerLink="/dashboard"
-        routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="closeMobileMenu()"
-        class="mb-2 rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
-      >
-        {{ 'HEADER.DASHBOARD' | translate }}
-      </a>
+      <app-client-header (linkClick)="closeMobileMenu()" />
       }
-      <a
-        routerLink="/profile"
-        routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
-        (click)="closeMobileMenu()"
-        class="mb-6 rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
-      >
-        {{ 'HEADER.PROFILE' | translate }}
-      </a>
-
       <button
         (click)="logout()"
         class="rounded-md bg-secondary px-4 py-3 text-base font-medium text-primary transition-colors hover:bg-secondary/80 dark:bg-secondary-dark dark:text-primary-dark dark:hover:bg-secondary-dark/80"

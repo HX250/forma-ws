@@ -1,10 +1,24 @@
 <nav class="hidden items-center gap-0.5 md:flex md:gap-1">
-  @for (link of navLinks; track link.route) {
+  @for (link of navLinks(); track link.route) {
   <a
     [routerLink]="link.route"
     routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
     [routerLinkActiveOptions]="link.exact ? { exact: true } : { exact: false }"
     class="rounded-md px-2 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10 md:px-4"
+  >
+    {{ link.translationKey | translate }}
+  </a>
+  }
+</nav>
+
+<nav class="flex flex-col gap-2 md:hidden">
+  @for (link of navLinks(); track link.route) {
+  <a
+    [routerLink]="link.route"
+    routerLinkActive="bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark"
+    [routerLinkActiveOptions]="link.exact ? { exact: true } : { exact: false }"
+    (click)="onLinkClick()"
+    class="mb-2 rounded-md px-4 py-3 text-base font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
   >
     {{ link.translationKey | translate }}
   </a>
