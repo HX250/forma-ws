@@ -6,13 +6,13 @@ import { AuthPayload, Client, Coach } from '@forma-ws/frontend/domain';
 })
 export class SecurityService {
   private isLoggedIn = signal<boolean>(false);
-  private currentUser = signal<Coach | Client>({} as Coach | Client);
-  private authPayload = signal<AuthPayload>({} as AuthPayload);
+  private currentUser = signal<Coach | Client | null>(null);
+  private authPayload = signal<AuthPayload | null>(null);
 
   isAuthenticated = computed(() => this.isLoggedIn());
   user = computed(() => this.currentUser());
-  userId = computed(() => this.authPayload().sub);
-  userType = computed(() => this.authPayload().userType);
+  userId = computed(() => this.authPayload()?.sub || null);
+  userType = computed(() => this.authPayload()?.userType || null);
 
   setLoggedIn(value: boolean) {
     this.isLoggedIn.set(value);
@@ -37,7 +37,7 @@ export class SecurityService {
 
   clear() {
     this.isLoggedIn.set(false);
-    this.currentUser.set({} as Coach | Client);
-    this.authPayload.set({} as AuthPayload);
+    this.currentUser.set(null);
+    this.authPayload.set(null);
   }
 }

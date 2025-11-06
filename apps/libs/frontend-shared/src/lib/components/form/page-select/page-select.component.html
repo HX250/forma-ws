@@ -1,7 +1,7 @@
-<div class="my-4">
+<div>
   @if (label()) {
   <label
-    class="block text-sm font-medium text-secondary dark:text-secondary-dark"
+    class="block text-sm py-2 font-medium text-secondary dark:text-secondary-dark"
   >
     {{ label() | translate }}
     @if (required()) {
@@ -119,7 +119,7 @@
   </div>
 
   @if (control().touched && control().errors) {
-  <div class="text-sm text-utils-error">
+  <div class="text-sm py-2 text-utils-error">
     @if (control().errors?.['required']) {
     <span>{{ 'COMPONENTS.FORM.ERRORS.REQUIRED' | translate }}</span>
     }

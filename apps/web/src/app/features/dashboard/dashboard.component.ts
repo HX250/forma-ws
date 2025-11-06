@@ -12,9 +12,9 @@ import { AlertService, AlertType } from '@forma-ws/frontend-shared';
 })
 export class DashboardComponent {
   newPassword: string = '';
-  private alertService = inject(AlertService);
 
-  constructor(private dashboardService: DashboardResourceService) {}
+  private alertService = inject(AlertService);
+  private dashboardService = inject(DashboardResourceService);
 
   submitNewPassword() {
     this.dashboardService

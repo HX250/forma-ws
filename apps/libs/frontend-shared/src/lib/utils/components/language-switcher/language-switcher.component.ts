@@ -6,12 +6,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { LucideAngularModule, Flag } from 'lucide-angular';
 
 @Component({
   selector: 'app-language-switcher',
   standalone: true,
-  imports: [CommonModule, TranslateModule, LucideAngularModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <button
       class="flex items-center justify-center w-12 h-12 fixed bottom-6 left-6 rounded-full bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
@@ -91,7 +90,6 @@ import { LucideAngularModule, Flag } from 'lucide-angular';
 export class LanguageSwitcher {
   private translate = inject(TranslateService);
 
-  readonly FlagIcon = Flag;
   current = signal('en');
 
   constructor() {

@@ -6,9 +6,7 @@ import {
   DarkLightButton,
   LanguageSwitcher,
 } from '@forma-ws/frontend-shared';
-import { CoachHeaderComponent } from './layout/coach-header/coach-header.component';
-import { ClientHeaderComponent } from './layout/client-header/client-header.component';
-import { UserType } from '@forma-ws/domain';
+import { HeaderComponent } from './layout/header/header.component';
 
 @Component({
   imports: [
@@ -16,8 +14,7 @@ import { UserType } from '@forma-ws/domain';
     DarkLightButton,
     LanguageSwitcher,
     AlertComponent,
-    CoachHeaderComponent,
-    ClientHeaderComponent,
+    HeaderComponent,
   ],
   selector: 'app-root',
   templateUrl: './app.html',
@@ -30,9 +27,5 @@ export class App {
 
   get isLoggedIn() {
     return this.authService.getIsLoggedIn();
-  }
-
-  get userType(): UserType {
-    return this.authService.userType();
   }
 }

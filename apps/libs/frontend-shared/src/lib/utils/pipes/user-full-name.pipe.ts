@@ -7,7 +7,11 @@ import { Client, Coach } from '@forma-ws/frontend/domain';
   standalone: true,
 })
 export class UserFullNamePipe implements PipeTransform {
-  transform(user: Client | Coach): string {
+  transform(user: Client | Coach | null): string {
+    if (!user) {
+      return '';
+    }
+
     return `${user?.firstName} ${user?.lastName}`;
   }
 }

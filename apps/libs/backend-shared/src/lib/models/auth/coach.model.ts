@@ -9,8 +9,16 @@ import {
   AvailabilityModel,
 } from '@forma-ws/domain';
 import { Prisma } from '@prisma/client';
+import { BaseMapper, MapperConfig } from '../../utils';
 
-export class Coach {
+export class Coach extends BaseMapper {
+  private static readonly mapperConfig: MapperConfig = {
+    sensitiveFields: ['password'],
+    decimalFields: ['pricing'],
+    jsonFields: ['availability'],
+    fieldMappings: {},
+  };
+
   constructor(
     public readonly email: string,
     private password: string,
@@ -26,7 +34,9 @@ export class Coach {
     public readonly createdAt: Date = new Date(),
     public readonly updatedAt: Date = new Date(),
     public readonly id?: string
-  ) {}
+  ) {
+    super();
+  }
 
   async validatePassword(plainPassword: string): Promise<boolean> {
     return await bcrypt.compare(plainPassword, this.password);
@@ -63,34 +73,35 @@ export class Coach {
   }
 
   static fromPrisma(data: any): Coach {
+    const mapped = BaseMapper['mapFromPrisma'](
+      data,
+      Coach,
+      Coach.mapperConfig
+    );
+
     return new Coach(
-      data.email,
-      data.password,
-      data.firstName,
-      data.lastName,
-      data.gender,
-      data.yearsOfExperience,
-      data.specializationFields,
-      data.communicationMethods,
-      data.bio,
-      data.pricing?.toNumber(),
-      data.availability as AvailabilityModel[],
-      data.createdAt,
-      data.updatedAt,
-      data.id
+      mapped.email,
+      mapped.password,
+      mapped.firstName,
+      mapped.lastName,
+      mapped.gender,
+      mapped.yearsOfExperience,
+      mapped.specializationFields,
+      mapped.communicationMethods,
+      mapped.bio,
+      mapped.pricing,
+      mapped.availability as AvailabilityModel[],
+      mapped.createdAt,
+      mapped.updatedAt,
+      mapped.id
     );
   }
 
   toPrisma() {
-    return {
-      ...this,
-      password: this.password,
-      availability: this.availability as unknown as Prisma.InputJsonValue,
-    } as Prisma.CoachCreateInput;
+    return BaseMapper['mapToPrisma'](this, Coach.mapperConfig) as Prisma.CoachCreateInput;
   }
 
   toJSON() {
-    const { password, ...rest } = this;
-    return rest;
+    return BaseMapper['mapToJSON'](this, Coach.mapperConfig);
   }
 }

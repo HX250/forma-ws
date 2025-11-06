@@ -19,6 +19,7 @@ import { UserType } from '@forma-ws/frontend/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '@forma-ws/frontend-shared';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -58,19 +59,15 @@ export class AuthComponent
       return;
     }
 
-    this.sendRequest(
-      this.authResourceService.login(this.form.getRawValue())
-    ).subscribe({
-      next: (authPayload) => {
+    forkJoin([
+      this.sendRequest(this.authResourceService.login(this.form.getRawValue())),
+      this.sendRequest(this.authResourceService.getCurrentUser()),
+    ]).subscribe({
+      next: ([authPayload, user]) => {
         this.securityService.setAuthPayload(authPayload);
-
-        this.authResourceService.getCurrentUser().subscribe({
-          next: (user) => {
-            this.securityService.setCurrentUser(user);
-            this.alertService.show(AlertType.SUCCESS, 'Login successful');
-            this.router.navigateByUrl('/dashboard');
-          },
-        });
+        this.securityService.setCurrentUser(user);
+        this.alertService.show(AlertType.SUCCESS, 'Login successful');
+        this.router.navigateByUrl('/dashboard');
       },
     });
   }

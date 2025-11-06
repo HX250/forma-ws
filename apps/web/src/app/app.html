@@ -1,11 +1,9 @@
 <div
   class="min-h-screen bg-primary dark:bg-primary-dark transition-colors duration-300"
 >
-  @if(isLoggedIn()){ @if(userType === 'COACH') {
-  <app-coach-header />
-  } @else if(userType === 'CLIENT') {
-  <app-client-header />
-  } }
+  @if(isLoggedIn()){
+  <app-header />
+  }
   <main class="p-6">
     <router-outlet></router-outlet>
   </main>

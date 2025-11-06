@@ -7,8 +7,15 @@ import {
   FitnessExperience,
 } from '@forma-ws/domain';
 import { Prisma } from '@prisma/client';
+import { BaseMapper, MapperConfig } from '../../utils';
 
-export class Client {
+export class Client extends BaseMapper {
+  private static readonly mapperConfig: MapperConfig = {
+    sensitiveFields: ['password', 'onetimepassword'],
+    decimalFields: ['currentWeight', 'height'],
+    fieldMappings: {},
+  };
+
   constructor(
     public readonly email: string,
     public readonly coachId: string,
@@ -31,7 +38,9 @@ export class Client {
     public readonly createdAt: Date = new Date(),
     public readonly updatedAt: Date = new Date(),
     public readonly id?: string
-  ) {}
+  ) {
+    super();
+  }
 
   async validatePassword(plainPassword: string): Promise<boolean> {
     if (this.isFirstLogin && this.oneTimePassword) {
@@ -89,37 +98,39 @@ export class Client {
   }
 
   static fromPrisma(data: any): Client {
+    const mapped = BaseMapper['mapFromPrisma'](
+      data,
+      Client,
+      Client.mapperConfig
+    );
+
     return new Client(
-      data.email,
-      data.coachId,
-      data.password,
-      data.oneTimePassword,
-      data.isFirstLogin,
-      data.firstName,
-      data.lastName,
-      data.gender,
-      data.birthDate,
-      data.currentWeight.toNumber(),
-      data.height.toNumber(),
-      data.activityLevel,
-      data.fitnessExperience,
-      data.canTrackExercise,
-      data.canTrackSleep,
-      data.canTrackNutrition,
-      data.canTrackWater,
-      data.medicalConditions,
-      data.createdAt,
-      data.updatedAt,
-      data.id
+      mapped.email,
+      mapped.coachId,
+      mapped.password,
+      mapped.oneTimePassword,
+      mapped.isFirstLogin,
+      mapped.firstName,
+      mapped.lastName,
+      mapped.gender,
+      mapped.birthDate,
+      mapped.currentWeight,
+      mapped.height,
+      mapped.activityLevel,
+      mapped.fitnessExperience,
+      mapped.canTrackExercise,
+      mapped.canTrackSleep,
+      mapped.canTrackNutrition,
+      mapped.canTrackWater,
+      mapped.medicalConditions,
+      mapped.createdAt,
+      mapped.updatedAt,
+      mapped.id
     );
   }
 
   toPrisma() {
-    return {
-      ...this,
-      password: this.password,
-      oneTimePassword: this.oneTimePassword,
-    } as Prisma.ClientCreateInput;
+    return BaseMapper['mapToPrisma'](this, Client.mapperConfig) as Prisma.ClientCreateInput;
   }
 
   getUserType(): UserType {
@@ -147,7 +158,6 @@ export class Client {
   }
 
   toJSON() {
-    const { password, oneTimePassword, ...rest } = this;
-    return rest;
+    return BaseMapper['mapToJSON'](this, Client.mapperConfig);
   }
 }
