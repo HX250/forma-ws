@@ -1,59 +1,496 @@
-<div class="p-6 max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold text-secondary dark:text-secondary-dark mb-6">
+<div class="p-4 max-w-full mx-auto h-fit flex flex-col overflow-hidden">
+  <h1 class="text-2xl font-bold text-secondary dark:text-secondary-dark mb-4">
     Dashboard
   </h1>
 
-  <!-- Alert Test Section -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark mb-4">
-      Test Alerts
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <button
-        (click)="showSuccessAlert()"
-        class="rounded-md bg-accent px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-accent/80 dark:bg-accent-dark dark:text-primary-dark dark:hover:bg-accent-dark/80"
-      >
-        Show Success Alert
-      </button>
-      <button
-        (click)="showErrorAlert()"
-        class="rounded-md bg-utils-error px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-utils-error/80"
-      >
-        Show Error Alert
-      </button>
-      <button
-        (click)="showWarningAlert()"
-        class="rounded-md bg-utils-warning px-4 py-3 text-sm font-medium text-secondary transition-colors hover:bg-utils-warning/80"
-      >
-        Show Warning Alert
-      </button>
-      <button
-        (click)="showInfoAlert()"
-        class="rounded-md bg-utils-info px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-utils-info/80"
-      >
-        Show Info Alert
-      </button>
-    </div>
-  </div>
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 relative flex-1 overflow-hidden"
+  >
+    <div
+      (click)="toggleWidget('new-clients')"
+      [class.hidden]="isHidden('new-clients')"
+      [class.fixed]="isExpanded('new-clients')"
+      [class.inset-0]="isExpanded('new-clients')"
+      [class.z-50]="isExpanded('new-clients')"
+      [class.m-6]="isExpanded('new-clients')"
+      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">🆕</span>
+          New Clients & Growth
+        </h2>
+        @if (isExpanded('new-clients')) {
+        <button
+          (click)="toggleWidget('new-clients'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
 
-  <!-- Password Change Section -->
-  <div class="rounded-lg border border-secondary/20 bg-primary p-6 dark:border-secondary-dark/20 dark:bg-primary-dark">
-    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark mb-4">
-      Change Password
-    </h2>
-    <div class="flex gap-3">
-      <input
-        type="text"
-        [(ngModel)]="newPassword"
-        placeholder="Enter new password"
-        class="flex-1 rounded-md border border-secondary/20 bg-primary px-4 py-2 text-sm text-secondary transition-colors focus:border-accent focus:outline-none dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark dark:focus:border-accent-dark"
-      />
-      <button
-        (click)="submitNewPassword()"
-        class="rounded-md bg-secondary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-secondary/80 dark:bg-secondary-dark dark:text-primary-dark dark:hover:bg-secondary-dark/80"
-      >
-        Send
-      </button>
+      <div class="mb-2">
+        <div
+          class="h-24 border border-dashed border-secondary/20 dark:border-secondary-dark/20 rounded-lg flex items-center justify-center bg-secondary/5 dark:bg-secondary-dark/5"
+        >
+          <div class="text-center">
+            <p
+              class="text-xs text-secondary/50 dark:text-secondary-dark/50 mb-2"
+            >
+              Client Growth Trend
+            </p>
+            <svg
+              class="w-full h-20 px-4"
+              viewBox="0 0 200 60"
+              preserveAspectRatio="none"
+            >
+              <polyline
+                points="0,50 40,45 80,40 120,35 160,30 200,25"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="text-accent dark:text-accent-dark"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            New This Month
+          </p>
+          <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+        </div>
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            Total Active
+          </p>
+          <p class="text-xl font-bold text-secondary dark:text-secondary-dark">
+            0
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('weight-trend')"
+      [class.hidden]="isHidden('weight-trend')"
+      [class.fixed]="isExpanded('weight-trend')"
+      [class.inset-0]="isExpanded('weight-trend')"
+      [class.z-50]="isExpanded('weight-trend')"
+      [class.m-6]="isExpanded('weight-trend')"
+      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">⚖️</span>
+          Weight Trend
+        </h2>
+        @if (isExpanded('weight-trend')) {
+        <button
+          (click)="toggleWidget('weight-trend'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            Portfolio Goal Status
+          </p>
+          <div class="flex items-baseline gap-2">
+            <p class="text-3xl font-bold text-accent dark:text-accent-dark">
+              0%
+            </p>
+            <span class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+              on track
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
+        >
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-2">
+            Clients trending toward goals
+          </p>
+          <div
+            class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+          >
+            <div
+              class="bg-accent dark:bg-accent-dark h-2 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('workout-adherence')"
+      [class.hidden]="isHidden('workout-adherence')"
+      [class.fixed]="isExpanded('workout-adherence')"
+      [class.inset-0]="isExpanded('workout-adherence')"
+      [class.z-50]="isExpanded('workout-adherence')"
+      [class.m-6]="isExpanded('workout-adherence')"
+      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">🏋️</span>
+          Workout Adherence
+        </h2>
+        @if (isExpanded('workout-adherence')) {
+        <button
+          (click)="toggleWidget('workout-adherence'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            Avg. Weekly Completion
+          </p>
+          <div class="flex items-baseline gap-2">
+            <p class="text-3xl font-bold text-accent dark:text-accent-dark">
+              0%
+            </p>
+            <span class="text-xs text-utils-error flex items-center gap-1">
+              <span>↓</span>
+              <span>0%</span>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
+        >
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+            vs. last week
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('engagement-score')"
+      [class.hidden]="isHidden('engagement-score')"
+      [class.fixed]="isExpanded('engagement-score')"
+      [class.inset-0]="isExpanded('engagement-score')"
+      [class.z-50]="isExpanded('engagement-score')"
+      [class.m-6]="isExpanded('engagement-score')"
+      class="row-span-1 md:col-span-2 lg:col-span-3 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">📈</span>
+          Client Engagement
+        </h2>
+        @if (isExpanded('engagement-score')) {
+        <button
+          (click)="toggleWidget('engagement-score'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🏋️</span>
+              <p
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                Exercise
+              </p>
+            </div>
+            <span class="text-sm font-bold text-accent dark:text-accent-dark"
+              >0%</span
+            >
+          </div>
+          <div
+            class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+          >
+            <div
+              class="bg-accent dark:bg-accent-dark h-2 rounded-full transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🍎</span>
+              <p
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                Nutrition
+              </p>
+            </div>
+            <span class="text-sm font-bold text-utils-warning">0%</span>
+          </div>
+          <div
+            class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+          >
+            <div
+              class="bg-utils-warning h-2 rounded-full transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">😴</span>
+              <p
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                Sleep
+              </p>
+            </div>
+            <span
+              class="text-sm font-bold text-secondary dark:text-secondary-dark"
+              >0%</span
+            >
+          </div>
+          <div
+            class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+          >
+            <div
+              class="bg-secondary dark:bg-secondary-dark h-2 rounded-full transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">💧</span>
+              <p
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                Water
+              </p>
+            </div>
+            <span class="text-sm font-bold text-utils-info">0%</span>
+          </div>
+          <div
+            class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+          >
+            <div
+              class="bg-utils-info h-2 rounded-full transition-all"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('logging-activity')"
+      [class.hidden]="isHidden('logging-activity')"
+      [class.fixed]="isExpanded('logging-activity')"
+      [class.inset-0]="isExpanded('logging-activity')"
+      [class.z-50]="isExpanded('logging-activity')"
+      [class.m-6]="isExpanded('logging-activity')"
+      class="row-span-1 md:col-span-2 lg:col-span-3 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">📊</span>
+          Logging Activity
+        </h2>
+        @if (isExpanded('logging-activity')) {
+        <button
+          (click)="toggleWidget('logging-activity'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
+        <div
+          class="flex items-center justify-between p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5 hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 transition-colors"
+        >
+          <div class="flex items-center gap-4 flex-1">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div
+                class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
+              ></div>
+              <div class="min-w-0 flex-1">
+                <p
+                  class="text-sm font-medium text-secondary dark:text-secondary-dark"
+                >
+                  No recent logging activity
+                </p>
+                <p
+                  class="text-xs text-secondary/70 dark:text-secondary-dark/70"
+                >
+                  Client activities will appear here
+                </p>
+              </div>
+            </div>
+          </div>
+          <span
+            class="text-xs text-secondary/50 dark:text-secondary-dark/50 flex-shrink-0 ml-4"
+          >
+            --
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('time-to-log')"
+      [class.hidden]="isHidden('time-to-log')"
+      [class.fixed]="isExpanded('time-to-log')"
+      [class.inset-0]="isExpanded('time-to-log')"
+      [class.z-50]="isExpanded('time-to-log')"
+      [class.m-6]="isExpanded('time-to-log')"
+      class="row-span-1 md:col-span-2 lg:col-span-6 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">⏳</span>
+          Logging Timing Distribution
+        </h2>
+        @if (isExpanded('time-to-log')) {
+        <button
+          (click)="toggleWidget('time-to-log'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-4">
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+          When clients log their activities throughout the day
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                🌅 Morning (5am-11am)
+              </span>
+              <span class="text-sm font-bold text-accent dark:text-accent-dark">
+                15%
+              </span>
+            </div>
+            <div
+              class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+            >
+              <div
+                class="w-full bg-accent dark:bg-accent-dark rounded-t-lg transition-all"
+                style="height: 15%"
+              ></div>
+            </div>
+            <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+              Low morning tracking
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                ☀️ Lunch (11am-4pm)
+              </span>
+              <span class="text-sm font-bold text-utils-info"> 20% </span>
+            </div>
+            <div
+              class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+            >
+              <div
+                class="w-full bg-utils-info rounded-t-lg transition-all"
+                style="height: 20%"
+              ></div>
+            </div>
+            <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+              Consistent lunchtime checks
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                🌤️ Afternoon (4pm-8pm)
+              </span>
+              <span class="text-sm font-bold text-utils-warning"> 10% </span>
+            </div>
+            <div
+              class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+            >
+              <div
+                class="w-full bg-utils-warning rounded-t-lg transition-all"
+                style="height: 10%"
+              ></div>
+            </div>
+            <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+              Low evening workout logging
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-xs font-medium text-secondary dark:text-secondary-dark"
+              >
+                🌙 Night (8pm-5am)
+              </span>
+              <span class="text-sm font-bold text-utils-error"> 55% </span>
+            </div>
+            <div
+              class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+            >
+              <div
+                class="w-full bg-utils-error rounded-t-lg transition-all"
+                style="height: 55%"
+              ></div>
+            </div>
+            <p class="text-xs text-utils-error font-medium">
+              ⚠️ High friction - logging before bed
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
