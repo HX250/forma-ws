@@ -73,7 +73,11 @@ export class Client extends BaseMapper {
     activityLevel: ActivityLevel,
     medicalConditions: string | undefined,
     fitnessExperience: FitnessExperience,
-    oneTimePassword: string
+    oneTimePassword: string,
+    canTrackExercise: boolean,
+    canTrackSleep: boolean,
+    canTrackNutrition: boolean,
+    canTrackWater: boolean
   ): Client {
     return new Client(
       email,
@@ -89,10 +93,10 @@ export class Client extends BaseMapper {
       height,
       activityLevel,
       fitnessExperience,
-      false,
-      false,
-      false,
-      false,
+      canTrackExercise,
+      canTrackSleep,
+      canTrackNutrition,
+      canTrackWater,
       medicalConditions
     );
   }

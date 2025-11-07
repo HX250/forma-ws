@@ -12,6 +12,7 @@
 
   <div class="relative" (clickOutside)="closeDropdown()">
     <button
+      #selectButton
       type="button"
       (click)="toggleDropdown()"
       [disabled]="disabled()"
@@ -82,7 +83,10 @@
 
     @if (isOpen()) {
     <div
-      class="absolute z-10 w-full mt-1 bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-lg max-h-60 overflow-auto"
+      class="fixed z-[100] bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-lg max-h-60 overflow-auto"
+      [style.top]="dropdownPosition().top"
+      [style.left]="dropdownPosition().left"
+      [style.width]="dropdownPosition().width"
     >
       @if (items().length === 0) {
       <div class="px-3 py-2 text-muted dark:text-muted-dark">

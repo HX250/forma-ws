@@ -111,7 +111,11 @@ export class AuthService {
       registerDto.activityLevel,
       registerDto.medicalConditions,
       registerDto.fitnessExperience,
-      oneTimePassword
+      oneTimePassword,
+      registerDto.canTrackExercise,
+      registerDto.canTrackSleep,
+      registerDto.canTrackNutrition,
+      registerDto.canTrackWater
     );
 
     const savedClient = await this.clientRepository.save(client);

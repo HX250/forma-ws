@@ -1,0 +1,45 @@
+<div class="space-y-6">
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+      {{ 'REGISTER_CLIENT.PERSONAL_INFORMATION' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-page-input
+        [control]="firstName()"
+        [label]="'REGISTER_CLIENT.FIRST_NAME'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.FIRST_NAME'"
+      />
+
+      <app-page-input
+        [control]="lastName()"
+        [label]="'REGISTER_CLIENT.LAST_NAME'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.LAST_NAME'"
+      />
+    </div>
+
+    <app-page-input
+      [control]="email()"
+      [label]="'REGISTER_CLIENT.EMAIL'"
+      [type]="'email'"
+      [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.EMAIL'"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-page-select
+        [control]="gender()"
+        [items]="genderOptions"
+        [label]="'REGISTER_CLIENT.GENDER'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.SELECT_GENDER'"
+        [required]="true"
+      />
+
+      <app-page-input
+        [control]="birthDate()"
+        [label]="'REGISTER_CLIENT.BIRTH_DATE'"
+        [type]="'date'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.BIRTH_DATE'"
+      />
+    </div>
+  </div>
+</div>
