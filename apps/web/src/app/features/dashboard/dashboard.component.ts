@@ -1,56 +1,30 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DashboardResourceService } from './resources/dashboard.resource.service';
-import { AlertService, AlertType } from '@forma-ws/frontend-shared';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-dashboard',
   imports: [CommonModule, FormsModule],
   templateUrl: './dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent {
-  newPassword: string = '';
+  expandedWidget = signal<string | null>(null);
 
-  private alertService = inject(AlertService);
-  private dashboardService = inject(DashboardResourceService);
-
-  submitNewPassword() {
-    this.dashboardService
-      .setClientPassword(this.newPassword)
-      .subscribe((res) => {});
+  toggleWidget(widgetId: string) {
+    if (this.expandedWidget() === widgetId) {
+      this.expandedWidget.set(null);
+    } else {
+      this.expandedWidget.set(widgetId);
+    }
   }
 
-  showSuccessAlert() {
-    this.alertService.show(
-      AlertType.SUCCESS,
-      'This is a success message. Everything went well!',
-      'Success'
-    );
+  isExpanded(widgetId: string): boolean {
+    return this.expandedWidget() === widgetId;
   }
 
-  showErrorAlert() {
-    this.alertService.show(
-      AlertType.ERROR,
-      'This is an error message. Something went wrong!',
-      'Error'
-    );
-  }
-
-  showWarningAlert() {
-    this.alertService.show(
-      AlertType.WARNING,
-      'This is a warning message. Please be careful!',
-      'Warning'
-    );
-  }
-
-  showInfoAlert() {
-    this.alertService.show(
-      AlertType.INFO,
-      'This is an info message. Here is some useful information.',
-      'Information'
-    );
+  isHidden(widgetId: string): boolean {
+    const expanded = this.expandedWidget();
+    return expanded !== null && expanded !== widgetId;
   }
 }
