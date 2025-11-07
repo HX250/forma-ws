@@ -1,0 +1,85 @@
+<div class="space-y-6">
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+      {{ 'REGISTER_CLIENT.PERMISSIONS_INFORMATION' | translate }}
+    </h2>
+
+    <p class="text-sm text-muted dark:text-muted-dark mb-4">
+      {{ 'REGISTER_CLIENT.PERMISSIONS_DESCRIPTION' | translate }}
+    </p>
+
+    <div class="space-y-3">
+      <label
+        class="flex items-center gap-3 p-3 rounded-lg border border-secondary/20 dark:border-secondary-dark/20 hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 cursor-pointer transition-colors"
+      >
+        <input
+          type="checkbox"
+          [formControl]="canTrackExercise()"
+          class="w-5 h-5 text-accent dark:text-accent-dark rounded border-secondary/50 dark:border-secondary-dark/50 focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-0 cursor-pointer accent-accent"
+        />
+        <div class="flex-1">
+          <div class="font-medium text-secondary dark:text-secondary-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_EXERCISE' | translate }}
+          </div>
+          <div class="text-sm text-muted dark:text-muted-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_EXERCISE_DESC' | translate }}
+          </div>
+        </div>
+      </label>
+
+      <label
+        class="flex items-center gap-3 p-3 rounded-lg border border-secondary/20 dark:border-secondary-dark/20 hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 cursor-pointer transition-colors"
+      >
+        <input
+          type="checkbox"
+          [formControl]="canTrackSleep()"
+          class="w-5 h-5 text-accent dark:text-accent-dark rounded border-secondary/50 dark:border-secondary-dark/50 focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-0 cursor-pointer accent-accent"
+        />
+        <div class="flex-1">
+          <div class="font-medium text-secondary dark:text-secondary-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_SLEEP' | translate }}
+          </div>
+          <div class="text-sm text-muted dark:text-muted-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_SLEEP_DESC' | translate }}
+          </div>
+        </div>
+      </label>
+
+      <label
+        class="flex items-center gap-3 p-3 rounded-lg border border-secondary/20 dark:border-secondary-dark/20 hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 cursor-pointer transition-colors"
+      >
+        <input
+          type="checkbox"
+          [formControl]="canTrackNutrition()"
+          class="w-5 h-5 text-accent dark:text-accent-dark rounded border-secondary/50 dark:border-secondary-dark/50 focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-0 cursor-pointer accent-accent"
+        />
+        <div class="flex-1">
+          <div class="font-medium text-secondary dark:text-secondary-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_NUTRITION' | translate }}
+          </div>
+          <div class="text-sm text-muted dark:text-muted-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_NUTRITION_DESC' | translate }}
+          </div>
+        </div>
+      </label>
+
+      <label
+        class="flex items-center gap-3 p-3 rounded-lg border border-secondary/20 dark:border-secondary-dark/20 hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 cursor-pointer transition-colors"
+      >
+        <input
+          type="checkbox"
+          [formControl]="canTrackWater()"
+          class="w-5 h-5 text-accent dark:text-accent-dark rounded border-secondary/50 dark:border-secondary-dark/50 focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-0 cursor-pointer accent-accent"
+        />
+        <div class="flex-1">
+          <div class="font-medium text-secondary dark:text-secondary-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_WATER' | translate }}
+          </div>
+          <div class="text-sm text-muted dark:text-muted-dark">
+            {{ 'REGISTER_CLIENT.PERMISSIONS.TRACK_WATER_DESC' | translate }}
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>

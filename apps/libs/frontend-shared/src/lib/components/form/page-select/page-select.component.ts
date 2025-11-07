@@ -4,6 +4,9 @@ import {
   inject,
   input,
   signal,
+  ElementRef,
+  viewChild,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -35,10 +38,37 @@ export class PageSelect {
   control = input.required<FormControl<any>>();
 
   isOpen = signal(false);
+  dropdownPosition = signal<{ top: string; left: string; width: string }>({
+    top: '0px',
+    left: '0px',
+    width: '0px',
+  });
+
+  buttonRef = viewChild<ElementRef>('selectButton');
+
+  constructor() {
+    effect(() => {
+      if (this.isOpen()) {
+        this.updateDropdownPosition();
+      }
+    });
+  }
 
   toggleDropdown() {
     if (!this.disabled()) {
       this.isOpen.set(!this.isOpen());
+    }
+  }
+
+  private updateDropdownPosition() {
+    const button = this.buttonRef()?.nativeElement;
+    if (button) {
+      const rect = button.getBoundingClientRect();
+      this.dropdownPosition.set({
+        top: `${rect.bottom + 4}px`,
+        left: `${rect.left}px`,
+        width: `${rect.width}px`,
+      });
     }
   }
 

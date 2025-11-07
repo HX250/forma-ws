@@ -1,0 +1,46 @@
+<div class="space-y-6">
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-secondary dark:text-secondary-dark">
+      {{ 'REGISTER_CLIENT.HEALTH_INFORMATION' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-page-input
+        [control]="currentWeight()"
+        [label]="'REGISTER_CLIENT.CURRENT_WEIGHT'"
+        [type]="'number'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.CURRENT_WEIGHT'"
+      />
+
+      <app-page-input
+        [control]="height()"
+        [label]="'REGISTER_CLIENT.HEIGHT'"
+        [type]="'number'"
+        [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.HEIGHT'"
+      />
+    </div>
+
+    <app-page-select
+      [control]="activityLevel()"
+      [items]="activityLevelOptions"
+      [label]="'REGISTER_CLIENT.ACTIVITY_LEVEL'"
+      [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.SELECT_ACTIVITY_LEVEL'"
+      [required]="true"
+    />
+
+    <app-page-input
+      [control]="medicalConditions()"
+      [label]="'REGISTER_CLIENT.MEDICAL_CONDITIONS'"
+      [type]="'textarea'"
+      [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.MEDICAL_CONDITIONS'"
+    />
+
+    <app-page-select
+      [control]="fitnessExperience()"
+      [items]="fitnessExperienceOptions"
+      [label]="'REGISTER_CLIENT.FITNESS_EXPERIENCE'"
+      [placeholder]="'REGISTER_CLIENT.PLACEHOLDERS.SELECT_FITNESS_EXPERIENCE'"
+      [required]="true"
+    />
+  </div>
+</div>

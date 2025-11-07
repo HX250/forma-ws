@@ -8,6 +8,7 @@ import {
   IsDateString,
   IsArray,
   Min,
+  IsBoolean,
 } from 'class-validator';
 import {
   Gender,
@@ -72,8 +73,6 @@ export class RegisterCoachDto {
 }
 
 export class RegisterClientDto {
-  id!: string;
-
   @IsEmail()
   email!: string;
 
@@ -109,6 +108,18 @@ export class RegisterClientDto {
 
   @IsString()
   coachId!: string;
+
+  @IsBoolean()
+  canTrackExercise!: boolean;
+
+  @IsBoolean()
+  canTrackSleep!: boolean;
+
+  @IsBoolean()
+  canTrackNutrition!: boolean;
+
+  @IsBoolean()
+  canTrackWater!: boolean;
 }
 
 export class SetClientPasswordDto {

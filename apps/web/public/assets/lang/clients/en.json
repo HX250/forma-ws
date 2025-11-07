@@ -1,0 +1,70 @@
+{
+  "REGISTER_CLIENT": {
+    "TITLE": "Register New Client",
+    "OPEN_MODAL": "Add New Client",
+    "PERSONAL_INFORMATION": "Personal Information",
+    "HEALTH_INFORMATION": "Health Information",
+    "FITNESS_INFORMATION": "Fitness Information",
+    "PERMISSIONS_INFORMATION": "Client Permissions",
+    "PERMISSIONS_DESCRIPTION": "Select which features this client can access and track.",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL": "Email",
+    "GENDER": "Gender",
+    "BIRTH_DATE": "Birth Date",
+    "CURRENT_WEIGHT": "Current Weight (kg)",
+    "HEIGHT": "Height (cm)",
+    "ACTIVITY_LEVEL": "Activity Level",
+    "MEDICAL_CONDITIONS": "Medical Conditions",
+    "FITNESS_EXPERIENCE": "Fitness Experience",
+    "COACH_ID": "Assign Coach",
+    "COACH_AUTO_ASSIGNED": "This client will be automatically assigned to you as their coach.",
+    "REGISTER_BUTTON": "Register Client",
+    "SUCCESS_MESSAGE": "Client registered successfully",
+    "CANCEL": "Cancel",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "PLACEHOLDERS": {
+      "FIRST_NAME": "Enter first name",
+      "LAST_NAME": "Enter last name",
+      "EMAIL": "Enter email address",
+      "SELECT_GENDER": "Select gender",
+      "BIRTH_DATE": "Select birth date",
+      "CURRENT_WEIGHT": "Enter current weight in kg",
+      "HEIGHT": "Enter height in cm",
+      "SELECT_ACTIVITY_LEVEL": "Select activity level",
+      "MEDICAL_CONDITIONS": "Enter any medical conditions or leave blank",
+      "SELECT_FITNESS_EXPERIENCE": "Select fitness experience level",
+      "SELECT_COACH": "Select a coach"
+    },
+    "GENDER_OPTIONS": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "OTHER": "Other",
+      "PREFER_NOT_TO_SAY": "Prefer not to say"
+    },
+    "ACTIVITY_LEVEL_OPTIONS": {
+      "SEDENTARY": "Sedentary (little or no exercise)",
+      "LIGHTLY_ACTIVE": "Lightly Active (exercise 1-3 days/week)",
+      "MODERATELY_ACTIVE": "Moderately Active (exercise 3-5 days/week)",
+      "VERY_ACTIVE": "Very Active (exercise 6-7 days/week)",
+      "EXTREMELY_ACTIVE": "Extremely Active (physical job or training twice per day)"
+    },
+    "FITNESS_EXPERIENCE_OPTIONS": {
+      "BEGINNER": "Beginner (0-1 year)",
+      "INTERMEDIATE": "Intermediate (1-3 years)",
+      "ADVANCED": "Advanced (3-5 years)",
+      "EXPERT": "Expert (5+ years)"
+    },
+    "PERMISSIONS": {
+      "TRACK_EXERCISE": "Track Exercise",
+      "TRACK_EXERCISE_DESC": "Allow client to log and track exercise activities",
+      "TRACK_SLEEP": "Track Sleep",
+      "TRACK_SLEEP_DESC": "Allow client to log and monitor sleep patterns",
+      "TRACK_NUTRITION": "Track Nutrition",
+      "TRACK_NUTRITION_DESC": "Allow client to log meals and track nutrition intake",
+      "TRACK_WATER": "Track Water Intake",
+      "TRACK_WATER_DESC": "Allow client to log and monitor daily water consumption"
+    }
+  }
+}

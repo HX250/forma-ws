@@ -1,0 +1,70 @@
+{
+  "REGISTER_CLIENT": {
+    "TITLE": "Registrovať nového klienta",
+    "OPEN_MODAL": "Pridať nového klienta",
+    "PERSONAL_INFORMATION": "Osobné informácie",
+    "HEALTH_INFORMATION": "Zdravotné informácie",
+    "FITNESS_INFORMATION": "Fitness informácie",
+    "PERMISSIONS_INFORMATION": "Oprávnenia klienta",
+    "PERMISSIONS_DESCRIPTION": "Vyberte, ktoré funkcie môže tento klient používať a sledovať.",
+    "FIRST_NAME": "Meno",
+    "LAST_NAME": "Priezvisko",
+    "EMAIL": "Email",
+    "GENDER": "Pohlavie",
+    "BIRTH_DATE": "Dátum narodenia",
+    "CURRENT_WEIGHT": "Aktuálna hmotnosť (kg)",
+    "HEIGHT": "Výška (cm)",
+    "ACTIVITY_LEVEL": "Úroveň aktivity",
+    "MEDICAL_CONDITIONS": "Zdravotné problémy",
+    "FITNESS_EXPERIENCE": "Fitness skúsenosti",
+    "COACH_ID": "Priradiť trénera",
+    "COACH_AUTO_ASSIGNED": "Tento klient bude automaticky priradený k vám ako trénerovi.",
+    "REGISTER_BUTTON": "Registrovať klienta",
+    "SUCCESS_MESSAGE": "Klient bol úspešne zaregistrovaný",
+    "CANCEL": "Zrušiť",
+    "PREVIOUS": "Späť",
+    "NEXT": "Ďalej",
+    "PLACEHOLDERS": {
+      "FIRST_NAME": "Zadajte meno",
+      "LAST_NAME": "Zadajte priezvisko",
+      "EMAIL": "Zadajte emailovú adresu",
+      "SELECT_GENDER": "Vyberte pohlavie",
+      "BIRTH_DATE": "Vyberte dátum narodenia",
+      "CURRENT_WEIGHT": "Zadajte aktuálnu hmotnosť v kg",
+      "HEIGHT": "Zadajte výšku v cm",
+      "SELECT_ACTIVITY_LEVEL": "Vyberte úroveň aktivity",
+      "MEDICAL_CONDITIONS": "Zadajte zdravotné problémy alebo nechajte prázdne",
+      "SELECT_FITNESS_EXPERIENCE": "Vyberte úroveň fitness skúseností",
+      "SELECT_COACH": "Vyberte trénera"
+    },
+    "GENDER_OPTIONS": {
+      "MALE": "Muž",
+      "FEMALE": "Žena",
+      "OTHER": "Iné",
+      "PREFER_NOT_TO_SAY": "Nechcem uviesť"
+    },
+    "ACTIVITY_LEVEL_OPTIONS": {
+      "SEDENTARY": "Sedavý (málo alebo žiadne cvičenie)",
+      "LIGHTLY_ACTIVE": "Mierne aktívny (cvičenie 1-3 dni/týždeň)",
+      "MODERATELY_ACTIVE": "Stredne aktívny (cvičenie 3-5 dní/týždeň)",
+      "VERY_ACTIVE": "Veľmi aktívny (cvičenie 6-7 dní/týždeň)",
+      "EXTREMELY_ACTIVE": "Extrémne aktívny (fyzická práca alebo tréning dvakrát denne)"
+    },
+    "FITNESS_EXPERIENCE_OPTIONS": {
+      "BEGINNER": "Začiatočník (0-1 rok)",
+      "INTERMEDIATE": "Pokročilý (1-3 roky)",
+      "ADVANCED": "Pokročilý (3-5 rokov)",
+      "EXPERT": "Expert (5+ rokov)"
+    },
+    "PERMISSIONS": {
+      "TRACK_EXERCISE": "Sledovať cvičenie",
+      "TRACK_EXERCISE_DESC": "Povoliť klientovi zaznamenávať a sledovať cvičebné aktivity",
+      "TRACK_SLEEP": "Sledovať spánok",
+      "TRACK_SLEEP_DESC": "Povoliť klientovi zaznamenávať a monitorovať spánkové vzorce",
+      "TRACK_NUTRITION": "Sledovať výživu",
+      "TRACK_NUTRITION_DESC": "Povoliť klientovi zaznamenávať jedlá a sledovať príjem výživy",
+      "TRACK_WATER": "Sledovať príjem vody",
+      "TRACK_WATER_DESC": "Povoliť klientovi zaznamenávať a monitorovať dennú spotrebu vody"
+    }
+  }
+}

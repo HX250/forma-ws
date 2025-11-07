@@ -18,4 +18,12 @@ export const appRoutes: Route[] = [
       ),
     canActivate: [securityGuard],
   },
+  {
+    path: 'clients',
+    loadChildren: () =>
+      import('./features/clients/clients.routes').then(
+        (m) => m.ClientsRoutingModule
+      ),
+    canActivate: [securityGuard],
+  },
 ];
