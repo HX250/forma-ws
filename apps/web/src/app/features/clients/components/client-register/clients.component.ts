@@ -184,11 +184,11 @@ export class ClientsComponent
         return (
           this.form.controls.currentWeight.valid &&
           this.form.controls.height.valid &&
-          this.form.controls.activityLevel.valid
+          this.form.controls.activityLevel.valid &&
+          this.form.controls.medicalConditions.valid &&
+          this.form.controls.fitnessExperience.valid
         );
       case 3:
-        return this.form.controls.fitnessExperience.valid;
-      case 4:
         return (
           this.form.controls.canTrackExercise.valid &&
           this.form.controls.canTrackSleep.valid &&

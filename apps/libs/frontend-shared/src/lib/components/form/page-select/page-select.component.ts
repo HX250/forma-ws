@@ -57,9 +57,6 @@ export class PageSelect {
   toggleDropdown() {
     if (!this.disabled()) {
       this.isOpen.set(!this.isOpen());
-      if (this.isOpen()) {
-        setTimeout(() => this.updateDropdownPosition(), 0);
-      }
     }
   }
 

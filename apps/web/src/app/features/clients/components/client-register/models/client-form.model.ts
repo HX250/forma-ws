@@ -10,7 +10,7 @@ export interface ClientFormControls {
   currentWeight: FormControl<number>;
   height: FormControl<number>;
   activityLevel: FormControl<ActivityLevel>;
-  medicalConditions: FormControl<string>;
+  medicalConditions: FormControl<string | undefined>;
   fitnessExperience: FormControl<FitnessExperience>;
   coachId: FormControl<string>;
   canTrackExercise: FormControl<boolean>;
