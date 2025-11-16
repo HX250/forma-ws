@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SecurityService } from './core/auth/security.service';
 import {
@@ -21,9 +21,9 @@ import { HeaderComponent } from './layout/header/header.component';
   styleUrl: './app.css',
 })
 export class App {
-  protected title = 'Forma';
+  private readonly authService = inject(SecurityService);
 
-  constructor(private authService: SecurityService) {}
+  protected title = 'Forma';
 
   get isLoggedIn() {
     return this.authService.getIsLoggedIn();

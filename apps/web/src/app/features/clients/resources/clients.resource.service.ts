@@ -11,4 +11,8 @@ export class ClientResourceService extends GlobalAuthService {
   register(form: RegisterClientDto) {
     return this.http.post(this.endpoint + '/auth/register/client', form);
   }
+
+  getClientList(coachId: string) {
+    return this.http.get(this.endpoint + '/clients?coachId=' + coachId);
+  }
 }

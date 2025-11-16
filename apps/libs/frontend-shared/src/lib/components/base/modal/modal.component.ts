@@ -8,13 +8,14 @@ import {
   signal,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonComponent } from '../button/button.component';
 
 export type ModalSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, ButtonComponent],
   templateUrl: './modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -22,7 +23,6 @@ export class ModalComponent {
   title = input<string>('');
   showCloseButton = input<boolean>(true);
   buttonText = input<string>('Open');
-  buttonClass = input<string>('');
   size = input<ModalSize>('md');
 
   showFooterButtons = input<boolean>(true);

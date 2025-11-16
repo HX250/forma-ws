@@ -19,11 +19,14 @@ import {
   SetClientPasswordDto,
   AuthPayload,
 } from '@forma-ws/domain';
-import { JwtAuthGuard } from '@forma-ws/backend-shared';
+import { JwtAuthGuard, SecurityService } from '@forma-ws/backend-shared';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private securityService: SecurityService
+  ) {}
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -76,7 +79,7 @@ export class AuthController {
       throw new UnauthorizedException('No refresh token provided');
     }
 
-    return this.authService.refreshTokens(refreshToken, response);
+    return this.securityService.refreshTokens(refreshToken, response);
   }
 
   @Post('logout')

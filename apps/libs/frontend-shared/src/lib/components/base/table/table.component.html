@@ -1,0 +1,35 @@
+<div
+  class="w-full overflow-x-auto rounded-lg border border-secondary/20 dark:border-secondary-dark/20"
+>
+  <div class="min-w-full">
+    <div
+      class="grid bg-secondary/5 dark:bg-secondary-dark/5 border-b border-secondary/20 dark:border-secondary-dark/20"
+      [style.grid-template-columns]="gridTemplateColumns()"
+    >
+      @for (column of computedColumns(); track $index) {
+      <div
+        class="px-lg py-md font-semibold text-secondary dark:text-secondary-dark text-sm"
+      >
+        {{ column.header }}
+      </div>
+      }
+    </div>
+
+    <div class="divide-y divide-secondary/20 dark:divide-secondary-dark/20">
+      @for (item of data(); track $index) {
+      <forma-table-row
+        [data]="item"
+        [index]="$index"
+        [columnCount]="columnCount()"
+        (rowClick)="onRowClick($event)"
+      >
+        @for (column of computedColumns(); track column.header) {
+        <div class="px-lg py-md text-secondary dark:text-secondary-dark">
+          {{ getCellValue(item, column) }}
+        </div>
+        }
+      </forma-table-row>
+      }
+    </div>
+  </div>
+</div>

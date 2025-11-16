@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../../../env/dev.env';
 import { AuthPayload } from '@forma-ws/frontend/domain';
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardResourceService {
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
 
   endpoint = environment.API_END_POINT;
 
