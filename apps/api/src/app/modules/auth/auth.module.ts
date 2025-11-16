@@ -5,13 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-
 import { JwtStrategy } from '../strategies/jwt.strategy';
-import {
-  DatabaseModule,
-  ClientRepository,
-  CoachRepository,
-} from '@forma-ws/backend-shared';
+import { DatabaseModule, SecurityService } from '@forma-ws/backend-shared';
 
 @Module({
   imports: [
@@ -20,17 +15,17 @@ import {
     DatabaseModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'),
         signOptions: {
-          expiresIn: configService.get<string>('JWT_EXPIRES_IN', '15m'),
+          expiresIn: configService.get('JWT_EXPIRES_IN') || '15m',
         },
       }),
-      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, CoachRepository, ClientRepository, JwtStrategy],
+  providers: [AuthService, SecurityService, JwtStrategy],
   exports: [AuthService, PassportModule],
 })
 export class AuthModule {}

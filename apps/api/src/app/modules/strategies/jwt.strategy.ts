@@ -1,16 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { DatabaseService } from '@forma-ws/backend-shared';
 
-import { CoachRepository, ClientRepository } from '@forma-ws/backend-shared';
-import { AuthPayload } from '@forma-ws/domain';
+interface AuthPayload {
+  sub: string;
+  email: string;
+  userType: 'COACH' | 'CLIENT';
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private coachRepository: CoachRepository,
-    private clientRepository: ClientRepository
-  ) {
+  constructor(private readonly prisma: DatabaseService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -28,8 +29,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: AuthPayload) {
     const user =
       payload.userType === 'COACH'
-        ? await this.coachRepository.findById(payload.sub)
-        : await this.clientRepository.findById(payload.sub);
+        ? await this.prisma.coach.findUnique({ where: { id: payload.sub } })
+        : await this.prisma.client.findUnique({ where: { id: payload.sub } });
 
     if (!user) {
       throw new UnauthorizedException();

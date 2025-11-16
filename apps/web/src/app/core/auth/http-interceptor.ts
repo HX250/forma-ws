@@ -32,7 +32,7 @@ export class HttpInterceptor implements HttpInterceptor {
           }
         },
         error: (err) => {
-          if (err.url?.includes('/auth/getCurrentUser')) {
+          if (err.url?.includes('/auth/me')) {
             return;
           }
 

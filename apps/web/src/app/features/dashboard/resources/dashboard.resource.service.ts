@@ -14,7 +14,7 @@ export class DashboardResourceService {
     const body = { newPassword: newPassword };
 
     return this.http.post<AuthPayload>(
-      this.endpoint + '/auth/client/set-password',
+      this.endpoint + '/auth/set-password',
       body
     );
   }

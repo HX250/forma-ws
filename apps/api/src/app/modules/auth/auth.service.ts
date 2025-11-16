@@ -1,179 +1,277 @@
 import {
   Injectable,
   UnauthorizedException,
+  BadRequestException,
   ConflictException,
 } from '@nestjs/common';
-import { randomBytes } from 'crypto';
-
-import {
-  Client,
-  Coach,
-  CoachRepository,
-  ClientRepository,
-  SecurityService,
-} from '@forma-ws/backend-shared';
+import { DatabaseService } from '@forma-ws/backend-shared';
+import { SecurityService } from '@forma-ws/backend-shared';
 import {
   LoginDto,
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
-  AuthPayload,
+  AuthResponse,
+  Client,
+  Coach,
   UserType,
 } from '@forma-ws/domain';
+import { Prisma } from '@prisma/client';
 import { Response } from 'express';
+import * as bcrypt from 'bcrypt';
+import { randomBytes } from 'crypto';
+import { prismaToPlain } from '../../utils/prisma-to-plain';
+
+interface AuthPayload {
+  sub: string;
+  email: string;
+  userType: 'COACH' | 'CLIENT';
+}
 
 @Injectable()
 export class AuthService {
   constructor(
-    private securityService: SecurityService,
-    private coachRepository: CoachRepository,
-    private clientRepository: ClientRepository
+    private readonly prisma: DatabaseService,
+    private readonly securityService: SecurityService
   ) {}
 
-  async login(loginDto: LoginDto, response: Response): Promise<AuthPayload> {
-    const { email, password, userType } = loginDto;
-    let user: Coach | Client;
+  async login(dto: LoginDto, res: Response): Promise<AuthResponse> {
+    const { email, password, userType } = dto;
 
     if (userType === UserType.COACH) {
-      user = await this.coachRepository.findByEmail(email);
+      const coach = await this.prisma.coach.findUnique({ where: { email } });
+      if (!coach) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      const isValid = await bcrypt.compare(password, coach.password);
+      if (!isValid) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      const payload: AuthPayload = {
+        sub: coach.id,
+        email: coach.email,
+        userType: 'COACH',
+      };
+
+      const tokens = this.securityService.generateTokens(payload);
+      this.securityService.setCookies(res, tokens);
+
+      return {
+        user: payload,
+        requiresPasswordSetup: false,
+      };
     } else {
-      user = await this.clientRepository.findByEmail(email);
+      const client = await this.prisma.client.findUnique({ where: { email } });
+      if (!client) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      const isValidPassword = await this.validateClientPassword(
+        client,
+        password
+      );
+      if (!isValidPassword) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+
+      const payload: AuthPayload = {
+        sub: client.id,
+        email: client.email,
+        userType: 'CLIENT',
+      };
+
+      const tokens = this.securityService.generateTokens(payload);
+      this.securityService.setCookies(res, tokens);
+
+      return {
+        user: payload,
+        requiresPasswordSetup: client.isFirstLogin && !!client.oneTimePassword,
+      };
     }
-
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    const isValidPassword = await user.validatePassword(password);
-    if (!isValidPassword) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    const tokens = await this.securityService.generateTokens(
-      user.getAuthPayload()
-    );
-
-    this.securityService.setCookies(response, tokens);
-
-    return {
-      sub: user.id,
-      email: user.email,
-      userType: userType,
-    };
   }
 
-  async registerCoach(
-    registerDto: RegisterCoachDto,
-    response: Response
-  ): Promise<AuthPayload> {
-    const existingCoach = await this.coachRepository.findByEmail(
-      registerDto.email
-    );
+  async registerCoach(dto: RegisterCoachDto, res: Response): Promise<Coach> {
+    const existingCoach = await this.prisma.coach.findUnique({
+      where: { email: dto.email },
+    });
+
     if (existingCoach) {
       throw new ConflictException('Coach with this email already exists');
     }
 
-    const coach = await Coach.createWithHashedPassword(registerDto);
-    const savedCoach = await this.coachRepository.save(coach);
-    const tokens = await this.securityService.generateTokens(
-      savedCoach.getAuthPayload()
-    );
+    const hashedPassword = await bcrypt.hash(dto.password, 12);
 
-    this.securityService.setCookies(response, tokens);
+    const coach = await this.prisma.coach.create({
+      data: {
+        email: dto.email,
+        password: hashedPassword,
+        firstName: dto.firstName,
+        lastName: dto.lastName,
+        gender: dto.gender,
+        yearsOfExperience: dto.yearsOfExperience,
+        specializationFields: dto.specializationFields,
+        bio: dto.bio,
+        pricing: dto.pricing,
+        availability: dto.availability
+          ? (dto.availability as unknown as Prisma.InputJsonValue)
+          : null,
+        communicationMethods: dto.communicationMethods,
+      },
+    });
 
-    return {
-      sub: savedCoach.id,
-      email: savedCoach.email,
-      userType: UserType.COACH,
+    const payload: AuthPayload = {
+      sub: coach.id,
+      email: coach.email,
+      userType: 'COACH',
     };
+
+    const tokens = this.securityService.generateTokens(payload);
+    this.securityService.setCookies(res, tokens);
+
+    return prismaToPlain<Coach>(coach);
   }
 
-  async registerClient(
-    registerDto: RegisterClientDto
-  ): Promise<{ userId: string }> {
-    const existingClient = await this.clientRepository.findByEmail(
-      registerDto.email
-    );
+  async registerClient(dto: RegisterClientDto): Promise<Client> {
+    const existingClient = await this.prisma.client.findUnique({
+      where: { email: dto.email },
+    });
+
     if (existingClient) {
       throw new ConflictException('Client with this email already exists');
     }
 
-    const oneTimePassword = this.generateOneTimePassword();
+    const oneTimePassword = this.generateOTP();
 
-    const client = await Client.createWithOneTimePassword(
-      registerDto.email,
-      registerDto.coachId,
-      registerDto.firstName,
-      registerDto.lastName,
-      registerDto.gender,
-      new Date(registerDto.birthDate),
-      registerDto.currentWeight,
-      registerDto.height,
-      registerDto.activityLevel,
-      registerDto.medicalConditions,
-      registerDto.fitnessExperience,
-      oneTimePassword,
-      registerDto.canTrackExercise,
-      registerDto.canTrackSleep,
-      registerDto.canTrackNutrition,
-      registerDto.canTrackWater
-    );
+    const client = await this.prisma.client.create({
+      data: {
+        email: dto.email,
+        firstName: dto.firstName,
+        lastName: dto.lastName,
+        gender: dto.gender,
+        birthDate: new Date(dto.birthDate),
+        currentWeight: dto.currentWeight,
+        height: dto.height,
+        activityLevel: dto.activityLevel,
+        medicalConditions: dto.medicalConditions,
+        fitnessExperience: dto.fitnessExperience,
+        coachId: dto.coachId,
+        oneTimePassword,
+        isFirstLogin: true,
+        canTrackExercise: dto.canTrackExercise,
+        canTrackSleep: dto.canTrackSleep,
+        canTrackNutrition: dto.canTrackNutrition,
+        canTrackWater: dto.canTrackWater,
+      },
+    });
 
-    const savedClient = await this.clientRepository.save(client);
-
-    return {
-      userId: savedClient.id,
-    };
+    return prismaToPlain<Client>(client);
   }
 
   async setClientPassword(
     clientId: string,
-    setPasswordDto: SetClientPasswordDto,
-    response: Response
-  ): Promise<AuthPayload> {
-    const client = await this.clientRepository.findById(clientId);
+    dto: SetClientPasswordDto,
+    res: Response
+  ): Promise<Client> {
+    const client = await this.prisma.client.findUnique({
+      where: { id: clientId },
+    });
+
     if (!client) {
-      throw new UnauthorizedException('Client not found');
+      throw new BadRequestException('Client not found');
     }
 
-    if (!client.needsPasswordSetup()) {
-      throw new ConflictException('Client already has permanent password');
+    if (!client.isFirstLogin) {
+      throw new BadRequestException('Password already set');
     }
 
-    await client.setPermamentPassword(setPasswordDto.newPassword);
-    const updatedClient = await this.clientRepository.updateAfterPasswordSet(
-      client
-    );
-    const tokens = await this.securityService.generateTokens(
-      updatedClient.getAuthPayload()
-    );
+    const hashedPassword = await bcrypt.hash(dto.newPassword, 12);
 
-    this.securityService.setCookies(response, tokens);
+    const updated = await this.prisma.client.update({
+      where: { id: clientId },
+      data: {
+        password: hashedPassword,
+        oneTimePassword: null,
+        isFirstLogin: false,
+      },
+    });
 
-    return {
-      sub: updatedClient.id,
-      email: updatedClient.email,
-      userType: UserType.CLIENT,
+    const payload: AuthPayload = {
+      sub: updated.id,
+      email: updated.email,
+      userType: 'CLIENT',
     };
+
+    const tokens = this.securityService.generateTokens(payload);
+    this.securityService.setCookies(res, tokens);
+
+    return prismaToPlain<Client>(updated);
   }
 
-  async getCurrentUser(authPayload: AuthPayload): Promise<Client | Coach> {
-    const { sub, userType } = authPayload;
-
-    const repository =
-      userType === UserType.COACH
-        ? this.coachRepository
-        : this.clientRepository;
-    const user = await repository.findById(sub);
-
-    if (!user) {
-      throw new UnauthorizedException('User not found');
+  async getCurrentUser(payload: AuthPayload): Promise<Client | Coach> {
+    if (payload.userType === 'COACH') {
+      const coach = await this.prisma.coach.findUnique({
+        where: { id: payload.sub },
+      });
+      if (!coach) throw new UnauthorizedException('Coach not found');
+      return prismaToPlain<Coach>(coach);
+    } else {
+      const client = await this.prisma.client.findUnique({
+        where: { id: payload.sub },
+        include: {
+          coach: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              email: true,
+            },
+          },
+          goals: true,
+        },
+      });
+      if (!client) throw new UnauthorizedException('Client not found');
+      return prismaToPlain<Client>(client);
     }
-
-    return user.toJSON();
   }
 
-  private generateOneTimePassword(): string {
+  async logout(res: Response): Promise<void> {
+    this.securityService.clearCookies(res);
+  }
+
+  async refreshTokens(
+    refreshToken: string,
+    res: Response
+  ): Promise<AuthResponse> {
+    try {
+      const payload = this.securityService.verifyRefreshToken(refreshToken);
+      const tokens = this.securityService.generateTokens(payload);
+      this.securityService.setCookies(res, tokens);
+
+      return {
+        user: payload,
+      };
+    } catch {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+  }
+
+  // Helper methods
+  private async validateClientPassword(
+    client: any,
+    password: string
+  ): Promise<boolean> {
+    if (client.isFirstLogin && client.oneTimePassword) {
+      return password === client.oneTimePassword;
+    }
+    if (client.password) {
+      return bcrypt.compare(password, client.password);
+    }
+    return false;
+  }
+
+  private generateOTP(): string {
     return randomBytes(4).toString('hex').toUpperCase();
   }
 }

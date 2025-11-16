@@ -1,14 +1,16 @@
 import {
   Controller,
   Post,
+  Get,
   Body,
   UseGuards,
   Req,
+  Res,
   HttpCode,
   HttpStatus,
-  Res,
+  UseInterceptors,
+  ClassSerializerInterceptor,
   UnauthorizedException,
-  Get,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
@@ -17,82 +19,84 @@ import {
   RegisterCoachDto,
   RegisterClientDto,
   SetClientPasswordDto,
-  AuthPayload,
+  AuthResponse,
+  Client,
+  Coach,
 } from '@forma-ws/domain';
-import { JwtAuthGuard, SecurityService } from '@forma-ws/backend-shared';
+import { JwtAuthGuard } from '@forma-ws/backend-shared';
+import { CurrentUser } from './decorators/current-user.decorator';
+
+interface AuthPayload {
+  sub: string;
+  email: string;
+  userType: 'COACH' | 'CLIENT';
+}
 
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private securityService: SecurityService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(
-    @Body() loginDto: LoginDto,
-    @Res({ passthrough: true }) response: Response
-  ): Promise<AuthPayload> {
-    return this.authService.login(loginDto, response);
+    @Body() dto: LoginDto,
+    @Res({ passthrough: true }) res: Response
+  ): Promise<AuthResponse> {
+    return this.authService.login(dto, res);
   }
 
   @Post('register/coach')
   async registerCoach(
-    @Body() registerDto: RegisterCoachDto,
-    @Res({ passthrough: true }) response: Response
-  ): Promise<AuthPayload> {
-    return this.authService.registerCoach(registerDto, response);
+    @Body() dto: RegisterCoachDto,
+    @Res({ passthrough: true }) res: Response
+  ): Promise<Coach> {
+    return this.authService.registerCoach(dto, res);
   }
 
   @Post('register/client')
-  async registerClient(
-    @Body() registerDto: RegisterClientDto
-  ): Promise<{ userId: string }> {
-    return this.authService.registerClient(registerDto);
+  async registerClient(@Body() dto: RegisterClientDto): Promise<Client> {
+    return this.authService.registerClient(dto);
   }
 
-  @Post('client/set-password')
+  @Post('set-password')
   @UseGuards(JwtAuthGuard)
-  async setClientPassword(
-    @Req() req: Request,
-    @Body() setPasswordDto: SetClientPasswordDto,
-    @Res({ passthrough: true }) response: Response
-  ): Promise<AuthPayload> {
-    const clientId = req.user['sub'];
-    return this.authService.setClientPassword(
-      clientId,
-      setPasswordDto,
-      response
-    );
+  async setPassword(
+    @CurrentUser() user: AuthPayload,
+    @Body() dto: SetClientPasswordDto,
+    @Res({ passthrough: true }) res: Response
+  ): Promise<Client> {
+    return this.authService.setClientPassword(user.sub, dto, res);
   }
 
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  async refreshTokens(
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response
-  ): Promise<AuthPayload> {
-    const refreshToken = request.cookies['refreshToken'];
-
+  async refresh(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response
+  ): Promise<AuthResponse> {
+    const refreshToken = req.cookies['refreshToken'];
     if (!refreshToken) {
       throw new UnauthorizedException('No refresh token provided');
     }
-
-    return this.securityService.refreshTokens(refreshToken, response);
+    return this.authService.refreshTokens(refreshToken, res);
   }
 
   @Post('logout')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  logout(@Res({ passthrough: true }) response: Response): { success: boolean } {
-    response.clearCookie('accessToken');
-    response.clearCookie('refreshToken');
-    return { success: true };
+  async logout(
+    @Res({ passthrough: true }) res: Response
+  ): Promise<{ message: string }> {
+    await this.authService.logout(res);
+    return { message: 'Logged out successfully' };
   }
 
-  @Get('getCurrentUser')
+  @Get('me')
   @UseGuards(JwtAuthGuard)
-  async getCurrentUser(@Req() req: { user: AuthPayload }) {
-    return this.authService.getCurrentUser(req.user);
+  async getCurrentUser(
+    @CurrentUser() user: AuthPayload
+  ): Promise<Client | Coach> {
+    return this.authService.getCurrentUser(user);
   }
 }

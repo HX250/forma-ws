@@ -1,5 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { AuthPayload, Client, Coach } from '@forma-ws/frontend/domain';
+import { AuthPayload, Client, Coach } from '@forma-ws/domain';
 
 @Injectable({
   providedIn: 'root',

@@ -1,94 +1,69 @@
-import { AuthTokens, AuthPayload } from '@forma-ws/domain';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { randomBytes } from 'crypto';
 import { Response } from 'express';
+
+interface AuthPayload {
+  sub: string;
+  email: string;
+  userType: 'COACH' | 'CLIENT';
+}
+
+interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+}
 
 @Injectable()
 export class SecurityService {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService
   ) {}
 
-  async setCookies(response: Response, tokens: AuthTokens) {
-    const isProduction =
-      this.configService.get<string>('NODE_ENV') === 'production';
+  generateTokens(payload: AuthPayload): AuthTokens {
+    return {
+      accessToken: this.jwtService.sign(payload, {
+        secret: this.configService.get('JWT_SECRET'),
+        expiresIn: this.configService.get('JWT_EXPIRES_IN') || '15m',
+      }),
+      refreshToken: this.jwtService.sign(payload, {
+        secret: this.configService.get('JWT_REFRESH_SECRET'),
+        expiresIn: this.configService.get('JWT_REFRESH_EXPIRES_IN') || '7d',
+      }),
+    };
+  }
 
-    response.cookie('accessToken', tokens.accessToken, {
+  setCookies(res: Response, tokens: AuthTokens): void {
+    const isProduction = this.configService.get('NODE_ENV') === 'production';
+
+    res.cookie('accessToken', tokens.accessToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      maxAge: this.configService.get<number>(
-        'JWT_ACCESS_EXPIRES_IN_MS',
-        15 * 60 * 1000
-      ),
+      maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
-    response.cookie('refreshToken', tokens.refreshToken, {
+    res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      maxAge: this.configService.get<number>(
-        'JWT_REFRESH_EXPIRES_IN_MS',
-        7 * 24 * 60 * 60 * 1000
-      ),
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
   }
 
-  async generateTokens(payload: AuthPayload): Promise<AuthTokens> {
-    const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload, {
-        secret: this.configService.get<string>('JWT_SECRET'),
-        expiresIn: this.configService.get<string>('JWT_EXPIRES_IN', '15m'),
-      }),
-      this.jwtService.signAsync(payload, {
-        secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-        expiresIn: this.configService.get<string>(
-          'JWT_REFRESH_EXPIRES_IN',
-          '7d'
-        ),
-      }),
-    ]);
-
-    return { accessToken, refreshToken };
+  clearCookies(res: Response): void {
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
   }
 
-  async refreshTokens(
-    refreshToken: string,
-    response: Response
-  ): Promise<AuthPayload> {
+  verifyRefreshToken(token: string): AuthPayload {
     try {
-      const payload = this.jwtService.verify(refreshToken, {
+      return this.jwtService.verify<AuthPayload>(token, {
         secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
       });
-
-      const tokens = await this.generateTokens({
-        sub: payload.sub,
-        email: payload.email,
-        userType: payload.userType,
-      });
-
-      this.setCookies(response, tokens);
-
-      return {
-        sub: payload.sub,
-        email: payload.email,
-        userType: payload.userType,
-      };
     } catch (error) {
       throw new UnauthorizedException('Invalid refresh token');
     }
-  }
-
-  async verifyRefreshToken(refreshToken: string): Promise<AuthPayload> {
-    return this.jwtService.verify(refreshToken, {
-      secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-    });
-  }
-
-  generateOneTimePassword(): string {
-    return randomBytes(4).toString('hex').toUpperCase();
   }
 }

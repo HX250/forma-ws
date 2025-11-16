@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-
 import { ClientsController } from './clients.controller';
 import { ClientsService } from './clients.service';
-
-import { DatabaseModule, ClientRepository } from '@forma-ws/backend-shared';
+import { DatabaseModule } from '@forma-ws/backend-shared';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule],
+  imports: [DatabaseModule],
   controllers: [ClientsController],
-  providers: [ClientsService, ClientRepository],
+  providers: [ClientsService],
   exports: [ClientsService],
 })
 export class ClientsModule {}

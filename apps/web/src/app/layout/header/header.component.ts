@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserFullNamePipe } from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
-import { Client, Coach, UserType } from '@forma-ws/domain';
+import { UserType, Client, Coach } from '@forma-ws/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { ClientHeaderComponent } from './components/client-header/client-header.component';
 import { CoachHeaderComponent } from './components/coach-header/coach-header.component';
