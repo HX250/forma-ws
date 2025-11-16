@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
-  AuthPayload,
   LoginDto,
   RegisterCoachDto,
   Client,
   Coach,
+  AuthPayload,
 } from '@forma-ws/domain';
 import { GlobalAuthService } from '../../../core/auth/auth';
 @Injectable({

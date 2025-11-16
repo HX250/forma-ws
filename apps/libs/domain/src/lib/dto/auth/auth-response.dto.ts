@@ -1,9 +1,7 @@
-// Frontend-compatible types (no class-transformer)
+import { UserType } from '../../types/auth/auth.types';
+
 export interface AuthResponse {
-  user: {
-    sub: string;
-    email: string;
-    userType: 'COACH' | 'CLIENT';
-  };
-  requiresPasswordSetup?: boolean;
+  sub: string;
+  email: string;
+  userType: UserType;
 }

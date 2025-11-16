@@ -15,18 +15,13 @@ import {
   Client,
   Coach,
   UserType,
+  AuthPayload,
 } from '@forma-ws/domain';
 import { Prisma } from '@prisma/client';
 import { Response } from 'express';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
 import { prismaToPlain } from '../../utils/prisma-to-plain';
-
-interface AuthPayload {
-  sub: string;
-  email: string;
-  userType: 'COACH' | 'CLIENT';
-}
 
 @Injectable()
 export class AuthService {
@@ -52,15 +47,16 @@ export class AuthService {
       const payload: AuthPayload = {
         sub: coach.id,
         email: coach.email,
-        userType: 'COACH',
+        userType: UserType.COACH,
       };
 
       const tokens = this.securityService.generateTokens(payload);
       this.securityService.setCookies(res, tokens);
 
       return {
-        user: payload,
-        requiresPasswordSetup: false,
+        sub: payload.sub,
+        email: payload.email,
+        userType: payload.userType,
       };
     } else {
       const client = await this.prisma.client.findUnique({ where: { email } });
@@ -79,15 +75,16 @@ export class AuthService {
       const payload: AuthPayload = {
         sub: client.id,
         email: client.email,
-        userType: 'CLIENT',
+        userType: UserType.CLIENT,
       };
 
       const tokens = this.securityService.generateTokens(payload);
       this.securityService.setCookies(res, tokens);
 
       return {
-        user: payload,
-        requiresPasswordSetup: client.isFirstLogin && !!client.oneTimePassword,
+        sub: payload.sub,
+        email: payload.email,
+        userType: payload.userType,
       };
     }
   }
@@ -124,7 +121,7 @@ export class AuthService {
     const payload: AuthPayload = {
       sub: coach.id,
       email: coach.email,
-      userType: 'COACH',
+      userType: UserType.COACH,
     };
 
     const tokens = this.securityService.generateTokens(payload);
@@ -200,7 +197,7 @@ export class AuthService {
     const payload: AuthPayload = {
       sub: updated.id,
       email: updated.email,
-      userType: 'CLIENT',
+      userType: UserType.CLIENT,
     };
 
     const tokens = this.securityService.generateTokens(payload);
@@ -250,14 +247,18 @@ export class AuthService {
       this.securityService.setCookies(res, tokens);
 
       return {
-        user: payload,
+        sub: payload.sub,
+        email: payload.email,
+        userType:
+          payload.userType === UserType.COACH
+            ? UserType.COACH
+            : UserType.CLIENT,
       };
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
   }
 
-  // Helper methods
   private async validateClientPassword(
     client: any,
     password: string

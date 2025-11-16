@@ -1,4 +1,3 @@
-// Frontend-compatible types (no Prisma imports)
 export interface Coach {
   id: string;
   email: string;

@@ -22,15 +22,10 @@ import {
   AuthResponse,
   Client,
   Coach,
+  AuthPayload,
 } from '@forma-ws/domain';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { CurrentUser } from './decorators/current-user.decorator';
-
-interface AuthPayload {
-  sub: string;
-  email: string;
-  userType: 'COACH' | 'CLIENT';
-}
 
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)
