@@ -21,12 +21,11 @@ export class ClientRepository extends BaseRepository<Client> {
     return client ? Client.fromPrisma(client) : null;
   }
 
-  async findByCoachId(coachId: string): Promise<ClientTable[] | []> {
+  async findByCoachId(coachId: string): Promise<Client[] | []> {
     const clients = await this.prisma.client.findMany({
       where: { coachId },
-      selectFromType: ClientTable,
     });
-    return clients;
+    return clients ? clients.map((c) => Client.fromPrisma(c)) : [];
   }
 
   override async save(client: Client): Promise<Client> {
