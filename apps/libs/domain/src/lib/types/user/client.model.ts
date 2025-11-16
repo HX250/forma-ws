@@ -21,3 +21,13 @@ export interface Client {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ClientTable {
+  id: string;
+  firstName: string;
+  lastName: string;
+  canTrackExercise: boolean;
+  canTrackSleep: boolean;
+  canTrackNutrition: boolean;
+  canTrackWater: boolean;
+}

@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from '@forma-ws/backend-shared';
 import { AuthModule } from './modules/auth/auth.module';
+import { ClientsModule } from './modules/clients/clients.module';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -19,6 +20,7 @@ const isProduction = process.env.NODE_ENV === 'production';
     }),
     DatabaseModule,
     AuthModule,
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

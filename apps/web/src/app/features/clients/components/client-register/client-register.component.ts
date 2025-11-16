@@ -32,10 +32,9 @@ import { ClientPermissionsInfoComponent } from './components/permissions-info/pe
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 import { ClientFormControls } from './models/client-form.model';
 import { ClientResourceService } from '../../resources/clients.resource.service';
-import { switchMap, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-clients',
+  selector: 'app-client-register',
   imports: [
     CommonModule,
     ButtonComponent,
@@ -46,10 +45,10 @@ import { switchMap, tap } from 'rxjs';
     ClientHealthInfoComponent,
     ClientPermissionsInfoComponent,
   ],
-  templateUrl: './clients.component.html',
+  templateUrl: './client-register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientsComponent
+export class ClientRegisterComponent
   extends PageFormComponent<FormGroup<ClientFormControls>>
   implements OnInit
 {

@@ -3,6 +3,7 @@ import { Client } from '../../models/auth/client.model';
 import { BaseRepository } from '../base.repository';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { ClientTable } from '@forma-ws/domain';
 
 @Injectable()
 export class ClientRepository extends BaseRepository<Client> {
@@ -18,6 +19,13 @@ export class ClientRepository extends BaseRepository<Client> {
   override async findByEmail(email: string): Promise<Client | null> {
     const client = await this.prisma.client.findUnique({ where: { email } });
     return client ? Client.fromPrisma(client) : null;
+  }
+
+  async findByCoachId(coachId: string): Promise<Client[]> {
+    const clients = await this.prisma.client.findMany({
+      where: { coachId },
+    });
+    return clients.map((c) => Client.fromPrisma(c));
   }
 
   override async save(client: Client): Promise<Client> {

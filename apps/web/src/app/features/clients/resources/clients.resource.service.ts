@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RegisterClientDto } from '@forma-ws/frontend/domain';
 import { GlobalAuthService } from '../../../core/auth/auth';
@@ -10,5 +10,10 @@ export class ClientResourceService extends GlobalAuthService {
 
   register(form: RegisterClientDto) {
     return this.http.post(this.endpoint + '/auth/register/client', form);
+  }
+
+  getClientList(coachId: string) {
+    const params = new HttpParams().set('coachId', coachId);
+    return this.http.get(this.endpoint + '/clients', { params });
   }
 }

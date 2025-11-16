@@ -1,17 +1,8 @@
-<button
-  type="button"
-  [class]="
-    buttonClass() ||
-    'px-lg py-md bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark rounded-md font-semibold hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-2'
-  "
-  (click)="open()"
->
-  {{ buttonText() | translate }}
-</button>
+<app-button [text]="buttonText()" (clicked)="open()" />
 
 @if (isOpen()) {
 <div
-  class="fixed inset-0 z-50 flex items-center justify-center bg-secondary/50 dark:bg-secondary-dark/50 animate-in fade-in duration-200"
+  class="fixed inset-0 z-[9999] flex items-center justify-center bg-secondary/50 dark:bg-secondary-dark/50 animate-in fade-in duration-200"
   (click)="onBackdropClick($event)"
 >
   <div

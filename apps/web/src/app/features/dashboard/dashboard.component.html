@@ -7,74 +7,9 @@
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 relative flex-1 overflow-hidden"
   >
     <div
-      (click)="toggleWidget('new-clients')"
-      [class.hidden]="isHidden('new-clients')"
-      [class.fixed]="isExpanded('new-clients')"
-      [class.inset-0]="isExpanded('new-clients')"
-      [class.z-50]="isExpanded('new-clients')"
-      [class.m-6]="isExpanded('new-clients')"
-      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+      class="row-span-2 md:col-span-2 lg:col-span-3 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
     >
-      <div class="flex items-center justify-between mb-3">
-        <h2
-          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
-        >
-          <span class="text-xl">🆕</span>
-          New Clients & Growth
-        </h2>
-        @if (isExpanded('new-clients')) {
-        <button
-          (click)="toggleWidget('new-clients'); $event.stopPropagation()"
-          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
-        >
-          ✕
-        </button>
-        }
-      </div>
-
-      <div class="mb-2">
-        <div
-          class="h-24 border border-dashed border-secondary/20 dark:border-secondary-dark/20 rounded-lg flex items-center justify-center bg-secondary/5 dark:bg-secondary-dark/5"
-        >
-          <div class="text-center">
-            <p
-              class="text-xs text-secondary/50 dark:text-secondary-dark/50 mb-2"
-            >
-              Client Growth Trend
-            </p>
-            <svg
-              class="w-full h-20 px-4"
-              viewBox="0 0 200 60"
-              preserveAspectRatio="none"
-            >
-              <polyline
-                points="0,50 40,45 80,40 120,35 160,30 200,25"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="text-accent dark:text-accent-dark"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-            New This Month
-          </p>
-          <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
-        </div>
-        <div>
-          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-            Total Active
-          </p>
-          <p class="text-xl font-bold text-secondary dark:text-secondary-dark">
-            0
-          </p>
-        </div>
-      </div>
+      <app-clients-growth />
     </div>
 
     <div
@@ -84,7 +19,7 @@
       [class.inset-0]="isExpanded('weight-trend')"
       [class.z-50]="isExpanded('weight-trend')"
       [class.m-6]="isExpanded('weight-trend')"
-      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+      class="row-span-1 md:col-span-2 lg:col-span-1 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
     >
       <div class="flex items-center justify-between mb-3">
         <h2
@@ -143,7 +78,7 @@
       [class.inset-0]="isExpanded('workout-adherence')"
       [class.z-50]="isExpanded('workout-adherence')"
       [class.m-6]="isExpanded('workout-adherence')"
-      class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+      class="row-span-1 md:col-span-2 lg:col-span-1 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
     >
       <div class="flex items-center justify-between mb-3">
         <h2
@@ -184,6 +119,64 @@
           <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
             vs. last week
           </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      (click)="toggleWidget('logging-activity')"
+      [class.hidden]="isHidden('logging-activity')"
+      [class.fixed]="isExpanded('logging-activity')"
+      [class.inset-0]="isExpanded('logging-activity')"
+      [class.z-50]="isExpanded('logging-activity')"
+      [class.m-6]="isExpanded('logging-activity')"
+      class="row-span-1 md:col-span-2 lg:col-span-1 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
+    >
+      <div class="flex items-center justify-between mb-3">
+        <h2
+          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+        >
+          <span class="text-xl">📊</span>
+          Logging Activity
+        </h2>
+        @if (isExpanded('logging-activity')) {
+        <button
+          (click)="toggleWidget('logging-activity'); $event.stopPropagation()"
+          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
+        >
+          ✕
+        </button>
+        }
+      </div>
+
+      <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
+        <div
+          class="flex items-center justify-between p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5 hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 transition-colors"
+        >
+          <div class="flex items-center gap-4 flex-1">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+              <div
+                class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
+              ></div>
+              <div class="min-w-0 flex-1">
+                <p
+                  class="text-sm font-medium text-secondary dark:text-secondary-dark"
+                >
+                  No recent logging activity
+                </p>
+                <p
+                  class="text-xs text-secondary/70 dark:text-secondary-dark/70"
+                >
+                  Client activities will appear here
+                </p>
+              </div>
+            </div>
+          </div>
+          <span
+            class="text-xs text-secondary/50 dark:text-secondary-dark/50 flex-shrink-0 ml-4"
+          >
+            --
+          </span>
         </div>
       </div>
     </div>
@@ -306,64 +299,6 @@
               style="width: 0%"
             ></div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      (click)="toggleWidget('logging-activity')"
-      [class.hidden]="isHidden('logging-activity')"
-      [class.fixed]="isExpanded('logging-activity')"
-      [class.inset-0]="isExpanded('logging-activity')"
-      [class.z-50]="isExpanded('logging-activity')"
-      [class.m-6]="isExpanded('logging-activity')"
-      class="row-span-1 md:col-span-2 lg:col-span-3 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm hover:shadow-md transition-all cursor-pointer overflow-auto"
-    >
-      <div class="flex items-center justify-between mb-3">
-        <h2
-          class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
-        >
-          <span class="text-xl">📊</span>
-          Logging Activity
-        </h2>
-        @if (isExpanded('logging-activity')) {
-        <button
-          (click)="toggleWidget('logging-activity'); $event.stopPropagation()"
-          class="text-secondary/70 hover:text-secondary dark:text-secondary-dark/70 dark:hover:text-secondary-dark"
-        >
-          ✕
-        </button>
-        }
-      </div>
-
-      <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
-        <div
-          class="flex items-center justify-between p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5 hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 transition-colors"
-        >
-          <div class="flex items-center gap-4 flex-1">
-            <div class="flex items-center gap-3 min-w-0 flex-1">
-              <div
-                class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
-              ></div>
-              <div class="min-w-0 flex-1">
-                <p
-                  class="text-sm font-medium text-secondary dark:text-secondary-dark"
-                >
-                  No recent logging activity
-                </p>
-                <p
-                  class="text-xs text-secondary/70 dark:text-secondary-dark/70"
-                >
-                  Client activities will appear here
-                </p>
-              </div>
-            </div>
-          </div>
-          <span
-            class="text-xs text-secondary/50 dark:text-secondary-dark/50 flex-shrink-0 ml-4"
-          >
-            --
-          </span>
         </div>
       </div>
     </div>
