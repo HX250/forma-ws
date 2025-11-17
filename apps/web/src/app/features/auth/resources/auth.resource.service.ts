@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
-  AuthPayload,
   LoginDto,
   RegisterCoachDto,
-  Coach,
   Client,
-} from '@forma-ws/frontend/domain';
+  Coach,
+  AuthPayload,
+} from '@forma-ws/domain';
 import { GlobalAuthService } from '../../../core/auth/auth';
 @Injectable({
   providedIn: 'root',
@@ -27,8 +27,6 @@ export class AuthResourceService extends GlobalAuthService {
   }
 
   getCurrentUser() {
-    return this.http.get<Coach | Client>(
-      this.endpoint + '/auth/getCurrentUser'
-    );
+    return this.http.get<Coach | Client>(this.endpoint + '/auth/me');
   }
 }

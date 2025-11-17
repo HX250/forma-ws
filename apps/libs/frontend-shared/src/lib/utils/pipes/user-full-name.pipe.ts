@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { Client, Coach } from '@forma-ws/frontend/domain';
+import { Client, Coach } from '@forma-ws/domain';
 
 @Pipe({
   name: 'userFullName',
