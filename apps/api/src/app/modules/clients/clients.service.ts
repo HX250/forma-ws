@@ -68,18 +68,4 @@ export class ClientsService {
     });
     return clients;
   }
-
-  async updateClient(id: string, data: any): Promise<Client> {
-    const updated = await this.prisma.client.update({
-      where: { id },
-      data,
-    });
-    return prismaToPlain<Client>(updated);
-  }
-
-  async deleteClient(id: string): Promise<void> {
-    await this.prisma.client.delete({
-      where: { id },
-    });
-  }
 }

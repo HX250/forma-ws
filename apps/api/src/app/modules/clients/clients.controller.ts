@@ -7,15 +7,9 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
-import { Client, ClientTable } from '@forma-ws/domain';
+import { AuthPayload, Client, ClientTable } from '@forma-ws/domain';
 import { JwtAuthGuard, CoachOnlyGuard } from '@forma-ws/backend-shared';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
-
-interface AuthPayload {
-  sub: string;
-  email: string;
-  userType: 'COACH' | 'CLIENT';
-}
+import { CurrentUser } from '../security/common/decorators/current-user.decorator';
 
 @Controller('clients')
 @UseGuards(JwtAuthGuard)

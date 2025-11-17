@@ -2,12 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { DatabaseService } from '@forma-ws/backend-shared';
-
-interface AuthPayload {
-  sub: string;
-  email: string;
-  userType: 'COACH' | 'CLIENT';
-}
+import { AuthPayload } from '@forma-ws/domain';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

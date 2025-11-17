@@ -1,18 +1,8 @@
+import { AuthPayload, AuthTokens } from '@forma-ws/domain';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
-
-interface AuthPayload {
-  sub: string;
-  email: string;
-  userType: 'COACH' | 'CLIENT';
-}
-
-interface AuthTokens {
-  accessToken: string;
-  refreshToken: string;
-}
 
 @Injectable()
 export class SecurityService {
@@ -41,14 +31,20 @@ export class SecurityService {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      maxAge: 15 * 60 * 1000, // 15 minutes
+      maxAge: this.configService.get<number>(
+        'JWT_ACCESS_EXPIRES_IN_MS',
+        15 * 60 * 1000
+      ),
     });
 
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: this.configService.get<number>(
+        'JWT_REFRESH_EXPIRES_IN_MS',
+        7 * 24 * 60 * 60 * 1000
+      ),
     });
   }
 

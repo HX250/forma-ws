@@ -16,9 +16,6 @@ import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import {
   LoginDto,
-  RegisterCoachDto,
-  RegisterClientDto,
-  SetClientPasswordDto,
   AuthResponse,
   Client,
   Coach,
@@ -29,7 +26,7 @@ import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)
-export class AuthController {
+export class SecurityController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
@@ -39,29 +36,6 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response
   ): Promise<AuthResponse> {
     return this.authService.login(dto, res);
-  }
-
-  @Post('register/coach')
-  async registerCoach(
-    @Body() dto: RegisterCoachDto,
-    @Res({ passthrough: true }) res: Response
-  ): Promise<Coach> {
-    return this.authService.registerCoach(dto, res);
-  }
-
-  @Post('register/client')
-  async registerClient(@Body() dto: RegisterClientDto): Promise<Client> {
-    return this.authService.registerClient(dto);
-  }
-
-  @Post('set-password')
-  @UseGuards(JwtAuthGuard)
-  async setPassword(
-    @CurrentUser() user: AuthPayload,
-    @Body() dto: SetClientPasswordDto,
-    @Res({ passthrough: true }) res: Response
-  ): Promise<Client> {
-    return this.authService.setClientPassword(user.sub, dto, res);
   }
 
   @Post('refresh')
