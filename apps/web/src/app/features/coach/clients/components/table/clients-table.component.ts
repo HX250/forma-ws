@@ -17,6 +17,7 @@ import { TableModel } from '@forma-ws/frontend-shared';
 import { ClientTableView } from './models/client-table.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientTableService } from './services/client-table.service';
+import { ClientTable } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-clients-table',
@@ -53,7 +54,7 @@ export class ClientsTableComponent implements OnInit {
     this.clientTableService.loadClientsTable();
   }
 
-  mapClients(client: any) {
+  mapClients(client: ClientTable) {
     return {
       id: client.id,
       fullName: `${client.firstName} ${client.lastName}`.trim(),
