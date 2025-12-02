@@ -61,6 +61,7 @@ export class ClientsService {
         canTrackSleep: true,
         canTrackNutrition: true,
         canTrackWater: true,
+        updatedAt: true,
       },
       orderBy: {
         createdAt: 'desc',

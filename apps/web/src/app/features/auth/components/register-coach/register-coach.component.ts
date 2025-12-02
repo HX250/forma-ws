@@ -117,7 +117,7 @@ export class RegisterCoachComponent
       return;
     }
 
-    this.sendRequest(
+    this.sendFormRequest(
       this.authResourceService.register(this.form.getRawValue())
     ).subscribe(() => {
       this.alertService.show(AlertType.SUCCESS, 'Coach Created successfully');

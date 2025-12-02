@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RegisterClientDto, ClientTable } from '@forma-ws/domain';
-import { GlobalAuthService } from '../../../core/auth/auth';
+import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })

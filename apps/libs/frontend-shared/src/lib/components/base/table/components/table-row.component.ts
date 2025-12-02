@@ -27,7 +27,7 @@ export class TableRowComponent<T = unknown> {
 
   @HostBinding('class')
   get hostClasses(): string {
-    return 'grid cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent dark:focus:ring-accent-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 last:rounded-b-lg overflow-hidden';
+    return 'grid cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent dark:focus:ring-accent-dark hover:bg-accent/5 dark:hover:bg-accent-dark/5  last:rounded-b-lg overflow-hidden';
   }
 
   @HostBinding('attr.tabindex')

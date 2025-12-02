@@ -59,7 +59,7 @@ export class AuthComponent
       return;
     }
 
-    this.sendRequest(
+    this.sendFormRequest(
       this.authResourceService.login(this.form.getRawValue()).pipe(
         tap((authPayload) => this.securityService.setAuthPayload(authPayload)),
         switchMap(() => this.authResourceService.getCurrentUser()),

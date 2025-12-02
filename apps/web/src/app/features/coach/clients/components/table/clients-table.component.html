@@ -1,0 +1,14 @@
+@if(loading()){
+<forma-loading />
+} @else if(clientsTable().length === 0){
+<div class="p-lg text-center text-secondary dark:text-secondary-dark">
+  <p class="text-4xl">{{ 'CLIENTS_TABLE.NO_CLIENTS' | translate }}</p>
+  <p class="text-xl">{{ 'CLIENTS_TABLE.NO_CLIENTS_ERROR' | translate }}</p>
+</div>
+} @else {
+<forma-table
+  [model]="tableModel"
+  [data]="clientsTable()"
+  (rowClick)="onRowClick($event)"
+/>
+}

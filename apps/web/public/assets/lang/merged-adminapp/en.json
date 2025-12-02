@@ -180,5 +180,17 @@
       "TRACK_WATER": "Track Water Intake",
       "TRACK_WATER_DESC": "Allow client to log and monitor daily water consumption"
     }
+  },
+  "CLIENTS_TABLE": {
+    "TITLE": "Clients board",
+    "NO_CLIENTS": "No clients found, please add a client.",
+    "NO_CLIENTS_ERROR": "If this is a result of an error, please try again later.",
+    "LOADING_CLIENTS": "Loading clients...",
+    "FULL_NAME": "Name",
+    "EXCERCISE": "Excercise",
+    "SLEEP": "Sleep",
+    "NUTRITION": "Nutrition",
+    "WATER": "Water",
+    "LAST_UPDATED": "Last updated"
   }
 }

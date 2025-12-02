@@ -1,0 +1,14 @@
+{
+  "CLIENTS_TABLE": {
+    "TITLE": "Tabuľka klientov",
+    "NO_CLIENTS": "Nenašli sa žiadni klienti, prosím pridajte klienta.",
+    "NO_CLIENTS_ERROR": "Ak je to výsledok chyby, skúste tote neskôr znova.",
+    "LOADING_CLIENTS": "Načítavanie klientov...",
+    "FULL_NAME": "Meno",
+    "EXCERCISE": "Cvičenie",
+    "SLEEP": "Spánok",
+    "NUTRITION": "Výživa",
+    "WATER": "Voda",
+    "LAST_UPDATED": "Naposledy aktualizované"
+  }
+}
