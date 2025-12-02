@@ -49,4 +49,5 @@ export interface ClientTable {
   canTrackSleep: boolean;
   canTrackNutrition: boolean;
   canTrackWater: boolean;
+  updatedAt: Date;
 }

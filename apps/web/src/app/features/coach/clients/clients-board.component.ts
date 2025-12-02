@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { ClientRegisterComponent } from './components/client-register/client-register.component';
 import { ClientsTableComponent } from './components/table/clients-table.component';
-import { Client } from './models/clients-table.model';
+import { ClientTableView } from './components/table/models/client-table.model';
+import { ClientTableService } from './components/table/services/client-table.service';
 
 @Component({
   selector: 'app-clients-board',
@@ -18,8 +24,13 @@ import { Client } from './models/clients-table.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientsBoardComponent {
-  onClientClick(event: { data: Client; index: number }): void {
-    console.log('Client clicked:', event);
-    console.log('Client name:', event.data.name);
+  private readonly clientTableService = inject(ClientTableService);
+
+  reloadClients(): void {
+    this.clientTableService.loadClientsTable(true);
+  }
+
+  onClientClick(event: { data: ClientTableView; index: number }): void {
+    this.clientTableService.loadClientsTable(true);
   }
 }

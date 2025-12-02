@@ -13,7 +13,7 @@ export class PageFormComponent<TFormGroup extends FormGroup<any>> {
     return this.form.formLoader();
   }
 
-  sendRequest<T>(req: Observable<T>) {
+  sendFormRequest<T>(req: Observable<T>) {
     this.form.showLoader();
 
     req = req.pipe(

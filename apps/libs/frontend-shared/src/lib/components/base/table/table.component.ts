@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { TableRowComponent } from './components/table-row.component';
 import { TableColumn, TableModel } from './models/table.models';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'forma-table',
   standalone: true,
-  imports: [CommonModule, TableRowComponent],
+  imports: [CommonModule, TableRowComponent, TranslateModule],
   templateUrl: './table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -52,7 +53,13 @@ export class TableComponent<T> {
 
   protected getCellValue(item: T, column: TableColumn<T>): string {
     if (column.field) {
-      return String(item[column.field]);
+      const value = item[column.field];
+
+      if (typeof value === 'boolean') {
+        return value ? '✓' : '✗';
+      }
+
+      return String(value ?? '');
     }
     return '';
   }

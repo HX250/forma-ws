@@ -24,6 +24,7 @@ export class ModalComponent {
   showCloseButton = input<boolean>(true);
   buttonText = input<string>('Open');
   size = input<ModalSize>('md');
+  form = input<boolean>(false);
 
   showFooterButtons = input<boolean>(true);
   primaryButtonText = input<string>('Submit');

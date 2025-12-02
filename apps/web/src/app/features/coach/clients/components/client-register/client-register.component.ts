@@ -6,6 +6,7 @@ import {
   signal,
   computed,
   DestroyRef,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -52,6 +53,22 @@ export class ClientRegisterComponent
   extends PageFormComponent<FormGroup<ClientFormControls>>
   implements OnInit
 {
+  private fb = inject(FormBuilder);
+  private alertService = inject(AlertService);
+  private destroyRef = inject(DestroyRef);
+  private securityService = inject(SecurityService);
+  private clientResourceService = inject(ClientResourceService);
+  private translate = inject(TranslateService);
+
+  readonly ButtonProperties = ButtonProperties;
+  readonly totalSteps = 3;
+
+  private gender = Gender;
+  private activityLevel = ActivityLevel;
+  private fitnessExperience = FitnessExperience;
+
+  createdClient = output<void>();
+
   currentStep = signal<number>(1);
   formValidityTrigger = signal<number>(0);
   breadcrumbItems = signal<BreadcrumbItem[]>([
@@ -83,19 +100,10 @@ export class ClientRegisterComponent
     return this.currentStep() === this.totalSteps;
   });
 
-  readonly ButtonProperties = ButtonProperties;
-  readonly totalSteps = 3;
-
-  private gender = Gender;
-  private activityLevel = ActivityLevel;
-  private fitnessExperience = FitnessExperience;
-
-  private fb = inject(FormBuilder);
-  private alertService = inject(AlertService);
-  private destroyRef = inject(DestroyRef);
-  private securityService = inject(SecurityService);
-  private clientResourceService = inject(ClientResourceService);
-  private translate = inject(TranslateService);
+  constructor() {
+    console.log('ClientRegisterComponent initialized');
+    super();
+  }
 
   ngOnInit(): void {
     this.form = this.buildForm();
@@ -118,7 +126,7 @@ export class ClientRegisterComponent
       return;
     }
 
-    this.sendRequest(
+    this.sendFormRequest(
       this.clientResourceService.register(this.form.getRawValue())
     ).subscribe({
       next: () => {
@@ -126,6 +134,8 @@ export class ClientRegisterComponent
           AlertType.SUCCESS,
           this.translate.instant('REGISTER_CLIENT.SUCCESS_MESSAGE')
         );
+        this.createdClient.emit();
+        this.currentStep.set(1);
         this.resetForm();
       },
     });
