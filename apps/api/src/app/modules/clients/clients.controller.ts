@@ -7,7 +7,14 @@ import {
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { ClientsService } from './clients.service';
-import { AuthPayload, Client, ClientTable } from '@forma-ws/domain';
+import {
+  AuthPayload,
+  Client,
+  ClientGeneralDetails,
+  ClientHealthDetails,
+  ClientPermissions,
+  ClientTable,
+} from '@forma-ws/domain';
 import { JwtAuthGuard, CoachOnlyGuard } from '@forma-ws/backend-shared';
 import { CurrentUser } from '../security/common/decorators/current-user.decorator';
 
@@ -17,9 +24,28 @@ import { CurrentUser } from '../security/common/decorators/current-user.decorato
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
 
-  @Get(':id')
-  async getClient(@Param('id') id: string): Promise<Client> {
-    const client = await this.clientsService.findById(id);
+  @Get('details/:id')
+  async getClientDetails(
+    @Param('id') id: string
+  ): Promise<ClientGeneralDetails> {
+    const client = await this.clientsService.getClientGeneralDetails(id);
+    return client;
+  }
+
+  @Get('permissions/:id')
+  async getClientPermissions(
+    @Param('id') id: string
+  ): Promise<ClientPermissions> {
+    const client = await this.clientsService.getClientPermissions(id);
+    return client;
+  }
+
+  @Get('health/:id')
+  async getClientHealthDetails(
+    @Param('id') id: string
+  ): Promise<ClientHealthDetails> {
+    const client = await this.clientsService.getClientHealthDetails(id);
+
     return client;
   }
 

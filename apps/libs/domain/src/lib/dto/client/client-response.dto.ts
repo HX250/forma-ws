@@ -51,3 +51,27 @@ export interface ClientTable {
   canTrackWater: boolean;
   updatedAt: Date;
 }
+
+export interface ClientGeneralDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt: Date;
+  gender: string;
+  birthDate: Date;
+}
+
+export interface ClientPermissions {
+  canTrackExercise: boolean;
+  canTrackSleep: boolean;
+  canTrackNutrition: boolean;
+  canTrackWater: boolean;
+}
+
+export interface ClientHealthDetails {
+  currentWeight: number;
+  height: number;
+  activityLevel: string;
+  fitnessExperience: string;
+  medicalConditions?: string | null;
+}

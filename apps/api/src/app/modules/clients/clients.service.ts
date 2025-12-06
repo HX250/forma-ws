@@ -1,7 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '@forma-ws/backend-shared';
-import { Client, ClientTable } from '@forma-ws/domain';
+import {
+  Client,
+  ClientGeneralDetails,
+  ClientHealthDetails,
+  ClientPermissions,
+  ClientTable,
+} from '@forma-ws/domain';
 import { prismaToPlain } from '../../utils/prisma-to-plain';
+import { decimalInObjectToNumber } from '../../utils/decimal-to-numbers';
 
 @Injectable()
 export class ClientsService {
@@ -67,6 +74,62 @@ export class ClientsService {
         createdAt: 'desc',
       },
     });
+
     return clients;
+  }
+
+  async getClientGeneralDetails(id: string): Promise<ClientGeneralDetails> {
+    const client = await this.prisma.client.findUnique({
+      where: { id },
+      select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        createdAt: true,
+        gender: true,
+        birthDate: true,
+      },
+    });
+
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
+    return client;
+  }
+  async getClientPermissions(id: string): Promise<ClientPermissions> {
+    const client = await this.prisma.client.findUnique({
+      where: { id },
+      select: {
+        canTrackExercise: true,
+        canTrackSleep: true,
+        canTrackNutrition: true,
+        canTrackWater: true,
+      },
+    });
+
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
+    return client;
+  }
+  async getClientHealthDetails(id: string): Promise<ClientHealthDetails> {
+    const client = await this.prisma.client.findUnique({
+      where: { id },
+      select: {
+        currentWeight: true,
+        height: true,
+        activityLevel: true,
+        fitnessExperience: true,
+        medicalConditions: true,
+      },
+    });
+
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
+    return decimalInObjectToNumber(client);
   }
 }

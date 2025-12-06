@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ClientResourceService extends GlobalAuthService {
+export class ClientsBoardResourceService extends GlobalAuthService {
   private http = inject(HttpClient);
 
   register(form: RegisterClientDto) {

@@ -1,6 +1,3 @@
-<app-button [text]="buttonText()" (clicked)="open()" />
-
-@if (isOpen()) {
 <div
   class="fixed inset-0 z-[9999] flex items-center justify-center bg-secondary/50 dark:bg-secondary-dark/50 animate-in fade-in duration-200"
   (click)="onBackdropClick($event)"
@@ -11,17 +8,17 @@
       sizeClass
     "
   >
-    @if (title() || showCloseButton()) {
+    @if (title || showCloseButton) {
     <div
       class="flex items-center justify-between px-lg py-lg border-b border-secondary/20 dark:border-secondary-dark/20"
     >
-      @if (title()) {
+      @if (title) {
       <h2
         class="text-xl font-semibold text-secondary dark:text-secondary-dark font-heading"
       >
-        {{ title() | translate }}
+        {{ title | translate }}
       </h2>
-      } @if (showCloseButton()) {
+      } @if (showCloseButton) {
       <button
         type="button"
         class="w-8 h-8 flex items-center justify-center rounded-md text-muted dark:text-muted-dark hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 hover:text-secondary dark:hover:text-secondary-dark transition-colors focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
@@ -33,10 +30,8 @@
       }
     </div>
     }
-    <div class="px-lg py-lg">
-      <ng-content></ng-content>
-    </div>
-    @if (showFooterButtons()) {
+    <div class="px-lg py-lg" data-modal-content></div>
+    @if (showFooterButtons) {
     <div
       class="flex items-center justify-between px-lg py-lg border-t border-secondary/20 dark:border-secondary-dark/20"
     >
@@ -45,17 +40,16 @@
         class="px-lg py-md bg-secondary/10 dark:bg-secondary-dark/10 text-secondary dark:text-secondary-dark rounded-md font-semibold hover:bg-secondary/20 dark:hover:bg-secondary-dark/20 transition-colors focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-2"
         (click)="onSecondaryClick()"
       >
-        {{ secondaryButtonText() | translate }}
+        {{ secondaryButtonText | translate }}
       </button>
       <button
         type="button"
         class="px-lg py-md bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark rounded-md font-semibold hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark focus:ring-offset-2"
         (click)="onPrimaryClick()"
       >
-        {{ primaryButtonText() | translate }}
+        {{ primaryButtonText | translate }}
       </button>
     </div>
     }
   </div>
 </div>
-}

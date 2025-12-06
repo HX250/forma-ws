@@ -3,38 +3,30 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
-  input,
   output,
-  signal,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent } from '../button/button.component';
 
 export type ModalSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ButtonComponent],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-  title = input<string>('');
-  showCloseButton = input<boolean>(true);
-  buttonText = input<string>('Open');
-  size = input<ModalSize>('md');
-  form = input<boolean>(false);
+  title = '';
+  showCloseButton = true;
+  size: 'sm' | 'md' | 'lg' = 'md';
+  showFooterButtons = true;
+  primaryButtonText = 'Submit';
+  secondaryButtonText = 'Cancel';
 
-  showFooterButtons = input<boolean>(true);
-  primaryButtonText = input<string>('Submit');
-  secondaryButtonText = input<string>('Cancel');
-
+  closeModal = output<void>();
   primaryClick = output<void>();
   secondaryClick = output<void>();
-  modalClosed = output<void>();
-
-  isOpen = signal<boolean>(false);
 
   get sizeClass(): string {
     const sizes = {
@@ -42,23 +34,16 @@ export class ModalComponent {
       md: 'max-w-[672px]',
       lg: 'max-w-[896px]',
     };
-    return sizes[this.size()];
+    return sizes[this.size];
   }
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
-    if (this.isOpen()) {
-      this.close();
-    }
-  }
-
-  open(): void {
-    this.isOpen.set(true);
+    this.close();
   }
 
   close(): void {
-    this.isOpen.set(false);
-    this.modalClosed.emit();
+    this.closeModal.emit();
   }
 
   onBackdropClick(event: MouseEvent): void {
@@ -69,11 +54,9 @@ export class ModalComponent {
 
   onPrimaryClick(): void {
     this.primaryClick.emit();
-    this.close();
   }
 
   onSecondaryClick(): void {
     this.secondaryClick.emit();
-    this.close();
   }
 }
