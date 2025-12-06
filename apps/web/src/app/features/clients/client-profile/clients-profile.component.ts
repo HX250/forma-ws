@@ -3,7 +3,6 @@ import {
   Component,
   effect,
   inject,
-  Injector,
   OnInit,
   signal,
 } from '@angular/core';
@@ -14,14 +13,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientsProfileResourceService } from '../resources/clients-profile.resources.service';
 
 @Component({
-  selector: 'app-clients-board',
+  selector: 'app-clients-profile',
   imports: [CommonModule, TranslateModule],
   templateUrl: './clients-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientsProfileComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly injector = inject(Injector);
   private readonly clientsProfileResourceService = inject(
     ClientsProfileResourceService
   );

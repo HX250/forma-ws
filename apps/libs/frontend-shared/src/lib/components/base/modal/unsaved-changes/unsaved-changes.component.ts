@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 export type ModalSize = 'sm' | 'md' | 'lg';
 @Component({
-  selector: 'app-modal',
+  selector: 'app-unsaved-changes-modal',
   standalone: true,
   imports: [CommonModule, TranslateModule],
   templateUrl: './unsaved-changes.component.html',

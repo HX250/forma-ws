@@ -45,6 +45,7 @@ export class ClientsController {
     @Param('id') id: string
   ): Promise<ClientHealthDetails> {
     const client = await this.clientsService.getClientHealthDetails(id);
+
     return client;
   }
 

@@ -1,5 +1,3 @@
-import { Gender } from '../../enums';
-
 export interface ClientGoal {
   id: string;
   goalType: string[];

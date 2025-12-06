@@ -74,11 +74,12 @@ export class ClientsService {
         createdAt: 'desc',
       },
     });
+
     return clients;
   }
 
   async getClientGeneralDetails(id: string): Promise<ClientGeneralDetails> {
-    const client = await this.prisma.client.findFirst({
+    const client = await this.prisma.client.findUnique({
       where: { id },
       select: {
         firstName: true,
@@ -90,10 +91,14 @@ export class ClientsService {
       },
     });
 
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
     return client;
   }
   async getClientPermissions(id: string): Promise<ClientPermissions> {
-    const client = await this.prisma.client.findFirst({
+    const client = await this.prisma.client.findUnique({
       where: { id },
       select: {
         canTrackExercise: true,
@@ -103,10 +108,14 @@ export class ClientsService {
       },
     });
 
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
     return client;
   }
   async getClientHealthDetails(id: string): Promise<ClientHealthDetails> {
-    const client = await this.prisma.client.findFirst({
+    const client = await this.prisma.client.findUnique({
       where: { id },
       select: {
         currentWeight: true,
@@ -116,6 +125,10 @@ export class ClientsService {
         medicalConditions: true,
       },
     });
+
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
 
     return decimalInObjectToNumber(client);
   }
