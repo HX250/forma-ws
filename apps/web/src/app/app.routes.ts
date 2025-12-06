@@ -21,7 +21,7 @@ export const appRoutes: Route[] = [
   {
     path: 'clients',
     loadChildren: () =>
-      import('./features/coach/clients/clients.routes').then(
+      import('./features/clients/clients.routes').then(
         (m) => m.ClientsRoutingModule
       ),
     canActivate: [securityGuard],

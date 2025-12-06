@@ -184,7 +184,7 @@
   "CLIENTS_TABLE": {
     "TITLE": "Tabuľka klientov",
     "NO_CLIENTS": "Nenašli sa žiadni klienti, prosím pridajte klienta.",
-    "NO_CLIENTS_ERROR": "Ak je to výsledok chyby, skúste tote neskôr znova.",
+    "NO_CLIENTS_ERROR": "Ak je to výsledok chyby, skúste to neskôr znova.",
     "LOADING_CLIENTS": "Načítavanie klientov...",
     "FULL_NAME": "Meno",
     "EXCERCISE": "Cvičenie",

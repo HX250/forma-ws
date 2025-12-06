@@ -18,7 +18,7 @@ import {
   BreadcrumbsComponent,
   ButtonComponent,
   FormUtils,
-  ModalComponent,
+  ModalRef,
 } from '@forma-ws/frontend-shared';
 import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
 import {
@@ -32,7 +32,7 @@ import { ClientHealthInfoComponent } from './components/health-info/health-info.
 import { ClientPermissionsInfoComponent } from './components/permissions-info/permissions-info.component';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 import { ClientFormControls } from './models/client-form.model';
-import { ClientResourceService } from '../../resources/clients.resource.service';
+import { ClientsBoardResourceService } from '../../../resources/clients-board.resource.service';
 
 @Component({
   selector: 'app-client-register',
@@ -41,7 +41,6 @@ import { ClientResourceService } from '../../resources/clients.resource.service'
     ButtonComponent,
     TranslateModule,
     BreadcrumbsComponent,
-    ModalComponent,
     ClientPersonalInfoComponent,
     ClientHealthInfoComponent,
     ClientPermissionsInfoComponent,
@@ -57,7 +56,7 @@ export class ClientRegisterComponent
   private alertService = inject(AlertService);
   private destroyRef = inject(DestroyRef);
   private securityService = inject(SecurityService);
-  private clientResourceService = inject(ClientResourceService);
+  private clientsBoardResourceService = inject(ClientsBoardResourceService);
   private translate = inject(TranslateService);
 
   readonly ButtonProperties = ButtonProperties;
@@ -67,7 +66,7 @@ export class ClientRegisterComponent
   private activityLevel = ActivityLevel;
   private fitnessExperience = FitnessExperience;
 
-  createdClient = output<void>();
+  modalRef?: ModalRef<boolean>;
 
   currentStep = signal<number>(1);
   formValidityTrigger = signal<number>(0);
@@ -101,7 +100,6 @@ export class ClientRegisterComponent
   });
 
   constructor() {
-    console.log('ClientRegisterComponent initialized');
     super();
   }
 
@@ -127,28 +125,16 @@ export class ClientRegisterComponent
     }
 
     this.sendFormRequest(
-      this.clientResourceService.register(this.form.getRawValue())
+      this.clientsBoardResourceService.register(this.form.getRawValue())
     ).subscribe({
       next: () => {
         this.alertService.show(
           AlertType.SUCCESS,
           this.translate.instant('REGISTER_CLIENT.SUCCESS_MESSAGE')
         );
-        this.createdClient.emit();
-        this.currentStep.set(1);
-        this.resetForm();
+        this.modalRef?.close(true);
       },
     });
-  }
-
-  onModalClosed(): void {
-    this.resetForm();
-  }
-
-  private resetForm(): void {
-    this.form.reset();
-    this.currentStep.set(1);
-    this.form = this.buildForm();
   }
 
   onStepClick(step: number): void {

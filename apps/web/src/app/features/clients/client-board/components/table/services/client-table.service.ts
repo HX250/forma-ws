@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { ClientResourceService } from '../../../resources/clients.resource.service';
+import { ClientsBoardResourceService } from '../../../../resources/clients-board.resource.service';
 import { ClientTable } from '@forma-ws/domain';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 
@@ -7,7 +7,9 @@ import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
   providedIn: 'root',
 })
 export class ClientTableService {
-  private readonly clientsResourceService = inject(ClientResourceService);
+  private readonly clientsBoardResourceService = inject(
+    ClientsBoardResourceService
+  );
   private readonly securityService = inject(SecurityService);
   clientsTable = signal<ClientTable[] | null>(null);
   loading = signal<boolean>(false);
@@ -19,7 +21,7 @@ export class ClientTableService {
 
     this.loading.set(true);
 
-    this.clientsResourceService
+    this.clientsBoardResourceService
       .getClientList(this.securityService.userId()!)
       .subscribe({
         next: (clients) => {

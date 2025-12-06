@@ -1,7 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '@forma-ws/backend-shared';
-import { Client, ClientTable } from '@forma-ws/domain';
+import {
+  Client,
+  ClientGeneralDetails,
+  ClientHealthDetails,
+  ClientPermissions,
+  ClientTable,
+} from '@forma-ws/domain';
 import { prismaToPlain } from '../../utils/prisma-to-plain';
+import { decimalInObjectToNumber } from '../../utils/decimal-to-numbers';
 
 @Injectable()
 export class ClientsService {
@@ -68,5 +75,48 @@ export class ClientsService {
       },
     });
     return clients;
+  }
+
+  async getClientGeneralDetails(id: string): Promise<ClientGeneralDetails> {
+    const client = await this.prisma.client.findFirst({
+      where: { id },
+      select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        createdAt: true,
+        gender: true,
+        birthDate: true,
+      },
+    });
+
+    return client;
+  }
+  async getClientPermissions(id: string): Promise<ClientPermissions> {
+    const client = await this.prisma.client.findFirst({
+      where: { id },
+      select: {
+        canTrackExercise: true,
+        canTrackSleep: true,
+        canTrackNutrition: true,
+        canTrackWater: true,
+      },
+    });
+
+    return client;
+  }
+  async getClientHealthDetails(id: string): Promise<ClientHealthDetails> {
+    const client = await this.prisma.client.findFirst({
+      where: { id },
+      select: {
+        currentWeight: true,
+        height: true,
+        activityLevel: true,
+        fitnessExperience: true,
+        medicalConditions: true,
+      },
+    });
+
+    return decimalInObjectToNumber(client);
   }
 }

@@ -1,8 +1,5 @@
 import { Prisma } from '@prisma/client';
 
-/**
- * Converts Prisma Decimal types to plain numbers for JSON serialization
- */
 export function decimalToNumber(
   value: Prisma.Decimal | null | undefined
 ): number | null | undefined {
@@ -11,9 +8,6 @@ export function decimalToNumber(
   return value.toNumber();
 }
 
-/**
- * Recursively converts all Decimal fields in an object to numbers
- */
 export function prismaToPlain<T>(obj: any): T {
   if (obj === null || obj === undefined) {
     return obj;
