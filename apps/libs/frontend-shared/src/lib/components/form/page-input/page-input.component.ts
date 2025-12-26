@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormProperties } from '../../../core/forms/form-properties';
+import { DateValidations } from '../models/date-validation.model';
 
 @Component({
   selector: 'app-page-input',
@@ -24,6 +25,7 @@ export class PageInput extends FormProperties {
   id = input<string>('');
   name = input<string>('');
   readonly = input<boolean>(false);
+  dateValidations = input<DateValidations>();
 
   valueChange = output<any>();
   blur = output<any>();

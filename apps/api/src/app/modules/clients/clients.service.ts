@@ -3,7 +3,7 @@ import { DatabaseService } from '@forma-ws/backend-shared';
 import {
   Client,
   ClientGeneralDetails,
-  ClientHealthDetails,
+  ClientFitnessDetails,
   ClientPermissions,
   ClientTable,
 } from '@forma-ws/domain';
@@ -114,7 +114,7 @@ export class ClientsService {
 
     return client;
   }
-  async getClientHealthDetails(id: string): Promise<ClientHealthDetails> {
+  async getClientHealthDetails(id: string): Promise<ClientFitnessDetails> {
     const client = await this.prisma.client.findUnique({
       where: { id },
       select: {

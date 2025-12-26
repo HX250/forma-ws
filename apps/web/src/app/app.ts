@@ -28,4 +28,8 @@ export class App {
   get isLoggedIn() {
     return this.authService.getIsLoggedIn();
   }
+
+  get currentUser() {
+    return this.authService.getCurrentUser();
+  }
 }

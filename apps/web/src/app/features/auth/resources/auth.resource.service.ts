@@ -3,9 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import {
   LoginDto,
   RegisterCoachDto,
-  Client,
-  Coach,
   AuthPayload,
+  UserAuthDetails,
 } from '@forma-ws/domain';
 import { GlobalAuthService } from '../../../core/auth/auth';
 @Injectable({
@@ -27,6 +26,6 @@ export class AuthResourceService extends GlobalAuthService {
   }
 
   getCurrentUser() {
-    return this.http.get<Coach | Client>(this.endpoint + '/auth/me');
+    return this.http.get<UserAuthDetails>(this.endpoint + '/auth/me');
   }
 }

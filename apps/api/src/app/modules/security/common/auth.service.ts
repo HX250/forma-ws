@@ -4,7 +4,6 @@ import { DatabaseService } from '@forma-ws/backend-shared';
 import { TokenService } from './token/token.service';
 import {
   LoginDto,
-  AuthResponse,
   Client,
   Coach,
   AuthPayload,
@@ -20,7 +19,7 @@ export class AuthService {
     private readonly tokenService: TokenService
   ) {}
 
-  async login(dto: LoginDto, res: Response): Promise<AuthResponse> {
+  async login(dto: LoginDto, res: Response): Promise<AuthPayload> {
     const { email, password, userType } = dto;
 
     const user =
@@ -59,7 +58,7 @@ export class AuthService {
   async refreshTokens(
     refreshToken: string,
     res: Response
-  ): Promise<AuthResponse> {
+  ): Promise<AuthPayload> {
     try {
       const payload = this.tokenService.verifyRefreshToken(refreshToken);
       this.tokenService.generateAndSetTokens(payload, res);
@@ -81,27 +80,20 @@ export class AuthService {
     this.tokenService.clearTokens(res);
   }
 
-  async getCurrentUser(payload: AuthPayload): Promise<Client | Coach> {
+  async getCurrentUser(payload: AuthPayload): Promise<Coach | Client> {
     if (payload.userType === 'COACH') {
-      const coach = await this.prisma.coach.findUnique({
+      let coach = await this.prisma.coach.findUnique({
         where: { id: payload.sub },
         select: {
           id: true,
           email: true,
           firstName: true,
           lastName: true,
-          gender: true,
-          yearsOfExperience: true,
-          specializationFields: true,
-          bio: true,
-          pricing: true,
-          availability: true,
-          communicationMethods: true,
-          createdAt: true,
-          updatedAt: true,
         },
       });
+
       if (!coach) throw new UnauthorizedException('Coach not found');
+
       return prismaToPlain<Coach>(coach);
     } else {
       const client = await this.prisma.client.findUnique({
@@ -111,25 +103,12 @@ export class AuthService {
           email: true,
           firstName: true,
           lastName: true,
-          gender: true,
-          birthDate: true,
-          currentWeight: true,
-          height: true,
-          activityLevel: true,
-          medicalConditions: true,
-          fitnessExperience: true,
           isFirstLogin: true,
-          canTrackExercise: true,
-          canTrackSleep: true,
-          canTrackNutrition: true,
-          canTrackWater: true,
-          coachId: true,
-          createdAt: true,
-          updatedAt: true,
-          goals: true,
         },
       });
+
       if (!client) throw new UnauthorizedException('Client not found');
+
       return prismaToPlain<Client>(client);
     }
   }

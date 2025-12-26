@@ -3,6 +3,7 @@ import {
   Component,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +12,7 @@ import {
   AlertType,
   ButtonComponent,
   FormUtils,
+  LoadingComponent,
   PageInput,
 } from '@forma-ws/frontend-shared';
 import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
@@ -23,7 +25,13 @@ import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
-  imports: [CommonModule, PageInput, ButtonComponent, RouterLink],
+  imports: [
+    CommonModule,
+    PageInput,
+    ButtonComponent,
+    RouterLink,
+    LoadingComponent,
+  ],
   templateUrl: './auth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -68,7 +76,13 @@ export class AuthComponent
     ).subscribe({
       next: () => {
         this.alertService.show(AlertType.SUCCESS, 'Login successful');
-        this.router.navigateByUrl('/dashboard');
+      },
+      complete: () => {
+        if (this.securityService.getCurrentUser()()?.isFirstLogin) {
+          this.router.navigate(['/clients/set-up-password']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
     });
   }

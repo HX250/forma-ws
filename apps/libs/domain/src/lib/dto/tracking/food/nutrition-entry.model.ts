@@ -8,6 +8,14 @@ export interface NutritionEntry {
   fat?: number;
   servingSize?: string;
   mealType?: string;
-  date: Date;
   createdAt: Date;
+}
+
+export interface NutritionSummary {
+  totalCalories: number;
+  totalProtein: number;
+  totalCarbs: number;
+  totalFat: number;
+  mealCount: number;
+  entries: NutritionEntry[];
 }

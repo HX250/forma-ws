@@ -84,7 +84,9 @@
         "REQUIRED": "This field is required",
         "EMAIL": "Please enter a valid email address",
         "MIN_LENGTH": "Minimum length is {{requiredLength}} characters",
-        "MAX_LENGTH": "Maximum length is {{requiredLength}} characters"
+        "MAX_LENGTH": "Maximum length is {{requiredLength}} characters",
+        "MIN_VALUE": "Minimum value is {{requiredLength}}",
+        "MAX_VALUE": "Maximum value is {{requiredLength}}"
       },
       "SELECT": {
         "NO_ITEMS": "No items available",

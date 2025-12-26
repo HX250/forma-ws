@@ -1,7 +1,7 @@
 <div
   class="min-h-screen bg-primary dark:bg-primary-dark transition-colors duration-300"
 >
-  @if(isLoggedIn()){
+  @if(isLoggedIn() && !currentUser()?.isFirstLogin){
   <app-header />
   }
   <main class="p-6">

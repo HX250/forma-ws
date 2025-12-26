@@ -1,0 +1,61 @@
+<div class="flex flex-col gap-3">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl">💪</span>
+      <div>
+        <p class="text-sm text-muted dark:text-muted-dark">Exercises</p>
+        <p
+          class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ summary().totalExercises }}
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-col items-end">
+      <p class="text-xs text-muted dark:text-muted-dark">Sets</p>
+      <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
+        {{ summary().totalSets }}
+      </p>
+    </div>
+  </div>
+
+  @if(summary().totalDuration > 0) {
+  <div
+    class="flex items-center gap-2 px-2 py-1 rounded-md bg-accent/10 dark:bg-accent-dark/10"
+  >
+    <span class="text-xs">⏱️</span>
+    <span class="text-xs text-accent dark:text-accent-dark font-medium">
+      {{ summary().totalDuration }} min @if(summary().totalReps > 0) { ·
+      {{ summary().totalReps }} reps total }
+    </span>
+  </div>
+  } @if(summary().lastExercise) {
+  <div class="p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5">
+    <p class="text-xs text-muted dark:text-muted-dark mb-1">Last Exercise</p>
+    <p class="text-sm text-secondary dark:text-secondary-dark font-medium">
+      {{ summary().lastExercise!.exerciseName }}
+    </p>
+    <div class="flex gap-2 mt-1 text-xs text-muted dark:text-muted-dark">
+      @if(summary().lastExercise!.sets) {
+      <span>{{ summary().lastExercise!.sets }} sets</span>
+      } @if(summary().lastExercise!.reps) {
+      <span>× {{ summary().lastExercise!.reps }} reps</span>
+      } @if(summary().lastExercise!.weight) {
+      <span>@ {{ summary().lastExercise!.weight }}kg</span>
+      } @if(summary().lastExercise!.duration) {
+      <span>{{ summary().lastExercise!.duration }}min</span>
+      }
+    </div>
+  </div>
+  } @else {
+  <p class="text-xs text-muted dark:text-muted-dark">
+    No exercises logged today
+  </p>
+  }
+
+  <button
+    class="w-full px-3 py-2 rounded-md text-sm border border-secondary/20 bg-primary text-secondary dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
+  >
+    Log Exercise
+  </button>
+</div>

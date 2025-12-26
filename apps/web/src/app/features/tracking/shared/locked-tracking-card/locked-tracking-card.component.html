@@ -1,0 +1,26 @@
+<div
+  class="p-4 flex flex-col items-center justify-center h-full min-h-[200px] text-center"
+>
+  <div
+    class="w-12 h-12 rounded-full bg-secondary/10 dark:bg-secondary-dark/10 flex items-center justify-center mb-3"
+  >
+    <span class="text-2xl opacity-50">{{ icon }}</span>
+  </div>
+  <h3
+    class="text-sm font-semibold text-secondary/70 dark:text-secondary-dark/70 mb-1"
+  >
+    {{ title() | translate }} Locked
+  </h3>
+  <p class="text-xs text-secondary/50 dark:text-secondary-dark/50">
+    {{ message | translate }}
+  </p>
+  @if (currentUser() === UserType.COACH) {
+  <button>
+    <span
+      class="text-xs text-accent dark:text-accent-dark underline mt-3 inline-block"
+      (click)="enablePermission()"
+      >Enable Permission</span
+    >
+  </button>
+  }
+</div>

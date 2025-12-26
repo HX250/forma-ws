@@ -151,7 +151,6 @@ model ExerciseEntry {
   weight                 Decimal?               @db.Decimal(6, 2)
   duration               Int?                   
   notes                  String?
-  date                   DateTime               @default(now())
   
   createdAt              DateTime               @default(now())
 
@@ -168,7 +167,6 @@ model SleepEntry {
   hoursSlept             Decimal                @db.Decimal(4, 2)
   sleepQuality           Int?                 
   notes                  String?
-  date                   DateTime               @default(now()) @db.Date
   
   createdAt              DateTime               @default(now())
   
@@ -188,7 +186,6 @@ model NutritionEntry {
   fat                    Decimal?               @db.Decimal(6, 2)
   servingSize            String?
   mealType               String?                
-  date                   DateTime               @default(now()) @db.Date
   
   createdAt              DateTime               @default(now())
 
@@ -201,7 +198,6 @@ model WaterEntry {
   client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
   
   amount                 Decimal                @db.Decimal(6, 2) 
-  date                   DateTime               @default(now()) @db.Date
   
   createdAt              DateTime               @default(now())
 

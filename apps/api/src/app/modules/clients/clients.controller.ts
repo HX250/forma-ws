@@ -9,9 +9,8 @@ import {
 import { ClientsService } from './clients.service';
 import {
   AuthPayload,
-  Client,
   ClientGeneralDetails,
-  ClientHealthDetails,
+  ClientFitnessDetails,
   ClientPermissions,
   ClientTable,
 } from '@forma-ws/domain';
@@ -43,7 +42,7 @@ export class ClientsController {
   @Get('health/:id')
   async getClientHealthDetails(
     @Param('id') id: string
-  ): Promise<ClientHealthDetails> {
+  ): Promise<ClientFitnessDetails> {
     const client = await this.clientsService.getClientHealthDetails(id);
 
     return client;

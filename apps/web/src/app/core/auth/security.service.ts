@@ -1,12 +1,12 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { AuthPayload, Client, Coach } from '@forma-ws/domain';
+import { AuthPayload, UserAuthDetails } from '@forma-ws/domain';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SecurityService {
   private isLoggedIn = signal<boolean>(false);
-  private currentUser = signal<Coach | Client | null>(null);
+  private currentUser = signal<UserAuthDetails | null>(null);
   private authPayload = signal<AuthPayload | null>(null);
 
   isAuthenticated = computed(() => this.isLoggedIn());
@@ -22,7 +22,7 @@ export class SecurityService {
     return this.isLoggedIn.asReadonly();
   }
 
-  setCurrentUser(user: Coach | Client) {
+  setCurrentUser(user: UserAuthDetails) {
     this.currentUser.set(user);
   }
 

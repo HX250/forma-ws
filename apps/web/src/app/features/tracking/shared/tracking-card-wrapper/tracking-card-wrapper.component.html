@@ -1,0 +1,18 @@
+<div
+  class="rounded-lg border border-secondary/20 dark:border-secondary-dark/20 dark:bg-secondary-dark/5 w-full h-full transition-all overflow-hidden"
+>
+  @if(isEnabled()) {
+  <app-tracking-card-content-wrapper
+    [permissionType]="permissionType()"
+    [currentUser]="currentUser()"
+  >
+    <ng-content></ng-content>
+  </app-tracking-card-content-wrapper>
+  } @else if(currentUser() === UserType.COACH) {
+  <app-locked-tracking-card
+    [title]="title()"
+    [currentUser]="currentUser()"
+    [permissionType]="permissionType()"
+  />
+  }
+</div>

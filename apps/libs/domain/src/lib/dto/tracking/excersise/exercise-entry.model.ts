@@ -7,6 +7,14 @@ export interface ExerciseEntry {
   weight?: number;
   duration?: number;
   notes?: string;
-  date: Date;
   createdAt: Date;
+}
+
+export interface ExerciseSummary {
+  totalExercises: number;
+  totalDuration: number;
+  totalSets: number;
+  totalReps: number;
+  entries: ExerciseEntry[];
+  lastExercise?: ExerciseEntry;
 }

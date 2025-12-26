@@ -84,7 +84,9 @@
         "REQUIRED": "Toto pole je povinné",
         "EMAIL": "Prosím zadajte platnú e-mailovú adresu",
         "MIN_LENGTH": "Minimálna dĺžka je {{requiredLength}} znakov",
-        "MAX_LENGTH": "Maximálna dĺžka je {{requiredLength}} znakov"
+        "MAX_LENGTH": "Maximálna dĺžka je {{requiredLength}} znakov",
+        "MIN_VALUE": "Minimálna hodnota je {{requiredLength}}",
+        "MAX_VALUE": "Maximálna value je {{requiredLength}}"
       },
       "SELECT": {
         "NO_ITEMS": "Žiadne položky nie sú k dispozícii",

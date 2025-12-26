@@ -6,6 +6,5 @@ export interface SleepEntry {
   hoursSlept: number;
   sleepQuality?: number;
   notes?: string;
-  date: Date;
   createdAt: Date;
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   ClientGeneralDetails,
-  ClientHealthDetails,
+  ClientFitnessDetails,
   ClientPermissions,
 } from '@forma-ws/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
@@ -24,8 +24,8 @@ export class ClientsProfileResourceService extends GlobalAuthService {
       this.endpoint + `/clients/permissions/${id}`
     );
   }
-  getClientHealthDetails(id: string): Observable<ClientHealthDetails> {
-    return this.http.get<ClientHealthDetails>(
+  getClientFitnessDetails(id: string): Observable<ClientFitnessDetails> {
+    return this.http.get<ClientFitnessDetails>(
       this.endpoint + `/clients/health/${id}`
     );
   }

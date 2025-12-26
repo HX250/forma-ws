@@ -1,7 +1,10 @@
 import { UserType } from '../../types/auth/auth.types';
 
-export interface AuthResponse {
-  sub: string;
+export interface UserAuthDetails {
+  id: string;
   email: string;
+  firstName: string;
+  lastName: string;
   userType: UserType;
+  isFirstLogin?: boolean;
 }

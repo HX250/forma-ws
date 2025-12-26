@@ -6,7 +6,7 @@ import { Client, Coach } from '@forma-ws/domain';
   standalone: true,
 })
 export class UserFullNamePipe implements PipeTransform {
-  transform(user: Client | Coach | null): string {
+  transform(user: any): string {
     if (!user) {
       return '';
     }

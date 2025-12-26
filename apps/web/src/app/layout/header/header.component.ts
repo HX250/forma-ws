@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserFullNamePipe } from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserType, Client, Coach } from '@forma-ws/domain';
+import { UserAuthDetails, UserType } from '@forma-ws/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { ClientHeaderComponent } from './components/client-header/client-header.component';
 import { CoachHeaderComponent } from './components/coach-header/coach-header.component';
@@ -31,7 +31,7 @@ export class HeaderComponent {
     return this.securityService.userType() || null;
   }
 
-  get currentUser(): Coach | Client | null {
+  get currentUser(): UserAuthDetails | null {
     return this.securityService.getCurrentUser()() || null;
   }
 
@@ -50,6 +50,10 @@ export class HeaderComponent {
   }
 
   navigateAndClose(path: string) {
+    if (this.userType === UserType.CLIENT) {
+      path = `/clients/${path}/${this.currentUser?.id}`;
+    }
+
     this.router.navigate([path]);
     this.closeMobileMenu();
   }
