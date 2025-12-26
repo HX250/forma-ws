@@ -35,10 +35,10 @@ export class LockedTrackingCardComponent {
   AlertType = AlertType;
 
   enablePermission() {
-    const usedrId = this.activatedRoute.snapshot.paramMap.get('id');
+    const userId = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.trackingResourceService
-      .updatePermission(usedrId!, this.permissionType(), true)
+      .updatePermission(userId!, this.permissionType(), true)
       .subscribe({
         next: (data) => {
           this.alertService.show(
@@ -46,11 +46,8 @@ export class LockedTrackingCardComponent {
             'Permission enabled successfully'
           );
         },
-        error: (err) => {
-          console.error('Error enabling permission:', err);
-        },
         complete: () => {
-          this.trackingService.reloadPermissions(usedrId!);
+          this.trackingService.reloadPermissions(userId!);
         },
       });
   }

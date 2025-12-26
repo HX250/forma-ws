@@ -82,7 +82,7 @@ export class AuthService {
 
   async getCurrentUser(payload: AuthPayload): Promise<Coach | Client> {
     if (payload.userType === 'COACH') {
-      let coach = await this.prisma.coach.findUnique({
+      const coach = await this.prisma.coach.findUnique({
         where: { id: payload.sub },
         select: {
           id: true,

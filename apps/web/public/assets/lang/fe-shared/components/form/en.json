@@ -6,8 +6,8 @@
         "EMAIL": "Please enter a valid email address",
         "MIN_LENGTH": "Minimum length is {{requiredLength}} characters",
         "MAX_LENGTH": "Maximum length is {{requiredLength}} characters",
-        "MIN_VALUE": "Minimum value is {{requiredLength}}",
-        "MAX_VALUE": "Maximum value is {{requiredLength}}"
+        "MIN_VALUE": "Minimum value is {{value}}",
+        "MAX_VALUE": "Maximum value is {{value}}"
       },
       "SELECT": {
         "NO_ITEMS": "No items available",

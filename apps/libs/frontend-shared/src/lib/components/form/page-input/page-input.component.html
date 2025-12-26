@@ -48,11 +48,11 @@
     >
     } @if (control().errors?.['min']) {
     <span
-      >{{ 'COMPONENTS.FORM.ERRORS.MIN_VALUE' | translate: { requiredLength: control().errors?.['min'].min } }}</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MIN_VALUE' | translate: { value: control().errors?.['min'].min } }}</span
     >
     } @if (control().errors?.['max']) {
     <span
-      >{{ 'COMPONENTS.FORM.ERRORS.MAX_VALUE' | translate: { requiredLength: control().errors?.['max'].max } }}</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MAX_VALUE' | translate: { value: control().errors?.['max'].max } }}</span
     >
     }
   </div>
