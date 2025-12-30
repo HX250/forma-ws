@@ -37,6 +37,7 @@ export class TrackingComponent {
   private readonly securityService = inject(SecurityService);
 
   clientId = input.required<string>();
+  todayDate = input.required<Date>();
 
   currentUser = signal<UserType>(this.securityService.userType()!);
   loading = computed(() => this.trackingService.loading());

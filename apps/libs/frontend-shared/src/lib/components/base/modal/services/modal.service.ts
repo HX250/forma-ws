@@ -1,12 +1,13 @@
 import {
-  ApplicationRef,
-  ComponentRef,
-  createComponent,
-  EnvironmentInjector,
   Injectable,
+  ComponentRef,
+  ApplicationRef,
+  EnvironmentInjector,
   Type,
+  createComponent,
 } from '@angular/core';
 import { ModalComponent } from '../modal.component';
+import { Subject, Observable } from 'rxjs';
 
 export interface ModalConfig {
   title?: string;
@@ -23,9 +24,7 @@ export interface ModalRef<T = any> {
   componentInstance: any;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ModalService {
   private activeModals: Array<{
     container: ComponentRef<ModalComponent>;
@@ -40,88 +39,83 @@ export class ModalService {
   open<T = any>(
     component: Type<any>,
     config: ModalConfig = {}
-  ): Promise<T | undefined> {
-    return new Promise((resolve) => {
-      const modalContainer = this.createModalContainer(config);
+  ): Observable<T | undefined> {
+    const result$ = new Subject<T | undefined>();
 
-      const contentComponentRef = createComponent(component, {
-        environmentInjector: this.injector,
-      });
-
-      if (config.data) {
-        Object.assign(contentComponentRef.instance, config.data);
-      }
-
-      this.appRef.attachView(contentComponentRef.hostView);
-
-      const contentElement = contentComponentRef.location.nativeElement;
-
-      setTimeout(() => {
-        const contentSlot = modalContainer.location.nativeElement.querySelector(
-          '[data-modal-content]'
-        );
-
-        if (contentSlot) {
-          contentSlot.appendChild(contentElement);
-          contentComponentRef.changeDetectorRef.detectChanges();
-          modalContainer.changeDetectorRef.detectChanges();
-        }
-      }, 0);
-
-      const modalRef: ModalRef<T> = {
-        close: (result?: T) => {
-          this.closeModal(modalContainer, contentComponentRef);
-          resolve(result);
-        },
-        componentInstance: contentComponentRef.instance,
-      };
-
-      if ('modalRef' in contentComponentRef.instance) {
-        contentComponentRef.instance.modalRef = modalRef;
-      }
-
-      const subscriptions = [
-        modalContainer.instance.closeModal.subscribe(() => {
-          modalRef.close(undefined);
-        }),
-        modalContainer.instance.primaryClick.subscribe(() => {
-          if ('onPrimaryClick' in contentComponentRef.instance) {
-            const result = contentComponentRef.instance.onPrimaryClick();
-            if (result !== false) {
-              modalRef.close(result);
-            }
-          } else {
-            modalRef.close(true as any);
-          }
-        }),
-        modalContainer.instance.secondaryClick.subscribe(() => {
-          if ('onSecondaryClick' in contentComponentRef.instance) {
-            contentComponentRef.instance.onSecondaryClick();
-          }
-          modalRef.close(false as any);
-        }),
-      ];
-
-      const originalClose = modalRef.close;
-      modalRef.close = (result?: T) => {
-        subscriptions.forEach((sub) => sub.unsubscribe());
-        originalClose(result);
-      };
-
-      this.activeModals.push({
-        container: modalContainer,
-        content: contentComponentRef,
-      });
-    });
-  }
-
-  private createModalContainer(
-    config: ModalConfig
-  ): ComponentRef<ModalComponent> {
-    const modalContainerRef = createComponent(ModalComponent, {
+    const modalContainer = this.createModalContainer(config);
+    const contentComponentRef = createComponent(component, {
       environmentInjector: this.injector,
     });
 
+    if (config.data) {
+      Object.assign(contentComponentRef.instance, config.data);
+    }
+
+    this.appRef.attachView(contentComponentRef.hostView);
+    const contentElement = contentComponentRef.location.nativeElement;
+
+    setTimeout(() => {
+      const contentSlot = modalContainer.location.nativeElement.querySelector(
+        '[data-modal-content]'
+      );
+      if (contentSlot) {
+        contentSlot.appendChild(contentElement);
+        contentComponentRef.changeDetectorRef.detectChanges();
+        modalContainer.changeDetectorRef.detectChanges();
+      }
+    }, 0);
+
+    const modalRef: ModalRef<T> = {
+      close: (result?: T) => {
+        this.closeModal(modalContainer, contentComponentRef);
+        result$.next(result);
+        result$.complete();
+      },
+      componentInstance: contentComponentRef.instance,
+    };
+
+    if ('modalRef' in contentComponentRef.instance) {
+      contentComponentRef.instance.modalRef = modalRef;
+    }
+
+    const subscriptions = [
+      modalContainer.instance.closeModal.subscribe(() =>
+        modalRef.close(undefined)
+      ),
+      modalContainer.instance.primaryClick.subscribe(() => {
+        if ('onPrimaryClick' in contentComponentRef.instance) {
+          const res = contentComponentRef.instance.onPrimaryClick();
+          if (res !== false) modalRef.close(res);
+        } else {
+          modalRef.close(true as any);
+        }
+      }),
+      modalContainer.instance.secondaryClick.subscribe(() => {
+        if ('onSecondaryClick' in contentComponentRef.instance) {
+          contentComponentRef.instance.onSecondaryClick();
+        }
+        modalRef.close(false as any);
+      }),
+    ];
+
+    const originalClose = modalRef.close;
+    modalRef.close = (result?: T) => {
+      subscriptions.forEach((sub) => sub.unsubscribe());
+      originalClose(result);
+    };
+
+    this.activeModals.push({
+      container: modalContainer,
+      content: contentComponentRef,
+    });
+
+    return result$.asObservable();
+  }
+
+  private createModalContainer(config: ModalConfig) {
+    const modalContainerRef = createComponent(ModalComponent, {
+      environmentInjector: this.injector,
+    });
     modalContainerRef.instance.title = config.title || '';
     modalContainerRef.instance.showCloseButton = config.showCloseButton ?? true;
     modalContainerRef.instance.size = config.size || 'md';
@@ -131,26 +125,20 @@ export class ModalService {
       config.primaryButtonText || 'Submit';
     modalContainerRef.instance.secondaryButtonText =
       config.secondaryButtonText || 'Cancel';
-
     this.appRef.attachView(modalContainerRef.hostView);
-    const domElem = modalContainerRef.location.nativeElement;
-    document.body.appendChild(domElem);
-
+    document.body.appendChild(modalContainerRef.location.nativeElement);
     modalContainerRef.changeDetectorRef.detectChanges();
-
     return modalContainerRef;
   }
 
   private closeModal(
     containerRef: ComponentRef<ModalComponent>,
     contentRef: ComponentRef<any>
-  ): void {
+  ) {
     const index = this.activeModals.findIndex(
       (m) => m.container === containerRef
     );
-    if (index > -1) {
-      this.activeModals.splice(index, 1);
-    }
+    if (index > -1) this.activeModals.splice(index, 1);
 
     this.appRef.detachView(contentRef.hostView);
     contentRef.destroy();
@@ -159,9 +147,9 @@ export class ModalService {
     containerRef.destroy();
   }
 
-  closeAll(): void {
-    [...this.activeModals].forEach((modal) =>
-      this.closeModal(modal.container, modal.content)
+  closeAll() {
+    [...this.activeModals].forEach((m) =>
+      this.closeModal(m.container, m.content)
     );
   }
 }

@@ -29,7 +29,7 @@ export class App {
     return this.authService.getIsLoggedIn();
   }
 
-  get currentUser() {
-    return this.authService.getCurrentUser();
+  get isUserFirstTimeLogIn() {
+    return this.authService.user()?.isFirstLogin;
   }
 }

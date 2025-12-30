@@ -7,7 +7,7 @@
         <p
           class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
         >
-          {{ totalWater() }}L
+          {{ totalWater() | number : '1.2-2' }}L
         </p>
       </div>
     </div>
@@ -16,16 +16,16 @@
     </div>
   </div>
 
-  <!-- Progress Bar -->
   <div
     class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
   >
     <div
       class="bg-accent dark:bg-accent-dark h-2 rounded-full transition-all"
-      [style.width.%]="(totalWater() / waterGoal()) * 100"
+      [style.width.%]="getProgressPercentage()"
     ></div>
   </div>
 
+  @if (currentUserType === UserType.CLIENT) {
   <div class="flex gap-2">
     <button
       (click)="addWater(0.25)"
@@ -40,4 +40,46 @@
       +500ml
     </button>
   </div>
+  } @if (currentUserType === UserType.COACH) {
+  <div
+    class="px-3 py-2 rounded-md text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-center"
+  >
+    Viewing client's water intake (read-only)
+  </div>
+  } @if (waterEntries().length > 0) {
+  <div class="mt-2">
+    <p class="text-xs text-muted dark:text-muted-dark mb-2">Today's entries:</p>
+    <div class="flex flex-col overflow-x-scroll max-h-44 gap-1">
+      @for (entry of waterEntries(); track entry.id) {
+      <div
+        class="flex items-center justify-between p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
+      >
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-muted dark:text-muted-dark">
+            {{ formatTime(entry.createdAt) }}
+          </span>
+          <span
+            class="text-sm font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ entry.amount }}ml
+          </span>
+        </div>
+        @if (currentUserType === UserType.CLIENT) {
+        <button
+          (click)="removeWaterEntry(entry.id)"
+          class="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
+        >
+          Remove
+        </button>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  } @else {
+  <p class="text-xs text-center text-muted dark:text-muted-dark mt-2">
+    @if (currentUserType === UserType.CLIENT) { No water logged today. Start
+    tracking! } @else { No water entries for today. }
+  </p>
+  }
 </div>

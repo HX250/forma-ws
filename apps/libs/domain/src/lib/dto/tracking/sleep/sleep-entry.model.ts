@@ -1,6 +1,5 @@
-export interface SleepEntry {
+export interface SleepEntryData {
   id: string;
-  clientId: string;
   bedTime: Date;
   wakeTime: Date;
   hoursSlept: number;

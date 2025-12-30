@@ -9,3 +9,4 @@ export * from './directives/click-outside.directive';
 export * from './types/types.model';
 export * from './pipes/user-full-name.pipe';
 export * from './form/date.utils';
+export * from './types/radio-options.model';

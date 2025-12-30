@@ -28,7 +28,7 @@ export class SecurityController {
   async login(
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response
-  ): Promise<AuthPayload> {
+  ): Promise<UserAuthDetails> {
     return this.authService.login(dto, res);
   }
 

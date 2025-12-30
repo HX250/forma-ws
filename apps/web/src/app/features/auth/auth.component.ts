@@ -69,16 +69,17 @@ export class AuthComponent
 
     this.sendFormRequest(
       this.authResourceService.login(this.form.getRawValue()).pipe(
-        tap((authPayload) => this.securityService.setAuthPayload(authPayload)),
-        switchMap(() => this.authResourceService.getCurrentUser()),
-        tap((user) => this.securityService.setCurrentUser(user))
+        tap((response) => {
+          this.securityService.setCurrentUser(response);
+        })
       )
     ).subscribe({
       next: () => {
         this.alertService.show(AlertType.SUCCESS, 'Login successful');
       },
       complete: () => {
-        if (this.securityService.getCurrentUser()()?.isFirstLogin) {
+        const user = this.securityService.user();
+        if (user?.isFirstLogin) {
           this.router.navigate(['/clients/set-up-password']);
         } else {
           this.router.navigate(['/dashboard']);

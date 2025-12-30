@@ -7,8 +7,8 @@ import {
   ClientPermissions,
   ClientTable,
 } from '@forma-ws/domain';
-import { prismaToPlain } from '../../utils/prisma-to-plain';
-import { decimalInObjectToNumber } from '../../utils/decimal-to-numbers';
+import { prismaToPlain } from '../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
+import { decimalInObjectToNumber } from '../../../../../libs/backend-shared/src/lib/utils/decimal-to-numbers';
 
 @Injectable()
 export class ClientsService {

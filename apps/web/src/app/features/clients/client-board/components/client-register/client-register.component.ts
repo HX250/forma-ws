@@ -196,7 +196,7 @@ export class ClientRegisterComponent
   }
 
   private buildForm() {
-    const loggedInCoachId = this.securityService.getCurrentUser()()?.id;
+    const loggedInCoachId = this.securityService.userId();
 
     return FormUtils.createFormGroup(
       this.fb.group({

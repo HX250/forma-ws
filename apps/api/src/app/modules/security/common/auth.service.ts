@@ -8,9 +8,10 @@ import {
   Coach,
   AuthPayload,
   UserType,
+  UserAuthDetails,
 } from '@forma-ws/domain';
 import * as bcrypt from 'bcrypt';
-import { prismaToPlain } from '../../../utils/prisma-to-plain';
+import { prismaToPlain } from '../../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
     private readonly tokenService: TokenService
   ) {}
 
-  async login(dto: LoginDto, res: Response): Promise<AuthPayload> {
+  async login(dto: LoginDto, res: Response): Promise<UserAuthDetails> {
     const { email, password, userType } = dto;
 
     const user =
@@ -49,9 +50,12 @@ export class AuthService {
     this.tokenService.generateAndSetTokens(payload, res);
 
     return {
-      sub: payload.sub,
-      email: payload.email,
-      userType: payload.userType,
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      userType: userType,
+      isFirstLogin: 'isFirstLogin' in user ? user.isFirstLogin : false,
     };
   }
 
@@ -80,7 +84,7 @@ export class AuthService {
     this.tokenService.clearTokens(res);
   }
 
-  async getCurrentUser(payload: AuthPayload): Promise<Coach | Client> {
+  async getCurrentUser(payload: AuthPayload): Promise<UserAuthDetails> {
     if (payload.userType === 'COACH') {
       const coach = await this.prisma.coach.findUnique({
         where: { id: payload.sub },
@@ -94,7 +98,7 @@ export class AuthService {
 
       if (!coach) throw new UnauthorizedException('Coach not found');
 
-      return prismaToPlain<Coach>(coach);
+      return prismaToPlain<UserAuthDetails>(coach);
     } else {
       const client = await this.prisma.client.findUnique({
         where: { id: payload.sub },
@@ -109,7 +113,7 @@ export class AuthService {
 
       if (!client) throw new UnauthorizedException('Client not found');
 
-      return prismaToPlain<Client>(client);
+      return prismaToPlain<UserAuthDetails>(client);
     }
   }
 

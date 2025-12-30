@@ -14,9 +14,9 @@
     </div>
 
     <div class="hidden md:block">
-      @if(userType === 'COACH') {
+      @if(userType === UserType.COACH) {
       <app-coach-header />
-      } @else if(userType === 'CLIENT') {
+      } @else if(userType === UserType.CLIENT) {
       <app-client-header />
       }
     </div>
@@ -123,9 +123,9 @@
         </div>
       </div>
 
-      @if(userType === 'COACH') {
+      @if(userType === UserType.COACH) {
       <app-coach-header (linkClick)="closeMobileMenu()" />
-      } @else if(userType === 'CLIENT') {
+      } @else if(userType === UserType.CLIENT) {
       <app-client-header (linkClick)="closeMobileMenu()" />
       }
       <button

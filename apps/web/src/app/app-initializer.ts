@@ -9,12 +9,6 @@ export function initializeAuth() {
 
   return authService.getCurrentUser().pipe(
     tap((user) => {
-      securityService.setAuthPayload({
-        sub: user.id,
-        email: user.email,
-        userType: user.userType,
-      });
-
       securityService.setCurrentUser(user);
     }),
     catchError(() => {

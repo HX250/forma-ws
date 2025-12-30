@@ -11,7 +11,7 @@ import {
 } from '@forma-ws/domain';
 import * as bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
-import { prismaToPlain } from '../../../utils/prisma-to-plain';
+import { prismaToPlain } from '../../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
 
 @Injectable()
 export class ClientSecurityService {

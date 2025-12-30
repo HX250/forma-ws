@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
   OnInit,
   signal,
@@ -36,12 +37,16 @@ export class ClientsProfileComponent implements OnInit {
   private readonly router = inject(Router);
 
   clientId = signal<string>('');
-  selectedDate = signal<string>(new Date().toISOString().split('T')[0]);
+  selectedDate = signal<Date>(new Date());
 
   UserType = UserType;
 
   ngOnInit(): void {
     this.clientId.set(this.getClientId());
+  }
+
+  onDateChange(value: string) {
+    this.selectedDate.set(new Date(value));
   }
 
   redirectToClientList() {

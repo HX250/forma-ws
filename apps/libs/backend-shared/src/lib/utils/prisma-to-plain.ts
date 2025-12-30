@@ -9,9 +9,7 @@ export function decimalToNumber(
 }
 
 export function prismaToPlain<T>(obj: any): T {
-  if (obj === null || obj === undefined) {
-    return obj;
-  }
+  if (obj === null || obj === undefined) return obj;
 
   if (obj instanceof Prisma.Decimal) {
     return obj.toNumber() as any;
@@ -21,10 +19,12 @@ export function prismaToPlain<T>(obj: any): T {
     return obj.map((item) => prismaToPlain(item)) as any;
   }
 
-  if (typeof obj === 'object' && obj.constructor === Object) {
+  if (typeof obj === 'object') {
+    if (obj instanceof Date) return obj as any;
+
     const result: any = {};
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         result[key] = prismaToPlain(obj[key]);
       }
     }
