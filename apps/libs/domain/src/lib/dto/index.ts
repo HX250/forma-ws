@@ -4,3 +4,7 @@ export * from './client/client-response.dto';
 export * from './coach/coach-response.dto';
 export * from './coach/auth/coach-register.dto';
 export * from './client/auth/client-register.dto';
+export * from './coach/permissions/coach-permissions.dto';
+export * from './client/tracking/client-response-tracking.dto';
+export * from './coach/permissions/permissions.enum';
+export * from './tracking';

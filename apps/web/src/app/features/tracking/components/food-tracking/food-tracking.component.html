@@ -1,0 +1,64 @@
+<div class="flex flex-col gap-3">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="text-2xl">🍽️</span>
+      <div>
+        <p class="text-sm text-muted dark:text-muted-dark">Calories</p>
+        <p
+          class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ summary().totalCalories }}
+        </p>
+      </div>
+    </div>
+    <div class="text-xs text-muted dark:text-muted-dark">
+      {{ summary().mealCount }}
+      {{ summary().mealCount === 1 ? 'meal' : 'meals' }}
+    </div>
+  </div>
+
+  <!-- Macros Grid -->
+  <div class="grid grid-cols-3 gap-2">
+    <div
+      class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
+    >
+      <p class="text-xs text-muted dark:text-muted-dark">Protein</p>
+      <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
+        {{ summary().totalProtein ? summary().totalProtein.toFixed(1) : '0' }}g
+      </p>
+    </div>
+    <div
+      class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
+    >
+      <p class="text-xs text-muted dark:text-muted-dark">Carbs</p>
+      <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
+        {{ summary().totalCarbs ? summary().totalCarbs.toFixed(1) : '0' }}g
+      </p>
+    </div>
+    <div
+      class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
+    >
+      <p class="text-xs text-muted dark:text-muted-dark">Fat</p>
+      <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
+        {{ summary().totalFat ? summary().totalFat.toFixed(1) : '0' }}g
+      </p>
+    </div>
+  </div>
+
+  @if(summary().entries.length > 0) {
+  <div class="flex flex-col gap-1 max-h-20 overflow-y-auto">
+    @for(entry of summary().entries; track entry.id) {
+    <div class="text-xs text-muted dark:text-muted-dark flex justify-between">
+      <span class="truncate">{{ entry.foodName }}</span>
+      <span class="ml-2 flex-shrink-0">{{ entry.calories }} cal</span>
+    </div>
+    }
+  </div>
+  }
+
+  <button
+    class="w-full px-3 py-2 rounded-md text-sm border border-secondary/20 bg-primary text-secondary dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
+  >
+    Log Meal
+  </button>
+</div>

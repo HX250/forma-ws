@@ -196,7 +196,7 @@ export class ClientRegisterComponent
   }
 
   private buildForm() {
-    const loggedInCoachId = this.securityService.getCurrentUser()()?.id;
+    const loggedInCoachId = this.securityService.userId();
 
     return FormUtils.createFormGroup(
       this.fb.group({
@@ -205,8 +205,8 @@ export class ClientRegisterComponent
         lastName: ['', Validators.required],
         gender: [this.gender.MALE, Validators.required],
         birthDate: ['', Validators.required],
-        currentWeight: [0, [Validators.required, Validators.min(0)]],
-        height: [0, [Validators.required, Validators.min(0)]],
+        currentWeight: [0, [Validators.required, Validators.min(15)]],
+        height: [0, [Validators.required, Validators.min(30)]],
         activityLevel: [this.activityLevel.SEDENTARY, Validators.required],
         medicalConditions: [''],
         fitnessExperience: [

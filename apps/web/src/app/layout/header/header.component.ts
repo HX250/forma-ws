@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserFullNamePipe } from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserType, Client, Coach } from '@forma-ws/domain';
+import { UserAuthDetails, UserType } from '@forma-ws/domain';
 import { SecurityService } from '../../core/auth/security.service';
 import { ClientHeaderComponent } from './components/client-header/client-header.component';
 import { CoachHeaderComponent } from './components/coach-header/coach-header.component';
+import { AuthResourceService } from '../../features/auth/resources/auth.resource.service';
 
 @Component({
   selector: 'app-header',
@@ -22,17 +23,20 @@ import { CoachHeaderComponent } from './components/coach-header/coach-header.com
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+  private readonly securityService = inject(SecurityService);
+  private readonly router = inject(Router);
+  private readonly authResourceService = inject(AuthResourceService);
+
   isMobileMenuOpen = signal(false);
 
-  private securityService = inject(SecurityService);
-  private router = inject(Router);
+  UserType = UserType;
 
   get userType(): UserType | null {
     return this.securityService.userType() || null;
   }
 
-  get currentUser(): Coach | Client | null {
-    return this.securityService.getCurrentUser()() || null;
+  get currentUser(): UserAuthDetails | null {
+    return this.securityService.user() || null;
   }
 
   toggleMobileMenu() {
@@ -44,12 +48,18 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.securityService.clear();
-    this.closeMobileMenu();
-    this.router.navigate(['/']);
+    this.authResourceService.logout().subscribe(() => {
+      this.securityService.clear();
+      this.closeMobileMenu();
+      this.router.navigate(['/']);
+    });
   }
 
   navigateAndClose(path: string) {
+    if (this.userType === UserType.CLIENT) {
+      path = `/clients/${path}/${this.currentUser?.id}`;
+    }
+
     this.router.navigate([path]);
     this.closeMobileMenu();
   }

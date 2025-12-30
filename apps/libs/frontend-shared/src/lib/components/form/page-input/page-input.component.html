@@ -18,6 +18,8 @@
       [required]="getRequiredControls(control())"
       [readonly]="readonly()"
       [formControl]="control()"
+      [min]="dateValidations()?.min"
+      [max]="dateValidations()?.max"
       class="w-full px-3 py-2 text-base text-primary-dark dark:text-primary bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-sm placeholder:text-muted dark:placeholder:text-muted-dark focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent disabled:bg-muted dark:disabled:bg-muted-dark disabled:text-muted dark:disabled:text-muted-dark disabled:cursor-not-allowed readonly:bg-secondary dark:readonly:bg-secondary-dark readonly:cursor-default transition-colors duration-200"
       [class.border-utils-error]="control().invalid && control().touched"
       [class.dark:border-utils-error]="control().invalid && control().touched"
@@ -43,6 +45,14 @@
     } @if (control().errors?.['maxlength']) {
     <span
       >{{ 'COMPONENTS.FORM.ERRORS.MAX_LENGTH' | translate: { requiredLength: control().errors?.['maxlength'].requiredLength } }}</span
+    >
+    } @if (control().errors?.['min']) {
+    <span
+      >{{ 'COMPONENTS.FORM.ERRORS.MIN_VALUE' | translate: { value: control().errors?.['min'].min } }}</span
+    >
+    } @if (control().errors?.['max']) {
+    <span
+      >{{ 'COMPONENTS.FORM.ERRORS.MAX_VALUE' | translate: { value: control().errors?.['max'].max } }}</span
     >
     }
   </div>

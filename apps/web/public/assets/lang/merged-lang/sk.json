@@ -1,0 +1,198 @@
+{
+  "AUTH": {
+    "CLIENT": "Klient",
+    "COACH": "Trenér",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Heslo",
+    "LOGIN_BUTTON": "Prihlásiť sa",
+    "REGISTER_COACH": {
+      "REDIRECT": "Chceš byť trenérom? Zaregistruj sa teraz!",
+      "FIRST_NAME": "Meno",
+      "LAST_NAME": "Priezvisko",
+      "GENDER": "Pohlavie",
+      "YEARS_OF_EXPERIENCE": "Roky skúseností",
+      "SPECIALIZATION_FIELDS": "Oblasti špecializácie",
+      "BIO": "O mne",
+      "PRICING": "Cena (za hodinu)",
+      "AVAILABILITY": "Dostupnosť",
+      "AVAILABILITY_DAYS": {
+        "MONDAY": "Pondelok",
+        "TUESDAY": "Utorok",
+        "WEDNESDAY": "Streda",
+        "THURSDAY": "Štvrtok",
+        "FRIDAY": "Piatok",
+        "SATURDAY": "Sobota",
+        "SUNDAY": "Nedeľa"
+      },
+      "AVAILABILITY_ACTIONS": {
+        "ADD_TIME_SLOT": "Pridať časový slot",
+        "REMOVE": "Odstrániť"
+      },
+      "COMMUNICATION_METHODS": "Spôsoby komunikácie",
+      "REGISTER_BUTTON": "Registrovať",
+      "CANCEL": "Zrušiť",
+      "PREVIOUS": "Predchádzajúci",
+      "NEXT": "Ďalší",
+      "TITLE": "Registrácia ako trenér",
+      "PERSONAL_INFORMATION": "Osobné údaje",
+      "ACCOUNT_INFORMATION": "Informácie o účte",
+      "PROFESSIONAL_INFORMATION": "Profesionálne informácie",
+      "AVAILABILITY_COMMUNICATION": "Dostupnosť a komunikácia",
+      "SELECT_SPECIALIZATION_FIELDS": "Vyberte oblasti špecializácie",
+      "SELECT_COMMUNICATION_METHODS": "Vyberte spôsoby komunikácie",
+      "PLACEHOLDERS": {
+        "FIRST_NAME": "Zadajte vaše meno",
+        "LAST_NAME": "Zadajte vaše priezvisko",
+        "SELECT_GENDER": "Vyberte vaše pohlavie",
+        "ENTER_EMAIL": "Zadajte váš e-mail",
+        "ENTER_PASSWORD": "Zadajte vaše heslo",
+        "YEARS_OF_EXPERIENCE": "Roky skúseností",
+        "BIO": "Povedzte nám o sebe",
+        "PRICING": "Hodinová sadzba (USD)",
+        "AVAILABILITY": "napr. Pondelok-Piatok 9:00-17:00"
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Muž",
+        "FEMALE": "Žena",
+        "OTHER": "Iné",
+        "PREFER_NOT_TO_SAY": "Nechcem uviesť"
+      },
+      "SPECIALIZATION_FIELDS_OPTIONS": {
+        "POWERLIFTING": "Silový trojboj",
+        "CROSSFIT": "CrossFit",
+        "BODYBUILDING": "Bodybuilding",
+        "WEIGHT_LOSS": "Chudnutie",
+        "STRENGTH_TRAINING": "Silový tréning",
+        "CARDIO": "Kardio",
+        "YOGA": "Jóga",
+        "PILATES": "Pilates",
+        "SPORTS_PERFORMANCE": "Športový výkon",
+        "REHABILITATION": "Rehabilitácia",
+        "NUTRITION": "Výživa"
+      },
+      "COMMUNICATION_METHODS_OPTIONS": {
+        "EMAIL": "E-mail",
+        "PHONE": "Telefón",
+        "TEXT_MESSAGE": "Textová správa",
+        "IN_APP_MESSAGING": "Správa v aplikácii"
+      }
+    }
+  },
+  "COMPONENTS": {
+    "FORM": {
+      "ERRORS": {
+        "REQUIRED": "Toto pole je povinné",
+        "EMAIL": "Prosím zadajte platnú e-mailovú adresu",
+        "MIN_LENGTH": "Minimálna dĺžka je {{requiredLength}} znakov",
+        "MAX_LENGTH": "Maximálna dĺžka je {{requiredLength}} znakov",
+        "MIN_VALUE": "Minimálna hodnota je {{value}}",
+        "MAX_VALUE": "Maximálna hodnota je {{value}}"
+      },
+      "SELECT": {
+        "NO_ITEMS": "Žiadne položky nie sú k dispozícii",
+        "SELECTED_COUNT": "{{count}} vybraných"
+      }
+    }
+  },
+  "ALERT": {
+    "SUCCESS": "Úspech",
+    "ERROR": "Chyba",
+    "WARNING": "Upozornenie",
+    "INFO": "Informácia"
+  },
+  "ERRORS": {
+    "UNATHORIZED": "Nemáte oprávnenie na vykonanie tejto akcie. Prosím, prihláste sa.",
+    "FORBIDDEN_ACCESS": "Prístup k tomuto zdroju je zakázaný. Nemáte potrebné povolenia.",
+    "RESOURCE_NOT_FOUND": "Požadovaný zdroj sa nenašiel. Možno bol odstránený alebo neexistuje.",
+    "INTERNAL_SERVER_ERROR": "Došlo k neočakávanej chybe servera. Prosím, skúste to znova neskôr.",
+    "UNKNOWN_ERROR": "Došlo k neznámej chybe. Ak problém pretrvá, kontaktujte podporu.",
+    "BAD_REQUEST": "Požiadavka bola neplatná alebo ju nemožno spracovať. Skontrolujte svoje vstupy."
+  },
+  "HEADER": {
+    "DASHBOARD": "Prehľad",
+    "CLIENTS": "Klienti",
+    "PROFILE": "Profil",
+    "SETTINGS": "Nastavenia",
+    "LOGOUT": "Odhlásiť sa"
+  },
+  "REGISTER_CLIENT": {
+    "TITLE": "Registrovať nového klienta",
+    "OPEN_MODAL": "Pridať nového klienta",
+    "PERSONAL_INFORMATION": "Osobné informácie",
+    "HEALTH_INFORMATION": "Zdravotné informácie",
+    "FITNESS_INFORMATION": "Fitness informácie",
+    "PERMISSIONS_INFORMATION": "Oprávnenia klienta",
+    "PERMISSIONS_DESCRIPTION": "Vyberte, ktoré funkcie môže tento klient používať a sledovať.",
+    "FIRST_NAME": "Meno",
+    "LAST_NAME": "Priezvisko",
+    "EMAIL": "Email",
+    "GENDER": "Pohlavie",
+    "BIRTH_DATE": "Dátum narodenia",
+    "CURRENT_WEIGHT": "Aktuálna hmotnosť (kg)",
+    "HEIGHT": "Výška (cm)",
+    "ACTIVITY_LEVEL": "Úroveň aktivity",
+    "MEDICAL_CONDITIONS": "Zdravotné problémy",
+    "FITNESS_EXPERIENCE": "Fitness skúsenosti",
+    "COACH_ID": "Priradiť trénera",
+    "COACH_AUTO_ASSIGNED": "Tento klient bude automaticky priradený k vám ako trénerovi.",
+    "REGISTER_BUTTON": "Registrovať klienta",
+    "SUCCESS_MESSAGE": "Klient bol úspešne zaregistrovaný",
+    "CANCEL": "Zrušiť",
+    "PREVIOUS": "Späť",
+    "NEXT": "Ďalej",
+    "PLACEHOLDERS": {
+      "FIRST_NAME": "Zadajte meno",
+      "LAST_NAME": "Zadajte priezvisko",
+      "EMAIL": "Zadajte emailovú adresu",
+      "SELECT_GENDER": "Vyberte pohlavie",
+      "BIRTH_DATE": "Vyberte dátum narodenia",
+      "CURRENT_WEIGHT": "Zadajte aktuálnu hmotnosť v kg",
+      "HEIGHT": "Zadajte výšku v cm",
+      "SELECT_ACTIVITY_LEVEL": "Vyberte úroveň aktivity",
+      "MEDICAL_CONDITIONS": "Zadajte zdravotné problémy alebo nechajte prázdne",
+      "SELECT_FITNESS_EXPERIENCE": "Vyberte úroveň fitness skúseností",
+      "SELECT_COACH": "Vyberte trénera"
+    },
+    "GENDER_OPTIONS": {
+      "MALE": "Muž",
+      "FEMALE": "Žena",
+      "OTHER": "Iné",
+      "PREFER_NOT_TO_SAY": "Nechcem uviesť"
+    },
+    "ACTIVITY_LEVEL_OPTIONS": {
+      "SEDENTARY": "Sedavý (málo alebo žiadne cvičenie)",
+      "LIGHTLY_ACTIVE": "Mierne aktívny (cvičenie 1-3 dni/týždeň)",
+      "MODERATELY_ACTIVE": "Stredne aktívny (cvičenie 3-5 dní/týždeň)",
+      "VERY_ACTIVE": "Veľmi aktívny (cvičenie 6-7 dní/týždeň)",
+      "EXTREMELY_ACTIVE": "Extrémne aktívny (fyzická práca alebo tréning dvakrát denne)"
+    },
+    "FITNESS_EXPERIENCE_OPTIONS": {
+      "BEGINNER": "Začiatočník (0-1 rok)",
+      "INTERMEDIATE": "Pokročilý (1-3 roky)",
+      "ADVANCED": "Pokročilý (3-5 rokov)",
+      "EXPERT": "Expert (5+ rokov)"
+    },
+    "PERMISSIONS": {
+      "TRACK_EXERCISE": "Sledovať cvičenie",
+      "TRACK_EXERCISE_DESC": "Povoliť klientovi zaznamenávať a sledovať cvičebné aktivity",
+      "TRACK_SLEEP": "Sledovať spánok",
+      "TRACK_SLEEP_DESC": "Povoliť klientovi zaznamenávať a monitorovať spánkové vzorce",
+      "TRACK_NUTRITION": "Sledovať výživu",
+      "TRACK_NUTRITION_DESC": "Povoliť klientovi zaznamenávať jedlá a sledovať príjem výživy",
+      "TRACK_WATER": "Sledovať príjem vody",
+      "TRACK_WATER_DESC": "Povoliť klientovi zaznamenávať a monitorovať dennú spotrebu vody"
+    }
+  },
+  "CLIENTS_TABLE": {
+    "TITLE": "Tabuľka klientov",
+    "NO_CLIENTS": "Nenašli sa žiadni klienti, prosím pridajte klienta.",
+    "NO_CLIENTS_ERROR": "Ak je to výsledok chyby, skúste to neskôr znova.",
+    "LOADING_CLIENTS": "Načítavanie klientov...",
+    "FULL_NAME": "Meno",
+    "EXCERCISE": "Cvičenie",
+    "SLEEP": "Spánok",
+    "NUTRITION": "Výživa",
+    "WATER": "Voda",
+    "LAST_UPDATED": "Naposledy aktualizované"
+  }
+}

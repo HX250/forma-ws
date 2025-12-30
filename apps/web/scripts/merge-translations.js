@@ -15,7 +15,7 @@ if (!fs.existsSync(configPath)) {
 
 const content = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
-const outputDir = path.join(basePath, 'merged-adminapp');
+const outputDir = path.join(basePath, 'merged-lang');
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
@@ -24,32 +24,36 @@ let hadError = false;
 
 function findLanguageFiles(dir, lang, results = []) {
   if (!fs.existsSync(dir)) return results;
-  
+
   const entries = fs.readdirSync(dir, { withFileTypes: true });
-  
+
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
-    
+
     if (entry.isDirectory()) {
       findLanguageFiles(fullPath, lang, results);
     } else if (entry.isFile() && entry.name === `${lang}.json`) {
       results.push(fullPath);
     }
   }
-  
+
   return results;
 }
 
 function deepMerge(target, source, sourcePath, keysOrigin) {
   for (const key in source) {
     if (!Object.prototype.hasOwnProperty.call(source, key)) continue;
-    
-    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+
+    if (
+      source[key] &&
+      typeof source[key] === 'object' &&
+      !Array.isArray(source[key])
+    ) {
       if (!target[key]) {
         target[key] = {};
         keysOrigin[key] = [];
       }
-      
+
       if (typeof target[key] !== 'object' || Array.isArray(target[key])) {
         console.error(
           `Type conflict for key '${key}': cannot merge object with non-object. Found in: ${sourcePath}`
@@ -57,27 +61,29 @@ function deepMerge(target, source, sourcePath, keysOrigin) {
         hadError = true;
         continue;
       }
-      
+
       keysOrigin[key].push(sourcePath);
       deepMerge(target[key], source[key], sourcePath, keysOrigin);
     } else {
       if (!keysOrigin.hasOwnProperty(key)) {
         keysOrigin[key] = [];
       }
-      
+
       keysOrigin[key].push(sourcePath);
-      
+
       if (target.hasOwnProperty(key)) {
         console.error(
-          `Duplicate key found: '${key}' found in: ${keysOrigin[key].join(', ')}`
+          `Duplicate key found: '${key}' found in: ${keysOrigin[key].join(
+            ', '
+          )}`
         );
         hadError = true;
       }
-      
+
       target[key] = source[key];
     }
   }
-  
+
   return target;
 }
 
@@ -85,7 +91,7 @@ const availableLangs = new Set();
 for (const appDir of content.apps) {
   const appPath = path.join(basePath, appDir);
   if (!fs.existsSync(appPath)) continue;
-  
+
   for (const lang of langVariants) {
     const files = findLanguageFiles(appPath, lang);
     if (files.length > 0) {
@@ -113,7 +119,9 @@ for (const lang of langsToProcess) {
     const langFiles = findLanguageFiles(appPath, lang);
 
     if (langFiles.length === 0) {
-      console.warn(`No ${lang}.json files found in ${directoryName} — skipping`);
+      console.warn(
+        `No ${lang}.json files found in ${directoryName} — skipping`
+      );
       continue;
     }
 
@@ -125,12 +133,14 @@ for (const lang of langsToProcess) {
 
       const fileContents = fs.readFileSync(filePath, 'utf8');
       let addition = {};
-      
+
       if (!fileContents || fileContents.trim() === '') {
-        console.warn(`    Empty translation file ${relativePath} — treating as {}`);
+        console.warn(
+          `    Empty translation file ${relativePath} — treating as {}`
+        );
         continue;
       }
-      
+
       try {
         addition = JSON.parse(fileContents);
       } catch (e) {

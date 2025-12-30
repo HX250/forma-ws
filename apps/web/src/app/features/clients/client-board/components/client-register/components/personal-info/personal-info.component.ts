@@ -14,7 +14,13 @@ import { Gender } from '@forma-ws/frontend/domain';
 @Component({
   selector: 'app-client-personal-info',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PageInput, PageSelect, TranslateModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    PageInput,
+    PageSelect,
+    TranslateModule,
+  ],
   templateUrl: './personal-info.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,6 +32,22 @@ export class ClientPersonalInfoComponent {
   birthDate = input.required<FormControl<string>>();
 
   private registerClientService = inject(RegisterClientService);
-  
+
   genderOptions = this.registerClientService.getGenderFields();
+
+  today = new Date();
+  minBirthDate = new Date(
+    this.today.getFullYear() - 99,
+    this.today.getMonth(),
+    this.today.getDate()
+  );
+
+  dateValidations = {
+    min: this.formatDate(this.minBirthDate),
+    max: this.formatDate(this.today),
+  };
+
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
 }

@@ -49,8 +49,21 @@ export class SecurityService {
   }
 
   clearCookies(res: Response): void {
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
+    const isProduction = this.configService.get('NODE_ENV') === 'production';
+
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      path: '/',
+    });
+
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      path: '/',
+    });
   }
 
   verifyRefreshToken(token: string): AuthPayload {

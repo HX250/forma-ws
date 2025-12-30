@@ -51,6 +51,6 @@ export class ClientsBoardComponent {
   }
 
   onClientClick(event: { data: ClientTableView; index: number }): void {
-    this.router.navigate(['/clients', event.data.id]);
+    this.router.navigate(['/clients/profile', event.data.id]);
   }
 }

@@ -7,5 +7,11 @@ export type {
   AvailabilityModel,
 } from './lib/dto';
 
+export type {
+  GetWaterData,
+  AddWaterData,
+  DeleteWaterData,
+} from './lib/dto/tracking';
+
 export * from './lib/enums';
 export * from './lib/types';

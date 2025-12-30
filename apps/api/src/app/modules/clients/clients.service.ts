@@ -3,12 +3,12 @@ import { DatabaseService } from '@forma-ws/backend-shared';
 import {
   Client,
   ClientGeneralDetails,
-  ClientHealthDetails,
+  ClientFitnessDetails,
   ClientPermissions,
   ClientTable,
 } from '@forma-ws/domain';
-import { prismaToPlain } from '../../utils/prisma-to-plain';
-import { decimalInObjectToNumber } from '../../utils/decimal-to-numbers';
+import { prismaToPlain } from '../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
+import { decimalInObjectToNumber } from '../../../../../libs/backend-shared/src/lib/utils/decimal-to-numbers';
 
 @Injectable()
 export class ClientsService {
@@ -114,7 +114,7 @@ export class ClientsService {
 
     return client;
   }
-  async getClientHealthDetails(id: string): Promise<ClientHealthDetails> {
+  async getClientHealthDetails(id: string): Promise<ClientFitnessDetails> {
     const client = await this.prisma.client.findUnique({
       where: { id },
       select: {

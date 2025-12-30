@@ -1,4 +1,7 @@
 <div class="max-w-md mx-auto mt-10 p-6">
+  @if(this.form.formLoader()){
+  <forma-loading />
+  } @else {
   <form class="flex flex-col gap-6">
     <div class="w-full flex justify-between gap-4">
       <app-button
@@ -43,4 +46,5 @@
     />
     }
   </form>
+  }
 </div>

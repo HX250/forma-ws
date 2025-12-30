@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(TranslateModule.forRoot()),
     provideTranslateHttpLoader({
-      prefix: '/assets/lang/merged-adminapp/',
+      prefix: '/assets/lang/merged-lang/',
       suffix: '.json',
     }),
     provideHttpClient(withInterceptorsFromDi()),

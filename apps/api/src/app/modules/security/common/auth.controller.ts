@@ -14,13 +14,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
-import {
-  LoginDto,
-  AuthResponse,
-  Client,
-  Coach,
-  AuthPayload,
-} from '@forma-ws/domain';
+import { LoginDto, AuthPayload, UserAuthDetails } from '@forma-ws/domain';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { CurrentUser } from './decorators/current-user.decorator';
 
@@ -34,7 +28,7 @@ export class SecurityController {
   async login(
     @Body() dto: LoginDto,
     @Res({ passthrough: true }) res: Response
-  ): Promise<AuthResponse> {
+  ): Promise<UserAuthDetails> {
     return this.authService.login(dto, res);
   }
 
@@ -43,7 +37,7 @@ export class SecurityController {
   async refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response
-  ): Promise<AuthResponse> {
+  ): Promise<AuthPayload> {
     const refreshToken = req.cookies['refreshToken'];
     if (!refreshToken) {
       throw new UnauthorizedException('No refresh token provided');
@@ -65,7 +59,8 @@ export class SecurityController {
   @UseGuards(JwtAuthGuard)
   async getCurrentUser(
     @CurrentUser() user: AuthPayload
-  ): Promise<Client | Coach> {
-    return this.authService.getCurrentUser(user);
+  ): Promise<UserAuthDetails> {
+    const response = await this.authService.getCurrentUser(user);
+    return { ...response, userType: user.userType };
   }
 }

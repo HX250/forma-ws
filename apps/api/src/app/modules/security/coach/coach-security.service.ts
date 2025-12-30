@@ -3,7 +3,7 @@ import { DatabaseService } from '@forma-ws/backend-shared';
 import { RegisterCoachDto, Coach } from '@forma-ws/domain';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { prismaToPlain } from '../../../utils/prisma-to-plain';
+import { prismaToPlain } from '../../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
 
 @Injectable()
 export class CoachSecurityService {

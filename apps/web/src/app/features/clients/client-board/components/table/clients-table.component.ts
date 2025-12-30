@@ -51,7 +51,7 @@ export class ClientsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientTableService.loadClientsTable();
+    this.clientTableService.loadClientsTable(true);
   }
 
   mapClients(client: ClientTable) {
