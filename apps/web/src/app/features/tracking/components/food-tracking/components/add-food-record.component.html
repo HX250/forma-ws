@@ -1,0 +1,103 @@
+<div class="space-y-lg">
+  <app-page-horizontal-radio
+    [control]="control.mealType"
+    [options]="mealTypeOptions()"
+    [label]="'Meal Type'"
+  />
+
+  <div class="flex flex-col sm:flex-row gap-md">
+    <div class="flex-1">
+      <app-page-autocomplete
+        [control]="control.food.controls.foodName"
+        [results]="searchResults()"
+        [loading]="loading"
+        [label]="'Search Food'"
+        [placeholder]="'Type to search... (e.g., chicken breast)'"
+        [required]="true"
+        [minChars]="2"
+        [debounceTime]="300"
+        (searchChange)="performSearch()"
+        (itemSelected)="foodId.set($event.id)"
+        (cleared)="onSearchCleared()"
+      />
+    </div>
+    <div class="w-full sm:w-32">
+      <app-page-input
+        [control]="control.servingSize"
+        [label]="'Serving size (g)'"
+      />
+    </div>
+  </div>
+
+  @if(selectedFood()){
+  <div
+    class="bg-primary dark:bg-primary-dark border rounded-lg p-lg shadow-card"
+  >
+    <h3
+      class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
+    >
+      Nutritional Information (per {{ servingSize() }}g)
+    </h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Calories</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.caloriesPer100g }}
+          <span class="text-sm font-normal">kcal</span>
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Protein</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.proteinPer100g }}
+          <span class="text-sm font-normal">g</span>
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Carbs</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.carbsPer100g }}
+          <span class="text-sm font-normal">g</span>
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Fat</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.fatPer100g }}
+          <span class="text-sm font-normal">g</span>
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Sugar</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.sugarPer100g }}
+          <span class="text-sm font-normal">g</span>
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Fiber</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedFood()!.fiberPer100g }}
+          <span class="text-sm font-normal">g</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  }
+
+  <div class="flex justify-end pt-md">
+    <app-button (click)="onSubmit()" [loading]="loading" [text]="'Log meal'" />
+  </div>
+</div>

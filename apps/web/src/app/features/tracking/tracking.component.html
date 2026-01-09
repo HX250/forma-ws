@@ -14,7 +14,7 @@
   <forma-loading />
   } @else {
   <div
-    class="grid gap-4"
+    class="grid gap-2"
     style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))"
   >
     @for(card of trackingCards(); track card.permissionType){
@@ -24,9 +24,10 @@
       [currentUser]="currentUser()"
       [permissionType]="card.permissionType"
     >
-      @switch(card.component) { @case('exercise') { <app-exercise-tracking /> }
-      @case('sleep') { <app-sleep-tracking [todayDate]="todayDate()" /> }
-      @case('nutrition') { <app-food-tracking /> } @case('water') {
+      @switch(card.component) { @case('exercise') {
+      <app-exercise-tracking [todayDate]="todayDate()" /> } @case('sleep') {
+      <app-sleep-tracking [todayDate]="todayDate()" /> } @case('nutrition') {
+      <app-food-tracking [todayDate]="todayDate()" /> } @case('water') {
       <app-water-tracking [todayDate]="todayDate()" /> } }
     </app-tracking-card-wrapper>
     }

@@ -10,3 +10,5 @@ export * from './types/types.model';
 export * from './pipes/user-full-name.pipe';
 export * from './form/date.utils';
 export * from './types/radio-options.model';
+export * from './components/language-switcher/language.service';
+export * from './pipes/language-swithcher-response.pipe';

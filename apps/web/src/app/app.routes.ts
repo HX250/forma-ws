@@ -3,6 +3,7 @@ import { securityGuard } from './core/auth/auth.guard';
 import { loggedInGuard } from './core/auth/logged-in.guard';
 
 export const appRoutes: Route[] = [
+  // TODO pridat guardy
   {
     path: '',
     loadChildren: () =>

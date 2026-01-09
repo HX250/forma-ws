@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from './language.service';
 
 @Component({
   selector: 'app-language-switcher',
@@ -14,12 +15,12 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   template: `
     <button
       class="flex items-center justify-center w-12 h-12 fixed bottom-6 left-6 rounded-full bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-      (click)="onChange(current())"
+      (click)="onChange(currentLang)"
       [attr.aria-label]="
-        'Switch to ' + (current() === 'en' ? 'Slovak' : 'English')
+        'Switch to ' + (currentLang === 'en' ? 'Slovak' : 'English')
       "
     >
-      @if(current() === 'en') {
+      @if(currentLang === 'en') {
       <svg class="w-7 h-7" viewBox="0 0 30 30" fill="none">
         <defs>
           <clipPath id="circle-clip">
@@ -88,27 +89,13 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSwitcher {
-  private translate = inject(TranslateService);
+  private languageService = inject(LanguageService);
 
-  current = signal('en');
-
-  constructor() {
-    const saved = localStorage.getItem('app.lang');
-
-    if (saved) {
-      this.current.set(saved);
-      this.translate.use(saved);
-      return;
-    }
-
-    this.translate.setFallbackLang('en');
-    this.current.set(this.translate.getFallbackLang() || 'en');
+  get currentLang() {
+    return this.languageService.currentLang();
   }
 
   onChange(lang: string) {
-    const newLang = lang === 'en' ? 'sk' : 'en';
-    this.translate.use(newLang);
-    this.current.set(newLang);
-    localStorage.setItem('app.lang', newLang);
+    this.languageService.onChange(lang);
   }
 }

@@ -26,11 +26,15 @@
       class="flex-1 h-10 rounded-md transition-all hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
       [attr.aria-label]="option.label || 'Rating ' + option.value"
     >
-      @if (isSelected(option.value)) {
-      <span class="text-white dark:text-background-dark font-medium text-sm">
-        {{ option.value }}
+      <span
+        class="dark:text-background-dark font-medium text-sm"
+        [ngClass]="{
+        'text-inverse': isSelected(option.value),
+        'dark:text-inverse text-primary-dark': !isSelected(option.value),
+      }"
+      >
+        {{ option.label }}
       </span>
-      }
     </button>
     }
   </div>

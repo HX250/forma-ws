@@ -2,7 +2,10 @@
   "name": "@forma-ws/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "seed:food": "ts-node apps/api/prisma/seeds/food-seed.ts",
+    "seed:exercise": "ts-node apps/api/prisma/seeds/exercise-seed.ts"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~20.1.0",

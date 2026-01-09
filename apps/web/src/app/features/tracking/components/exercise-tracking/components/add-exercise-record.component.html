@@ -1,0 +1,97 @@
+<div class="space-y-lg">
+  <div class="flex flex-col sm:flex-row gap-md">
+    <div class="flex-1">
+      <app-page-autocomplete
+        [control]="control.exercise.controls.exerciseName"
+        [results]="searchResults()"
+        [loading]="loading"
+        [label]="'Search Exercise'"
+        [placeholder]="'Type to search... (e.g., bench press)'"
+        [required]="true"
+        [minChars]="2"
+        [debounceTime]="300"
+        (searchChange)="performSearch()"
+        (itemSelected)="exerciseId.set($event.id)"
+        (cleared)="onSearchCleared()"
+      />
+    </div>
+    <div class="w-full sm:w-32">
+      <app-page-input
+        [control]="control.sets"
+        [label]="'Sets'"
+        [type]="'number'"
+      />
+    </div>
+    <div class="w-full sm:w-32">
+      <app-page-input
+        [control]="control.reps"
+        [label]="'Reps'"
+        [type]="'number'"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-md">
+    <div class="w-full sm:w-32">
+      <app-page-input
+        [control]="control.weight"
+        [label]="'Weight (kg)'"
+        [type]="'number'"
+      />
+    </div>
+    <div class="w-full sm:w-32">
+      <app-page-input
+        [control]="control.duration"
+        [label]="'Duration (min)'"
+        [type]="'number'"
+      />
+    </div>
+    <div class="flex-1">
+      <app-page-input
+        [control]="control.notes"
+        [label]="'Notes'"
+        [type]="'text'"
+      />
+    </div>
+  </div>
+
+  @if(selectedExercise()) {
+  <div
+    class="bg-primary dark:bg-primary-dark border rounded-lg p-lg shadow-card"
+  >
+    <h3
+      class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
+    >
+      Exercise Details
+    </h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark">Category</span>
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedExercise()!.category }}
+        </span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xs text-muted dark:text-muted-dark"
+          >Primary Muscle</span
+        >
+        <span
+          class="text-lg font-semibold text-secondary dark:text-secondary-dark"
+        >
+          {{ selectedExercise()!.primaryMuscle }}
+        </span>
+      </div>
+    </div>
+  </div>
+  }
+
+  <div class="flex justify-end pt-md">
+    <app-button
+      (click)="onSubmit()"
+      [loading]="loading"
+      [text]="'Log Exercise'"
+    />
+  </div>
+</div>

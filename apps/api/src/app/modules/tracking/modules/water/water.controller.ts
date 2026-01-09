@@ -8,7 +8,6 @@ import {
   Delete,
   Body,
   Query,
-  Param,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { WaterService } from './water.service';
