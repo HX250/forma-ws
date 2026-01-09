@@ -6,6 +6,10 @@ export enum ExerciseCategory {
   MOBILITY = 'MOBILITY',
   WARMUP = 'WARMUP',
   COOL_DOWN = 'COOL_DOWN',
+  HIIT = 'HIIT',
+  YOGA = 'YOGA',
+  PILATES = 'PILATES',
+  OTHER = 'OTHER',
 }
 
 export enum MuscleFocus {

@@ -103,7 +103,6 @@ export class ExerciseService {
           lte: end,
         },
       },
-      include: { exercise: true },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -115,9 +114,9 @@ export class ExerciseService {
   private mapExcersiseData(entries: ExerciseEntry[]): ExerciseSummary {
     return {
       totalExercises: entries.length,
-      totalDuration: entries.reduce((sum, e) => sum + e.duration, 0),
-      totalSets: entries.reduce((sum, e) => sum + e.sets, 0),
-      totalReps: entries.reduce((sum, e) => sum + e.reps, 0),
+      totalDuration: entries.reduce((sum, e) => sum + (e.duration || 0), 0),
+      totalSets: entries.reduce((sum, e) => sum + (e.sets || 0), 0),
+      totalReps: entries.reduce((sum, e) => sum + (e.reps || 0), 0),
       entries: entries.map((e) => ({
         id: e.id,
         name: e.exerciseName,

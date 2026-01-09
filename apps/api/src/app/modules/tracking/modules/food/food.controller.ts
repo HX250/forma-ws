@@ -58,7 +58,7 @@ export class FoodController {
 
   @Post('/entries')
   async logNutritionEntry(
-    @Query('id') clientId: string,
+    @Query('clientId') clientId: string,
     @Body() dto: NutritionEntryDto
   ): Promise<boolean> {
     return this.foodService.logNutritionEntry(dto, clientId);
@@ -67,7 +67,7 @@ export class FoodController {
   @Delete('/entries/:entryId')
   async deleteNutritionEntry(
     @Param('entryId') entryId: string,
-    @Query('id') clientId: string
+    @Query('clientId') clientId: string
   ): Promise<boolean> {
     return this.foodService.deleteNutritionEntry(entryId, clientId);
   }

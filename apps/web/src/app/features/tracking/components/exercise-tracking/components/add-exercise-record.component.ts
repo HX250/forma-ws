@@ -130,7 +130,6 @@ export class AddExerciseRecordComponent
     const formValue = this.form.getRawValue();
 
     const dto: ExerciseEntryDto = {
-      clientId: this.clientId(),
       exerciseId: exercise.id,
       exerciseName: exercise.name,
       exerciseNameSk: exercise.nameSk,

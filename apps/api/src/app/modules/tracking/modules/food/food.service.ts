@@ -84,6 +84,8 @@ export class FoodService {
         protein: dto.protein,
         carbs: dto.carbs,
         fat: dto.fat,
+        fiber: dto.fiber,
+        sugar: dto.sugar,
         servingSize: dto.servingSize,
         mealType: mealTypeMap[dto.mealType],
       },
@@ -146,7 +148,6 @@ export class FoodService {
         nameSk: e.foodNameSk,
         servingSize: decimalToNumber(e.servingSize),
         calories: e.calories,
-        category: 0,
       })),
     };
   }

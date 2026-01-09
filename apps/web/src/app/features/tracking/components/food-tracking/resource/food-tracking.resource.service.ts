@@ -48,7 +48,7 @@ export class FoodTrackingResourceService extends GlobalAuthService {
     return this.http.post<boolean>(
       this.endpoint + '/tracking/food/entries',
       data,
-      { params: { id: clientId } }
+      { params: { clientId: clientId } }
     );
   }
 
@@ -60,7 +60,7 @@ export class FoodTrackingResourceService extends GlobalAuthService {
       `${this.endpoint}/tracking/food/entries/${params.id}`,
       {
         params: {
-          id: params.clientId,
+          clientId: params.clientId,
         },
       }
     );

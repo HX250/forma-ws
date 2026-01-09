@@ -2,9 +2,6 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class ExerciseEntryDto {
   @IsString()
-  clientId!: string;
-
-  @IsString()
   exerciseId!: string;
 
   @IsString()

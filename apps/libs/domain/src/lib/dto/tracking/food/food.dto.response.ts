@@ -19,7 +19,6 @@ export interface FoodEntryDetail {
   id: string;
   name: string;
   nameSk: string;
-  category: number;
   servingSize: number;
   calories: number;
 }
