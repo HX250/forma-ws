@@ -4,12 +4,12 @@ import {
   effect,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
 import { ClientsProfileResourceService } from '../../../resources/clients-profile.resources.service';
 import { ClientGeneralDetails } from '@forma-ws/domain';
 import { UserFullNamePipe } from '../../../../../../../../libs/frontend-shared/src/lib/utils/pipes/user-full-name.pipe';
@@ -22,12 +22,12 @@ import { LoaderUtils, LoadingComponent } from '@forma-ws/frontend-shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeneralInfoComponent {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly clientsProfileResourceService = inject(
     ClientsProfileResourceService
   );
 
   clientId = input<string | null>(null);
+  memberSince = output<Date>();
 
   clientGeneralData = signal<ClientGeneralDetails>({} as ClientGeneralDetails);
   loading = signal(true);
@@ -38,6 +38,7 @@ export class GeneralInfoComponent {
       this.loading
     ).subscribe((data) => {
       this.clientGeneralData.set(data);
+      this.memberSince.emit(data.createdAt);
     });
   });
 }

@@ -16,15 +16,6 @@
     </div>
   </div>
 
-  <div
-    class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
-  >
-    <div
-      class="bg-accent dark:bg-accent-dark h-2 rounded-full transition-all"
-      [style.width.%]="getProgressPercentage()"
-    ></div>
-  </div>
-
   @if (currentUserType === UserType.CLIENT) {
   <div class="flex gap-2">
     <button
@@ -46,7 +37,18 @@
   >
     Viewing client's water intake (read-only)
   </div>
-  } @if (waterEntries().length > 0) {
+  }
+
+  <div
+    class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+  >
+    <div
+      class="bg-accent dark:bg-accent-dark h-2 rounded-full transition-all"
+      [style.width.%]="getProgressPercentage()"
+    ></div>
+  </div>
+
+  @if (waterEntries().length > 0) {
   <div class="mt-2">
     <p class="text-xs text-muted dark:text-muted-dark mb-2">Today's entries:</p>
     <div class="flex flex-col overflow-x-scroll max-h-44 gap-1">
@@ -69,7 +71,7 @@
           (click)="removeWaterEntry(entry.id)"
           class="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
         >
-          Remove
+          ✕
         </button>
         }
       </div>

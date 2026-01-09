@@ -1,0 +1,25 @@
+export enum ExerciseCategory {
+  STRENGTH = 'STRENGTH',
+  CARDIO = 'CARDIO',
+  FLEXIBILITY = 'FLEXIBILITY',
+  BALANCE = 'BALANCE',
+  MOBILITY = 'MOBILITY',
+  WARMUP = 'WARMUP',
+  COOL_DOWN = 'COOL_DOWN',
+  HIIT = 'HIIT',
+  YOGA = 'YOGA',
+  PILATES = 'PILATES',
+  OTHER = 'OTHER',
+}
+
+export enum MuscleFocus {
+  CHEST = 'CHEST',
+  BACK = 'BACK',
+  LEGS = 'LEGS',
+  SHOULDERS = 'SHOULDERS',
+  ARMS = 'ARMS',
+  CORE = 'CORE',
+  GLUTES = 'GLUTES',
+  FULL_BODY = 'FULL_BODY',
+  OTHER = 'OTHER',
+}

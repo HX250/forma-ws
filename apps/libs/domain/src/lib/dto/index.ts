@@ -8,3 +8,5 @@ export * from './coach/permissions/coach-permissions.dto';
 export * from './client/tracking/client-response-tracking.dto';
 export * from './coach/permissions/permissions.enum';
 export * from './tracking';
+export * from './tracking/food/food.dto';
+export * from './tracking/tracking.dto';

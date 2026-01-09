@@ -9,7 +9,7 @@ import { AlertType } from './alert.model';
   imports: [CommonModule, TranslateModule],
   standalone: true,
   template: `
-    <div class="fixed top-4 right-4 z-50 flex flex-col gap-3 max-w-md">
+    <div class="fixed top-4 right-4 z-[70] flex flex-col gap-3 max-w-md">
       @for (alert of alertService.alerts(); track alert.id) {
       <div
         [class]="getAlertClasses(alert.type)"
@@ -103,9 +103,11 @@ export class AlertComponent {
 
   getAlertClasses(type: AlertType): string {
     const typeClasses = {
-      success: 'bg-primary dark:bg-primary-dark border-2 border-accent/30 dark:border-accent-dark/30',
+      success:
+        'bg-primary dark:bg-primary-dark border-2 border-accent/30 dark:border-accent-dark/30',
       error: 'bg-primary dark:bg-primary-dark border-2 border-utils-error/30',
-      warning: 'bg-primary dark:bg-primary-dark border-2 border-utils-warning/30',
+      warning:
+        'bg-primary dark:bg-primary-dark border-2 border-utils-warning/30',
       info: 'bg-primary dark:bg-primary-dark border-2 border-utils-info/30',
     };
     return `${typeClasses[type]}`;
@@ -113,7 +115,8 @@ export class AlertComponent {
 
   getIconClasses(type: AlertType): string {
     const typeClasses = {
-      success: 'bg-accent/20 dark:bg-accent-dark/20 text-accent dark:text-accent-dark',
+      success:
+        'bg-accent/20 dark:bg-accent-dark/20 text-accent dark:text-accent-dark',
       error: 'bg-utils-error/20 text-utils-error',
       warning: 'bg-utils-warning/20 text-utils-warning',
       info: 'bg-utils-info/20 text-utils-info',

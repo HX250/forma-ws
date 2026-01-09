@@ -59,6 +59,38 @@ enum CommunicationMethod {
   IN_APP_MESSAGING
 }
 
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
+enum ExerciseCategory {
+  STRENGTH
+  CARDIO
+  FLEXIBILITY
+  BALANCE
+  HIIT
+  YOGA
+  PILATES
+  MOBILITY
+  OTHER
+}
+
+enum MuscleFocus {
+  CHEST
+  BACK
+  LEGS
+  ARMS
+  SHOULDERS
+  CORE
+  FULL_BODY
+  CARDIO
+  OTHER
+}
+
+
 model Coach {
   id                     String                 @id @default(cuid())
   email                  String                 @unique
@@ -141,20 +173,25 @@ model ClientGoal {
 }
 
 model ExerciseEntry {
-  id                     String                 @id @default(cuid())
-  clientId               String
-  client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  
-  exerciseName           String
-  sets                   Int?
-  reps                   Int?
-  weight                 Decimal?               @db.Decimal(6, 2)
-  duration               Int?                   
-  notes                  String?
-  
-  createdAt              DateTime               @default(now())
+  id           String   @id @default(cuid())
+  clientId     String
+  client       Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  exerciseId   String?
+  exercise     Exercise? @relation(fields: [exerciseId], references: [id])
+
+  exerciseName String   
+  exerciseNameSk String   
+  sets         Int?
+  reps         Int?
+  weight       Decimal? @db.Decimal(6, 2)
+  duration     Int?      
+  notes        String?
+
+  createdAt    DateTime @default(now())
 
   @@map("exercise_entries")
+  @@index([clientId, createdAt])
 }
 
 model SleepEntry {
@@ -178,18 +215,27 @@ model NutritionEntry {
   id                     String                 @id @default(cuid())
   clientId               String
   client                 Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  foodId                 String?
+  food                   Food?                  @relation(fields: [foodId], references: [id])
   
   foodName               String
+  foodNameSk               String
+
   calories               Int
   protein                Decimal?               @db.Decimal(6, 2)
   carbs                  Decimal?               @db.Decimal(6, 2)
   fat                    Decimal?               @db.Decimal(6, 2)
-  servingSize            String?
-  mealType               String?                
+  fiber                  Decimal?               @db.Decimal(6, 2)
+  sugar                  Decimal?               @db.Decimal(6, 2)
+
+  servingSize            Decimal?                @db.Decimal(6, 2)
+  mealType               MealType
   
   createdAt              DateTime               @default(now())
 
   @@map("nutrition_entries")
+  @@index([clientId, createdAt])
 }
 
 model WaterEntry {
@@ -219,3 +265,55 @@ model WeighIn {
 
   @@map("weigh_ins")
 }
+
+model Food {
+  id                String            @id @default(cuid())
+  name              String
+  nameSk            String?          
+  category          String?        
+  
+  caloriesPer100g   Decimal           @db.Decimal(7, 2)
+  proteinPer100g    Decimal           @db.Decimal(6, 2)
+  carbsPer100g      Decimal           @db.Decimal(6, 2)
+  fatPer100g        Decimal           @db.Decimal(6, 2)
+  
+  fiberPer100g      Decimal?          @db.Decimal(6, 2)
+  sugarPer100g      Decimal?          @db.Decimal(6, 2)
+  
+  isVerified        Boolean           @default(false) 
+  isCustom          Boolean           @default(false)
+  createdBy         String?           
+  
+  nutritionEntries  NutritionEntry[]
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@map("foods")
+  @@index([name])
+  @@index([nameSk])
+  @@index([category])
+}
+
+model Exercise {
+  id            String           @id @default(cuid())
+  name          String
+  nameSk        String?          
+  category      ExerciseCategory @default(OTHER)
+  primaryMuscle MuscleFocus      @default(OTHER)
+  isVerified    Boolean          @default(false)
+  isCustom      Boolean          @default(false)
+  createdBy     String?          
+
+  exerciseEntries ExerciseEntry[] 
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@map("exercises")
+  @@index([name])
+  @@index([nameSk])
+  @@index([category])
+  @@index([primaryMuscle])
+}
+
