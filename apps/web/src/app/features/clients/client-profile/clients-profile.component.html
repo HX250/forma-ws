@@ -46,6 +46,7 @@
     </div>
     <div class="flex items-center justify-end">
       <button
+        (click)="openEditClientGoals()"
         class="flex items-center justify-center w-10 h-10 rounded-lg border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 transition-all"
       >
         <span class="material-icons text-secondary dark:text-secondary-dark"
@@ -68,17 +69,27 @@
     <div
       class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
     >
-      <app-client-goals [clientId]="clientId()" />
+      <app-fitness-info
+        [clientId]="clientId()"
+        [clientGoals]="clientGoals().generalGoals"
+      />
     </div>
     <div
       class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
     >
-      <app-fitness-info [clientId]="clientId()" />
+      <app-weight-tracking
+        [clientId]="clientId()"
+        [targetWeightLoss]="clientGoals().generalGoals.weightGoal"
+      />
     </div>
     <div
       class="row-span-1 md:col-span-2 lg:col-span-6 rounded-lg bg-primary dark:bg-primary-dark shadow-sm"
     >
-      <app-tracking [clientId]="clientId()" [todayDate]="selectedDate()" />
+      <app-tracking
+        [clientId]="clientId()"
+        [todayDate]="selectedDate()"
+        [clientGoals]="clientGoals().trackingGoal"
+      />
     </div>
   </div>
 </div>

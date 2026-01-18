@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './page-horizontal-radio.component.html',
 })
 export class PageHorizontalRadioComponent {
-  control = input.required<FormControl<number | null>>();
+  control = input.required<FormControl<number | number[] | null>>();
   options = input.required<RatingOption[]>();
   label = input<string>('');
   leftLabel = input<string>('');

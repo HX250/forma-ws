@@ -12,7 +12,12 @@ import { WaterTrackingComponent } from './components/water-tracking/water-tracki
 import { SleepTrackingComponent } from './components/sleep-tracking/sleep-tracking.component';
 import { FoodTrackingComponent } from './components/food-tracking/food-tracking.component';
 import { ExerciseTrackingComponent } from './components/exercise-tracking/exercise-tracking.component';
-import { ClientPermissions, PermissionsEnum, UserType } from '@forma-ws/domain';
+import {
+  ClientPermissions,
+  ClientTrackingGoalResponse,
+  PermissionsEnum,
+  UserType,
+} from '@forma-ws/domain';
 import { LoadingComponent } from '@forma-ws/frontend-shared';
 import { TrackingService } from './services/tracking.service';
 import { TrackingCardWrapperComponent } from './shared/tracking-card-wrapper/tracking-card-wrapper.component';
@@ -38,6 +43,7 @@ export class TrackingComponent {
 
   clientId = input.required<string>();
   todayDate = input.required<Date>();
+  clientGoals = input.required<ClientTrackingGoalResponse>();
 
   currentUser = signal<UserType>(this.securityService.userType()!);
   loading = computed(() => this.trackingService.loading());

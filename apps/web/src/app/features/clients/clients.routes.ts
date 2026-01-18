@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClientsBoardComponent } from './client-board/clients-board.component';
 import { ClientsProfileComponent } from './client-profile/clients-profile.component';
 import { FirstLoginComponent } from './first-login/first-login.component';
+import { coachGuard } from '../../core/auth/coach.guard';
 
 const routes: Routes = [
-  { path: '', component: ClientsBoardComponent },
+  { path: '', component: ClientsBoardComponent, canActivate: [coachGuard] },
   {
     path: 'profile/:id',
     component: ClientsProfileComponent,

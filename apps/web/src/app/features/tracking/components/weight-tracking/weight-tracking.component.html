@@ -1,0 +1,52 @@
+<div>
+  <app-line-chart [config]="chartConfig"></app-line-chart>
+  <div class="flex justify-between items-center">
+    <div>
+      <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+        Target Weight Loss:
+        <span class="font-bold">{{ targetWeightLoss() }} kg</span>
+      </p>
+      <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+        {{ chartSpanLabel() }} Weight Loss:
+        <span class="font-bold">{{ targetWeightLoss() }} kg</span>
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <button
+        class="border rounded-full py-2 px-4 transition"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.DAY"
+        [class.text-white]="chartSpan() === ChartSpaceValues.DAY"
+        (click)="chartSpan.set(ChartSpaceValues.DAY)"
+      >
+        day
+      </button>
+
+      <button
+        class="border rounded-full py-2 px-4 transition"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
+        [class.text-white]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
+        (click)="chartSpan.set(ChartSpaceValues.THREE_MONTHS)"
+      >
+        month
+      </button>
+
+      <button
+        class="border rounded-full py-2 px-4 transition"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
+        [class.text-white]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
+        (click)="chartSpan.set(ChartSpaceValues.SIX_MONTHS)"
+      >
+        6month
+      </button>
+
+      <button
+        class="border rounded-full py-2 px-4 transition"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.YEAR"
+        [class.text-white]="chartSpan() === ChartSpaceValues.YEAR"
+        (click)="chartSpan.set(ChartSpaceValues.YEAR)"
+      >
+        year
+      </button>
+    </div>
+  </div>
+</div>

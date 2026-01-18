@@ -30,6 +30,7 @@ export class ExerciseTrackingComponent {
   private readonly securityService = inject(SecurityService);
 
   todayDate = input.required<Date>();
+  goal = input.required<number>();
 
   summary = signal<ExerciseSummary>({
     totalExercises: 0,

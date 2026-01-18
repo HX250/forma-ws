@@ -1,5 +1,5 @@
 <div
-  class="row-span-1 md:col-span-2 lg:col-span-6 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
+  class="rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
 >
   <div class="flex items-center justify-between mb-4">
     <h2
@@ -25,10 +25,26 @@
       [permissionType]="card.permissionType"
     >
       @switch(card.component) { @case('exercise') {
-      <app-exercise-tracking [todayDate]="todayDate()" /> } @case('sleep') {
-      <app-sleep-tracking [todayDate]="todayDate()" /> } @case('nutrition') {
-      <app-food-tracking [todayDate]="todayDate()" /> } @case('water') {
-      <app-water-tracking [todayDate]="todayDate()" /> } }
+      <app-exercise-tracking
+        [todayDate]="todayDate()"
+        [goal]="clientGoals()!.exerciseGoal"
+      />
+      } @case('sleep') {
+      <app-sleep-tracking
+        [todayDate]="todayDate()"
+        [goal]="clientGoals()!.sleepGoal"
+      />
+      } @case('nutrition') {
+      <app-food-tracking
+        [todayDate]="todayDate()"
+        [goal]="clientGoals()!.nutritionGoals"
+      />
+      } @case('water') {
+      <app-water-tracking
+        [todayDate]="todayDate()"
+        [goal]="clientGoals()!.waterGoal"
+      />
+      } }
     </app-tracking-card-wrapper>
     }
   </div>

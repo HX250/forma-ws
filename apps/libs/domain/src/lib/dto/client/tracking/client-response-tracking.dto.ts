@@ -31,5 +31,4 @@ export interface ClientGoal {
   proteinTarget?: number | null;
   carbTarget?: number | null;
   fatTarget?: number | null;
-  isActive: boolean;
 }

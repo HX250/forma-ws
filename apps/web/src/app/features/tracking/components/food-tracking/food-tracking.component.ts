@@ -7,7 +7,11 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NutritionSummary, UserType } from '@forma-ws/domain';
+import {
+  NutritionClientGoal,
+  NutritionSummary,
+  UserType,
+} from '@forma-ws/domain';
 import { ModalService, LanguageSwitcherPipe } from '@forma-ws/frontend-shared';
 import { ActivatedRoute } from '@angular/router';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
@@ -28,6 +32,7 @@ export class FoodTrackingComponent {
   private readonly securityService = inject(SecurityService);
 
   todayDate = input.required<Date>();
+  goal = input.required<NutritionClientGoal>();
 
   summary = signal<NutritionSummary>({
     totalCalories: 0,

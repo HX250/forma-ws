@@ -10,3 +10,5 @@ export * from './coach/permissions/permissions.enum';
 export * from './tracking';
 export * from './tracking/food/food.dto';
 export * from './tracking/tracking.dto';
+export * from './client/goals/goals.dto';
+export * from './client/goals/goals.dto.response';

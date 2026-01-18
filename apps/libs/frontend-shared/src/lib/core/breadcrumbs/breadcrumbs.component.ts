@@ -51,8 +51,12 @@ export class BreadcrumbsComponent {
         }
       });
 
-      if (updatedCompleted.size !== this.completedSteps().size ||
-          !Array.from(updatedCompleted).every(step => this.completedSteps().has(step))) {
+      if (
+        updatedCompleted.size !== this.completedSteps().size ||
+        !Array.from(updatedCompleted).every((step) =>
+          this.completedSteps().has(step)
+        )
+      ) {
         this.completedSteps.set(updatedCompleted);
       }
     });

@@ -11,12 +11,20 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsProfileResourceService } from '../../../resources/clients-profile.resources.service';
-import { ClientFitnessDetails } from '@forma-ws/domain';
-import { LoaderUtils, LoadingComponent } from '@forma-ws/frontend-shared';
+import {
+  ClientFitnessDetails,
+  ClientGeneralGoalResponse,
+  GoalType,
+} from '@forma-ws/domain';
+import {
+  EnumLabelPipe,
+  LoaderUtils,
+  LoadingComponent,
+} from '@forma-ws/frontend-shared';
 
 @Component({
   selector: 'app-fitness-info',
-  imports: [CommonModule, TranslateModule, LoadingComponent],
+  imports: [CommonModule, TranslateModule, LoadingComponent, EnumLabelPipe],
   templateUrl: './fitness-info.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -26,10 +34,13 @@ export class FitnessInfoComponent {
     ClientsProfileResourceService
   );
 
-  clientId = input<string | null>(null);
+  clientId = input.required<string>();
+  clientGoals = input.required<ClientGeneralGoalResponse>();
 
   clientFitnessData = signal<ClientFitnessDetails>({} as ClientFitnessDetails);
   loading = signal(true);
+
+  GoalType = GoalType;  
 
   private clientIdEffect = effect(() => {
     LoaderUtils.sendRequest(
