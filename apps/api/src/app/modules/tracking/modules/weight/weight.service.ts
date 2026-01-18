@@ -1,26 +1,26 @@
 import { DatabaseService } from '@forma-ws/backend-shared';
-import { ChartSpaceVlues } from '@forma-ws/domain';
+import { ChartSpaceValues } from '@forma-ws/domain';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class WeightService {
   constructor(private prisma: DatabaseService) {}
 
-  async getWeightTracking(clientId: string, span: ChartSpaceVlues) {
+  async getWeightTracking(clientId: string, span: ChartSpaceValues) {
     const endDate = new Date();
     const startDate = this.getStartDate(span, endDate);
 
-    if (span === ChartSpaceVlues.DAY) {
+    if (span === ChartSpaceValues.DAY) {
       return this.getDailyWeights(clientId, startDate, endDate);
     }
 
     return this.getMonthlyAverages(clientId, startDate, endDate);
   }
 
-  private getStartDate(span: ChartSpaceVlues, end: Date): Date {
+  private getStartDate(span: ChartSpaceValues, end: Date): Date {
     const start = new Date(end);
 
-    if (span === ChartSpaceVlues.DAY) {
+    if (span === ChartSpaceValues.DAY) {
       start.setDate(end.getDate() - 6);
       return start;
     }
@@ -57,7 +57,7 @@ export class WeightService {
     }
 
     return {
-      span: ChartSpaceVlues.DAY,
+      span: ChartSpaceValues.DAY,
       data: result,
     };
   }

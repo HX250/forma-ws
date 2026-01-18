@@ -4,17 +4,12 @@ import {
   Query,
   Post,
   Body,
-  Put,
   UseGuards,
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
-import {
-  ClientGoalDto,
-  ClientGoalResponse,
-  ClientTrackingGoalResponse,
-} from '@forma-ws/domain';
+import { ClientGoalDto, ClientGoalResponse } from '@forma-ws/domain';
 import { GoalsService } from './goal.service';
 
 @Controller('client-goals')

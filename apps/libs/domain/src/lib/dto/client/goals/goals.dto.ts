@@ -1,11 +1,5 @@
 import { GoalType } from '@forma-ws/frontend/domain';
-import {
-  IsArray,
-  IsBoolean,
-  IsEnum,
-  IsISO8601,
-  IsNumber,
-} from 'class-validator';
+import { IsArray, IsEnum, IsISO8601, IsNumber } from 'class-validator';
 
 export class ClientGoalDto {
   @IsArray()
@@ -16,7 +10,7 @@ export class ClientGoalDto {
   targetWeight?: number;
 
   @IsISO8601()
-  targetDate?: number;
+  targetDate?: string;
 
   @IsNumber()
   caloriesGoal?: number;

@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
   name: 'enumLabel',
-  pure: true,
+  pure: false,
 })
 export class EnumLabelPipe implements PipeTransform {
   private translate = inject(TranslateService);

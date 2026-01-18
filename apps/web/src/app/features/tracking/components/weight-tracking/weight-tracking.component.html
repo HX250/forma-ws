@@ -14,36 +14,36 @@
     <div class="flex gap-2">
       <button
         class="border rounded-full py-2 px-4 transition"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceVlues.DAY"
-        [class.text-white]="chartSpan() === ChartSpaceVlues.DAY"
-        (click)="chartSpan.set(ChartSpaceVlues.DAY)"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.DAY"
+        [class.text-white]="chartSpan() === ChartSpaceValues.DAY"
+        (click)="chartSpan.set(ChartSpaceValues.DAY)"
       >
         day
       </button>
 
       <button
         class="border rounded-full py-2 px-4 transition"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceVlues.THREE_MONTHS"
-        [class.text-white]="chartSpan() === ChartSpaceVlues.THREE_MONTHS"
-        (click)="chartSpan.set(ChartSpaceVlues.THREE_MONTHS)"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
+        [class.text-white]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
+        (click)="chartSpan.set(ChartSpaceValues.THREE_MONTHS)"
       >
         month
       </button>
 
       <button
         class="border rounded-full py-2 px-4 transition"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceVlues.SIX_MONTHS"
-        [class.text-white]="chartSpan() === ChartSpaceVlues.SIX_MONTHS"
-        (click)="chartSpan.set(ChartSpaceVlues.SIX_MONTHS)"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
+        [class.text-white]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
+        (click)="chartSpan.set(ChartSpaceValues.SIX_MONTHS)"
       >
         6month
       </button>
 
       <button
         class="border rounded-full py-2 px-4 transition"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceVlues.YEAR"
-        [class.text-white]="chartSpan() === ChartSpaceVlues.YEAR"
-        (click)="chartSpan.set(ChartSpaceVlues.YEAR)"
+        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.YEAR"
+        [class.text-white]="chartSpan() === ChartSpaceValues.YEAR"
+        (click)="chartSpan.set(ChartSpaceValues.YEAR)"
       >
         year
       </button>

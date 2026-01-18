@@ -47,17 +47,14 @@ export class GoalsService {
       exerciseGoal: dto.exerciseGoal,
     };
 
-    const goal = existingGoal
-      ? await this.prisma.clientGoal.update({
-          where: { clientId },
-          data: goalData,
-        })
-      : await this.prisma.clientGoal.create({
-          data: {
-            clientId,
-            ...goalData,
-          },
-        });
+    await this.prisma.clientGoal.upsert({
+      where: { clientId },
+      update: goalData,
+      create: {
+        clientId,
+        ...goalData,
+      },
+    });
 
     return true;
   }

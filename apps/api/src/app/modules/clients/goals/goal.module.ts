@@ -7,6 +7,6 @@ import { GoalsController } from './goal.controller';
   imports: [DatabaseModule],
   controllers: [GoalsController],
   providers: [GoalsService],
-  exports: [GoalsModule],
+  exports: [GoalsService],
 })
 export class GoalsModule {}

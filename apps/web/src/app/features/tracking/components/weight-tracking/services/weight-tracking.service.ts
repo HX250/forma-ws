@@ -1,24 +1,24 @@
 import { Injectable, signal } from '@angular/core';
-import { ChartSpaceVlues } from '@forma-ws/domain';
+import { ChartSpaceValues } from '@forma-ws/domain';
 import { LineChartConfig } from '@forma-ws/frontend-shared';
 
 @Injectable()
 export class WeightTrackingService {
   private chartSpanCategories = signal<string[]>([]);
 
-  setChartSpanCategories(span: ChartSpaceVlues): void {
+  setChartSpanCategories(span: ChartSpaceValues): void {
     let categories: string[];
 
     switch (span) {
-      case ChartSpaceVlues.DAY:
+      case ChartSpaceValues.DAY:
         categories = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
         break;
 
-      case ChartSpaceVlues.THREE_MONTHS:
+      case ChartSpaceValues.THREE_MONTHS:
         categories = ['Month 1', 'Month 2', 'Month 3'];
         break;
 
-      case ChartSpaceVlues.SIX_MONTHS:
+      case ChartSpaceValues.SIX_MONTHS:
         categories = [
           'Month 1',
           'Month 2',

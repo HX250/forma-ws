@@ -57,7 +57,7 @@ export class EditClientGoalComponent {
       this.formData.set({
         goalType: this.currentGoal.generalGoals.goalType || [],
         targetWeight: this.currentGoal.generalGoals.targetWeight,
-        targetDate: this.currentGoal.generalGoals.targetDate,
+        targetDate: this.currentGoal.generalGoals.targetDate.toString(),
         caloriesGoal: this.currentGoal.trackingGoal.nutritionGoals.caloriesGoal,
         proteinTarget:
           this.currentGoal.trackingGoal.nutritionGoals.proteinTarget,

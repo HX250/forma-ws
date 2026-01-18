@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { WeightTrackingService } from './services/weight-tracking.service';
 import { LineChartComponent } from '@forma-ws/frontend-shared';
 import { WeightTrackingResourceService } from './services/resources/weight-tracking.resource.service';
-import { ChartSpaceVlues } from '@forma-ws/domain';
+import { ChartSpaceValues } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-weight-tracking',
@@ -27,21 +27,21 @@ export class WeightTrackingComponent {
   clientId = input.required<string>();
   targetWeightLoss = input.required<number>();
 
-  chartSpan = signal<ChartSpaceVlues>(ChartSpaceVlues.YEAR);
+  chartSpan = signal<ChartSpaceValues>(ChartSpaceValues.YEAR);
   chartData = signal<number[]>([]);
 
   chartSpanLabel = computed(() => {
     switch (this.chartSpan()) {
-      case ChartSpaceVlues.DAY:
+      case ChartSpaceValues.DAY:
         return 'Daily';
 
-      case ChartSpaceVlues.THREE_MONTHS:
+      case ChartSpaceValues.THREE_MONTHS:
         return '3-Month';
 
-      case ChartSpaceVlues.SIX_MONTHS:
+      case ChartSpaceValues.SIX_MONTHS:
         return '6-Month';
 
-      case ChartSpaceVlues.YEAR:
+      case ChartSpaceValues.YEAR:
         return 'Yearly';
 
       default:
@@ -50,7 +50,7 @@ export class WeightTrackingComponent {
   });
   chartConfig = this.weightTrackingService.getChartConfig([]);
 
-  ChartSpaceVlues = ChartSpaceVlues;
+  ChartSpaceValues = ChartSpaceValues;
 
   private chartSpanEffect = effect(() => {
     this.weightTrackingService.setChartSpanCategories(this.chartSpan());

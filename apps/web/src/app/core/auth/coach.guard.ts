@@ -6,7 +6,6 @@ import { UserType } from '@forma-ws/domain';
 export const coachGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const securityService = inject(SecurityService);
-  UserType;
 
   if (securityService.userType() === UserType.CLIENT) {
     router.navigate(['/dashboard']);

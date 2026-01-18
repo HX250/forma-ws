@@ -101,7 +101,11 @@ export class ClientsProfileComponent implements OnInit {
           currentGoal: this.clientGoals(),
         },
       })
-      .subscribe((result) => {});
+      .subscribe((result) => {
+        if (result) {
+          this.trackingService.loadClientGoals(this.clientId());
+        }
+      });
   }
 
   redirectToClientList() {
