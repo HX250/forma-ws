@@ -33,23 +33,40 @@
         </p>
       </div>
     </div>
+    <div class="grid grid-cols-2 grid-rows-2 gap-4">
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          Activity Level
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{ clientFitnessData().activityLevel }}
+        </p>
+      </div>
 
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Activity Level
-      </p>
-      <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        {{ clientFitnessData().activityLevel }}
-      </p>
-    </div>
-
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Fitness Experience
-      </p>
-      <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        {{ clientFitnessData().fitnessExperience }}
-      </p>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          Fitness Experience
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{ clientFitnessData().fitnessExperience }}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          Weight Goal
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{ clientGoals().targetWeight }} kg
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          Goal Type
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{ clientGoals().goalType | enumLabel : 'GoalType' }}
+        </p>
+      </div>
     </div>
 
     <div

@@ -160,12 +160,20 @@ model ClientGoal {
   goalType               GoalType[]
   targetWeight           Decimal?               @db.Decimal(5, 2)
   targetDate             DateTime?
-  calorieTarget          Int?                   
+
+  caloriesGoal           Int?                      
   proteinTarget          Decimal?               @db.Decimal(6, 2) 
   carbTarget             Decimal?               @db.Decimal(6, 2) 
   fatTarget              Decimal?               @db.Decimal(6, 2) 
-  isActive               Boolean                @default(true)
-  
+  fiberTarget              Decimal?               @db.Decimal(6, 2) 
+  sugarTarget              Decimal?               @db.Decimal(6, 2) 
+
+
+  sleepGoal              Decimal?               @db.Decimal(6, 2)
+  waterGoal              Decimal?               @db.Decimal(6, 2)
+  weightGoal             Decimal?               @db.Decimal(6, 2)
+  exerciseGoal           Decimal?               @db.Decimal(6, 2)
+     
   createdAt              DateTime               @default(now())
   updatedAt              DateTime               @updatedAt
 
@@ -187,7 +195,6 @@ model ExerciseEntry {
   weight       Decimal? @db.Decimal(6, 2)
   duration     Int?      
   notes        String?
-
   createdAt    DateTime @default(now())
 
   @@map("exercise_entries")
@@ -203,8 +210,8 @@ model SleepEntry {
   wakeTime               DateTime
   hoursSlept             Decimal                @db.Decimal(4, 2)
   sleepQuality           Int?                 
-  notes                  String?
-  
+  notes                  String? 
+ 
   createdAt              DateTime               @default(now())
   
 

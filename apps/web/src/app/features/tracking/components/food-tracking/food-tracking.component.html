@@ -7,7 +7,7 @@
         <p
           class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
         >
-          {{ summary().totalCalories }}
+          {{ summary().totalCalories }} / {{ goal().caloriesGoal }}kcal
         </p>
       </div>
     </div>
@@ -37,7 +37,7 @@
     >
       <p class="text-xs text-muted dark:text-muted-dark">Protein</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalProtein }}g
+        {{ summary().totalProtein }}g / {{ goal().proteinTarget }}g
       </p>
     </div>
     <div
@@ -45,7 +45,7 @@
     >
       <p class="text-xs text-muted dark:text-muted-dark">Carbs</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalCarbs }}g
+        {{ summary().totalCarbs }}g / {{ goal().carbTarget }}g
       </p>
     </div>
     <div
@@ -53,7 +53,7 @@
     >
       <p class="text-xs text-muted dark:text-muted-dark">Fat</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalFat }}g
+        {{ summary().totalFat }}g / {{ goal().fatTarget }}g
       </p>
     </div>
     <div
@@ -61,7 +61,7 @@
     >
       <p class="text-xs text-muted dark:text-muted-dark">Fiber</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalFiber }}g
+        {{ summary().totalFiber }}g / {{ goal().fiberTarget }}g
       </p>
     </div>
     <div
@@ -69,7 +69,7 @@
     >
       <p class="text-xs text-muted dark:text-muted-dark">Sugar</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalSugar }}g
+        {{ summary().totalSugar }}g / {{ goal().sugarTarget }}g
       </p>
     </div>
   </div>

@@ -6,7 +6,11 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AlertService, AlertType } from '@forma-ws/frontend-shared';
+import {
+  AlertService,
+  AlertType,
+  ModalService,
+} from '@forma-ws/frontend-shared';
 import { Observable, tap } from 'rxjs';
 import { SecurityService } from './security.service';
 import { Router } from '@angular/router';
@@ -16,6 +20,7 @@ export class HttpInterceptor implements HttpInterceptor {
   private alertService = inject(AlertService);
   private securityService = inject(SecurityService);
   private router = inject(Router);
+  private modalService = inject(ModalService);
 
   intercept(
     req: HttpRequest<any>,
@@ -39,6 +44,7 @@ export class HttpInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             this.securityService.clear();
             this.router.navigateByUrl('/');
+            this.modalService.closeAll();
           }
           this.errorHandling(err);
         },

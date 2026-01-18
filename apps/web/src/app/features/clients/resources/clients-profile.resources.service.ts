@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   ClientGeneralDetails,
   ClientFitnessDetails,
   ClientPermissions,
+  ClientGoalResponse,
 } from '@forma-ws/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 import { Observable } from 'rxjs';
@@ -24,6 +25,13 @@ export class ClientsProfileResourceService extends GlobalAuthService {
       this.endpoint + `/clients/permissions/${id}`
     );
   }
+
+  getClientGoals(clientId: string): Observable<ClientGoalResponse> {
+    return this.http.get<ClientGoalResponse>(this.endpoint + '/client-goals', {
+      params: { clientId },
+    });
+  }
+
   getClientFitnessDetails(id: string): Observable<ClientFitnessDetails> {
     return this.http.get<ClientFitnessDetails>(
       this.endpoint + `/clients/health/${id}`

@@ -28,6 +28,7 @@ export class SleepTrackingComponent {
   private readonly securityService = inject(SecurityService);
 
   todayDate = input.required<Date>();
+  goal = input.required<number>();
 
   todayEntry = signal<SleepEntryData | null>(null);
   userId = signal<string>(this.activatedRoute.snapshot.paramMap.get('id')!);

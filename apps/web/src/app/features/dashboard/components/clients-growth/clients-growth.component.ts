@@ -10,6 +10,7 @@ import { ClientsGrowthService } from './services/clients-growth.service';
   imports: [CommonModule, TranslateModule, LineChartComponent],
   templateUrl: './clients-growth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ClientsGrowthService],
 })
 export class ClientsGrowthComponent {
   private clientsGrowthService = inject(ClientsGrowthService);

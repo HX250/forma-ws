@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  effect,
   inject,
   OnInit,
   signal,
@@ -11,9 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
 import { FitnessInfoComponent } from './components/fintess-info/fitness-info.component';
 import { TrackingComponent } from '../../tracking/tracking.component';
-import { ClientGoalsComponent } from './components/client-goals/client-goals.component';
 import { FormsModule } from '@angular/forms';
 import { UserType } from '@forma-ws/domain';
+import { WeightTrackingComponent } from '../../tracking/components/weight-tracking/weight-tracking.component';
+import { TrackingService } from '../../tracking/services/tracking.service';
+import { EditClientGoalComponent } from './components/client-goals/edit-client-goals.component';
+import { ModalService } from '@forma-ws/frontend-shared';
 
 @Component({
   selector: 'app-clients-profile',
@@ -23,8 +28,8 @@ import { UserType } from '@forma-ws/domain';
     GeneralInfoComponent,
     FitnessInfoComponent,
     TrackingComponent,
-    ClientGoalsComponent,
     FormsModule,
+    WeightTrackingComponent,
   ],
   templateUrl: './clients-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,14 +37,20 @@ import { UserType } from '@forma-ws/domain';
 export class ClientsProfileComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly trackingService = inject(TrackingService);
+  private readonly modalService = inject(ModalService);
+
   clientId = signal<string>('');
   selectedDate = signal<Date>(new Date());
   memberSince = signal<Date | null>(null);
   today = signal<Date>(new Date());
   UserType = UserType;
 
+  clientGoals = computed(() => this.trackingService.clientTrackingGoals());
+
   ngOnInit(): void {
     this.clientId.set(this.getClientId());
+    this.trackingService.loadClientGoals(this.clientId());
   }
 
   onDateChange(value: string) {
@@ -76,6 +87,21 @@ export class ClientsProfileComponent implements OnInit {
 
   goToToday() {
     this.selectedDate.set(new Date());
+  }
+
+  openEditClientGoals() {
+    this.modalService
+      .open<boolean>(EditClientGoalComponent, {
+        title: '🍽️ Log Meal',
+        size: 'lg',
+        showFooterButtons: false,
+        showCloseButton: true,
+        data: {
+          clientId: this.clientId(),
+          currentGoal: this.clientGoals(),
+        },
+      })
+      .subscribe((result) => {});
   }
 
   redirectToClientList() {

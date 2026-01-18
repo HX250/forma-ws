@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LineChartConfig } from '@forma-ws/frontend-shared';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ClientsGrowthService {
   getChartConfig(): LineChartConfig {
     return {

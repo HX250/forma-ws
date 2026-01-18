@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="text-xs text-muted dark:text-muted-dark">
-      Total Duration: {{ summary().totalDuration }} min
+      Total Duration: {{ summary().totalDuration }} min / {{ goal() }} min
     </div>
   </div>
 
@@ -30,7 +30,7 @@
     Viewing client's exercise data (read-only)
   </div>
   } @if(summary()) {
-  <div class="grid grid-cols-4 gap-2">
+  <div class="grid grid-cols-3 gap-2">
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
@@ -45,14 +45,6 @@
       <p class="text-xs text-muted dark:text-muted-dark">Total Reps</p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalReps }}
-      </p>
-    </div>
-    <div
-      class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
-    >
-      <p class="text-xs text-muted dark:text-muted-dark">Total Duration</p>
-      <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-        {{ summary().totalDuration }} min
       </p>
     </div>
     <div

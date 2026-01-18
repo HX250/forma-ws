@@ -1,4 +1,3 @@
-// logged-in.guard.ts
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { SecurityService } from './security.service';

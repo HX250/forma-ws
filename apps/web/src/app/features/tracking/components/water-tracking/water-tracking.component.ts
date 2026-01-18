@@ -25,6 +25,7 @@ export class WaterTrackingComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
 
   todayDate = input.required<Date>();
+  goal = input.required<number>();
 
   waterEntries = signal<WaterData[]>([]);
   totalWater = signal<number>(0);
