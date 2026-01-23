@@ -20,8 +20,7 @@
           },
           {
             "glob": "staticwebapp.config.json",
-            "input": "apps/web/src",
-            "output": "/"
+            "input": "apps/web/src"
           }
         ],
         "styles": ["apps/web/src/styles.css"]
