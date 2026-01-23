@@ -66,6 +66,7 @@
         (memberSince)="memberSince.set($event)"
       />
     </div>
+    @if(clientGoals().generalGoals){
     <div
       class="row-span-1 md:col-span-2 lg:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
     >
@@ -82,6 +83,7 @@
         [targetWeightLoss]="clientGoals().generalGoals.weightGoal"
       />
     </div>
+    }
     <div
       class="row-span-1 md:col-span-2 lg:col-span-6 rounded-lg bg-primary dark:bg-primary-dark shadow-sm"
     >

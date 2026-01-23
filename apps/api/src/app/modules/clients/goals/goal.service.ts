@@ -14,11 +14,30 @@ export class GoalsService {
   async getClientTrackingGoals(
     clientId: string
   ): Promise<ClientGoalResponse | null> {
-    const goal = await this.prisma.clientGoal.findUnique({
+    let goal = await this.prisma.clientGoal.findUnique({
       where: { clientId },
     });
 
-    if (!goal) return null;
+    if (!goal) {
+      goal = await this.prisma.clientGoal.create({
+        data: {
+          clientId,
+          goalType: [],
+          targetWeight: 0,
+          targetDate: null,
+          caloriesGoal: 0,
+          proteinTarget: 0,
+          carbTarget: 0,
+          fatTarget: 0,
+          fiberTarget: 0,
+          sugarTarget: 0,
+          sleepGoal: 0,
+          waterGoal: 0,
+          weightGoal: 0,
+          exerciseGoal: 0,
+        },
+      });
+    }
 
     return this.mapGoalToResponse(goal);
   }
