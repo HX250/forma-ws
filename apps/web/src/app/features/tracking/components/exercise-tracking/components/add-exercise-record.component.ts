@@ -13,11 +13,8 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  ExerciseDetail,
-  ExerciseDetailList,
-  ExerciseEntryDto,
-} from '@forma-ws/domain';
+import { ExerciseDetail } from '@forma-ws/domain';
+import { ExerciseEntryDto } from '@forma-ws/frontend/domain';
 import {
   AlertService,
   AlertType,

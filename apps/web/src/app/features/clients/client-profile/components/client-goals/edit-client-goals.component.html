@@ -1,270 +1,143 @@
-<div class="flex flex-col gap-4 p-4">
-  <div class="flex flex-col gap-2">
-    <label class="text-sm font-medium text-secondary dark:text-secondary-dark">
-      Goal Types
-    </label>
-    <div class="flex flex-wrap gap-2">
-      @for(option of goalTypeOptions; track option.value) {
-      <button
-        type="button"
-        (click)="toggleGoalType(option.value)"
-        [class.bg-accent]="isGoalTypeSelected(option.value)"
-        [class.text-white]="isGoalTypeSelected(option.value)"
-        [class.dark:bg-accent-dark]="isGoalTypeSelected(option.value)"
-        [class.text-secondary]="!isGoalTypeSelected(option.value)"
-        [class.dark:text-secondary-dark]="!isGoalTypeSelected(option.value)"
-        class="px-3 py-2 rounded-md text-sm transition-all hover:opacity-80"
-      >
-        {{ option.label }}
-      </button>
-      }
-    </div>
+<div class="space-y-lg">
+  <div>
+    <app-page-horizontal-select
+      [control]="control.goalType"
+      [options]="goalTypeOptions"
+    />
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-sm"></div>
   </div>
 
-  <div class="grid grid-cols-2 gap-4">
-    <div class="flex flex-col gap-2">
-      <label
-        class="text-sm font-medium text-secondary dark:text-secondary-dark"
-      >
-        Target Weight (kg)
-      </label>
-      <input
-        type="number"
-        step="0.1"
-        [value]="formData().targetWeight ?? ''"
-        (input)="
-          updateField(
-            'targetWeight',
-            $any($event.target).value ? +$any($event.target).value : undefined
-          )
-        "
-        class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-        placeholder="70.0"
-      />
-    </div>
-    <div class="flex flex-col gap-2">
-      <label
-        class="text-sm font-medium text-secondary dark:text-secondary-dark"
-      >
-        Target Date
-      </label>
-      <input
-        type="date"
-        [value]="formData().targetDate ?? ''"
-        (input)="updateField('targetDate', $any($event.target).value)"
-        class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-      />
-    </div>
-  </div>
-
-  <div class="flex flex-col gap-2">
-    <h3 class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-      Nutrition Goals
+  <div
+    class="bg-primary dark:bg-primary-dark border border-border dark:border-border-dark rounded-lg p-lg shadow-card"
+  >
+    <h3
+      class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
+    >
+      General Goals
     </h3>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Calories (kcal)
-        </label>
-        <input
-          type="number"
-          [value]="formData().caloriesGoal ?? ''"
-          (input)="
-            updateField(
-              'caloriesGoal',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="2000"
+    <div class="flex flex-col sm:flex-row gap-md">
+      <div class="flex-1">
+        <app-page-input
+          [control]="form.controls.targetWeight"
+          [label]="'Target Weight (kg)'"
+          [type]="'number'"
         />
       </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Protein (g)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().proteinTarget ?? ''"
-          (input)="
-            updateField(
-              'proteinTarget',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="150"
+      <div class="flex-1">
+        <app-page-input
+          [control]="form.controls.targetDate"
+          [label]="'Target Date'"
+          [type]="'date'"
         />
       </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Carbs (g)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().carbTarget ?? ''"
-          (input)="
-            updateField(
-              'carbTarget',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="200"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark"> Fat (g) </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().fatTarget ?? ''"
-          (input)="
-            updateField(
-              'fatTarget',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="60"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Fiber (g)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().fiberTarget ?? ''"
-          (input)="
-            updateField(
-              'fiberTarget',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="60"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Sugar (g)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().sugarTarget ?? ''"
-          (input)="
-            updateField(
-              'sugarTarget',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="60"
-        />
-      </div>
-    </div>
-  </div>
-
-  <div class="flex flex-col gap-2">
-    <h3 class="text-sm font-semibold text-secondary dark:text-secondary-dark">
-      Lifestyle Goals
-    </h3>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Sleep (hours)
-        </label>
-        <input
-          type="number"
-          step="0.5"
-          [value]="formData().sleepGoal ?? ''"
-          (input)="
-            updateField(
-              'sleepGoal',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="8"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Water (L)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().waterGoal ?? ''"
-          (input)="
-            updateField(
-              'waterGoal',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="2.5"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Weight Goal (kg/week)
-        </label>
-        <input
-          type="number"
-          step="0.1"
-          [value]="formData().weightGoal ?? ''"
-          (input)="
-            updateField(
-              'weightGoal',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="0.5"
-        />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label class="text-xs text-muted dark:text-muted-dark">
-          Exercise (min/day)
-        </label>
-        <input
-          type="number"
-          [value]="formData().exerciseGoal ?? ''"
-          (input)="
-            updateField(
-              'exerciseGoal',
-              $any($event.target).value ? +$any($event.target).value : undefined
-            )
-          "
-          class="px-3 py-2 border border-secondary/20 bg-primary text-secondary rounded-md dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark"
-          placeholder="30"
+      <div class="flex-1">
+        <app-page-input
+          [control]="form.controls.weightGoal"
+          [label]="'Weekly Weight Goal (kg)'"
+          [type]="'number'"
         />
       </div>
     </div>
   </div>
 
   <div
-    class="flex gap-3 justify-end pt-4 border-t border-secondary/20 dark:border-secondary-dark/20"
+    class="bg-primary dark:bg-primary-dark border border-border dark:border-border-dark rounded-lg p-lg shadow-card"
   >
-    <button
-      type="button"
+    <h3
+      class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
+    >
+      Nutrition Goals
+    </h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
+      <div>
+        <app-page-input
+          [control]="form.controls.caloriesGoal"
+          [label]="'Calories'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.proteinTarget"
+          [label]="'Protein (g)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.carbTarget"
+          [label]="'Carbs (g)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.fatTarget"
+          [label]="'Fat (g)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.fiberTarget"
+          [label]="'Fiber (g)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.sugarTarget"
+          [label]="'Sugar (g)'"
+          [type]="'number'"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-primary dark:bg-primary-dark border border-border dark:border-border-dark rounded-lg p-lg shadow-card"
+  >
+    <h3
+      class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
+    >
+      Daily Tracking Goals
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+      <div>
+        <app-page-input
+          [control]="form.controls.sleepGoal"
+          [label]="'Sleep (hours)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.waterGoal"
+          [label]="'Water (L)'"
+          [type]="'number'"
+        />
+      </div>
+      <div>
+        <app-page-input
+          [control]="form.controls.exerciseGoal"
+          [label]="'Exercise (min)'"
+          [type]="'number'"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-md pt-md">
+    <app-button
       (click)="cancel()"
-      class="px-4 py-2 rounded-md text-sm border border-secondary/20 bg-primary text-secondary dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 transition-all"
-    >
-      Cancel
-    </button>
-    <button
-      type="button"
+      [text]="'Cancel'"
+      [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+    />
+    <app-button
       (click)="save()"
-      class="px-4 py-2 rounded-md text-sm bg-accent text-white dark:bg-accent-dark hover:opacity-90 transition-all"
-    >
-      Save Goals
-    </button>
+      [loading]="form.formLoader()"
+      [disabled]="form.invalid"
+      [text]="'Save Goals'"
+    />
   </div>
 </div>

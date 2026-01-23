@@ -5,12 +5,18 @@ export type {
   SetClientPasswordDto,
   RefreshTokenDto,
   AvailabilityModel,
+  ClientGoalDto,
 } from './lib/dto';
 
 export type {
   GetWaterData,
   AddWaterData,
   DeleteWaterData,
+  ExerciseEntryDto,
+  NutritionEntryDto,
+  AddSleepEntryDto,
+  GetSleepEntryDto,
+  DeleteSleepEntryDto,
 } from './lib/dto/tracking';
 
 export * from './lib/enums';

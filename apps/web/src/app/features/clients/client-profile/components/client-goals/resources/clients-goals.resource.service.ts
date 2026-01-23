@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ClientGoalDto } from '@forma-ws/domain';
+import { ClientGoalDto } from '@forma-ws/frontend/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 
 @Injectable()

@@ -6,3 +6,4 @@ export * from './water/water.dto';
 export * from './weight/weigh-in.model';
 export * from './food/food.dto.response';
 export * from './excersise/exercise.dto';
+export * from './food/food.dto';

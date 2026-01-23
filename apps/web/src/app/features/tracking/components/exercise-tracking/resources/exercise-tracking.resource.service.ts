@@ -1,11 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {
-  ExerciseDetail,
-  ExerciseSummary,
-  ExerciseEntryDto,
-} from '@forma-ws/domain';
+import { ExerciseDetail, ExerciseSummary } from '@forma-ws/domain';
+import { ExerciseEntryDto } from '@forma-ws/frontend/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 
 @Injectable()

@@ -2,10 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   GetSleepEntryDto,
-  SleepEntryData,
   AddSleepEntryDto,
   DeleteSleepEntryDto,
-} from '@forma-ws/domain';
+} from '@forma-ws/frontend/domain';
+import { SleepEntryData } from '@forma-ws/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 import { Observable } from 'rxjs';
 

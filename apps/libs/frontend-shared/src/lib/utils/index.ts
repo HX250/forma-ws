@@ -13,3 +13,4 @@ export * from './types/radio-options.model';
 export * from './components/language-switcher/language.service';
 export * from './pipes/language-swithcher-response.pipe';
 export * from './pipes/enum-to-string.pipe';
+export * from './types/horizontal-select-options.model';
