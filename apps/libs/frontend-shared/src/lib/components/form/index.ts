@@ -4,3 +4,6 @@ export * from './page-time-picker/page-time-picker.component';
 export * from './page-horizontal-radio/page-horizontal-radio.component';
 export * from './page-autocomplete/page-autocomplete.component';
 export * from './page-horizontal-select/page-horizontal-select.component';
+export * from './page-input-date/page-input-date.component';
+export * from './page-input-number/page-input-number.component';
+export * from './models/date-validation.model';

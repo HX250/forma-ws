@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { PageInput, PageSelect } from '@forma-ws/frontend-shared';
+import { PageSelect } from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegisterCoachService } from '../../services/register-coach.service';
 import { AuthModel } from '../../../../models/auth.model';

@@ -16,7 +16,7 @@ import {
   AlertType,
   FormUtils,
   PageFormComponent,
-  PageInput,
+  PageInputComponent,
 } from '@forma-ws/frontend-shared';
 import { FirstLoginFormModel } from './models/first-login.model';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ import { FirstLoginResourceService } from './resources/first-login.resource.serv
 
 @Component({
   selector: 'app-first-login',
-  imports: [CommonModule, FormsModule, PageInput],
+  imports: [CommonModule, FormsModule, PageInputComponent],
   templateUrl: './first-login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [FirstLoginResourceService],

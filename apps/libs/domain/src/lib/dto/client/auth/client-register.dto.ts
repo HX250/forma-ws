@@ -7,11 +7,11 @@ import {
   IsEmail,
   IsString,
   IsEnum,
-  IsDateString,
   IsNumber,
   Min,
   IsOptional,
   IsBoolean,
+  IsDate,
 } from 'class-validator';
 
 export class RegisterClientDto {
@@ -27,8 +27,8 @@ export class RegisterClientDto {
   @IsEnum(Gender)
   gender!: Gender;
 
-  @IsDateString()
-  birthDate!: string;
+  @IsDate()
+  birthDate!: Date;
 
   @IsNumber()
   @Min(0)

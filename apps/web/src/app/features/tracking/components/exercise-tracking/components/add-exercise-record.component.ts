@@ -21,9 +21,10 @@ import {
   ButtonComponent,
   PageAutocomplete,
   PageFormComponent,
-  PageInput,
   FormaFormContainer,
   FormUtils,
+  PageInputComponent,
+  PageNumberComponent,
 } from '@forma-ws/frontend-shared';
 import { ExerciseTrackingResourceService } from '../resources/exercise-tracking.resource.service';
 import { ExerciseTrackingFormModel } from '../models/exercise-tracking-form.model';
@@ -34,7 +35,8 @@ import { ExerciseTrackingFormModel } from '../models/exercise-tracking-form.mode
     CommonModule,
     FormsModule,
     PageAutocomplete,
-    PageInput,
+    PageInputComponent,
+    PageNumberComponent,
     ButtonComponent,
   ],
   templateUrl: './add-exercise-record.component.html',

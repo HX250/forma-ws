@@ -6,11 +6,11 @@ export interface ClientFormControls {
   firstName: FormControl<string>;
   lastName: FormControl<string>;
   gender: FormControl<Gender>;
-  birthDate: FormControl<string>;
+  birthDate: FormControl<Date>;
   currentWeight: FormControl<number>;
   height: FormControl<number>;
   activityLevel: FormControl<ActivityLevel>;
-  medicalConditions: FormControl<string | undefined>;
+  medicalConditions: FormControl<string>;
   fitnessExperience: FormControl<FitnessExperience>;
   coachId: FormControl<string>;
   canTrackExercise: FormControl<boolean>;

@@ -20,13 +20,10 @@
             >chevron_left</span
           >
         </button>
-        <input
-          type="date"
-          [ngModel]="selectedDate() | date : 'yyyy-MM-dd'"
-          [min]="memberSince() | date : 'yyyy-MM-dd'"
-          [max]="today() | date : 'yyyy-MM-dd'"
-          (ngModelChange)="onDateChange($event)"
-          class="w-full px-4 py-3 border border-secondary/20 bg-primary text-secondary dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark focus:outline-none focus:ring-2 focus:ring-accent dark:focus:ring-accent-dark transition-all"
+        <app-date-input
+          [control]="selectedDate"
+          [validations]="dateValidations()"
+          (valueChange)="onDateChange($event)"
         />
         <button
           (click)="nextDay()"
@@ -44,6 +41,7 @@
         </button>
       </div>
     </div>
+    @if(user === UserType.COACH){
     <div class="flex items-center justify-end">
       <button
         (click)="openEditClientGoals()"
@@ -54,6 +52,7 @@
         >
       </button>
     </div>
+    }
   </div>
   <div
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 relative flex-1 overflow-hidden"
@@ -89,7 +88,7 @@
     >
       <app-tracking
         [clientId]="clientId()"
-        [todayDate]="selectedDate()"
+        [todayDate]="selectedDate.value"
         [clientGoals]="clientGoals().trackingGoal"
       />
     </div>

@@ -6,7 +6,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { PageInput, PageSelect } from '@forma-ws/frontend-shared';
+import {
+  PageDateComponent,
+  PageInputComponent,
+  PageSelect,
+} from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegisterClientService } from '../../services/register-client.service';
 import { Gender } from '@forma-ws/frontend/domain';
@@ -17,8 +21,9 @@ import { Gender } from '@forma-ws/frontend/domain';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PageInput,
+    PageInputComponent,
     PageSelect,
+    PageDateComponent,
     TranslateModule,
   ],
   templateUrl: './personal-info.component.html',
@@ -29,7 +34,7 @@ export class ClientPersonalInfoComponent {
   lastName = input.required<FormControl<string>>();
   gender = input.required<FormControl<Gender>>();
   email = input.required<FormControl<string>>();
-  birthDate = input.required<FormControl<string>>();
+  birthDate = input.required<FormControl<Date>>();
 
   private registerClientService = inject(RegisterClientService);
 

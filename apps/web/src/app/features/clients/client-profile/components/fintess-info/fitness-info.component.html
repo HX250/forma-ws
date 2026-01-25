@@ -1,14 +1,31 @@
 @if(loading()){
 <forma-loading />
 } @else {
-<div>
-  <div class="flex items-center justify-between mb-3">
-    <h2
-      class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
-    >
-      <span class="text-xl">💪</span>
-      Fitness Information
-    </h2>
+<div class="flex flex-col">
+  <div class="flex justify-between">
+    <div class="flex items-center justify-between mb-3">
+      <h2
+        class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+      >
+        <span class="text-xl">💪</span>
+        Fitness Information
+      </h2>
+    </div>
+    @if (user === UserType.CLIENT) {
+    <div>
+      <button
+        (click)="openWeighInModal()"
+        class="flex items-center justify-center w-10 h-10 rounded-lg border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
+        title="Log Weight"
+      >
+        <span
+          class="material-icons text-secondary dark:text-secondary-dark text-2xl"
+        >
+          monitor_weight
+        </span>
+      </button>
+    </div>
+    }
   </div>
 
   <div class="space-y-3">

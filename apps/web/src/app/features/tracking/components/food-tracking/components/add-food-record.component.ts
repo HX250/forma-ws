@@ -24,7 +24,7 @@ import {
   PageAutocomplete,
   PageFormComponent,
   PageHorizontalRadioComponent,
-  PageInput,
+  PageNumberComponent,
   RatingOption,
 } from '@forma-ws/frontend-shared';
 import { FoodTrackingResourceService } from '../resource/food-tracking.resource.service';
@@ -40,7 +40,7 @@ import {
     FormsModule,
     PageHorizontalRadioComponent,
     PageAutocomplete,
-    PageInput,
+    PageNumberComponent,
     ButtonComponent,
   ],
   templateUrl: './add-food-record.component.html',

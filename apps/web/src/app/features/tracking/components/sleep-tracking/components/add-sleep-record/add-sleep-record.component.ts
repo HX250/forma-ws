@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import {
   FormUtils,
   PageFormComponent,
-  PageInput,
+  PageInputComponent,
   PageTimePickerComponent,
   RatingOption,
   PageHorizontalRadioComponent,
@@ -33,7 +33,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-sleep-tracking',
   imports: [
     CommonModule,
-    PageInput,
+    PageInputComponent,
     PageTimePickerComponent,
     PageHorizontalRadioComponent,
     FormsModule,

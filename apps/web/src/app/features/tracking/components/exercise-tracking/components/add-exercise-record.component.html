@@ -16,34 +16,21 @@
       />
     </div>
     <div class="w-full sm:w-32">
-      <app-page-input
-        [control]="control.sets"
-        [label]="'Sets'"
-        [type]="'number'"
-      />
+      <app-number-input [control]="control.sets" [label]="'Sets'" />
     </div>
     <div class="w-full sm:w-32">
-      <app-page-input
-        [control]="control.reps"
-        [label]="'Reps'"
-        [type]="'number'"
-      />
+      <app-number-input [control]="control.reps" [label]="'Reps'" />
     </div>
   </div>
 
   <div class="flex flex-col sm:flex-row gap-md">
     <div class="w-full sm:w-32">
-      <app-page-input
-        [control]="control.weight"
-        [label]="'Weight (kg)'"
-        [type]="'number'"
-      />
+      <app-number-input [control]="control.weight" [label]="'Weight (kg)'" />
     </div>
     <div class="w-full sm:w-32">
-      <app-page-input
+      <app-number-input
         [control]="control.duration"
         [label]="'Duration (min)'"
-        [type]="'number'"
       />
     </div>
     <div class="flex-1">

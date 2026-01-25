@@ -1,60 +1,18 @@
-import { Injectable, signal } from '@angular/core';
-import { ChartSpaceValues } from '@forma-ws/domain';
+import { Injectable } from '@angular/core';
 import { LineChartConfig } from '@forma-ws/frontend-shared';
+import { WeightTrackingResponse } from '@forma-ws/domain';
 
 @Injectable()
 export class WeightTrackingService {
-  private chartSpanCategories = signal<string[]>([]);
+  getChartConfig(trackingData: WeightTrackingResponse | null): LineChartConfig {
+    const data = trackingData?.data || [];
+    const categories = trackingData?.labels || [];
 
-  setChartSpanCategories(span: ChartSpaceValues): void {
-    let categories: string[];
-
-    switch (span) {
-      case ChartSpaceValues.DAY:
-        categories = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        break;
-
-      case ChartSpaceValues.THREE_MONTHS:
-        categories = ['Month 1', 'Month 2', 'Month 3'];
-        break;
-
-      case ChartSpaceValues.SIX_MONTHS:
-        categories = [
-          'Month 1',
-          'Month 2',
-          'Month 3',
-          'Month 4',
-          'Month 5',
-          'Month 6',
-        ];
-        break;
-
-      default:
-        categories = [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ];
-    }
-
-    this.chartSpanCategories.set(categories);
-  }
-
-  getChartConfig(chartData: number[]): LineChartConfig {
     return {
       series: [
         {
-          name: 'Weight',
-          data: chartData,
+          name: 'Weight (kg)',
+          data: data,
         },
       ],
       chart: {
@@ -81,7 +39,7 @@ export class WeightTrackingService {
         },
       },
       xaxis: {
-        categories: this.chartSpanCategories(),
+        categories: categories,
       },
     };
   }

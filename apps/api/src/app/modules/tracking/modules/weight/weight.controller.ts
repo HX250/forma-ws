@@ -1,16 +1,36 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ChartSpaceValues } from '@forma-ws/domain';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  AddWeighInDto,
+  ChartSpaceValues,
+  WeighInResponse,
+} from '@forma-ws/domain';
 import { WeightService } from './weight.service';
 
-@Controller('clients/:clientId/weight-tracking')
+@Controller('tracking/weight')
 export class WeightController {
   constructor(private readonly weightService: WeightService) {}
 
-  @Get()
+  @Get(':clientId/chart')
   getWeightTracking(
     @Param('clientId') clientId: string,
-    @Query('span') span: ChartSpaceValues
+    @Query('span') span: string
   ) {
-    return this.weightService.getWeightTracking(clientId, Number(span));
+    const spanValue = span ? Number(span) : ChartSpaceValues.YEAR;
+    return this.weightService.getWeightTracking(clientId, spanValue);
+  }
+
+  @Post()
+  addDailyWeighIn(
+    @Query('clientId') clientId: string,
+    @Body() dto: AddWeighInDto
+  ): Promise<boolean> {
+    return this.weightService.logDailyWeighIn(clientId, dto);
+  }
+
+  @Get()
+  getTodayTracking(
+    @Query('clientId') clientId: string
+  ): Promise<WeighInResponse> {
+    return this.weightService.getTodayWeighIn(clientId);
   }
 }

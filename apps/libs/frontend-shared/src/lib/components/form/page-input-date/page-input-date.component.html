@@ -9,7 +9,6 @@
     }
   </label>
   }
-
   <div class="relative">
     <input
       [type]="type()"
@@ -17,8 +16,10 @@
       [name]="name()"
       [required]="getRequiredControls(control())"
       [readonly]="readonly()"
-      [formControl]="control()"
-      class="w-full px-3 py-2 text-base text-primary-dark dark:text-primary bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-sm placeholder:text-muted dark:placeholder:text-muted-dark focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent disabled:bg-muted dark:disabled:bg-muted-dark disabled:text-muted dark:disabled:text-muted-dark disabled:cursor-not-allowed readonly:bg-secondary dark:readonly:bg-secondary-dark readonly:cursor-default transition-colors duration-200"
+      [value]="inputValue()"
+      [min]="validations()?.min"
+      [max]="validations()?.max"
+      [class]="stylingClass()"
       [class.border-utils-error]="control().invalid && control().touched"
       [class.dark:border-utils-error]="control().invalid && control().touched"
       [class.focus:ring-utils-error]="control().invalid && control().touched"
@@ -29,23 +30,18 @@
       (keydown.enter)="enter.emit($event)"
     />
   </div>
-
   @if (control().invalid && control().touched && control().errors) {
   <div class="text-sm py-2 text-utils-error">
     @if (control().errors?.['required']) {
     <span>{{ 'COMPONENTS.FORM.ERRORS.REQUIRED' | translate }}</span>
-    } @if (control().errors?.['email']) {
-    <span>{{ 'COMPONENTS.FORM.ERRORS.EMAIL' | translate }}</span>
-    } @if (control().errors?.['minlength']) {
+    } @if (control().errors?.['min']) {
     <span
-      >{{ 'COMPONENTS.FORM.ERRORS.MIN_LENGTH' | translate: { requiredLength: control().errors?.['minlength'].requiredLength } }}</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MIN_DATE' | translate: { value: control().errors?.['min'].min } }}</span
     >
-    } @if (control().errors?.['maxlength']) {
+    } @if (control().errors?.['max']) {
     <span
-      >{{ 'COMPONENTS.FORM.ERRORS.MAX_LENGTH' | translate: { requiredLength: control().errors?.['maxlength'].requiredLength } }}</span
+      >{{ 'COMPONENTS.FORM.ERRORS.MAX_DATE' | translate: { value: control().errors?.['max'].max } }}</span
     >
-    } @if (control().errors?.['pattern']) {
-    <span>{{ 'COMPONENTS.FORM.ERRORS.PATTERN' | translate }}</span>
     }
   </div>
   }
