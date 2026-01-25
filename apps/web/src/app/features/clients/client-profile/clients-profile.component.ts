@@ -13,12 +13,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
 import { FitnessInfoComponent } from './components/fintess-info/fitness-info.component';
 import { TrackingComponent } from '../../tracking/tracking.component';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { UserType } from '@forma-ws/domain';
 import { WeightTrackingComponent } from '../../tracking/components/weight-tracking/weight-tracking.component';
 import { TrackingService } from '../../tracking/services/tracking.service';
 import { EditClientGoalComponent } from './components/client-goals/edit-client-goals.component';
-import { ModalService } from '@forma-ws/frontend-shared';
+import {
+  AlertService,
+  AlertType,
+  DateValidations,
+  ModalService,
+  PageDateComponent,
+} from '@forma-ws/frontend-shared';
+import { SecurityService } from '../../../core/auth/security.service';
 
 @Component({
   selector: 'app-clients-profile',
@@ -27,6 +34,7 @@ import { ModalService } from '@forma-ws/frontend-shared';
     TranslateModule,
     GeneralInfoComponent,
     FitnessInfoComponent,
+    PageDateComponent,
     TrackingComponent,
     FormsModule,
     WeightTrackingComponent,
@@ -37,14 +45,27 @@ import { ModalService } from '@forma-ws/frontend-shared';
 export class ClientsProfileComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly alerService = inject(AlertService);
   private readonly trackingService = inject(TrackingService);
   private readonly modalService = inject(ModalService);
+  private readonly securityService = inject(SecurityService);
 
   clientId = signal<string>('');
-  selectedDate = signal<Date>(new Date());
-  memberSince = signal<Date | null>(null);
+  memberSince = signal<Date>(new Date());
   today = signal<Date>(new Date());
+
+  selectedDate: FormControl<Date> = new FormControl<Date>(this.today(), {
+    nonNullable: true,
+  });
+
+  dateValidations: DateValidations = {
+    min: this.memberSince().toISOString(),
+    max: this.today().toISOString(),
+  };
+
+  user = this.securityService.userType();
   UserType = UserType;
+  AlertType = AlertType;
 
   clientGoals = computed(() => this.trackingService.clientTrackingGoals());
 
@@ -53,12 +74,16 @@ export class ClientsProfileComponent implements OnInit {
     this.trackingService.loadClientGoals(this.clientId());
   }
 
-  onDateChange(value: string) {
-    this.selectedDate.set(new Date(value));
+  onDateChange(value: Date | null) {
+    if (!value) {
+      return;
+    }
+
+    this.selectedDate.patchValue(value);
   }
 
   previousDay() {
-    const currentDate = this.selectedDate();
+    const currentDate = new Date(this.selectedDate.value);
     const previousDate = new Date(currentDate);
 
     previousDate.setDate(previousDate.getDate() - 1);
@@ -66,27 +91,32 @@ export class ClientsProfileComponent implements OnInit {
     const minDate = new Date(this.memberSince() || '');
 
     if (minDate && previousDate < minDate) {
+      this.alerService.show(
+        AlertType.WARNING,
+        'Cannot go past creation of client'
+      );
       return;
     }
 
-    this.selectedDate.set(previousDate);
+    this.selectedDate.patchValue(previousDate);
   }
 
   nextDay() {
-    const currentDate = this.selectedDate();
+    const currentDate = new Date(this.selectedDate.value);
     const nextDate = new Date(currentDate);
     nextDate.setDate(nextDate.getDate() + 1);
 
     const maxDate = this.today();
     if (nextDate > maxDate) {
+      this.alerService.show(AlertType.WARNING, 'Cannot go to the future');
       return;
     }
 
-    this.selectedDate.set(nextDate);
+    this.selectedDate.patchValue(nextDate);
   }
 
   goToToday() {
-    this.selectedDate.set(new Date());
+    this.selectedDate.patchValue(new Date());
   }
 
   openEditClientGoals() {

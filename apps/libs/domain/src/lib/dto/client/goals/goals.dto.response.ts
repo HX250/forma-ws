@@ -8,7 +8,7 @@ export interface ClientGoalResponse {
 export interface ClientGeneralGoalResponse {
   goalType: GoalType[];
   weightGoal: number;
-  targetDate: number;
+  targetDate: Date;
   targetWeight: number;
 }
 

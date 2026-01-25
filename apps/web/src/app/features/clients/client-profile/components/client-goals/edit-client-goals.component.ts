@@ -14,8 +14,9 @@ import {
   FormaFormContainer,
   FormUtils,
   HorizontalSelectComponent,
+  PageDateComponent,
   PageFormComponent,
-  PageInput,
+  PageNumberComponent,
   SelectOption,
 } from '@forma-ws/frontend-shared';
 import { ClinetGoalsModel } from './models/goals-form.model';
@@ -25,7 +26,8 @@ import { ClinetGoalsModel } from './models/goals-form.model';
   imports: [
     CommonModule,
     FormsModule,
-    PageInput,
+    PageDateComponent,
+    PageNumberComponent,
     ButtonComponent,
     HorizontalSelectComponent,
   ],
@@ -70,8 +72,13 @@ export class EditClientGoalComponent extends PageFormComponent<
   }
 
   save() {
+    const payload = {
+      ...this.form.getRawValue(),
+      targetDate: this.control.targetDate.value.toISOString(),
+    };
+
     this.clientGoalResourceService
-      .createOrUpdateGoal(this.clientId, this.form.getRawValue())
+      .createOrUpdateGoal(this.clientId, payload)
       .subscribe(() => {
         this.modalRef.close(true);
       });
@@ -90,7 +97,7 @@ export class EditClientGoalComponent extends PageFormComponent<
     return {
       goalType: currentGoal.generalGoals.goalType,
       targetWeight: currentGoal.generalGoals.targetWeight,
-      targetDate: this.toDateInputValue(currentGoal.generalGoals.targetDate),
+      targetDate: currentGoal.generalGoals.targetDate,
       caloriesGoal: currentGoal.trackingGoal.nutritionGoals.caloriesGoal,
       proteinTarget: currentGoal.trackingGoal.nutritionGoals.proteinTarget,
       carbTarget: currentGoal.trackingGoal.nutritionGoals.carbTarget,
@@ -109,7 +116,7 @@ export class EditClientGoalComponent extends PageFormComponent<
       this.fb.group({
         goalType: [[], Validators.required],
         targetWeight: [0, Validators.required],
-        targetDate: [this.toDateInputValue(new Date()), Validators.required],
+        targetDate: [new Date(), Validators.required],
         caloriesGoal: [0, Validators.required],
         proteinTarget: [0, Validators.required],
         carbTarget: [0, Validators.required],

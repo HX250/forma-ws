@@ -6,7 +6,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { PageInput, PageSelect } from '@forma-ws/frontend-shared';
+import {
+  PageInputComponent,
+  PageNumberComponent,
+  PageSelect,
+} from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegisterCoachService } from '../../services/register-coach.service';
 import { AuthModel } from '../../../../models/auth.model';
@@ -17,7 +21,8 @@ import { AuthModel } from '../../../../models/auth.model';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PageInput,
+    PageInputComponent,
+    PageNumberComponent,
     PageSelect,
     TranslateModule,
   ],

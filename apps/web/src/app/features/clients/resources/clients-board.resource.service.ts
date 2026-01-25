@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RegisterClientDto, ClientTable } from '@forma-ws/domain';
+import { ClientTable } from '@forma-ws/domain';
+import { RegisterClientDto } from '@forma-ws/frontend/domain';
 import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 import { Observable } from 'rxjs';
 

@@ -13,7 +13,7 @@ import {
   ButtonComponent,
   FormUtils,
   LoadingComponent,
-  PageInput,
+  PageInputComponent,
 } from '@forma-ws/frontend-shared';
 import { PageFormComponent, ButtonProperties } from '@forma-ws/frontend-shared';
 import { AuthModel } from './models/auth.model';
@@ -27,7 +27,7 @@ import { switchMap, tap } from 'rxjs';
   selector: 'app-auth',
   imports: [
     CommonModule,
-    PageInput,
+    PageInputComponent,
     ButtonComponent,
     RouterLink,
     LoadingComponent,

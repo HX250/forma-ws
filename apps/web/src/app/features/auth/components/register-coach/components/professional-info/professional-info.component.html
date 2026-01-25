@@ -3,10 +3,9 @@
     {{ 'AUTH.REGISTER_COACH.PROFESSIONAL_INFORMATION' | translate }}
   </h2>
 
-  <app-page-input
+  <app-number-input
     [control]="yearsOfExperience()"
     [label]="'AUTH.REGISTER_COACH.YEARS_OF_EXPERIENCE'"
-    [type]="'number'"
     [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.YEARS_OF_EXPERIENCE'"
   />
 
@@ -25,10 +24,9 @@
     [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.BIO'"
   />
 
-  <app-page-input
+  <app-number-input
     [control]="pricing()"
     [label]="'AUTH.REGISTER_COACH.PRICING'"
-    [type]="'number'"
     [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.PRICING'"
   />
 </div>

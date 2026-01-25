@@ -6,7 +6,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { PageInput, PageSelect } from '@forma-ws/frontend-shared';
+import {
+  PageInputComponent,
+  PageNumberComponent,
+  PageSelect,
+} from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegisterClientService } from '../../services/register-client.service';
 import { ActivityLevel, FitnessExperience } from '@forma-ws/frontend/domain';
@@ -17,7 +21,8 @@ import { ActivityLevel, FitnessExperience } from '@forma-ws/frontend/domain';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PageInput,
+    PageInputComponent,
+    PageNumberComponent,
     PageSelect,
     TranslateModule,
   ],
@@ -28,7 +33,7 @@ export class ClientHealthInfoComponent {
   currentWeight = input.required<FormControl<number>>();
   height = input.required<FormControl<number>>();
   activityLevel = input.required<FormControl<ActivityLevel>>();
-  medicalConditions = input.required<FormControl<string | undefined>>();
+  medicalConditions = input.required<FormControl<string>>();
   fitnessExperience = input.required<FormControl<FitnessExperience>>();
 
   private registerClientService = inject(RegisterClientService);

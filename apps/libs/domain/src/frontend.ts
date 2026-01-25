@@ -17,6 +17,8 @@ export type {
   AddSleepEntryDto,
   GetSleepEntryDto,
   DeleteSleepEntryDto,
+  AddWeighInDto,
+  WeighInResponse,
 } from './lib/dto/tracking';
 
 export * from './lib/enums';

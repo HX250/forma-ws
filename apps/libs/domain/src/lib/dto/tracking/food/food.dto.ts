@@ -9,7 +9,7 @@ export class NutritionEntryDto {
   @IsString()
   foodId!: string;
 
-  @IsNumberString()
+  @IsNumber()
   servingSize!: number;
 
   @IsNumber()

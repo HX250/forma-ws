@@ -34,7 +34,7 @@ export class ClientSecurityService {
         firstName: dto.firstName,
         lastName: dto.lastName,
         gender: dto.gender,
-        birthDate: new Date(dto.birthDate),
+        birthDate: dto.birthDate,
         currentWeight: dto.currentWeight,
         height: dto.height,
         activityLevel: dto.activityLevel,

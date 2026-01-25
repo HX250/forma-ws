@@ -204,7 +204,7 @@ export class ClientRegisterComponent
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         gender: [this.gender.MALE, Validators.required],
-        birthDate: ['', Validators.required],
+        birthDate: [new Date(), Validators.required],
         currentWeight: [0, [Validators.required, Validators.min(15)]],
         height: [0, [Validators.required, Validators.min(30)]],
         activityLevel: [this.activityLevel.SEDENTARY, Validators.required],

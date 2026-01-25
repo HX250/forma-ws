@@ -4,7 +4,7 @@ import { GoalType } from '@forma-ws/domain';
 export interface ClinetGoalsModel {
   goalType: FormControl<GoalType[]>;
   targetWeight: FormControl<number>;
-  targetDate: FormControl<string>;
+  targetDate: FormControl<Date>;
   caloriesGoal: FormControl<number>;
   proteinTarget: FormControl<number>;
   carbTarget: FormControl<number>;
