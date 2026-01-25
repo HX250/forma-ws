@@ -58,10 +58,10 @@ export class ClientsProfileComponent implements OnInit {
     nonNullable: true,
   });
 
-  dateValidations = computed(() => ({
+  dateValidations: DateValidations = {
     min: this.memberSince().toISOString(),
     max: this.today().toISOString(),
-  }));
+  };
 
   user = this.securityService.userType();
   UserType = UserType;
