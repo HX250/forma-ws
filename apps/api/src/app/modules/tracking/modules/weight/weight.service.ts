@@ -18,17 +18,13 @@ export class WeightService {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const existingWeighIn = await this.prisma.weighIn.findFirst({
-      where: {
-        clientId: clientId,
-        date: today,
-      },
-    });
-
     await this.prisma.$transaction([
       this.prisma.weighIn.upsert({
         where: {
-          id: existingWeighIn?.id || '',
+          clientId_date: {
+            clientId,
+            date: today,
+          },
         },
         update: {
           weight: dto.weight,
@@ -37,21 +33,17 @@ export class WeightService {
           notes: dto.notes,
         },
         create: {
-          clientId: clientId,
+          clientId,
+          date: today,
           weight: dto.weight,
           bodyFatPercentage: dto.bodyFatPercentage,
           muscleMass: dto.muscleMass,
           notes: dto.notes,
-          date: today,
         },
       }),
       this.prisma.client.update({
-        where: {
-          id: clientId,
-        },
-        data: {
-          currentWeight: dto.weight,
-        },
+        where: { id: clientId },
+        data: { currentWeight: dto.weight },
       }),
     ]);
 

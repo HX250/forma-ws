@@ -266,10 +266,11 @@ model WeighIn {
   bodyFatPercentage      Decimal?               @db.Decimal(5, 2)
   muscleMass             Decimal?               @db.Decimal(5, 2)
   notes                  String?
-  date                   DateTime               @default(now()) @db.Date
+  date                   DateTime               @db.Date
   
   createdAt              DateTime               @default(now())
 
+  @@unique([clientId, date], name: "clientId_date")
   @@map("weigh_ins")
 }
 
