@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { WaterTrackingComponent } from './components/water-tracking/water-tracking.component';
 import { SleepTrackingComponent } from './components/sleep-tracking/sleep-tracking.component';
 import { FoodTrackingComponent } from './components/food-tracking/food-tracking.component';
@@ -27,6 +28,7 @@ import { SecurityService } from '../../core/auth/security.service';
   selector: 'app-tracking',
   imports: [
     CommonModule,
+    TranslateModule,
     ExerciseTrackingComponent,
     WaterTrackingComponent,
     SleepTrackingComponent,

@@ -13,6 +13,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ExerciseDetail } from '@forma-ws/domain';
 import { ExerciseEntryDto } from '@forma-ws/frontend/domain';
 import {
@@ -34,6 +35,7 @@ import { ExerciseTrackingFormModel } from '../models/exercise-tracking-form.mode
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     PageAutocomplete,
     PageInputComponent,
     PageNumberComponent,

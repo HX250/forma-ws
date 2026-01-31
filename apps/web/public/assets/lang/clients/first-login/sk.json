@@ -1,0 +1,9 @@
+{
+  "FIRST_LOGIN": {
+    "TITLE": "Odporúčame zmeniť heslo",
+    "DESCRIPTION": "Z bezpečnostných dôvodov si prosím nastavte nové heslo pre váš účet.",
+    "NEW_PASSWORD": "Nové heslo",
+    "CHANGE_PASSWORD_BUTTON": "Zmeniť heslo",
+    "PASSWORD_CHANGED": "Heslo bolo zmenené"
+  }
+}

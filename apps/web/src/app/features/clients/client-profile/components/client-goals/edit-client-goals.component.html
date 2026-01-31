@@ -1,6 +1,7 @@
 <div class="space-y-lg">
   <div>
     <app-page-horizontal-select
+      [label]="'CLIENT_PROFILE.GOALS.GOAL_TYPE'"
       [control]="control.goalType"
       [options]="goalTypeOptions"
     />
@@ -13,20 +14,20 @@
     <h3
       class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
     >
-      General Goals
+      {{ 'CLIENT_PROFILE.GOALS.GENERAL_GOALS' | translate }}
     </h3>
     <div class="flex flex-col sm:flex-row gap-md">
       <div class="flex-1">
         <app-number-input
           [control]="form.controls.targetWeight"
-          [label]="'Target Weight (kg)'"
+          [label]="'CLIENT_PROFILE.GOALS.TARGET_WEIGHT'"
           [step]="0.1"
         />
       </div>
       <div class="flex-1">
         <app-date-input
           [control]="form.controls.targetDate"
-          [label]="'Target Date'"
+          [label]="'CLIENT_PROFILE.GOALS.TARGET_DATE'"
           [stylingClass]="
             'w-full px-3 text-base text-primary-dark dark:text-primary bg-primary dark:bg-primary-dark border border-secondary dark:border-secondary-dark rounded-md shadow-sm placeholder:text-muted dark:placeholder:text-muted-dark focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent disabled:bg-muted dark:disabled:bg-muted-dark disabled:text-muted dark:disabled:text-muted-dark disabled:cursor-not-allowed readonly:bg-secondary dark:readonly:bg-secondary-dark readonly:cursor-default transition-colors duration-200'
           "
@@ -35,7 +36,7 @@
       <div class="flex-1">
         <app-number-input
           [control]="form.controls.weightGoal"
-          [label]="'Weekly Weight Goal (kg)'"
+          [label]="'CLIENT_PROFILE.GOALS.WEEKLY_WEIGHT_GOAL'"
           [step]="0.1"
         />
       </div>
@@ -48,48 +49,48 @@
     <h3
       class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
     >
-      Nutrition Goals
+      {{ 'CLIENT_PROFILE.GOALS.NUTRITION_GOALS' | translate }}
     </h3>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
       <div>
         <app-number-input
           [control]="form.controls.caloriesGoal"
-          [label]="'Calories'"
+          [label]="'CLIENT_PROFILE.GOALS.CALORIES'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.proteinTarget"
-          [label]="'Protein (g)'"
+          [label]="'CLIENT_PROFILE.GOALS.PROTEIN'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.carbTarget"
-          [label]="'Carbs (g)'"
+          [label]="'CLIENT_PROFILE.GOALS.CARBS'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.fatTarget"
-          [label]="'Fat (g)'"
+          [label]="'CLIENT_PROFILE.GOALS.FAT'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.fiberTarget"
-          [label]="'Fiber (g)'"
+          [label]="'CLIENT_PROFILE.GOALS.FIBER'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.sugarTarget"
-          [label]="'Sugar (g)'"
+          [label]="'CLIENT_PROFILE.GOALS.SUGAR'"
           [step]="0.1"
         />
       </div>
@@ -102,27 +103,27 @@
     <h3
       class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
     >
-      Daily Tracking Goals
+      {{ 'CLIENT_PROFILE.GOALS.DAILY_TRACKING_GOALS' | translate }}
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
       <div>
         <app-number-input
           [control]="form.controls.sleepGoal"
-          [label]="'Sleep (hours)'"
+          [label]="'CLIENT_PROFILE.GOALS.SLEEP'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.waterGoal"
-          [label]="'Water (L)'"
+          [label]="'CLIENT_PROFILE.GOALS.WATER'"
           [step]="0.1"
         />
       </div>
       <div>
         <app-number-input
           [control]="form.controls.exerciseGoal"
-          [label]="'Exercise (min)'"
+          [label]="'CLIENT_PROFILE.GOALS.EXERCISE'"
           [step]="0.1"
         />
       </div>
@@ -132,14 +133,14 @@
   <div class="flex justify-end gap-md pt-md">
     <app-button
       (click)="cancel()"
-      [text]="'Cancel'"
+      [text]="'CLIENT_PROFILE.GOALS.CANCEL'"
       [variant]="ButtonProperties.ButtonVariant.PRIMARY"
     />
     <app-button
       (click)="save()"
       [loading]="form.formLoader()"
       [disabled]="form.invalid"
-      [text]="'Save Goals'"
+      [text]="'CLIENT_PROFILE.GOALS.SAVE'"
     />
   </div>
 </div>

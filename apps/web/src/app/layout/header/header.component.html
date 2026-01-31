@@ -22,6 +22,8 @@
     </div>
 
     <div class="hidden items-center gap-2 md:flex">
+      <app-theme-button />
+      <app-language-switcher />
       <button
         (click)="navigateAndClose('/profile')"
         class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-secondary transition-colors hover:bg-secondary/10 dark:text-secondary-dark dark:hover:bg-secondary-dark/10"
@@ -128,6 +130,12 @@
       } @else if(userType === UserType.CLIENT) {
       <app-client-header (linkClick)="closeMobileMenu()" />
       }
+
+      <div class="flex items-center gap-2 mb-4">
+        <app-theme-button />
+        <app-language-switcher />
+      </div>
+
       <button
         (click)="logout()"
         class="rounded-md bg-secondary px-4 py-3 text-base font-medium text-primary transition-colors hover:bg-secondary/80 dark:bg-secondary-dark dark:text-primary-dark dark:hover:bg-secondary-dark/80"

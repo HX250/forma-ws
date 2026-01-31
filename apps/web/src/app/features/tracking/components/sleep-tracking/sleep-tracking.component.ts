@@ -7,16 +7,21 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { SleepEntryData, UserType } from '@forma-ws/domain';
 import { AddSleepRecordComponent } from './components/add-sleep-record/add-sleep-record.component';
-import { ModalService } from '@forma-ws/frontend-shared';
+import {
+  ModalService,
+  ButtonComponent,
+  ButtonProperties,
+} from '@forma-ws/frontend-shared';
 import { SleepTrackingResourceService } from './resource/sleep-tracking.resource.service';
 import { ActivatedRoute } from '@angular/router';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 
 @Component({
   selector: 'app-sleep-tracking',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule, ButtonComponent],
   templateUrl: './sleep-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SleepTrackingResourceService],
@@ -36,6 +41,7 @@ export class SleepTrackingComponent {
   currentUserType = this.securityService.userType();
 
   UserType = UserType;
+  ButtonProperties = ButtonProperties;
 
   private readonly todayEffect = effect(() => {
     const date = this.todayDate();

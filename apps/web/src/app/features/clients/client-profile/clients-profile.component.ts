@@ -24,6 +24,8 @@ import {
   DateValidations,
   ModalService,
   PageDateComponent,
+  ButtonComponent,
+  ButtonProperties,
 } from '@forma-ws/frontend-shared';
 import { SecurityService } from '../../../core/auth/security.service';
 
@@ -38,6 +40,7 @@ import { SecurityService } from '../../../core/auth/security.service';
     TrackingComponent,
     FormsModule,
     WeightTrackingComponent,
+    ButtonComponent,
   ],
   templateUrl: './clients-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,8 +69,15 @@ export class ClientsProfileComponent implements OnInit {
   user = this.securityService.userType();
   UserType = UserType;
   AlertType = AlertType;
+  ButtonProperties = ButtonProperties;
 
   clientGoals = computed(() => this.trackingService.clientTrackingGoals());
+  clientGoalsVerification = computed(() => {
+    return (
+      this.clientGoals().generalGoals.goalType &&
+      this.clientGoals().generalGoals.weightGoal
+    );
+  });
 
   ngOnInit(): void {
     this.clientId.set(this.getClientId());

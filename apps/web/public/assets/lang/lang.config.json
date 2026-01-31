@@ -1,3 +1,11 @@
 {
-  "apps": ["loginPage", "fe-shared", "layout", "clients"]
+  "apps": [
+    "loginPage",
+    "fe-shared",
+    "layout",
+    "clients",
+    "dashboard",
+    "tracking",
+    "client-profile"
+  ]
 }

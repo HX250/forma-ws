@@ -7,13 +7,13 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   template: `<button
     (click)="toggleTheme()"
-    class="flex items-center justify-center w-12 h-12 fixed bottom-6 right-6 rounded-full bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+    class="flex items-center justify-center w-10 h-10 rounded-md text-secondary dark:text-secondary-dark hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
     [attr.aria-label]="
       isDark() ? 'Switch to light mode' : 'Switch to dark mode'
     "
   >
     @if(isDark()) {
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
       />
     </svg>
     } @else {
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"

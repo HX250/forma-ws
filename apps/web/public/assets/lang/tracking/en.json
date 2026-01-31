@@ -1,0 +1,155 @@
+{
+  "TRACKING": {
+    "TITLE": "Daily Tracking",
+    "EXERCISE": {
+      "TITLE": "Exercise",
+      "LOG_EXERCISE": "Log exercise",
+      "NO_EXERCISES": "No exercises logged today. Start tracking your workouts!",
+      "VIEWING_READ_ONLY": "Viewing client's exercise data (read-only)",
+      "TOTAL_DURATION": "Total duration",
+      "GOAL": "Goal",
+      "MINUTES": "minutes",
+      "LOGGED": "Logged",
+      "EXERCISE_DETAILS": "Exercise Details",
+      "CATEGORY": "Category",
+      "PRIMARY_MUSCLE": "Primary Muscle",
+      "SEARCH_EXERCISE": "Search for an exercise",
+      "DURATION": "Duration (minutes)",
+      "SETS": "Sets",
+      "REPS": "Reps",
+      "WEIGHT": "Weight (kg)",
+      "NOTES": "Notes",
+      "TOTAL_SETS": "Total Sets",
+      "TOTAL_REPS": "Total Reps",
+      "EXERCISE_COUNT": "Exercise Count",
+      "DURATION_MIN": "Duration (minutes)",
+      "PLACEHOLDERS": {
+        "SEARCH": "Type to search exercises...",
+        "DURATION": "Enter duration",
+        "SETS": "Enter number of sets",
+        "REPS": "Enter number of reps",
+        "WEIGHT": "Enter weight",
+        "NOTES": "Any additional notes..."
+      },
+      "ALERTS": {
+        "SELECT_EXERCISE": "Please select an exercise",
+        "EXERCISE_LOGGED": "Exercise logged successfully",
+        "FAILED_TO_LOG": "Failed to log exercise"
+      }
+    },
+    "SLEEP": {
+      "TITLE": "Sleep",
+      "SLEEP_DURATION": "Sleep duration",
+      "LOG_SLEEP": "Log sleep",
+      "NO_SLEEP": "No sleep logged today. Start tracking your rest!",
+      "NO_SLEEP_DATA": "No sleep data for today.",
+      "VIEWING_READ_ONLY": "Viewing client's sleep data (read-only)",
+      "TODAY": "Today",
+      "GOAL": "Goal",
+      "HOURS": "hours",
+      "LOGGED": "Logged",
+      "QUALITY": "Quality",
+      "NOTES": "Notes",
+      "SLEEP_DATE": "Sleep date",
+      "BED_TIME": "Bed time",
+      "WAKE_DATE": "Wake date",
+      "WAKE_TIME": "Wake time",
+      "SLEEP_QUALITY": "Sleep quality",
+      "REMOVE_RECORD": "Remove Sleep Record",
+      "LOG_SLEEP_ENTRY": "Log sleep entry",
+      "PLACEHOLDERS": {
+        "BED_TIME": "Select bed time",
+        "WAKE_TIME": "Select wake time",
+        "NOTES": "Anything unusual or worth remembering?"
+      },
+      "QUALITY_LABELS": {
+        "VERY_POOR": "Very Poor",
+        "POOR": "Poor",
+        "FAIR": "Fair",
+        "GOOD": "Good",
+        "EXCELLENT": "Excellent"
+      },
+      "ALERTS": {
+        "SLEEP_RECORDED": "Sleep has been recorded",
+        "FAILED_TO_RECORD": "Failed to record sleep"
+      }
+    },
+    "NUTRITION": {
+      "TITLE": "Nutrition",
+      "LOG_MEAL": "Log meal",
+      "CALORIES": "Calories",
+      "PROTEIN": "Protein",
+      "CARBS": "Carbs",
+      "FAT": "Fat",
+      "VIEWING_READ_ONLY": "Viewing client's nutrition data (read-only)",
+      "MEAL": "meal",
+      "MEAL_TYPE": "Meal type",
+      "MEALS": "meals",
+      "FIBER": "Fiber",
+      "NO_MEALS": "No meals logged today. Start tracking your nutrition!",
+      "SUGAR": "Sugar",
+      "REMOVE": "Remove",
+      "SEARCH_FOOD": "Search for a food item",
+      "SERVING_SIZE": "Serving size (g)",
+      "PLACEHOLDERS": {
+        "SEARCH": "Type to search foods...",
+        "SERVING_SIZE": "Enter serving size"
+      },
+      "MEAL_TYPES": {
+        "BREAKFAST": "Breakfast",
+        "LUNCH": "Lunch",
+        "DINNER": "Dinner",
+        "SNACK": "Snack"
+      },
+      "ALERTS": {
+        "SELECT_FOOD": "Please select a food item",
+        "MEAL_LOGGED": "Meal logged successfully",
+        "FAILED_TO_LOG": "Failed to log meal"
+      },
+      "KCAL": "kcal"
+    },
+    "WATER": {
+      "TITLE": "Water",
+      "WATER_INTAKE": "Water Intake",
+      "GOAL": "Goal",
+      "ADD_250ML": "+250ml",
+      "ADD_500ML": "+500ml",
+      "BOTTLE_SIZES": "Bottle Sizes",
+      "BOTTLE_0_37L": "0.37L",
+      "TODAYS_ENTRIES": "Today's entries",
+      "BOTTLE_0_75L": "0.75L",
+      "BOTTLE_1L": "1L",
+      "BOTTLE_1_5L": "1.5L",
+      "CUSTOM_AMOUNT": "Custom",
+      "NO_WATER_CLIENT": "No water logged today. Start tracking your water intake!",
+      "NO_WATER_COACH": "No water data for today.",
+      "ENTER_CUSTOM_AMOUNT": "Enter amount (L)",
+      "ADD_WATER": "Add Water",
+      "VIEWING_READ_ONLY": "Viewing client's water intake (read-only)"
+    },
+    "WEIGHT": {
+      "TITLE": "Weight tracking",
+      "TARGET_WEIGHT_LOSS": "Target weight loss",
+      "WEIGHT_LOSS": "Weight loss",
+      "AVG_DAILY": "Avg daily",
+      "AVG_MONTHLY": "Avg monthly",
+      "AVERAGE": "Average",
+      "WEEKLY": "Weekly",
+      "3_MONTH": "3-month",
+      "6_MONTH": "6-month",
+      "YEARLY": "Yearly",
+      "FILTERS": {
+        "WEEK": "Week",
+        "3_MONTHS": "3 Months",
+        "6_MONTHS": "6 Months",
+        "YEAR": "Year"
+      }
+    },
+    "LOCKED": {
+      "LOCKED": "Locked",
+      "ENABLE_PERMISSION": "Enable Permission",
+      "CONTACT_COACH_MESSAGE": "Contact your coach to enable this feature",
+      "PERMISSION_ENABLED": "Permission enabled successfully"
+    }
+  }
+}

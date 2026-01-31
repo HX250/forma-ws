@@ -7,6 +7,13 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  ButtonComponent,
+  ButtonProperties,
+  PageNumberComponent,
+} from '@forma-ws/frontend-shared';
 import { WaterTrackingResourceService } from './resource/water-tracking.resource.service';
 import { UserType, WaterData } from '@forma-ws/domain';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
@@ -14,7 +21,12 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-water-tracking',
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ButtonComponent,
+    PageNumberComponent,
+  ],
   templateUrl: './water-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WaterTrackingResourceService],
@@ -29,11 +41,13 @@ export class WaterTrackingComponent {
 
   waterEntries = signal<WaterData[]>([]);
   totalWater = signal<number>(0);
-  waterGoal = signal<number>(2.5);
   userId = signal<string>(this.activatedRoute.snapshot.paramMap.get('id')!);
   currentUserType = this.securityService.userType();
+  customAmountControl = new FormControl<number | null>(null);
+  showCustomInput = signal<boolean>(false);
 
   UserType = UserType;
+  ButtonProperties = ButtonProperties;
 
   private readonly todayEffect = effect(() => {
     const date = this.todayDate();
@@ -86,7 +100,7 @@ export class WaterTrackingComponent {
   }
 
   getProgressPercentage(): number {
-    return Math.min((this.totalWater() / this.waterGoal()) * 100, 100);
+    return Math.min((this.totalWater() / this.goal()) * 100, 100);
   }
 
   formatTime(date: Date): string {
@@ -94,5 +108,21 @@ export class WaterTrackingComponent {
       hour: '2-digit',
       minute: '2-digit',
     });
+  }
+
+  toggleCustomInput(): void {
+    this.showCustomInput.set(!this.showCustomInput());
+    if (!this.showCustomInput()) {
+      this.customAmountControl.setValue(null);
+    }
+  }
+
+  addCustomWater(): void {
+    const amount = this.customAmountControl.value;
+    if (amount && amount > 0) {
+      this.addWater(amount);
+      this.customAmountControl.setValue(null);
+      this.showCustomInput.set(false);
+    }
   }
 }

@@ -1,7 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { UserFullNamePipe } from '@forma-ws/frontend-shared';
+import {
+  UserFullNamePipe,
+  DarkLightButton,
+  LanguageSwitcher,
+} from '@forma-ws/frontend-shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserAuthDetails, UserType } from '@forma-ws/domain';
 import { SecurityService } from '../../core/auth/security.service';
@@ -19,6 +23,8 @@ import { AuthResourceService } from '../../features/auth/resources/auth.resource
     TranslateModule,
     CoachHeaderComponent,
     ClientHeaderComponent,
+    DarkLightButton,
+    LanguageSwitcher,
   ],
   templateUrl: './header.component.html',
 })

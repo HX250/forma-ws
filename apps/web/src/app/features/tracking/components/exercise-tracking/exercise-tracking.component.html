@@ -3,7 +3,9 @@
     <div class="flex items-center gap-2">
       <span class="text-2xl">🏋️</span>
       <div>
-        <p class="text-sm text-muted dark:text-muted-dark">Exercises</p>
+        <p class="text-sm text-muted dark:text-muted-dark">
+          {{ 'TRACKING.EXERCISE.TITLE' | translate }}
+        </p>
         <p
           class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
         >
@@ -12,29 +14,32 @@
       </div>
     </div>
     <div class="text-xs text-muted dark:text-muted-dark">
-      Total Duration: {{ summary().totalDuration }} min / {{ goal() }} min
+      {{ 'TRACKING.EXERCISE.TOTAL_DURATION' | translate }}:
+      {{ summary().totalDuration }} min / {{ goal() }} min
     </div>
   </div>
 
   @if(currentUserType === UserType.CLIENT) {
-  <button
-    class="w-full px-3 py-2 rounded-md text-sm bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark hover:bg-accent/20 dark:hover:bg-accent-dark/20 transition-all"
-    (click)="openLogExerciseModal()"
-  >
-    Log Exercise
-  </button>
+  <app-button
+    [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+    [size]="ButtonProperties.ButtonSize.SMALL"
+    [text]="'TRACKING.EXERCISE.LOG_EXERCISE'"
+    (clicked)="openLogExerciseModal()"
+  />
   } @if(currentUserType === UserType.COACH) {
   <div
     class="px-3 py-2 rounded-md text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-center"
   >
-    Viewing client's exercise data (read-only)
+    {{ 'TRACKING.EXERCISE.VIEWING_READ_ONLY' | translate }}
   </div>
   } @if(summary()) {
   <div class="grid grid-cols-3 gap-2">
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Total Sets</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.EXERCISE.TOTAL_SETS' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalSets }}
       </p>
@@ -42,7 +47,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Total Reps</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.EXERCISE.TOTAL_REPS' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalReps }}
       </p>
@@ -50,7 +57,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Exercise Count</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.EXERCISE.EXERCISE_COUNT' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalExercises }}
       </p>
@@ -69,8 +78,11 @@
           {{ entry.name | languageSwitcher : entry.nameSk }}
         </p>
         <p class="text-xs text-muted dark:text-muted-dark">
-          Sets: {{ entry.sets }} • Reps: {{ entry.reps }} • Weight:
-          {{ entry.weight }}kg • Duration: {{ entry.duration }}min
+          {{ 'TRACKING.EXERCISE.SETS' | translate }}: {{ entry.sets }} •
+          {{ 'TRACKING.EXERCISE.REPS' | translate }}: {{ entry.reps }} •
+          {{ 'TRACKING.EXERCISE.WEIGHT' | translate }}: {{ entry.weight }}kg •
+          {{ 'TRACKING.EXERCISE.DURATION_MIN' | translate }}:
+          {{ entry.duration }}min
         </p>
         <p class="text-xs text-muted dark:text-muted-dark">
           {{ entry.notes }}
@@ -78,13 +90,12 @@
       </div>
       <div class="flex items-center gap-2 flex-shrink-0">
         @if(currentUserType === UserType.CLIENT) {
-        <button
-          (click)="removeEntry(entry.id)"
-          class="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 text-xs"
-          title="Remove"
-        >
-          ✕
-        </button>
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.DANGER"
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [text]="'✕'"
+          (clicked)="removeEntry(entry.id)"
+        />
         }
       </div>
     </div>
@@ -95,7 +106,7 @@
   <div class="flex flex-col gap-2 max-h-32 overflow-y-auto">
     @if(summary().entries.length === 0 && currentUserType === UserType.CLIENT) {
     <p class="text-xs text-center text-muted dark:text-muted-dark">
-      No exercises logged today. Start tracking your workouts!
+      {{ 'TRACKING.EXERCISE.NO_EXERCISES' | translate }}
     </p>
     }
   </div>

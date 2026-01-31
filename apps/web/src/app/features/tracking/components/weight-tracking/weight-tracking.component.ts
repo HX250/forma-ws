@@ -8,14 +8,19 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { WeightTrackingService } from './services/weight-tracking.service';
-import { LineChartComponent } from '@forma-ws/frontend-shared';
+import {
+  LineChartComponent,
+  ButtonComponent,
+  ButtonProperties,
+} from '@forma-ws/frontend-shared';
 import { WeightTrackingResourceService } from './services/resources/weight-tracking.resource.service';
 import { ChartSpaceValues, WeightTrackingResponse } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-weight-tracking',
-  imports: [CommonModule, LineChartComponent],
+  imports: [CommonModule, TranslateModule, LineChartComponent, ButtonComponent],
   templateUrl: './weight-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WeightTrackingService, WeightTrackingResourceService],
@@ -100,6 +105,13 @@ export class WeightTrackingComponent {
   });
 
   ChartSpaceValues = ChartSpaceValues;
+  ButtonProperties = ButtonProperties;
+
+  getFilterVariant(filter: ChartSpaceValues): ButtonProperties.ButtonVariant {
+    return this.chartSpan() === filter
+      ? ButtonProperties.ButtonVariant.PRIMARY
+      : ButtonProperties.ButtonVariant.NEUTRAL;
+  }
 
   private chartSpanEffect = effect(() => {
     const id = this.clientId();

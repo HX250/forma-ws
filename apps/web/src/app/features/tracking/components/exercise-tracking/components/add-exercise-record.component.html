@@ -5,8 +5,8 @@
         [control]="control.exercise.controls.exerciseName"
         [results]="searchResults()"
         [loading]="loading"
-        [label]="'Search Exercise'"
-        [placeholder]="'Type to search... (e.g., bench press)'"
+        [label]="'TRACKING.EXERCISE.SEARCH_EXERCISE'"
+        [placeholder]="'TRACKING.EXERCISE.PLACEHOLDERS.SEARCH'"
         [required]="true"
         [minChars]="2"
         [debounceTime]="300"
@@ -16,27 +16,36 @@
       />
     </div>
     <div class="w-full sm:w-32">
-      <app-number-input [control]="control.sets" [label]="'Sets'" />
+      <app-number-input
+        [control]="control.sets"
+        [label]="'TRACKING.EXERCISE.SETS'"
+      />
     </div>
     <div class="w-full sm:w-32">
-      <app-number-input [control]="control.reps" [label]="'Reps'" />
+      <app-number-input
+        [control]="control.reps"
+        [label]="'TRACKING.EXERCISE.REPS'"
+      />
     </div>
   </div>
 
   <div class="flex flex-col sm:flex-row gap-md">
     <div class="w-full sm:w-32">
-      <app-number-input [control]="control.weight" [label]="'Weight (kg)'" />
+      <app-number-input
+        [control]="control.weight"
+        [label]="'TRACKING.EXERCISE.WEIGHT'"
+      />
     </div>
     <div class="w-full sm:w-32">
       <app-number-input
         [control]="control.duration"
-        [label]="'Duration (min)'"
+        [label]="'TRACKING.EXERCISE.DURATION_MIN'"
       />
     </div>
     <div class="flex-1">
       <app-page-input
         [control]="control.notes"
-        [label]="'Notes'"
+        [label]="'TRACKING.EXERCISE.NOTES'"
         [type]="'text'"
       />
     </div>
@@ -49,11 +58,13 @@
     <h3
       class="text-sm font-medium text-secondary dark:text-secondary-dark mb-md"
     >
-      Exercise Details
+      {{ 'TRACKING.EXERCISE.EXERCISE_DETAILS' | translate }}
     </h3>
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-md">
       <div class="flex flex-col">
-        <span class="text-xs text-muted dark:text-muted-dark">Category</span>
+        <span class="text-xs text-muted dark:text-muted-dark">{{
+          'TRACKING.EXERCISE.CATEGORY' | translate
+        }}</span>
         <span
           class="text-lg font-semibold text-secondary dark:text-secondary-dark"
         >
@@ -61,9 +72,9 @@
         </span>
       </div>
       <div class="flex flex-col">
-        <span class="text-xs text-muted dark:text-muted-dark"
-          >Primary Muscle</span
-        >
+        <span class="text-xs text-muted dark:text-muted-dark">{{
+          'TRACKING.EXERCISE.PRIMARY_MUSCLE' | translate
+        }}</span>
         <span
           class="text-lg font-semibold text-secondary dark:text-secondary-dark"
         >
@@ -78,7 +89,7 @@
     <app-button
       (click)="onSubmit()"
       [loading]="loading"
-      [text]="'Log Exercise'"
+      [text]="'TRACKING.EXERCISE.LOG_EXERCISE'"
     />
   </div>
 </div>

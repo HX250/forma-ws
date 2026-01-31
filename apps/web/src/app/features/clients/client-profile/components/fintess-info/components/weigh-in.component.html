@@ -1,6 +1,6 @@
 <div class="mb-lg">
   <p class="mt-xs text-sm text-muted dark:text-muted-dark">
-    Track your daily weight
+    {{ 'CLIENT_PROFILE.FITNESS_INFO.WEIGH_IN_TIP' | translate }}
   </p>
 </div>
 
@@ -8,40 +8,38 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
     <app-number-input
       [control]="control.weight"
-      [label]="'Daily weight'"
-      [placeholder]="'Weight'"
+      [label]="'CLIENT_PROFILE.FITNESS_INFO.DAILY_WEIGHT'"
+      [placeholder]="'CLIENT_PROFILE.FITNESS_INFO.PLACEHOLDERS.WEIGHT'"
     />
     <app-number-input
       [control]="control.bodyFatPercentage"
-      [label]="'Body fat'"
-      [placeholder]="'Body fat %'"
+      [label]="'CLIENT_PROFILE.FITNESS_INFO.BODY_FAT'"
+      [placeholder]="'CLIENT_PROFILE.FITNESS_INFO.PLACEHOLDERS.BODY_FAT'"
     />
     <app-number-input
       [control]="control.muscleMass"
-      [label]="'Muscle mass'"
-      [placeholder]="'Muscle mass %'"
+      [label]="'CLIENT_PROFILE.FITNESS_INFO.MUSCLE_MASS'"
+      [placeholder]="'CLIENT_PROFILE.FITNESS_INFO.PLACEHOLDERS.MUSCLE_MASS'"
     />
     <app-page-input
       [control]="control.notes"
-      [label]="'Notes'"
-      [placeholder]="'Anything unusual or worth remembering?'"
+      [label]="'TRACKING.SLEEP.NOTES'"
+      [placeholder]="'TRACKING.SLEEP.PLACEHOLDERS.NOTES'"
     />
   </div>
   <div
     class="flex justify-between items-center gap-4 mt-6 pt-6 border-t border-secondary/20 dark:border-secondary-dark/20"
   >
     <p class="text-sm text-muted dark:text-muted-dark">
-      We recommend to do daily weigh in every morning before eating drinking
-      water but after bath potreba
+      {{ 'CLIENT_PROFILE.FITNESS_INFO.WEIGH_IN_TIP' | translate }}
     </p>
-    <button
-      type="button"
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+      [size]="ButtonProperties.ButtonSize.MEDIUM"
+      [text]="'CLIENT_PROFILE.FITNESS_INFO.RECORD_WEIGHT'"
       [disabled]="form.invalid || loading"
-      (click)="onSubmit()"
-      class="inline-flex items-center justify-center px-lg py-sm rounded-md text-sm font-medium text-inverse dark:text-inverse-dark bg-accent dark:bg-accent-dark hover:bg-accent/90 dark:hover:bg-accent-dark/90 disabled:opacity-50 disabled:cursor-not-allowed transition"
-    >
-      <span *ngIf="loading">Logging…</span>
-      <span *ngIf="!loading">Log sleep entry</span>
-    </button>
+      [loading]="loading"
+      (clicked)="onSubmit()"
+    />
   </div>
 </div>

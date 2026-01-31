@@ -5,6 +5,10 @@
     "EMAIL": "E-mail",
     "PASSWORD": "Heslo",
     "LOGIN_BUTTON": "Prihlásiť sa",
+    "ALERTS": {
+      "LOGIN_SUCCESSFUL": "Prihlásenie úspešné",
+      "COACH_CREATED": "Trenér úspešne vytvorený"
+    },
     "REGISTER_COACH": {
       "REDIRECT": "Chceš byť trenérom? Zaregistruj sa teraz!",
       "FIRST_NAME": "Meno",

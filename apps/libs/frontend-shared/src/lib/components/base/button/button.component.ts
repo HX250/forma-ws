@@ -25,7 +25,7 @@ export class ButtonComponent {
   disabled = input<boolean>(false);
   loading = input<boolean>(false);
   icon = input<string>('');
-  text = input.required<string>();
+  text = input<string>();
 
   clicked = output<MouseEvent>();
 
@@ -48,7 +48,6 @@ export class ButtonComponent {
       'dark:focus-visible:ring-offset-primary-dark',
       'cursor-pointer',
     ];
-
     const size = this.size();
     if (size === 'sm') base.push('h-9', 'px-3', 'text-sm');
     else if (size === 'lg') base.push('h-11', 'px-5', 'text-base');
@@ -66,6 +65,38 @@ export class ButtonComponent {
         'dark:text-primary-dark',
         'dark:border-secondary-dark',
         'dark:hover:bg-muted-dark'
+      );
+    } else if (variant === 'complementary') {
+      base.push(
+        'bg-accent/20',
+        'text-accent',
+        'hover:bg-accent/30',
+        'active:bg-accent/30',
+        'dark:bg-accent-dark/20',
+        'dark:text-accent-dark',
+        'dark:hover:bg-accent-dark/30'
+      );
+    } else if (variant === 'neutral') {
+      base.push(
+        'bg-secondary/10',
+        'text-secondary',
+        'hover:bg-secondary/20',
+        'active:bg-secondary/20',
+        'dark:bg-secondary-dark/10',
+        'dark:text-secondary-dark',
+        'dark:hover:bg-secondary-dark/20'
+      );
+    } else if (variant === 'danger') {
+      base.push(
+        'bg-red-500',
+        'text-white',
+        'hover:bg-red-600',
+        'active:bg-red-600',
+        'shadow-sm',
+        'hover:shadow-md',
+        'dark:bg-red-600',
+        'dark:text-white',
+        'dark:hover:bg-red-700'
       );
     } else {
       base.push(
@@ -92,6 +123,31 @@ export class ButtonComponent {
           'dark:bg-muted-dark',
           'dark:text-muted-dark',
           'dark:border-secondary-dark'
+        );
+      } else if (variant === 'complementary') {
+        base.push(
+          'bg-accent/10',
+          'text-accent/60',
+          'hover:bg-accent/10',
+          'dark:bg-accent-dark/10',
+          'dark:text-accent-dark/60'
+        );
+      } else if (variant === 'neutral') {
+        base.push(
+          'bg-secondary/5',
+          'text-secondary/60',
+          'hover:bg-secondary/5',
+          'dark:bg-secondary-dark/5',
+          'dark:text-secondary-dark/60'
+        );
+      } else if (variant === 'danger') {
+        base.push(
+          'bg-red-500/60',
+          'text-white/90',
+          'shadow-none',
+          'hover:bg-red-500/60',
+          'dark:bg-red-600/60',
+          'dark:text-white/90'
         );
       } else {
         base.push(

@@ -14,14 +14,14 @@ import { LanguageService } from './language.service';
   imports: [CommonModule, TranslateModule],
   template: `
     <button
-      class="flex items-center justify-center w-12 h-12 fixed bottom-6 left-6 rounded-full bg-accent text-inverse dark:bg-accent-dark dark:text-inverse-dark shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+      class="flex items-center justify-center w-10 h-10 rounded-md hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
       (click)="onChange(currentLang)"
       [attr.aria-label]="
         'Switch to ' + (currentLang === 'en' ? 'Slovak' : 'English')
       "
     >
       @if(currentLang === 'en') {
-      <svg class="w-7 h-7" viewBox="0 0 30 30" fill="none">
+      <svg class="w-6 h-6" viewBox="0 0 30 30" fill="none">
         <defs>
           <clipPath id="circle-clip">
             <circle cx="15" cy="15" r="15" />
@@ -49,7 +49,7 @@ import { LanguageService } from './language.service';
         />
       </svg>
       } @else {
-      <svg class="w-7 h-7" viewBox="0 0 30 30" fill="none">
+      <svg class="w-6 h-6" viewBox="0 0 30 30" fill="none">
         <defs>
           <clipPath id="circle-clip-sk">
             <circle cx="15" cy="15" r="15" />

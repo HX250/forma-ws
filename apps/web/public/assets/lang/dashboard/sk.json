@@ -1,0 +1,46 @@
+{
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "WIDGETS": {
+      "WEIGHT_TREND": {
+        "TITLE": "Trend hmotnosti",
+        "PORTFOLIO_GOAL_STATUS": "Stav cieľa portfólia",
+        "ON_TRACK": "na správnej ceste",
+        "CLIENTS_TRENDING": "Klienti smerujúci k cieľom"
+      },
+      "WORKOUT_ADHERENCE": {
+        "TITLE": "Dodržiavanie cvičenia",
+        "AVG_WEEKLY_COMPLETION": "Priem. týždenné dokončenie",
+        "VS_LAST_WEEK": "vs. minulý týždeň"
+      },
+      "LOGGING_ACTIVITY": {
+        "TITLE": "Aktivita zaznamenávania",
+        "NO_RECENT_ACTIVITY": "Žiadna nedávna aktivita zaznamenávania",
+        "CLIENT_ACTIVITIES_APPEAR": "Aktivity klientov sa zobrazia tu"
+      },
+      "CLIENT_ENGAGEMENT": {
+        "TITLE": "Zapojenie klientov",
+        "EXERCISE": "Cvičenie",
+        "NUTRITION": "Výživa",
+        "SLEEP": "Spánok",
+        "WATER": "Voda"
+      },
+      "LOGGING_TIMING": {
+        "TITLE": "Distribúcia času zaznamenávania",
+        "DESCRIPTION": "Kedy klienti zaznamenávajú svoje aktivity počas dňa",
+        "MORNING": "Ráno (5:00-11:00)",
+        "LUNCH": "Obed (11:00-16:00)",
+        "AFTERNOON": "Popoludnie (16:00-20:00)",
+        "NIGHT": "Noc (20:00-5:00)",
+        "LOW_MORNING": "Nízke ranné sledovanie",
+        "CONSISTENT_LUNCH": "Konzistentné obedové kontroly",
+        "LOW_EVENING": "Nízke večerné zaznamenávanie cvičenia",
+        "HIGH_FRICTION": "⚠️ Vysoké trenie - zaznamenávanie pred spaním"
+      },
+      "CLIENTS_GROWTH": {
+        "NEW_THIS_MONTH": "Nových tento mesiac",
+        "TOTAL_ACTIVE": "Celkovo aktívnych"
+      }
+    }
+  }
+}
