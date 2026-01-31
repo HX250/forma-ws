@@ -121,6 +121,8 @@
       "BOTTLE_1L": "1L",
       "BOTTLE_1_5L": "1.5L",
       "CUSTOM_AMOUNT": "Custom",
+      "NO_WATER_CLIENT": "No water logged today. Start tracking your water intake!",
+      "NO_WATER_COACH": "No water data for today.",
       "ENTER_CUSTOM_AMOUNT": "Enter amount (L)",
       "ADD_WATER": "Add Water",
       "VIEWING_READ_ONLY": "Viewing client's water intake (read-only)"

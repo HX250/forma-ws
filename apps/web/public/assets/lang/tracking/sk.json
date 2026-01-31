@@ -120,6 +120,8 @@
       "TODAYS_ENTRIES": "Dnesné záznamy",
       "BOTTLE_1_5L": "1.5L",
       "CUSTOM_AMOUNT": "Vlastné",
+      "NO_WATER_CLIENT": "Dnes neboli zaznamenané žiadne údaje o príjme vody. Začnite sledovať svoj príjem vody!",
+      "NO_WATER_COACH": "Žiadne údaje o príjme vody na dnes.",
       "ENTER_CUSTOM_AMOUNT": "Zadajte množstvo (L)",
       "ADD_WATER": "Pridať vodu",
       "VIEWING_READ_ONLY": "Zobrazenie príjmu vody klienta (iba na čítanie)"

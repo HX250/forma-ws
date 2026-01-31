@@ -72,7 +72,7 @@ export class ClientsProfileComponent implements OnInit {
   ButtonProperties = ButtonProperties;
 
   clientGoals = computed(() => this.trackingService.clientTrackingGoals());
-  clinetGoalsVerification = computed(() => {
+  clientGoalsVerification = computed(() => {
     return (
       this.clientGoals().generalGoals.goalType &&
       this.clientGoals().generalGoals.weightGoal
