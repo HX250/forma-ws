@@ -5,6 +5,10 @@
     "EMAIL": "E-mail",
     "PASSWORD": "Password",
     "LOGIN_BUTTON": "Log In",
+    "ALERTS": {
+      "LOGIN_SUCCESSFUL": "Login successful",
+      "COACH_CREATED": "Coach Created successfully"
+    },
     "REGISTER_COACH": {
       "REDIRECT": "Want to be a coach? Register now!",
       "FIRST_NAME": "First Name",
@@ -183,6 +187,13 @@
       "TRACK_WATER_DESC": "Allow client to log and monitor daily water consumption"
     }
   },
+  "FIRST_LOGIN": {
+    "TITLE": "We recommend changing your password",
+    "DESCRIPTION": "For security reasons, please set a new password for your account.",
+    "NEW_PASSWORD": "New password",
+    "CHANGE_PASSWORD_BUTTON": "Change Password",
+    "PASSWORD_CHANGED": "Password changed"
+  },
   "CLIENTS_TABLE": {
     "TITLE": "Clients board",
     "NO_CLIENTS": "No clients found, please add a client.",
@@ -194,5 +205,283 @@
     "NUTRITION": "Nutrition",
     "WATER": "Water",
     "LAST_UPDATED": "Last updated"
+  },
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "WIDGETS": {
+      "WEIGHT_TREND": {
+        "TITLE": "Weight trend",
+        "PORTFOLIO_GOAL_STATUS": "Portfolio goal status",
+        "ON_TRACK": "on track",
+        "CLIENTS_TRENDING": "Clients trending toward goals"
+      },
+      "WORKOUT_ADHERENCE": {
+        "TITLE": "Workout adherence",
+        "AVG_WEEKLY_COMPLETION": "Avg. weekly completion",
+        "VS_LAST_WEEK": "vs. last week"
+      },
+      "LOGGING_ACTIVITY": {
+        "TITLE": "Logging activity",
+        "NO_RECENT_ACTIVITY": "No recent logging activity",
+        "CLIENT_ACTIVITIES_APPEAR": "Client activities will appear here"
+      },
+      "CLIENT_ENGAGEMENT": {
+        "TITLE": "Client engagement",
+        "EXERCISE": "Exercise",
+        "NUTRITION": "Nutrition",
+        "SLEEP": "Sleep",
+        "WATER": "Water"
+      },
+      "LOGGING_TIMING": {
+        "TITLE": "Logging timing distribution",
+        "DESCRIPTION": "When clients log their activities throughout the day",
+        "MORNING": "Morning (5am-11am)",
+        "LUNCH": "Lunch (11am-4pm)",
+        "AFTERNOON": "Afternoon (4pm-8pm)",
+        "NIGHT": "Night (8pm-5am)",
+        "LOW_MORNING": "Low morning tracking",
+        "CONSISTENT_LUNCH": "Consistent lunchtime checks",
+        "LOW_EVENING": "Low evening workout logging",
+        "HIGH_FRICTION": "⚠️ High friction - logging before bed"
+      },
+      "CLIENTS_GROWTH": {
+        "NEW_THIS_MONTH": "New This Month",
+        "TOTAL_ACTIVE": "Total Active"
+      }
+    }
+  },
+  "TRACKING": {
+    "TITLE": "Daily Tracking",
+    "EXERCISE": {
+      "TITLE": "Exercise",
+      "LOG_EXERCISE": "Log exercise",
+      "NO_EXERCISES": "No exercises logged today. Start tracking your workouts!",
+      "VIEWING_READ_ONLY": "Viewing client's exercise data (read-only)",
+      "TOTAL_DURATION": "Total duration",
+      "GOAL": "Goal",
+      "MINUTES": "minutes",
+      "LOGGED": "Logged",
+      "EXERCISE_DETAILS": "Exercise Details",
+      "CATEGORY": "Category",
+      "PRIMARY_MUSCLE": "Primary Muscle",
+      "SEARCH_EXERCISE": "Search for an exercise",
+      "DURATION": "Duration (minutes)",
+      "SETS": "Sets",
+      "REPS": "Reps",
+      "WEIGHT": "Weight (kg)",
+      "NOTES": "Notes",
+      "TOTAL_SETS": "Total Sets",
+      "TOTAL_REPS": "Total Reps",
+      "EXERCISE_COUNT": "Exercise Count",
+      "DURATION_MIN": "Duration (minutes)",
+      "PLACEHOLDERS": {
+        "SEARCH": "Type to search exercises...",
+        "DURATION": "Enter duration",
+        "SETS": "Enter number of sets",
+        "REPS": "Enter number of reps",
+        "WEIGHT": "Enter weight",
+        "NOTES": "Any additional notes..."
+      },
+      "ALERTS": {
+        "SELECT_EXERCISE": "Please select an exercise",
+        "EXERCISE_LOGGED": "Exercise logged successfully",
+        "FAILED_TO_LOG": "Failed to log exercise"
+      }
+    },
+    "SLEEP": {
+      "TITLE": "Sleep",
+      "SLEEP_DURATION": "Sleep duration",
+      "LOG_SLEEP": "Log sleep",
+      "NO_SLEEP": "No sleep logged today. Start tracking your rest!",
+      "NO_SLEEP_DATA": "No sleep data for today.",
+      "VIEWING_READ_ONLY": "Viewing client's sleep data (read-only)",
+      "TODAY": "Today",
+      "GOAL": "Goal",
+      "HOURS": "hours",
+      "LOGGED": "Logged",
+      "QUALITY": "Quality",
+      "NOTES": "Notes",
+      "SLEEP_DATE": "Sleep date",
+      "BED_TIME": "Bed time",
+      "WAKE_DATE": "Wake date",
+      "WAKE_TIME": "Wake time",
+      "SLEEP_QUALITY": "Sleep quality",
+      "REMOVE_RECORD": "Remove Sleep Record",
+      "LOG_SLEEP_ENTRY": "Log sleep entry",
+      "PLACEHOLDERS": {
+        "BED_TIME": "Select bed time",
+        "WAKE_TIME": "Select wake time",
+        "NOTES": "Anything unusual or worth remembering?"
+      },
+      "QUALITY_LABELS": {
+        "VERY_POOR": "Very Poor",
+        "POOR": "Poor",
+        "FAIR": "Fair",
+        "GOOD": "Good",
+        "EXCELLENT": "Excellent"
+      },
+      "ALERTS": {
+        "SLEEP_RECORDED": "Sleep has been recorded",
+        "FAILED_TO_RECORD": "Failed to record sleep"
+      }
+    },
+    "NUTRITION": {
+      "TITLE": "Nutrition",
+      "LOG_MEAL": "Log meal",
+      "CALORIES": "Calories",
+      "PROTEIN": "Protein",
+      "CARBS": "Carbs",
+      "FAT": "Fat",
+      "VIEWING_READ_ONLY": "Viewing client's nutrition data (read-only)",
+      "MEAL": "meal",
+      "MEAL_TYPE": "Meal type",
+      "MEALS": "meals",
+      "FIBER": "Fiber",
+      "NO_MEALS": "No meals logged today. Start tracking your nutrition!",
+      "SUGAR": "Sugar",
+      "REMOVE": "Remove",
+      "SEARCH_FOOD": "Search for a food item",
+      "SERVING_SIZE": "Serving size (g)",
+      "PLACEHOLDERS": {
+        "SEARCH": "Type to search foods...",
+        "SERVING_SIZE": "Enter serving size"
+      },
+      "MEAL_TYPES": {
+        "BREAKFAST": "Breakfast",
+        "LUNCH": "Lunch",
+        "DINNER": "Dinner",
+        "SNACK": "Snack"
+      },
+      "ALERTS": {
+        "SELECT_FOOD": "Please select a food item",
+        "MEAL_LOGGED": "Meal logged successfully",
+        "FAILED_TO_LOG": "Failed to log meal"
+      },
+      "KCAL": "kcal"
+    },
+    "WATER": {
+      "TITLE": "Water",
+      "WATER_INTAKE": "Water Intake",
+      "GOAL": "Goal",
+      "ADD_250ML": "+250ml",
+      "ADD_500ML": "+500ml",
+      "BOTTLE_SIZES": "Bottle Sizes",
+      "BOTTLE_0_37L": "0.37L",
+      "TODAYS_ENTRIES": "Today's entries",
+      "BOTTLE_0_75L": "0.75L",
+      "BOTTLE_1L": "1L",
+      "BOTTLE_1_5L": "1.5L",
+      "CUSTOM_AMOUNT": "Custom",
+      "ENTER_CUSTOM_AMOUNT": "Enter amount (L)",
+      "ADD_WATER": "Add Water",
+      "VIEWING_READ_ONLY": "Viewing client's water intake (read-only)"
+    },
+    "WEIGHT": {
+      "TITLE": "Weight tracking",
+      "TARGET_WEIGHT_LOSS": "Target weight loss",
+      "WEIGHT_LOSS": "Weight loss",
+      "AVG_DAILY": "Avg daily",
+      "AVG_MONTHLY": "Avg monthly",
+      "AVERAGE": "Average",
+      "WEEKLY": "Weekly",
+      "3_MONTH": "3-month",
+      "6_MONTH": "6-month",
+      "YEARLY": "Yearly",
+      "FILTERS": {
+        "WEEK": "Week",
+        "3_MONTHS": "3 Months",
+        "6_MONTHS": "6 Months",
+        "YEAR": "Year"
+      }
+    },
+    "LOCKED": {
+      "LOCKED": "Locked",
+      "ENABLE_PERMISSION": "Enable Permission",
+      "CONTACT_COACH_MESSAGE": "Contact your coach to enable this feature",
+      "PERMISSION_ENABLED": "Permission enabled successfully"
+    }
+  },
+  "CLIENT_PROFILE": {
+    "NAVIGATION": {
+      "TODAY": "Today"
+    },
+    "GENERAL_INFO": {
+      "TITLE": "General information",
+      "MEMBER_SINCE": "Member since",
+      "EMAIL": "Email",
+      "FULL_NAME": "Full name",
+      "GENDER": "Gender",
+      "BIRTH_DATE": "Birth date",
+      "AGE": "Age",
+      "YEARS": "years"
+    },
+    "FITNESS_INFO": {
+      "TITLE": "Fitness information",
+      "CURRENT_WEIGHT": "Current weight",
+      "HEIGHT": "Height",
+      "TARGET_WEIGHT": "Target weight",
+      "ACTIVITY_LEVEL": "Activity level",
+      "FITNESS_EXPERIENCE": "Fitness experience",
+      "MEDICAL_CONDITIONS": "Medical conditions",
+      "WEIGHT_GOAL": "Weight goal",
+      "GOAL_TYPE": "Goal type",
+      "WEIGH_IN": "Weigh in",
+      "WEIGH_IN_TIP": "Track your progress by recording your weight regularly",
+      "DAILY_WEIGHT": "Daily weight (kg)",
+      "BODY_FAT": "Body fat percentage (%)",
+      "MUSCLE_MASS": "Muscle mass (kg)",
+      "RECORD_WEIGHT": "Record new weight",
+      "CANCEL": "Cancel",
+      "SAVE": "Save",
+      "NONE_REPORTED": "None reported",
+      "PLACEHOLDERS": {
+        "WEIGHT": "Enter weight in kg",
+        "BODY_FAT": "Enter body fat percentage",
+        "MUSCLE_MASS": "Enter muscle mass"
+      },
+      "UNITS": {
+        "KG": "kg",
+        "CM": "cm"
+      },
+      "ALERTS": {
+        "WEIGHT_RECORDED": "Vaha bola zaznamenana"
+      }
+    },
+    "GOALS": {
+      "TITLE": "Client goals",
+      "EDIT_TITLE": "Edit client goals",
+      "GENERAL_GOALS": "General goals",
+      "TRACKING_GOALS": "Tracking goals",
+      "GOAL_TYPE": "Goal type",
+      "TARGET_WEIGHT": "Target weight (kg)",
+      "TARGET_DATE": "Target date",
+      "WEEKLY_WEIGHT_GOAL": "Weekly weight swing (kg)",
+      "DAILY_TRACKING_GOALS": "Daily tracking goals",
+      "WATER": "Water",
+      "SLEEP": "Sleep",
+      "EXERCISE": "Exercise",
+      "WEIGHT_GOAL": "Weight goal (kg)",
+      "EXERCISE_GOAL": "Exercise goal (minutes/day)",
+      "SLEEP_GOAL": "Sleep goal (hours/day)",
+      "WATER_GOAL": "Water goal (liters/day)",
+      "NUTRITION_GOALS": "Nutrition goals",
+      "CALORIES": "Calories (kcal/day)",
+      "PROTEIN": "Protein (g/day)",
+      "CARBS": "Carbs (g/day)",
+      "FAT": "Fat (g/day)",
+      "FIBER": "Fiber (g/day)",
+      "SUGAR": "Sugar (g/day)",
+      "SAVE": "Save goals",
+      "CANCEL": "Cancel",
+      "SUCCESS": "Goals updated successfully"
+    }
+  },
+  "GOAL_TYPES": {
+    "LOSE_WEIGHT": "Lose Weight",
+    "GAIN_WEIGHT": "Gain Weight",
+    "MAINTAIN_WEIGHT": "Maintain Weight",
+    "BUILD_MUSCLE": "Build Muscle",
+    "IMPROVE_ENDURANCE": "Improve Endurance",
+    "GENERAL_FITNESS": "General Fitness"
   }
 }

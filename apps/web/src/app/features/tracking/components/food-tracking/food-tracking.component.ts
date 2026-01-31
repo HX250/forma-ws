@@ -7,12 +7,18 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   NutritionClientGoal,
   NutritionSummary,
   UserType,
 } from '@forma-ws/domain';
-import { ModalService, LanguageSwitcherPipe } from '@forma-ws/frontend-shared';
+import {
+  ButtonComponent,
+  ButtonProperties,
+  ModalService,
+  LanguageSwitcherPipe,
+} from '@forma-ws/frontend-shared';
 import { ActivatedRoute } from '@angular/router';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 import { FoodTrackingResourceService } from './resource/food-tracking.resource.service';
@@ -20,7 +26,12 @@ import { AddFoodRecordComponent } from './components/add-food-record.component';
 
 @Component({
   selector: 'app-food-tracking',
-  imports: [CommonModule, LanguageSwitcherPipe],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    ButtonComponent,
+    LanguageSwitcherPipe,
+  ],
   templateUrl: './food-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [FoodTrackingResourceService],
@@ -48,6 +59,7 @@ export class FoodTrackingComponent {
   userId = signal<string>(this.activatedRoute.snapshot.paramMap.get('id')!);
   currentUserType = this.securityService.userType();
   UserType = UserType;
+  ButtonProperties = ButtonProperties;
 
   private readonly todayEffect = effect(() => {
     const date = this.todayDate();

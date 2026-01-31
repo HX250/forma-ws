@@ -6,6 +6,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ClientGoalResponse, GoalType } from '@forma-ws/domain';
 import { ClientGoalResourceService } from './resources/clients-goals.resource.service';
 import {
@@ -26,6 +27,7 @@ import { ClinetGoalsModel } from './models/goals-form.model';
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     PageDateComponent,
     PageNumberComponent,
     ButtonComponent,
@@ -115,18 +117,18 @@ export class EditClientGoalComponent extends PageFormComponent<
     return FormUtils.createFormGroup(
       this.fb.group({
         goalType: [[], Validators.required],
-        targetWeight: [0, Validators.required],
-        targetDate: [new Date(), Validators.required],
-        caloriesGoal: [0, Validators.required],
-        proteinTarget: [0, Validators.required],
-        carbTarget: [0, Validators.required],
-        fatTarget: [0, Validators.required],
-        fiberTarget: [0, Validators.required],
-        sugarTarget: [0, Validators.required],
-        sleepGoal: [0, Validators.required],
-        waterGoal: [0, Validators.required],
-        weightGoal: [0, Validators.required],
-        exerciseGoal: [0, Validators.required],
+        targetWeight: [0, [Validators.min(0), Validators.max(1000)]],
+        targetDate: [new Date()],
+        caloriesGoal: [0],
+        proteinTarget: [0],
+        carbTarget: [0],
+        fatTarget: [0],
+        fiberTarget: [0],
+        sugarTarget: [0],
+        sleepGoal: [0],
+        waterGoal: [0],
+        weightGoal: [0],
+        exerciseGoal: [0],
       })
     );
   }

@@ -1,0 +1,152 @@
+{
+  "TRACKING": {
+    "TITLE": "Denné sledovanie",
+    "EXERCISE": {
+      "TITLE": "Cvičenie",
+      "LOG_EXERCISE": "Zaznamenať cvičenie",
+      "NO_EXERCISES": "Dnes neboli zaznamenané žiadne cvičenia. Začnite sledovať svoje tréningy!",
+      "VIEWING_READ_ONLY": "Zobrazenie cvičebných údajov klienta (iba na čítanie)",
+      "TOTAL_DURATION": "Celkový trvajúci čas",
+      "GOAL": "Cieľ",
+      "MINUTES": "minút",
+      "LOGGED": "Zaznamenané",
+      "EXERCISE_DETAILS": "Detaily cvičenia",
+      "CATEGORY": "Kategória",
+      "PRIMARY_MUSCLE": "Primárny sval",
+      "SEARCH_EXERCISE": "Vyhľadať cvičenie",
+      "DURATION": "Trvanie (minúty)",
+      "SETS": "Série",
+      "REPS": "Opakovania",
+      "WEIGHT": "Hmotnosť (kg)",
+      "TOTAL_SETS": "Celkový počet sérií",
+      "TOTAL_REPS": "Celkový počet opakovaní",
+      "EXERCISE_COUNT": "Počet cvičení",
+      "DURATION_MIN": "Trvanie (minúty)",
+      "NOTES": "Poznámky",
+      "PLACEHOLDERS": {
+        "SEARCH": "Začnite písať pre vyhľadávanie cvičení...",
+        "DURATION": "Zadajte trvanie",
+        "SETS": "Zadajte počet sérií",
+        "REPS": "Zadajte počet opakovaní",
+        "WEIGHT": "Zadajte hmotnosť",
+        "NOTES": "Ďalšie poznámky..."
+      },
+      "ALERTS": {
+        "SELECT_EXERCISE": "Prosím vyberte cvičenie",
+        "EXERCISE_LOGGED": "Cvičenie bolo úspešne zaznamenané",
+        "FAILED_TO_LOG": "Nepodarilo sa zaznamenať cvičenie"
+      }
+    },
+    "SLEEP": {
+      "TITLE": "Spánok",
+      "LOG_SLEEP": "Zaznamenať spánok",
+      "NO_SLEEP": "Dnes nebol zaznamenaný žiadny spánok. Začnite sledovať svoj odpočinok!",
+      "NO_SLEEP_DATA": "Žiadne údaje o spánku na dnes.",
+      "VIEWING_READ_ONLY": "Zobrazenie údajov o spánku klienta (iba na čítanie)",
+      "GOAL": "Cieľ",
+      "HOURS": "hodín",
+      "LOGGED": "Zaznamenané",
+      "QUALITY": "Kvalita",
+      "TODAY": "Dnes",
+      "NOTES": "Poznámky",
+      "SLEEP_DATE": "Dátum spánku",
+      "BED_TIME": "Čas ísť spať",
+      "WAKE_DATE": "Dátum prebudenia",
+      "WAKE_TIME": "Čas prebudenia",
+      "SLEEP_QUALITY": "Kvalita spánku",
+      "REMOVE_RECORD": "Odstrániť záznam spánku",
+      "LOG_SLEEP_ENTRY": "Zaznamenať spánok",
+      "PLACEHOLDERS": {
+        "BED_TIME": "Vyberte čas ísť spať",
+        "WAKE_TIME": "Vyberte čas prebudenia",
+        "NOTES": "Niečo nezvyčajné alebo hodné zapamätania?"
+      },
+      "QUALITY_LABELS": {
+        "VERY_POOR": "Veľmi zlá",
+        "POOR": "Zlá",
+        "FAIR": "Priemerná",
+        "GOOD": "Dobrá",
+        "EXCELLENT": "Vynikajúca"
+      },
+      "ALERTS": {
+        "SLEEP_RECORDED": "Spánok bol zaznamenaný",
+        "FAILED_TO_RECORD": "Nepodarilo sa zaznamenať spánok"
+      }
+    },
+    "NUTRITION": {
+      "TITLE": "Výživa",
+      "LOG_MEAL": "Zaznamenať jedlo",
+      "NO_MEALS": "Dnes neboli zaznamenané žiadne jedlá. Začnite sledovať svoju výživu!",
+      "VIEWING_READ_ONLY": "Zobrazenie nutričných údajov klienta (iba na čítanie)",
+      "CALORIES": "Kalórie",
+      "MEAL": "jedlo",
+      "MEALS": "jedlá",
+      "MEAL_TYPE": "Čas jedla",
+      "PROTEIN": "Bielkoviny",
+      "CARBS": "Sacharidy",
+      "FAT": "Tuky",
+      "FIBER": "Vláknina",
+      "SUGAR": "Cukor",
+      "REMOVE": "Odstrániť",
+      "SEARCH_FOOD": "Vyhľadať potravinu",
+      "SERVING_SIZE": "Veľkosť porcie (g)",
+      "PLACEHOLDERS": {
+        "SEARCH": "Začnite písať pre vyhľadávanie potravín...",
+        "SERVING_SIZE": "Zadajte veľkosť porcie"
+      },
+      "MEAL_TYPES": {
+        "BREAKFAST": "Raňajky",
+        "LUNCH": "Obed",
+        "DINNER": "Večera",
+        "SNACK": "Desiata"
+      },
+      "ALERTS": {
+        "SELECT_FOOD": "Prosím vyberte potravinu",
+        "MEAL_LOGGED": "Jedlo bolo úspešne zaznamenané",
+        "FAILED_TO_LOG": "Nepodarilo sa zaznamenať jedlo"
+      },
+      "KCAL": "kcal"
+    },
+    "WATER": {
+      "TITLE": "Voda",
+      "WATER_INTAKE": "Príjem vody",
+      "GOAL": "Cieľ",
+      "ADD_250ML": "+250ml",
+      "ADD_500ML": "+500ml",
+      "BOTTLE_SIZES": "Veľkosti fliaš",
+      "BOTTLE_0_37L": "0.37L",
+      "BOTTLE_0_75L": "0.75L",
+      "BOTTLE_1L": "1L",
+      "TODAYS_ENTRIES": "Dnesné záznamy",
+      "BOTTLE_1_5L": "1.5L",
+      "CUSTOM_AMOUNT": "Vlastné",
+      "ENTER_CUSTOM_AMOUNT": "Zadajte množstvo (L)",
+      "ADD_WATER": "Pridať vodu",
+      "VIEWING_READ_ONLY": "Zobrazenie príjmu vody klienta (iba na čítanie)"
+    },
+    "WEIGHT": {
+      "TITLE": "Sledovanie hmotnosti",
+      "TARGET_WEIGHT_LOSS": "Cieľový úbytok hmotnosti",
+      "WEIGHT_LOSS": "Úbytok hmotnosti",
+      "AVG_DAILY": "Priem. denný",
+      "AVG_MONTHLY": "Priem. mesačný",
+      "AVERAGE": "Priemer",
+      "WEEKLY": "Týždenný",
+      "3_MONTH": "3-mesačný",
+      "6_MONTH": "6-mesačný",
+      "YEARLY": "Ročný",
+      "FILTERS": {
+        "WEEK": "Týždeň",
+        "3_MONTHS": "3 mesiace",
+        "6_MONTHS": "6 mesiacov",
+        "YEAR": "Rok"
+      }
+    },
+    "LOCKED": {
+      "LOCKED": "Zamknuté",
+      "ENABLE_PERMISSION": "Povoliť prístup",
+      "CONTACT_COACH_MESSAGE": "Kontaktujte svojho trénera pre povolenie tejto funkcie",
+      "PERMISSION_ENABLED": "Oprávnenie úspešne povolené"
+    }
+  }
+}

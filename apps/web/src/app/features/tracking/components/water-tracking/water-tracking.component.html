@@ -3,39 +3,92 @@
     <div class="flex items-center gap-2">
       <span class="text-2xl">💧</span>
       <div>
-        <p class="text-sm text-muted dark:text-muted-dark">Water Intake</p>
+        <p class="text-sm text-muted dark:text-muted-dark">
+          {{ 'TRACKING.WATER.WATER_INTAKE' | translate }}
+        </p>
         <p
           class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
         >
-          {{ totalWater() | number : '1.2-2' }}L / {{ waterGoal() }}L
+          {{ totalWater() | number : '1.2-2' }}L / {{ goal() }}L
         </p>
       </div>
     </div>
     <div class="text-xs text-muted dark:text-muted-dark">
-      Goal: {{ waterGoal() }}L
+      {{ 'TRACKING.WATER.GOAL' | translate }}: {{ goal() }}L
     </div>
   </div>
 
   @if (currentUserType === UserType.CLIENT) {
-  <div class="flex gap-2">
-    <button
-      (click)="addWater(0.25)"
-      class="flex-1 px-3 py-2 rounded-md text-sm bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark hover:bg-accent/20 dark:hover:bg-accent-dark/20 transition-all"
-    >
-      +250ml
-    </button>
-    <button
-      (click)="addWater(0.5)"
-      class="flex-1 px-3 py-2 rounded-md text-sm bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark hover:bg-accent/20 dark:hover:bg-accent-dark/20 transition-all"
-    >
-      +500ml
-    </button>
+  <div class="flex flex-col gap-2">
+    <p class="text-xs font-medium text-secondary dark:text-secondary-dark">
+      {{ 'TRACKING.WATER.BOTTLE_SIZES' | translate }}
+    </p>
+    <div class="flex gap-2">
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WATER.BOTTLE_0_37L'"
+        (clicked)="addWater(0.37)"
+      />
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WATER.BOTTLE_0_75L'"
+        (clicked)="addWater(0.75)"
+      />
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WATER.BOTTLE_1L'"
+        (clicked)="addWater(1)"
+      />
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WATER.BOTTLE_1_5L'"
+        (clicked)="addWater(1.5)"
+      />
+    </div>
+    @if (!showCustomInput()) {
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [text]="'TRACKING.WATER.CUSTOM_AMOUNT'"
+      (clicked)="toggleCustomInput()"
+    />
+    } @else {
+    <div class="flex gap-2 items-end">
+      <div class="flex-1">
+        <app-number-input
+          [control]="customAmountControl"
+          [placeholder]="'TRACKING.WATER.ENTER_CUSTOM_AMOUNT' | translate"
+          [step]="0.1"
+          [validations]="{ min: 0.1, max: 5 }"
+        />
+      </div>
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WATER.ADD_WATER'"
+        [disabled]="
+          !customAmountControl.value || customAmountControl.value <= 0
+        "
+        (clicked)="addCustomWater()"
+      />
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.SECONDARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'✕'"
+        (clicked)="toggleCustomInput()"
+      />
+    </div>
+    }
   </div>
   } @if (currentUserType === UserType.COACH) {
   <div
     class="px-3 py-2 rounded-md text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-center"
   >
-    Viewing client's water intake (read-only)
+    {{ 'TRACKING.WATER.VIEWING_READ_ONLY' | translate }}
   </div>
   }
 
@@ -50,7 +103,9 @@
 
   @if (waterEntries().length > 0) {
   <div class="mt-2">
-    <p class="text-xs text-muted dark:text-muted-dark mb-2">Today's entries:</p>
+    <p class="text-xs text-muted dark:text-muted-dark mb-2">
+      {{ 'TRACKING.WATER.TODAYS_ENTRIES' | translate }}
+    </p>
     <div class="flex flex-col overflow-x-scroll max-h-44 gap-1">
       @for (entry of waterEntries(); track entry.id) {
       <div
@@ -67,12 +122,12 @@
           </span>
         </div>
         @if (currentUserType === UserType.CLIENT) {
-        <button
-          (click)="removeWaterEntry(entry.id)"
-          class="text-xs text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-        >
-          ✕
-        </button>
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.DANGER"
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [text]="'✕'"
+          (clicked)="removeWaterEntry(entry.id)"
+        />
         }
       </div>
       }
@@ -80,8 +135,9 @@
   </div>
   } @else {
   <p class="text-xs text-center text-muted dark:text-muted-dark mt-2">
-    @if (currentUserType === UserType.CLIENT) { No water logged today. Start
-    tracking! } @else { No water entries for today. }
+    @if (currentUserType === UserType.CLIENT) {
+    {{ 'TRACKING.WATER.NO_WATER_CLIENT' | translate }} } @else {
+    {{ 'TRACKING.WATER.NO_WATER_COACH' | translate }} }
   </p>
   }
 </div>

@@ -5,6 +5,10 @@
     "EMAIL": "E-mail",
     "PASSWORD": "Password",
     "LOGIN_BUTTON": "Log In",
+    "ALERTS": {
+      "LOGIN_SUCCESSFUL": "Login successful",
+      "COACH_CREATED": "Coach Created successfully"
+    },
     "REGISTER_COACH": {
       "REDIRECT": "Want to be a coach? Register now!",
       "FIRST_NAME": "First Name",

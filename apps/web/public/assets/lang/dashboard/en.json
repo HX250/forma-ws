@@ -1,0 +1,46 @@
+{
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "WIDGETS": {
+      "WEIGHT_TREND": {
+        "TITLE": "Weight trend",
+        "PORTFOLIO_GOAL_STATUS": "Portfolio goal status",
+        "ON_TRACK": "on track",
+        "CLIENTS_TRENDING": "Clients trending toward goals"
+      },
+      "WORKOUT_ADHERENCE": {
+        "TITLE": "Workout adherence",
+        "AVG_WEEKLY_COMPLETION": "Avg. weekly completion",
+        "VS_LAST_WEEK": "vs. last week"
+      },
+      "LOGGING_ACTIVITY": {
+        "TITLE": "Logging activity",
+        "NO_RECENT_ACTIVITY": "No recent logging activity",
+        "CLIENT_ACTIVITIES_APPEAR": "Client activities will appear here"
+      },
+      "CLIENT_ENGAGEMENT": {
+        "TITLE": "Client engagement",
+        "EXERCISE": "Exercise",
+        "NUTRITION": "Nutrition",
+        "SLEEP": "Sleep",
+        "WATER": "Water"
+      },
+      "LOGGING_TIMING": {
+        "TITLE": "Logging timing distribution",
+        "DESCRIPTION": "When clients log their activities throughout the day",
+        "MORNING": "Morning (5am-11am)",
+        "LUNCH": "Lunch (11am-4pm)",
+        "AFTERNOON": "Afternoon (4pm-8pm)",
+        "NIGHT": "Night (8pm-5am)",
+        "LOW_MORNING": "Low morning tracking",
+        "CONSISTENT_LUNCH": "Consistent lunchtime checks",
+        "LOW_EVENING": "Low evening workout logging",
+        "HIGH_FRICTION": "⚠️ High friction - logging before bed"
+      },
+      "CLIENTS_GROWTH": {
+        "NEW_THIS_MONTH": "New This Month",
+        "TOTAL_ACTIVE": "Total Active"
+      }
+    }
+  }
+}

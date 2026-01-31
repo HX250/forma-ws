@@ -1,0 +1,9 @@
+{
+  "FIRST_LOGIN": {
+    "TITLE": "We recommend changing your password",
+    "DESCRIPTION": "For security reasons, please set a new password for your account.",
+    "NEW_PASSWORD": "New password",
+    "CHANGE_PASSWORD_BUTTON": "Change Password",
+    "PASSWORD_CHANGED": "Password changed"
+  }
+}

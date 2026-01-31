@@ -3,7 +3,9 @@
     <div class="flex items-center gap-2">
       <span class="text-2xl">🍽️</span>
       <div>
-        <p class="text-sm text-muted dark:text-muted-dark">Calories</p>
+        <p class="text-sm text-muted dark:text-muted-dark">
+          {{ 'TRACKING.NUTRITION.CALORIES' | translate }}
+        </p>
         <p
           class="text-2xl font-semibold text-secondary dark:text-secondary-dark"
         >
@@ -18,24 +20,26 @@
   </div>
 
   @if(currentUserType === UserType.CLIENT) {
-  <button
-    class="w-full px-3 py-2 rounded-md text-sm bg-accent/10 text-accent dark:bg-accent-dark/10 dark:text-accent-dark hover:bg-accent/20 dark:hover:bg-accent-dark/20 transition-all"
-    (click)="openLogMealModal()"
-  >
-    Log Meal
-  </button>
+  <app-button
+    [variant]="ButtonProperties.ButtonVariant.COMPLEMENTARY"
+    [size]="ButtonProperties.ButtonSize.SMALL"
+    [text]="'TRACKING.NUTRITION.LOG_MEAL'"
+    (clicked)="openLogMealModal()"
+  />
   } @if(currentUserType === UserType.COACH) {
   <div
     class="px-3 py-2 rounded-md text-xs bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-center"
   >
-    Viewing client's nutrition data (read-only)
+    {{ 'TRACKING.NUTRITION.VIEWING_READ_ONLY' | translate }}
   </div>
   } @if(summary()) {
   <div class="grid grid-cols-3 gap-2">
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Protein</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.NUTRITION.PROTEIN' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalProtein }}g / {{ goal().proteinTarget }}g
       </p>
@@ -43,7 +47,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Carbs</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.NUTRITION.CARBS' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalCarbs }}g / {{ goal().carbTarget }}g
       </p>
@@ -51,7 +57,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Fat</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.NUTRITION.FAT' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalFat }}g / {{ goal().fatTarget }}g
       </p>
@@ -59,7 +67,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Fiber</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.NUTRITION.FIBER' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalFiber }}g / {{ goal().fiberTarget }}g
       </p>
@@ -67,7 +77,9 @@
     <div
       class="text-center p-2 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
     >
-      <p class="text-xs text-muted dark:text-muted-dark">Sugar</p>
+      <p class="text-xs text-muted dark:text-muted-dark">
+        {{ 'TRACKING.NUTRITION.SUGAR' | translate }}
+      </p>
       <p class="text-sm font-semibold text-secondary dark:text-secondary-dark">
         {{ summary().totalSugar }}g / {{ goal().sugarTarget }}g
       </p>
@@ -92,13 +104,12 @@
       </div>
       <div class="flex items-center gap-2 flex-shrink-0">
         @if(currentUserType === UserType.CLIENT) {
-        <button
-          (click)="removeEntry(entry.id)"
-          class="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 text-xs"
-          title="Remove"
-        >
-          ✕
-        </button>
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.DANGER"
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [text]="'✕'"
+          (clicked)="removeEntry(entry.id)"
+        />
         }
       </div>
     </div>
@@ -109,7 +120,7 @@
   <div class="flex flex-col gap-2 max-h-32 overflow-y-auto">
     @if(summary().entries.length === 0 && currentUserType === UserType.CLIENT) {
     <p class="text-xs text-center text-muted dark:text-muted-dark">
-      No meals logged today. Start tracking your nutrition!
+      {{ 'TRACKING.NUTRITION.NO_MEALS' | translate }}
     </p>
     }
   </div>

@@ -8,15 +8,26 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ExerciseSummary, UserType } from '@forma-ws/domain';
-import { LanguageSwitcherPipe, ModalService } from '@forma-ws/frontend-shared';
+import {
+  LanguageSwitcherPipe,
+  ModalService,
+  ButtonComponent,
+  ButtonProperties,
+} from '@forma-ws/frontend-shared';
 import { SecurityService } from 'apps/web/src/app/core/auth/security.service';
 import { AddExerciseRecordComponent } from './components/add-exercise-record.component';
 import { ExerciseTrackingResourceService } from './resources/exercise-tracking.resource.service';
 
 @Component({
   selector: 'app-exercise-tracking',
-  imports: [CommonModule, LanguageSwitcherPipe],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    LanguageSwitcherPipe,
+    ButtonComponent,
+  ],
   templateUrl: './exercise-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ExerciseTrackingResourceService],
@@ -43,6 +54,7 @@ export class ExerciseTrackingComponent {
   userId = signal<string>(this.activatedRoute.snapshot.paramMap.get('id')!);
   currentUserType = this.securityService.userType();
   UserType = UserType;
+  ButtonProperties = ButtonProperties;
 
   private readonly todayEffect = effect(() => {
     const date = this.todayDate();

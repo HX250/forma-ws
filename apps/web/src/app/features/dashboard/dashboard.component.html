@@ -1,6 +1,6 @@
 <div class="p-4 max-w-full mx-auto h-fit flex flex-col overflow-hidden">
   <h1 class="text-2xl font-bold text-secondary dark:text-secondary-dark mb-4">
-    Dashboard
+    {{ 'DASHBOARD.TITLE' | translate }}
   </h1>
 
   <div
@@ -26,7 +26,7 @@
           class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
         >
           <span class="text-xl">⚖️</span>
-          Weight Trend
+          {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.TITLE' | translate }}
         </h2>
         @if (isExpanded('weight-trend')) {
         <button
@@ -41,14 +41,16 @@
       <div class="space-y-3">
         <div>
           <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-            Portfolio Goal Status
+            {{
+              'DASHBOARD.WIDGETS.WEIGHT_TREND.PORTFOLIO_GOAL_STATUS' | translate
+            }}
           </p>
           <div class="flex items-baseline gap-2">
             <p class="text-3xl font-bold text-accent dark:text-accent-dark">
               0%
             </p>
             <span class="text-xs text-secondary/70 dark:text-secondary-dark/70">
-              on track
+              {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.ON_TRACK' | translate }}
             </span>
           </div>
         </div>
@@ -57,7 +59,7 @@
           class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
         >
           <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-2">
-            Clients trending toward goals
+            {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.CLIENTS_TRENDING' | translate }}
           </p>
           <div
             class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
@@ -85,7 +87,7 @@
           class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
         >
           <span class="text-xl">🏋️</span>
-          Workout Adherence
+          {{ 'DASHBOARD.WIDGETS.WORKOUT_ADHERENCE.TITLE' | translate }}
         </h2>
         @if (isExpanded('workout-adherence')) {
         <button
@@ -100,7 +102,10 @@
       <div class="space-y-3">
         <div>
           <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-            Avg. Weekly Completion
+            {{
+              'DASHBOARD.WIDGETS.WORKOUT_ADHERENCE.AVG_WEEKLY_COMPLETION'
+                | translate
+            }}
           </p>
           <div class="flex items-baseline gap-2">
             <p class="text-3xl font-bold text-accent dark:text-accent-dark">
@@ -117,7 +122,7 @@
           class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
         >
           <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
-            vs. last week
+            {{ 'DASHBOARD.WIDGETS.WORKOUT_ADHERENCE.VS_LAST_WEEK' | translate }}
           </p>
         </div>
       </div>
@@ -137,7 +142,7 @@
           class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
         >
           <span class="text-xl">📊</span>
-          Logging Activity
+          {{ 'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.TITLE' | translate }}
         </h2>
         @if (isExpanded('logging-activity')) {
         <button
@@ -162,12 +167,18 @@
                 <p
                   class="text-sm font-medium text-secondary dark:text-secondary-dark"
                 >
-                  No recent logging activity
+                  {{
+                    'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.NO_RECENT_ACTIVITY'
+                      | translate
+                  }}
                 </p>
                 <p
                   class="text-xs text-secondary/70 dark:text-secondary-dark/70"
                 >
-                  Client activities will appear here
+                  {{
+                    'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.CLIENT_ACTIVITIES_APPEAR'
+                      | translate
+                  }}
                 </p>
               </div>
             </div>
@@ -195,7 +206,7 @@
           class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
         >
           <span class="text-xl">📈</span>
-          Client Engagement
+          {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.TITLE' | translate }}
         </h2>
         @if (isExpanded('engagement-score')) {
         <button
@@ -215,7 +226,7 @@
               <p
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                Exercise
+                {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.EXERCISE' | translate }}
               </p>
             </div>
             <span class="text-sm font-bold text-accent dark:text-accent-dark"
@@ -239,7 +250,9 @@
               <p
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                Nutrition
+                {{
+                  'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.NUTRITION' | translate
+                }}
               </p>
             </div>
             <span class="text-sm font-bold text-utils-warning">0%</span>
@@ -261,7 +274,7 @@
               <p
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                Sleep
+                {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.SLEEP' | translate }}
               </p>
             </div>
             <span
@@ -286,7 +299,7 @@
               <p
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                Water
+                {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.WATER' | translate }}
               </p>
             </div>
             <span class="text-sm font-bold text-utils-info">0%</span>
@@ -317,7 +330,7 @@
           class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
         >
           <span class="text-xl">⏳</span>
-          Logging Timing Distribution
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.TITLE' | translate }}
         </h2>
         @if (isExpanded('time-to-log')) {
         <button
@@ -331,7 +344,7 @@
 
       <div class="space-y-4">
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
-          When clients log their activities throughout the day
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.DESCRIPTION' | translate }}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -340,7 +353,7 @@
               <span
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                🌅 Morning (5am-11am)
+                🌅 {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.MORNING' | translate }}
               </span>
               <span class="text-sm font-bold text-accent dark:text-accent-dark">
                 15%
@@ -355,7 +368,7 @@
               ></div>
             </div>
             <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
-              Low morning tracking
+              {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LOW_MORNING' | translate }}
             </p>
           </div>
 
@@ -364,7 +377,7 @@
               <span
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                ☀️ Lunch (11am-4pm)
+                ☀️ {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LUNCH' | translate }}
               </span>
               <span class="text-sm font-bold text-utils-info"> 20% </span>
             </div>
@@ -377,7 +390,9 @@
               ></div>
             </div>
             <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
-              Consistent lunchtime checks
+              {{
+                'DASHBOARD.WIDGETS.LOGGING_TIMING.CONSISTENT_LUNCH' | translate
+              }}
             </p>
           </div>
 
@@ -386,7 +401,8 @@
               <span
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                🌤️ Afternoon (4pm-8pm)
+                🌤️
+                {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.AFTERNOON' | translate }}
               </span>
               <span class="text-sm font-bold text-utils-warning"> 10% </span>
             </div>
@@ -399,7 +415,7 @@
               ></div>
             </div>
             <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
-              Low evening workout logging
+              {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LOW_EVENING' | translate }}
             </p>
           </div>
 
@@ -408,7 +424,7 @@
               <span
                 class="text-xs font-medium text-secondary dark:text-secondary-dark"
               >
-                🌙 Night (8pm-5am)
+                🌙 {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.NIGHT' | translate }}
               </span>
               <span class="text-sm font-bold text-utils-error"> 55% </span>
             </div>
@@ -421,7 +437,7 @@
               ></div>
             </div>
             <p class="text-xs text-utils-error font-medium">
-              ⚠️ High friction - logging before bed
+              {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.HIGH_FRICTION' | translate }}
             </p>
           </div>
         </div>

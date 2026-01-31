@@ -13,6 +13,7 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { FoodDetail, FoodDetailList } from '@forma-ws/domain';
 import {
   AlertService,
@@ -38,6 +39,7 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     PageHorizontalRadioComponent,
     PageAutocomplete,
     PageNumberComponent,

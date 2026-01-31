@@ -9,10 +9,10 @@ import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
-  FormsModule,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
+import { TranslateModule } from '@ngx-translate/core';
 import {
   AlertService,
   AlertType,
@@ -21,13 +21,22 @@ import {
   PageFormComponent,
   PageInputComponent,
   PageNumberComponent,
+  ButtonComponent,
+  ButtonProperties,
 } from '@forma-ws/frontend-shared';
 import { WeighInFormModel } from './models/weigh-in-form.model';
 import { WeighInResourceService } from './resources/weigh-in.resource.service';
 
 @Component({
-  selector: 'app-add-exercise-record',
-  imports: [CommonModule, FormsModule, PageInputComponent, PageNumberComponent],
+  selector: 'app-weigh-in',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    PageInputComponent,
+    PageNumberComponent,
+    ButtonComponent,
+  ],
   templateUrl: './weigh-in.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WeighInResourceService],
@@ -41,6 +50,7 @@ export class WeighInComponent
   private readonly alertService = inject(AlertService);
 
   clientId = signal<string>('');
+  ButtonProperties = ButtonProperties;
 
   modalRef!: { close: (result?: any) => void };
 

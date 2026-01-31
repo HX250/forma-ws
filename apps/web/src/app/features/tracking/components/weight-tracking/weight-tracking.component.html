@@ -5,11 +5,11 @@
   <div class="flex flex-col justify-between gap-8">
     <div class="flex justify-between gap-4">
       <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        Target Weight Loss:
+        {{ 'TRACKING.WEIGHT.TARGET_WEIGHT_LOSS' | translate }}:
         <span class="font-bold">{{ targetWeightLoss() }} kg</span>
       </p>
       <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        {{ chartSpanLabel() }} Weight Loss:
+        {{ chartSpanLabel() }} {{ 'TRACKING.WEIGHT.WEIGHT_LOSS' | translate }}:
         <span
           class="font-bold"
           [class.text-green-600]="totalWeightLoss() > 0"
@@ -19,7 +19,7 @@
         </span>
       </p>
       <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        {{ averageLabel() }} Weight Loss:
+        {{ averageLabel() }} {{ 'TRACKING.WEIGHT.WEIGHT_LOSS' | translate }}:
         <span
           class="font-bold"
           [class.text-green-600]="averageWeightLoss() > 0"
@@ -30,42 +30,30 @@
       </p>
     </div>
     <div class="flex gap-4 items-center justify-center flex-wrap">
-      <button
-        class="border rounded-full py-2 px-4 transition flex items-center gap-2"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.DAY"
-        [class.text-white]="chartSpan() === ChartSpaceValues.DAY"
-        (click)="chartSpan.set(ChartSpaceValues.DAY)"
-      >
-        <span class="material-icons text-sm">today</span>
-        <span>Week</span>
-      </button>
-      <button
-        class="border rounded-full py-2 px-4 transition flex items-center gap-2"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
-        [class.text-white]="chartSpan() === ChartSpaceValues.THREE_MONTHS"
-        (click)="chartSpan.set(ChartSpaceValues.THREE_MONTHS)"
-      >
-        <span class="material-icons text-sm">calendar_month</span>
-        <span>3 Months</span>
-      </button>
-      <button
-        class="border rounded-full py-2 px-4 transition flex items-center gap-2"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
-        [class.text-white]="chartSpan() === ChartSpaceValues.SIX_MONTHS"
-        (click)="chartSpan.set(ChartSpaceValues.SIX_MONTHS)"
-      >
-        <span class="material-icons text-sm">date_range</span>
-        <span>6 Months</span>
-      </button>
-      <button
-        class="border rounded-full py-2 px-4 transition flex items-center gap-2"
-        [class.bg-accent-dark]="chartSpan() === ChartSpaceValues.YEAR"
-        [class.text-white]="chartSpan() === ChartSpaceValues.YEAR"
-        (click)="chartSpan.set(ChartSpaceValues.YEAR)"
-      >
-        <span class="material-icons text-sm">calendar_today</span>
-        <span>Year</span>
-      </button>
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.DAY)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.WEEK'"
+        (clicked)="chartSpan.set(ChartSpaceValues.DAY)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.THREE_MONTHS)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.3_MONTHS'"
+        (clicked)="chartSpan.set(ChartSpaceValues.THREE_MONTHS)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.SIX_MONTHS)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.6_MONTHS'"
+        (clicked)="chartSpan.set(ChartSpaceValues.SIX_MONTHS)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.YEAR)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.YEAR'"
+        (clicked)="chartSpan.set(ChartSpaceValues.YEAR)"
+      />
     </div>
   </div>
 </div>

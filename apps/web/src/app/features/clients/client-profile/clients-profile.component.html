@@ -1,56 +1,55 @@
 <div class="p-4 max-w-full mx-auto h-fit flex flex-col overflow-hidden">
   <div class="grid grid-cols-3 items-center gap-4 mb-6">
     <div class="flex items-center gap-3">
-      <button
-        (click)="redirectToClientList()"
-        class="flex items-center justify-center w-10 h-10 rounded-lg border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
-      >
-        <span class="material-icons text-secondary dark:text-secondary-dark"
-          >arrow_back</span
-        >
-      </button>
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [icon]="'arrow_back'"
+        (clicked)="redirectToClientList()"
+      />
     </div>
     <div class="place-self-center">
       <div class="flex items-center justify-center gap-2">
-        <button
-          (click)="previousDay()"
-          class="flex items-center justify-center px-1 py-3 rounded-sm border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
-        >
-          <span class="material-icons text-secondary dark:text-secondary-dark"
-            >chevron_left</span
-          >
-        </button>
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+          [size]="ButtonProperties.ButtonSize.MEDIUM"
+          [icon]="'chevron_left'"
+          (clicked)="previousDay()"
+        />
         <app-date-input
           [control]="selectedDate"
           [validations]="dateValidations"
           (valueChange)="onDateChange($event)"
         />
-        <button
-          (click)="nextDay()"
-          class="flex items-center justify-center px-1 py-3 rounded-sm border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
-        >
-          <span class="material-icons text-secondary dark:text-secondary-dark"
-            >chevron_right</span
-          >
-        </button>
-        <button
-          (click)="goToToday()"
-          class="px-4 py-3 rounded-sm border border-secondary/20 bg-primary text-secondary dark:border-secondary-dark/20 dark:bg-primary-dark dark:text-secondary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all whitespace-nowrap font-medium"
-        >
-          Today
-        </button>
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+          [size]="ButtonProperties.ButtonSize.MEDIUM"
+          [icon]="'chevron_right'"
+          (clicked)="nextDay()"
+        />
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+          [size]="ButtonProperties.ButtonSize.MEDIUM"
+          [text]="'CLIENT_PROFILE.NAVIGATION.TODAY'"
+          (clicked)="goToToday()"
+        />
       </div>
     </div>
     @if(user === UserType.COACH){
-    <div class="flex items-center justify-end">
-      <button
-        (click)="openEditClientGoals()"
-        class="flex items-center justify-center w-10 h-10 rounded-lg border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 transition-all"
-      >
-        <span class="material-icons text-secondary dark:text-secondary-dark"
-          >more_vert</span
-        >
-      </button>
+    <div class="flex items-center justify-end relative">
+      <div
+        [ngClass]="
+          !clinetGoalsVerification()
+            ? 'absolute bg-yellow-500 transition-all duration-75 rounded-full w-4 h-4 animate-pulse -top-1 -right-1'
+            : ''
+        "
+      ></div>
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.SECONDARY"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [icon]="'more_vert'"
+        (clicked)="openEditClientGoals()"
+      />
     </div>
     }
   </div>

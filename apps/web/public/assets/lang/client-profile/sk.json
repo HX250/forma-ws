@@ -1,0 +1,85 @@
+{
+  "CLIENT_PROFILE": {
+    "NAVIGATION": {
+      "TODAY": "Dnes"
+    },
+    "GENERAL_INFO": {
+      "TITLE": "Všeobecné informácie",
+      "MEMBER_SINCE": "Člen od",
+      "EMAIL": "Email",
+      "FULL_NAME": "Celé meno",
+      "GENDER": "Pohlavie",
+      "BIRTH_DATE": "Dátum narodenia",
+      "AGE": "Vek",
+      "YEARS": "rokov"
+    },
+    "FITNESS_INFO": {
+      "TITLE": "Fitness informácie",
+      "CURRENT_WEIGHT": "Aktuálna hmotnosť",
+      "HEIGHT": "Výška",
+      "TARGET_WEIGHT": "Cieľová hmotnosť",
+      "ACTIVITY_LEVEL": "Úroveň aktivity",
+      "FITNESS_EXPERIENCE": "Fitness skúsenosti",
+      "MEDICAL_CONDITIONS": "Zdravotné podmienky",
+      "WEIGHT_GOAL": "Cieľ hmotnosti",
+      "GOAL_TYPE": "Typ cieľa",
+      "WEIGH_IN": "Váženie",
+      "WEIGH_IN_TIP": "Sledujte svoj pokrok pravidelným zaznamenávaním hmotnosti",
+      "DAILY_WEIGHT": "Denná hmotnosť (kg)",
+      "BODY_FAT": "Percento telesného tuku (%)",
+      "MUSCLE_MASS": "Svalová hmota (kg)",
+      "RECORD_WEIGHT": "Zaznamenať novú hmotnosť",
+      "CANCEL": "Zrušiť",
+      "SAVE": "Uložiť",
+      "NONE_REPORTED": "Neboli zaznamenane",
+      "PLACEHOLDERS": {
+        "WEIGHT": "Zadajte hmotnosť v kg",
+        "BODY_FAT": "Zadajte percento telesného tuku",
+        "MUSCLE_MASS": "Zadajte svalovú hmotu"
+      },
+      "UNITS": {
+        "KG": "kg",
+        "CM": "cm"
+      },
+      "ALERTS": {
+        "WEIGHT_RECORDED": "Vaha bola zaznamenana"
+      }
+    },
+    "GOALS": {
+      "TITLE": "Ciele klienta",
+      "EDIT_TITLE": "Upraviť ciele klienta",
+      "GENERAL_GOALS": "Všeobecné ciele",
+      "TRACKING_GOALS": "Sledovacie ciele",
+      "GOAL_TYPE": "Typ cieľa",
+      "WEEKLY_WEIGHT_GOAL": "Týždenný výkyv hmotnosti (kg)",
+      "DAILY_TRACKING_GOALS": "Denné sledovacie ciele",
+      "WATER": "Voda",
+      "SLEEP": "Spánok",
+      "EXERCISE": "Cvičenia",
+      "TARGET_WEIGHT": "Cieľová hmotnosť (kg)",
+      "TARGET_DATE": "Cieľový dátum",
+      "WEIGHT_GOAL": "Cieľ hmotnosti (kg)",
+      "EXERCISE_GOAL": "Cieľ cvičenia (minúty/deň)",
+      "SLEEP_GOAL": "Cieľ spánku (hodiny/deň)",
+      "WATER_GOAL": "Cieľ vody (litre/deň)",
+      "NUTRITION_GOALS": "Výživové ciele",
+      "CALORIES": "Kalórie (kcal/deň)",
+      "PROTEIN": "Bielkoviny (g/deň)",
+      "CARBS": "Sacharidy (g/deň)",
+      "FAT": "Tuky (g/deň)",
+      "FIBER": "Vláknina (g/deň)",
+      "SUGAR": "Cukor (g/deň)",
+      "SAVE": "Uložiť ciele",
+      "CANCEL": "Zrušiť",
+      "SUCCESS": "Ciele úspešne aktualizované"
+    }
+  },
+  "GOAL_TYPES": {
+    "LOSE_WEIGHT": "Schudnúť",
+    "GAIN_WEIGHT": "Pribrať",
+    "MAINTAIN_WEIGHT": "Udržať hmotnosť",
+    "BUILD_MUSCLE": "Budovať svaly",
+    "IMPROVE_ENDURANCE": "Zlepšiť vytrvalosť",
+    "GENERAL_FITNESS": "Všeobecná kondícia"
+  }
+}

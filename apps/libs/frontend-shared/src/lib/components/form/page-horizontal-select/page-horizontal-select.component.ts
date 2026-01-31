@@ -1,16 +1,18 @@
 import { Component, input, computed, effect, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { SelectOption } from '../../../utils/types/horizontal-select-options.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-page-horizontal-select',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslateModule],
   templateUrl: './page-horizontal-select.component.html',
 })
 export class HorizontalSelectComponent<T> {
   control = input.required<FormControl<T[]>>();
   options = input.required<SelectOption<T>[]>();
+  label = input.required<string>();
 
   readonly value = signal<T[]>([]);
 

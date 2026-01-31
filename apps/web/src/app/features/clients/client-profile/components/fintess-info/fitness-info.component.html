@@ -8,22 +8,18 @@
         class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
       >
         <span class="text-xl">💪</span>
-        Fitness Information
+        {{ 'CLIENT_PROFILE.FITNESS_INFO.TITLE' | translate }}
       </h2>
     </div>
     @if (user === UserType.CLIENT) {
     <div>
-      <button
-        (click)="openWeighInModal()"
-        class="flex items-center justify-center w-10 h-10 rounded-lg border border-secondary/20 bg-primary dark:border-secondary-dark/20 dark:bg-primary-dark hover:bg-secondary/5 dark:hover:bg-secondary-dark/5 hover:border-accent dark:hover:border-accent-dark transition-all"
-        title="Log Weight"
-      >
-        <span
-          class="material-icons text-secondary dark:text-secondary-dark text-2xl"
-        >
-          monitor_weight
-        </span>
-      </button>
+      <app-button
+        [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [icon]="'monitor_weight'"
+        [text]="'CLIENT_PROFILE.FITNESS_INFO.WEIGH_IN'"
+        (clicked)="openWeighInModal()"
+      />
     </div>
     }
   </div>
@@ -32,7 +28,7 @@
     <div class="grid grid-cols-2 gap-3">
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Current Weight
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.CURRENT_WEIGHT' | translate }}
         </p>
         <p class="text-2xl font-bold text-accent dark:text-accent-dark">
           {{ clientFitnessData().currentWeight }}
@@ -42,7 +38,7 @@
 
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Height
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.HEIGHT' | translate }}
         </p>
         <p class="text-2xl font-bold text-accent dark:text-accent-dark">
           {{ clientFitnessData().height }}
@@ -53,7 +49,7 @@
     <div class="grid grid-cols-2 grid-rows-2 gap-4">
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Activity Level
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.ACTIVITY_LEVEL' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
           {{ clientFitnessData().activityLevel }}
@@ -62,7 +58,7 @@
 
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Fitness Experience
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.FITNESS_EXPERIENCE' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
           {{ clientFitnessData().fitnessExperience }}
@@ -70,7 +66,7 @@
       </div>
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Weight Goal
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.WEIGHT_GOAL' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
           {{ clientGoals().targetWeight }} kg
@@ -78,10 +74,10 @@
       </div>
       <div>
         <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-          Goal Type
+          {{ 'CLIENT_PROFILE.FITNESS_INFO.GOAL_TYPE' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-          {{ clientGoals().goalType | enumLabel : 'GoalType' }}
+          {{ clientGoals().goalType | enumLabel : 'GOAL_TYPES' }}
         </p>
       </div>
     </div>
@@ -90,10 +86,13 @@
       class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
     >
       <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Medical Conditions
+        {{ 'CLIENT_PROFILE.FITNESS_INFO.MEDICAL_CONDITIONS' | translate }}
       </p>
       <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-        {{ clientFitnessData().medicalConditions || 'None reported' }}
+        {{
+          clientFitnessData().medicalConditions ||
+            ('CLIENT_PROFILE.FITNESS_INFO.NONE_REPORTED' | translate)
+        }}
       </p>
     </div>
   </div>

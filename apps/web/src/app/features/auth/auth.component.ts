@@ -22,6 +22,7 @@ import { SecurityService } from '../../core/auth/security.service';
 import { Router, RouterLink } from '@angular/router';
 import { AlertService } from '@forma-ws/frontend-shared';
 import { switchMap, tap } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
@@ -29,6 +30,7 @@ import { switchMap, tap } from 'rxjs';
     CommonModule,
     PageInputComponent,
     ButtonComponent,
+    TranslateModule,
     RouterLink,
     LoadingComponent,
   ],

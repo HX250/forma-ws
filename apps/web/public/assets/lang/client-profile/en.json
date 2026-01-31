@@ -1,0 +1,85 @@
+{
+  "CLIENT_PROFILE": {
+    "NAVIGATION": {
+      "TODAY": "Today"
+    },
+    "GENERAL_INFO": {
+      "TITLE": "General information",
+      "MEMBER_SINCE": "Member since",
+      "EMAIL": "Email",
+      "FULL_NAME": "Full name",
+      "GENDER": "Gender",
+      "BIRTH_DATE": "Birth date",
+      "AGE": "Age",
+      "YEARS": "years"
+    },
+    "FITNESS_INFO": {
+      "TITLE": "Fitness information",
+      "CURRENT_WEIGHT": "Current weight",
+      "HEIGHT": "Height",
+      "TARGET_WEIGHT": "Target weight",
+      "ACTIVITY_LEVEL": "Activity level",
+      "FITNESS_EXPERIENCE": "Fitness experience",
+      "MEDICAL_CONDITIONS": "Medical conditions",
+      "WEIGHT_GOAL": "Weight goal",
+      "GOAL_TYPE": "Goal type",
+      "WEIGH_IN": "Weigh in",
+      "WEIGH_IN_TIP": "Track your progress by recording your weight regularly",
+      "DAILY_WEIGHT": "Daily weight (kg)",
+      "BODY_FAT": "Body fat percentage (%)",
+      "MUSCLE_MASS": "Muscle mass (kg)",
+      "RECORD_WEIGHT": "Record new weight",
+      "CANCEL": "Cancel",
+      "SAVE": "Save",
+      "NONE_REPORTED": "None reported",
+      "PLACEHOLDERS": {
+        "WEIGHT": "Enter weight in kg",
+        "BODY_FAT": "Enter body fat percentage",
+        "MUSCLE_MASS": "Enter muscle mass"
+      },
+      "UNITS": {
+        "KG": "kg",
+        "CM": "cm"
+      },
+      "ALERTS": {
+        "WEIGHT_RECORDED": "Vaha bola zaznamenana"
+      }
+    },
+    "GOALS": {
+      "TITLE": "Client goals",
+      "EDIT_TITLE": "Edit client goals",
+      "GENERAL_GOALS": "General goals",
+      "TRACKING_GOALS": "Tracking goals",
+      "GOAL_TYPE": "Goal type",
+      "TARGET_WEIGHT": "Target weight (kg)",
+      "TARGET_DATE": "Target date",
+      "WEEKLY_WEIGHT_GOAL": "Weekly weight swing (kg)",
+      "DAILY_TRACKING_GOALS": "Daily tracking goals",
+      "WATER": "Water",
+      "SLEEP": "Sleep",
+      "EXERCISE": "Exercise",
+      "WEIGHT_GOAL": "Weight goal (kg)",
+      "EXERCISE_GOAL": "Exercise goal (minutes/day)",
+      "SLEEP_GOAL": "Sleep goal (hours/day)",
+      "WATER_GOAL": "Water goal (liters/day)",
+      "NUTRITION_GOALS": "Nutrition goals",
+      "CALORIES": "Calories (kcal/day)",
+      "PROTEIN": "Protein (g/day)",
+      "CARBS": "Carbs (g/day)",
+      "FAT": "Fat (g/day)",
+      "FIBER": "Fiber (g/day)",
+      "SUGAR": "Sugar (g/day)",
+      "SAVE": "Save goals",
+      "CANCEL": "Cancel",
+      "SUCCESS": "Goals updated successfully"
+    }
+  },
+  "GOAL_TYPES": {
+    "LOSE_WEIGHT": "Lose Weight",
+    "GAIN_WEIGHT": "Gain Weight",
+    "MAINTAIN_WEIGHT": "Maintain Weight",
+    "BUILD_MUSCLE": "Build Muscle",
+    "IMPROVE_ENDURANCE": "Improve Endurance",
+    "GENERAL_FITNESS": "General Fitness"
+  }
+}

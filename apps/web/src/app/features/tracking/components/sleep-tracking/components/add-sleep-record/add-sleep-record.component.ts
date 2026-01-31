@@ -8,6 +8,13 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import {
   FormUtils,
   PageFormComponent,
   PageInputComponent,
@@ -18,13 +25,9 @@ import {
   AlertType,
   DateUtils,
   bedTimeAfterWakeTimeValidator,
+  ButtonComponent,
+  ButtonProperties,
 } from '@forma-ws/frontend-shared';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  Validators,
-} from '@angular/forms';
 import { SleepTrackingFromModel } from '../../models/sleep-tracking-form.model';
 import { SleepTrackingResourceService } from '../../resource/sleep-tracking.resource.service';
 import { Subscription } from 'rxjs';
@@ -33,10 +36,12 @@ import { Subscription } from 'rxjs';
   selector: 'app-sleep-tracking',
   imports: [
     CommonModule,
+    FormsModule,
+    TranslateModule,
     PageInputComponent,
     PageTimePickerComponent,
     PageHorizontalRadioComponent,
-    FormsModule,
+    ButtonComponent,
   ],
   templateUrl: './add-sleep-record.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +59,7 @@ export class AddSleepRecordComponent
   sleepDate = signal<Date>(this.yesterday);
   clientId = signal<string>('');
   isSubmitting = signal(false);
+  ButtonProperties = ButtonProperties;
 
   ratingOptions = signal<RatingOption[]>([
     { value: 1, label: 'Very Poor' },
