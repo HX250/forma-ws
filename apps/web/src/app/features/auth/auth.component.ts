@@ -77,7 +77,10 @@ export class AuthComponent
       )
     ).subscribe({
       next: () => {
-        this.alertService.show(AlertType.SUCCESS, 'Login successful');
+        this.alertService.show(
+          AlertType.SUCCESS,
+          'AUTH.ALERTS.LOGIN_SUCCESSFUL'
+        );
       },
       complete: () => {
         const user = this.securityService.user();

@@ -148,7 +148,8 @@
       "LOCKED": "Zamknuté",
       "ENABLE_PERMISSION": "Povoliť prístup",
       "CONTACT_COACH_MESSAGE": "Kontaktujte svojho trénera pre povolenie tejto funkcie",
-      "PERMISSION_ENABLED": "Oprávnenie úspešne povolené"
+      "PERMISSION_ENABLED": "Oprávnenie úspešne povolené",
+      "PERMISSION_DISABLED": "Oprávnenie úspešne zakázané"
     }
   }
 }

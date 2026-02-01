@@ -44,12 +44,7 @@
             : ''
         "
       ></div>
-      <app-button
-        [variant]="ButtonProperties.ButtonVariant.SECONDARY"
-        [size]="ButtonProperties.ButtonSize.SMALL"
-        [icon]="'more_vert'"
-        (clicked)="openEditClientGoals()"
-      />
+      <app-client-actions [clientId]="clientId()" />
     </div>
     }
   </div>

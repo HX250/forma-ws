@@ -3,6 +3,12 @@
     "NAVIGATION": {
       "TODAY": "Today"
     },
+    "CLIENT_ACTIONS": {
+      "SET_CLIENT_GOALS": "Set client goals",
+      "DELETE_CLIENT": "Delete client",
+      "DELETE_SUCCESS": "Client deleted successfully",
+      "DELETE_ERROR": "Failed to delete client"
+    },
     "GENERAL_INFO": {
       "TITLE": "General information",
       "MEMBER_SINCE": "Member since",

@@ -372,6 +372,8 @@
       "BOTTLE_1L": "1L",
       "BOTTLE_1_5L": "1.5L",
       "CUSTOM_AMOUNT": "Custom",
+      "NO_WATER_CLIENT": "No water logged today. Start tracking your water intake!",
+      "NO_WATER_COACH": "No water data for today.",
       "ENTER_CUSTOM_AMOUNT": "Enter amount (L)",
       "ADD_WATER": "Add Water",
       "VIEWING_READ_ONLY": "Viewing client's water intake (read-only)"
@@ -398,12 +400,19 @@
       "LOCKED": "Locked",
       "ENABLE_PERMISSION": "Enable Permission",
       "CONTACT_COACH_MESSAGE": "Contact your coach to enable this feature",
-      "PERMISSION_ENABLED": "Permission enabled successfully"
+      "PERMISSION_ENABLED": "Permission enabled successfully",
+      "PERMISSION_DISABLED": "Permission disabled successfully"
     }
   },
   "CLIENT_PROFILE": {
     "NAVIGATION": {
       "TODAY": "Today"
+    },
+    "CLIENT_ACTIONS": {
+      "SET_CLIENT_GOALS": "Set client goals",
+      "DELETE_CLIENT": "Delete client",
+      "DELETE_SUCCESS": "Client deleted successfully",
+      "DELETE_ERROR": "Failed to delete client"
     },
     "GENERAL_INFO": {
       "TITLE": "General information",
@@ -426,7 +435,7 @@
       "WEIGHT_GOAL": "Weight goal",
       "GOAL_TYPE": "Goal type",
       "WEIGH_IN": "Weigh in",
-      "WEIGH_IN_TIP": "Track your progress by recording your weight regularly",
+      "WEIGH_IN_TIP": "We recommend to do daily weigh in every morning before eating and drinking water but after morning need",
       "DAILY_WEIGHT": "Daily weight (kg)",
       "BODY_FAT": "Body fat percentage (%)",
       "MUSCLE_MASS": "Muscle mass (kg)",
@@ -444,7 +453,7 @@
         "CM": "cm"
       },
       "ALERTS": {
-        "WEIGHT_RECORDED": "Vaha bola zaznamenana"
+        "WEIGHT_RECORDED": "Weight has been recorded"
       }
     },
     "GOALS": {

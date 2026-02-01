@@ -155,7 +155,7 @@ model Client {
 model ClientGoal {
   id                     String                 @id @default(cuid())
   clientId               String                 @unique
-  client                 Client?                @relation(fields: [clientId], references: [id])
+  client                 Client?                @relation(fields: [clientId], references: [id], onDelete: Cascade)
   
   goalType               GoalType[]
   targetWeight           Decimal?               @db.Decimal(5, 2)

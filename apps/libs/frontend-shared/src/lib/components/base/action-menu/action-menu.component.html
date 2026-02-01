@@ -1,0 +1,28 @@
+<div class="action-menu-container relative inline-block">
+  <button
+    type="button"
+    class="inline-flex items-center justify-center w-10 h-10 rounded-md transition-colors duration-150 hover:bg-secondary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 dark:hover:bg-secondary-dark/20"
+    [class.cursor-not-allowed]="disabled()"
+    [class.opacity-50]="disabled()"
+    [disabled]="disabled()"
+    (click)="toggleMenu()"
+    aria-haspopup="true"
+    [attr.aria-expanded]="isOpen()"
+  >
+    <span class="material-icons text-secondary dark:text-secondary-dark">
+      {{ icon() }}
+    </span>
+  </button>
+
+  @if (isOpen()) {
+  <div
+    class="absolute {{
+      menuPositionClass()
+    }} mt-2 w-56 rounded-md shadow-lg bg-primary dark:bg-primary-dark border border-secondary/20 dark:border-secondary-dark/20 z-50"
+  >
+    <div class="py-1" role="menu" aria-orientation="vertical">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  }
+</div>

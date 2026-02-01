@@ -371,6 +371,8 @@
       "TODAYS_ENTRIES": "Dnesné záznamy",
       "BOTTLE_1_5L": "1.5L",
       "CUSTOM_AMOUNT": "Vlastné",
+      "NO_WATER_CLIENT": "Dnes neboli zaznamenané žiadne údaje o príjme vody. Začnite sledovať svoj príjem vody!",
+      "NO_WATER_COACH": "Žiadne údaje o príjme vody na dnes.",
       "ENTER_CUSTOM_AMOUNT": "Zadajte množstvo (L)",
       "ADD_WATER": "Pridať vodu",
       "VIEWING_READ_ONLY": "Zobrazenie príjmu vody klienta (iba na čítanie)"
@@ -397,12 +399,19 @@
       "LOCKED": "Zamknuté",
       "ENABLE_PERMISSION": "Povoliť prístup",
       "CONTACT_COACH_MESSAGE": "Kontaktujte svojho trénera pre povolenie tejto funkcie",
-      "PERMISSION_ENABLED": "Oprávnenie úspešne povolené"
+      "PERMISSION_ENABLED": "Oprávnenie úspešne povolené",
+      "PERMISSION_DISABLED": "Oprávnenie úspešne zakázané"
     }
   },
   "CLIENT_PROFILE": {
     "NAVIGATION": {
       "TODAY": "Dnes"
+    },
+    "CLIENT_ACTIONS": {
+      "SET_CLIENT_GOALS": "Nastaviť ciele klienta",
+      "DELETE_CLIENT": "Vymazať klienta",
+      "DELETE_SUCCESS": "Klient bol úspešne vymazaný",
+      "DELETE_ERROR": "Nepodarilo sa vymazať klienta"
     },
     "GENERAL_INFO": {
       "TITLE": "Všeobecné informácie",
@@ -425,7 +434,7 @@
       "WEIGHT_GOAL": "Cieľ hmotnosti",
       "GOAL_TYPE": "Typ cieľa",
       "WEIGH_IN": "Váženie",
-      "WEIGH_IN_TIP": "Sledujte svoj pokrok pravidelným zaznamenávaním hmotnosti",
+      "WEIGH_IN_TIP": "Odporúčame vážiť sa každé ráno pred jedlom a pitím vody, ale až po rannej potrebe",
       "DAILY_WEIGHT": "Denná hmotnosť (kg)",
       "BODY_FAT": "Percento telesného tuku (%)",
       "MUSCLE_MASS": "Svalová hmota (kg)",

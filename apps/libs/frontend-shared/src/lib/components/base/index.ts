@@ -4,3 +4,4 @@ export * from './modal/modal.component';
 export * from './modal/services/modal.service';
 export * from './charts/line-chart/line-chart.component';
 export * from './table';
+export * from './action-menu/action-menu.component';

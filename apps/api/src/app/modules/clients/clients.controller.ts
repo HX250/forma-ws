@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Delete,
   Param,
   UseGuards,
   UseInterceptors,
@@ -46,6 +47,15 @@ export class ClientsController {
     const client = await this.clientsService.getClientHealthDetails(id);
 
     return client;
+  }
+
+  @Delete(':id')
+  @UseGuards(CoachOnlyGuard)
+  async deleteClient(
+    @Param('id') id: string,
+    @CurrentUser() user: AuthPayload
+  ): Promise<void> {
+    await this.clientsService.deleteClient(id, user.sub);
   }
 
   @Get()

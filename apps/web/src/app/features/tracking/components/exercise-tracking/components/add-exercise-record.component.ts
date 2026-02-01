@@ -124,7 +124,10 @@ export class AddExerciseRecordComponent
 
     const exercise = this.selectedExercise();
     if (!exercise) {
-      this.alertService.show(AlertType.ERROR, 'Please select an exercise');
+      this.alertService.show(
+        AlertType.ERROR,
+        'TRACKING.EXERCISE.ALERTS.SELECT_EXERCISE'
+      );
       return;
     }
 
@@ -145,14 +148,17 @@ export class AddExerciseRecordComponent
       next: (res) => {
         this.alertService.show(
           AlertType.SUCCESS,
-          'Exercise logged successfully'
+          'TRACKING.EXERCISE.ALERTS.EXERCISE_LOGGED'
         );
         this.form.reset();
         this.onSearchCleared();
         this.modalRef?.close(res);
       },
       error: () => {
-        this.alertService.show(AlertType.ERROR, 'Failed to log exercise');
+        this.alertService.show(
+          AlertType.ERROR,
+          'TRACKING.EXERCISE.ALERTS.FAILED_TO_LOG'
+        );
       },
     });
   }

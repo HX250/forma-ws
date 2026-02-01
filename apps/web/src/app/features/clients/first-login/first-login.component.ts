@@ -55,7 +55,10 @@ export class FirstLoginComponent
       this.firstLoginResourceService.setPassword(this.form.getRawValue())
     ).subscribe({
       next: () => {
-        this.alertService.show(AlertType.SUCCESS, 'Password changed');
+        this.alertService.show(
+          AlertType.SUCCESS,
+          'FIRST_LOGIN.PASSWORD_CHANGED'
+        );
       },
       complete: () => {
         this.router.navigateByUrl('/dashboard');

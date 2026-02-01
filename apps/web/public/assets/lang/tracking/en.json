@@ -149,7 +149,8 @@
       "LOCKED": "Locked",
       "ENABLE_PERMISSION": "Enable Permission",
       "CONTACT_COACH_MESSAGE": "Contact your coach to enable this feature",
-      "PERMISSION_ENABLED": "Permission enabled successfully"
+      "PERMISSION_ENABLED": "Permission enabled successfully",
+      "PERMISSION_DISABLED": "Permission disabled successfully"
     }
   }
 }

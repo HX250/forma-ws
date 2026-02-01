@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "seed:food": "ts-node apps/api/prisma/seeds/food-seed.ts",
-    "seed:exercise": "ts-node apps/api/prisma/seeds/exercise-seed.ts"
+    "seed:exercise": "ts-node apps/api/prisma/seeds/exercise-seed.ts",
+    "seed:client-test": "ts-node apps/api/prisma/seeds/test-client-seed.ts"
   },
   "private": true,
   "dependencies": {
