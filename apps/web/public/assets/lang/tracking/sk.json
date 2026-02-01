@@ -1,6 +1,17 @@
 {
   "TRACKING": {
     "TITLE": "Denné sledovanie",
+    "CARDS": {
+      "EXERCISE": "Cvičenie",
+      "SLEEP": "Spánok",
+      "NUTRITION": "Výživa",
+      "WATER": "Voda"
+    },
+    "MODALS": {
+      "LOG_EXERCISE_TITLE": "💪 Zaznamenať cvičenie",
+      "LOG_SLEEP_TITLE": "😴 Zaznamenať spánok",
+      "LOG_MEAL_TITLE": "🍽️ Zaznamenať jedlo"
+    },
     "EXERCISE": {
       "TITLE": "Cvičenie",
       "LOG_EXERCISE": "Zaznamenať cvičenie",

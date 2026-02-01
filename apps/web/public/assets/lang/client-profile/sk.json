@@ -9,6 +9,14 @@
       "DELETE_SUCCESS": "Klient bol úspešne vymazaný",
       "DELETE_ERROR": "Nepodarilo sa vymazať klienta"
     },
+    "ALERTS": {
+      "CANNOT_GO_PAST_CREATION": "Nie je možné ísť pred vytvorenie klienta",
+      "CANNOT_GO_TO_FUTURE": "Nie je možné ísť do budúcnosti"
+    },
+    "MODALS": {
+      "EDIT_GOALS_TITLE": "💪 Upraviť ciele klienta",
+      "WEIGH_IN_TITLE": "💪 Váženie"
+    },
     "GENERAL_INFO": {
       "TITLE": "Všeobecné informácie",
       "MEMBER_SINCE": "Člen od",

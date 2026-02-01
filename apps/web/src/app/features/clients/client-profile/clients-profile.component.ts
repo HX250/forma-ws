@@ -105,7 +105,7 @@ export class ClientsProfileComponent implements OnInit {
     if (minDate && previousDate < minDate) {
       this.alertService.show(
         AlertType.WARNING,
-        'Cannot go past creation of client'
+        'CLIENT_PROFILE.ALERTS.CANNOT_GO_PAST_CREATION'
       );
       return;
     }
@@ -120,7 +120,10 @@ export class ClientsProfileComponent implements OnInit {
 
     const maxDate = new Date();
     if (nextDate > maxDate) {
-      this.alertService.show(AlertType.WARNING, 'Cannot go to the future');
+      this.alertService.show(
+        AlertType.WARNING,
+        'CLIENT_PROFILE.ALERTS.CANNOT_GO_TO_FUTURE'
+      );
       return;
     }
 
@@ -134,7 +137,7 @@ export class ClientsProfileComponent implements OnInit {
   openEditClientGoals() {
     this.modalService
       .open<boolean>(EditClientGoalComponent, {
-        title: '🍽️ Log Meal',
+        title: 'CLIENT_PROFILE.MODALS.EDIT_GOALS_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

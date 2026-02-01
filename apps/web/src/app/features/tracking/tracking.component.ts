@@ -64,25 +64,25 @@ export class TrackingComponent {
       {
         permission: this.clientPermissions().canTrackExercise,
         permissionType: this.permissions.CAN_TRACK_EXERCISE,
-        title: 'Exercise',
+        title: 'TRACKING.CARDS.EXERCISE',
         component: 'exercise',
       },
       {
         permission: this.clientPermissions().canTrackSleep,
         permissionType: this.permissions.CAN_TRACK_SLEEP,
-        title: 'Sleep',
+        title: 'TRACKING.CARDS.SLEEP',
         component: 'sleep',
       },
       {
         permission: this.clientPermissions().canTrackNutrition,
         permissionType: this.permissions.CAN_TRACK_NUTRITION,
-        title: 'Nutrition',
+        title: 'TRACKING.CARDS.NUTRITION',
         component: 'nutrition',
       },
       {
         permission: this.clientPermissions().canTrackWater,
         permissionType: this.permissions.CAN_TRACK_WATER,
-        title: 'Water',
+        title: 'TRACKING.CARDS.WATER',
         component: 'water',
       },
     ].filter((card) => card.permission || this.currentUser() === UserType.COACH)

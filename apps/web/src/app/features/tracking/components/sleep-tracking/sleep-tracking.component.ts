@@ -83,7 +83,7 @@ export class SleepTrackingComponent {
   async openAddSleepRecordModal(): Promise<void> {
     this.modalService
       .open<boolean>(AddSleepRecordComponent, {
-        title: '😴 Log Sleep Entry',
+        title: 'TRACKING.MODALS.LOG_SLEEP_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

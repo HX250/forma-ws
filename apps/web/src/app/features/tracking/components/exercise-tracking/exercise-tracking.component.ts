@@ -90,7 +90,7 @@ export class ExerciseTrackingComponent {
   async openLogExerciseModal(): Promise<void> {
     this.modalService
       .open<boolean>(AddExerciseRecordComponent, {
-        title: '💪 Log Exercise',
+        title: 'TRACKING.MODALS.LOG_EXERCISE_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

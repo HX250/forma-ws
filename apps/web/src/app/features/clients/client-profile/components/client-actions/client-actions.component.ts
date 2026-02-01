@@ -40,7 +40,7 @@ export class ClientActionsComponent {
   onSetClientGoals(): void {
     this.modalService
       .open<boolean>(EditClientGoalComponent, {
-        title: '🍽️ Log Meal',
+        title: 'CLIENT_PROFILE.MODALS.EDIT_GOALS_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,
