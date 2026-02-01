@@ -132,4 +132,23 @@ export class ClientsService {
 
     return decimalInObjectToNumber(client);
   }
+
+  async deleteClient(id: string, coachId: string): Promise<void> {
+    const client = await this.prisma.client.findUnique({
+      where: { id },
+      select: { coachId: true },
+    });
+
+    if (!client) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
+    if (client.coachId !== coachId) {
+      throw new NotFoundException(`Client with ID ${id} not found`);
+    }
+
+    await this.prisma.client.delete({
+      where: { id },
+    });
+  }
 }

@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
+import { ClientActionsComponent } from './components/client-actions/client-actions.component';
 import { FitnessInfoComponent } from './components/fintess-info/fitness-info.component';
 import { TrackingComponent } from '../../tracking/tracking.component';
 import { FormControl, FormsModule } from '@angular/forms';
@@ -41,6 +42,7 @@ import { SecurityService } from '../../../core/auth/security.service';
     FormsModule,
     WeightTrackingComponent,
     ButtonComponent,
+    ClientActionsComponent,
   ],
   templateUrl: './clients-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +50,7 @@ import { SecurityService } from '../../../core/auth/security.service';
 export class ClientsProfileComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly alerService = inject(AlertService);
+  private readonly alertService = inject(AlertService);
   private readonly trackingService = inject(TrackingService);
   private readonly modalService = inject(ModalService);
   private readonly securityService = inject(SecurityService);
@@ -101,9 +103,9 @@ export class ClientsProfileComponent implements OnInit {
     const minDate = new Date(this.memberSince() || '');
 
     if (minDate && previousDate < minDate) {
-      this.alerService.show(
+      this.alertService.show(
         AlertType.WARNING,
-        'Cannot go past creation of client'
+        'CLIENT_PROFILE.ALERTS.CANNOT_GO_PAST_CREATION'
       );
       return;
     }
@@ -116,9 +118,12 @@ export class ClientsProfileComponent implements OnInit {
     const nextDate = new Date(currentDate);
     nextDate.setDate(nextDate.getDate() + 1);
 
-    const maxDate = this.today();
+    const maxDate = new Date();
     if (nextDate > maxDate) {
-      this.alerService.show(AlertType.WARNING, 'Cannot go to the future');
+      this.alertService.show(
+        AlertType.WARNING,
+        'CLIENT_PROFILE.ALERTS.CANNOT_GO_TO_FUTURE'
+      );
       return;
     }
 
@@ -132,7 +137,7 @@ export class ClientsProfileComponent implements OnInit {
   openEditClientGoals() {
     this.modalService
       .open<boolean>(EditClientGoalComponent, {
-        title: '🍽️ Log Meal',
+        title: 'CLIENT_PROFILE.MODALS.EDIT_GOALS_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

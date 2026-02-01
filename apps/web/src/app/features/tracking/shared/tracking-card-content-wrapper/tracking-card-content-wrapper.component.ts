@@ -37,7 +37,7 @@ export class TrackingCardContentWrapperComponent {
         next: (data) => {
           this.alertService.show(
             AlertType.SUCCESS,
-            'Permission disabled successfully'
+            'TRACKING.LOCKED.PERMISSION_DISABLED'
           );
         },
         error: (err) => {

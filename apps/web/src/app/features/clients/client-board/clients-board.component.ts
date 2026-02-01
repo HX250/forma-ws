@@ -30,20 +30,19 @@ export class ClientsBoardComponent {
   private readonly modalService = inject(ModalService);
   private readonly router = inject(Router);
 
-  async openRegisterModal(): Promise<void> {
-    const result = await this.modalService.open<boolean>(
-      ClientRegisterComponent,
-      {
+  openRegisterModal(): void {
+    this.modalService
+      .open<boolean>(ClientRegisterComponent, {
         title: 'REGISTER_CLIENT.TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,
-      }
-    );
-
-    if (result) {
-      this.reloadClients();
-    }
+      })
+      .subscribe((result) => {
+        if (result) {
+          this.reloadClients();
+        }
+      });
   }
 
   reloadClients(): void {

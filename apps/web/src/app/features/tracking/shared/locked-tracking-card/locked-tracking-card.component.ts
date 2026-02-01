@@ -43,7 +43,7 @@ export class LockedTrackingCardComponent {
         next: (data) => {
           this.alertService.show(
             AlertType.SUCCESS,
-            'Permission enabled successfully'
+            'TRACKING.LOCKED.PERMISSION_ENABLED'
           );
         },
         complete: () => {

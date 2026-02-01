@@ -132,12 +132,18 @@ export class AddSleepRecordComponent
       )
     ).subscribe({
       next: () => {
-        this.alertService.show(AlertType.SUCCESS, 'Sleep has been recorded');
+        this.alertService.show(
+          AlertType.SUCCESS,
+          'TRACKING.SLEEP.ALERTS.SLEEP_RECORDED'
+        );
         this.modalRef?.close(true);
       },
       error: () => {
         this.isSubmitting.set(false);
-        this.alertService.show(AlertType.ERROR, 'Failed to record sleep');
+        this.alertService.show(
+          AlertType.ERROR,
+          'TRACKING.SLEEP.ALERTS.FAILED_TO_RECORD'
+        );
       },
     });
   }

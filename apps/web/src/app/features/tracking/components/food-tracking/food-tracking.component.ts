@@ -97,7 +97,7 @@ export class FoodTrackingComponent {
   async openLogMealModal(): Promise<void> {
     this.modalService
       .open<boolean>(AddFoodRecordComponent, {
-        title: '🍽️ Log Meal',
+        title: 'TRACKING.MODALS.LOG_MEAL_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

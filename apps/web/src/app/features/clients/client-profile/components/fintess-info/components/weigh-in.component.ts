@@ -71,7 +71,10 @@ export class WeighInComponent
         this.form.getRawValue()
       )
     ).subscribe(() => {
-      this.alertService.show(AlertType.SUCCESS, 'Vaha bola zaznamenana');
+      this.alertService.show(
+        AlertType.SUCCESS,
+        'CLIENT_PROFILE.FITNESS_INFO.ALERTS.WEIGHT_RECORDED'
+      );
       this.modalRef.close(true);
     });
   }

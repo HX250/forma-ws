@@ -90,8 +90,7 @@
   >
     {{ 'TRACKING.WATER.VIEWING_READ_ONLY' | translate }}
   </div>
-  }
-
+  } @if (waterEntries().length > 0) {
   <div
     class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
   >
@@ -100,8 +99,6 @@
       [style.width.%]="getProgressPercentage()"
     ></div>
   </div>
-
-  @if (waterEntries().length > 0) {
   <div class="mt-2">
     <p class="text-xs text-muted dark:text-muted-dark mb-2">
       {{ 'TRACKING.WATER.TODAYS_ENTRIES' | translate }}

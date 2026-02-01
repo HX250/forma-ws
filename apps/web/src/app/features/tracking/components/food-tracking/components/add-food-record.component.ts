@@ -184,7 +184,10 @@ export class AddFoodRecordComponent
     const food = this.selectedFood();
 
     if (!food) {
-      this.alertService.show(AlertType.ERROR, 'Please select a food item');
+      this.alertService.show(
+        AlertType.ERROR,
+        'TRACKING.NUTRITION.ALERTS.SELECT_FOOD'
+      );
       return;
     }
 
@@ -198,13 +201,19 @@ export class AddFoodRecordComponent
       this.foodResourceService.logNutritionEntry(mappedForm, this.clientId())
     ).subscribe({
       next: (res) => {
-        this.alertService.show(AlertType.SUCCESS, 'Meal logged successfully');
+        this.alertService.show(
+          AlertType.SUCCESS,
+          'TRACKING.NUTRITION.ALERTS.MEAL_LOGGED'
+        );
         this.form.reset();
         this.onSearchCleared();
         this.modalRef?.close(res);
       },
       error: () => {
-        this.alertService.show(AlertType.ERROR, 'Failed to log meal');
+        this.alertService.show(
+          AlertType.ERROR,
+          'TRACKING.NUTRITION.ALERTS.FAILED_TO_LOG'
+        );
       },
     });
   }

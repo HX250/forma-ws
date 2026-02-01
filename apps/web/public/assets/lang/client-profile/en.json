@@ -3,6 +3,20 @@
     "NAVIGATION": {
       "TODAY": "Today"
     },
+    "CLIENT_ACTIONS": {
+      "SET_CLIENT_GOALS": "Set client goals",
+      "DELETE_CLIENT": "Delete client",
+      "DELETE_SUCCESS": "Client deleted successfully",
+      "DELETE_ERROR": "Failed to delete client"
+    },
+    "ALERTS": {
+      "CANNOT_GO_PAST_CREATION": "Cannot go past creation of client",
+      "CANNOT_GO_TO_FUTURE": "Cannot go to the future"
+    },
+    "MODALS": {
+      "EDIT_GOALS_TITLE": "💪 Edit Client Goals",
+      "WEIGH_IN_TITLE": "💪 Weigh-In"
+    },
     "GENERAL_INFO": {
       "TITLE": "General information",
       "MEMBER_SINCE": "Member since",

@@ -77,7 +77,7 @@ export class FitnessInfoComponent {
   async openWeighInModal(): Promise<void> {
     this.modalService
       .open<boolean>(WeighInComponent, {
-        title: '💪 Weigh-In',
+        title: 'CLIENT_PROFILE.MODALS.WEIGH_IN_TITLE',
         size: 'lg',
         showFooterButtons: false,
         showCloseButton: true,

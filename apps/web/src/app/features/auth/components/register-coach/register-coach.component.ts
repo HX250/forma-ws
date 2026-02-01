@@ -120,7 +120,7 @@ export class RegisterCoachComponent
     this.sendFormRequest(
       this.authResourceService.register(this.form.getRawValue())
     ).subscribe(() => {
-      this.alertService.show(AlertType.SUCCESS, 'Coach Created successfully');
+      this.alertService.show(AlertType.SUCCESS, 'AUTH.ALERTS.COACH_CREATED');
       this.router.navigateByUrl('/');
     });
   }

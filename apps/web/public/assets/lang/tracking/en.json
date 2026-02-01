@@ -1,6 +1,17 @@
 {
   "TRACKING": {
     "TITLE": "Daily Tracking",
+    "CARDS": {
+      "EXERCISE": "Exercise",
+      "SLEEP": "Sleep",
+      "NUTRITION": "Nutrition",
+      "WATER": "Water"
+    },
+    "MODALS": {
+      "LOG_EXERCISE_TITLE": "💪 Log Exercise",
+      "LOG_SLEEP_TITLE": "😴 Log Sleep Entry",
+      "LOG_MEAL_TITLE": "🍽️ Log Meal"
+    },
     "EXERCISE": {
       "TITLE": "Exercise",
       "LOG_EXERCISE": "Log exercise",
@@ -149,7 +160,8 @@
       "LOCKED": "Locked",
       "ENABLE_PERMISSION": "Enable Permission",
       "CONTACT_COACH_MESSAGE": "Contact your coach to enable this feature",
-      "PERMISSION_ENABLED": "Permission enabled successfully"
+      "PERMISSION_ENABLED": "Permission enabled successfully",
+      "PERMISSION_DISABLED": "Permission disabled successfully"
     }
   }
 }
