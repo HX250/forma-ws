@@ -134,25 +134,6 @@ export class ClientsProfileComponent implements OnInit {
     this.selectedDate.patchValue(new Date());
   }
 
-  openEditClientGoals() {
-    this.modalService
-      .open<boolean>(EditClientGoalComponent, {
-        title: 'CLIENT_PROFILE.MODALS.EDIT_GOALS_TITLE',
-        size: 'lg',
-        showFooterButtons: false,
-        showCloseButton: true,
-        data: {
-          clientId: this.clientId(),
-          currentGoal: this.clientGoals(),
-        },
-      })
-      .subscribe((result) => {
-        if (result) {
-          this.trackingService.loadClientGoals(this.clientId());
-        }
-      });
-  }
-
   redirectToClientList() {
     this.router.navigateByUrl('/clients');
   }
