@@ -252,6 +252,17 @@
   },
   "TRACKING": {
     "TITLE": "Daily Tracking",
+    "CARDS": {
+      "EXERCISE": "Exercise",
+      "SLEEP": "Sleep",
+      "NUTRITION": "Nutrition",
+      "WATER": "Water"
+    },
+    "MODALS": {
+      "LOG_EXERCISE_TITLE": "💪 Log Exercise",
+      "LOG_SLEEP_TITLE": "😴 Log Sleep Entry",
+      "LOG_MEAL_TITLE": "🍽️ Log Meal"
+    },
     "EXERCISE": {
       "TITLE": "Exercise",
       "LOG_EXERCISE": "Log exercise",
@@ -413,6 +424,14 @@
       "DELETE_CLIENT": "Delete client",
       "DELETE_SUCCESS": "Client deleted successfully",
       "DELETE_ERROR": "Failed to delete client"
+    },
+    "ALERTS": {
+      "CANNOT_GO_PAST_CREATION": "Cannot go past creation of client",
+      "CANNOT_GO_TO_FUTURE": "Cannot go to the future"
+    },
+    "MODALS": {
+      "EDIT_GOALS_TITLE": "💪 Edit Client Goals",
+      "WEIGH_IN_TITLE": "💪 Weigh-In"
     },
     "GENERAL_INFO": {
       "TITLE": "General information",
