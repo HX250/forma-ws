@@ -5,7 +5,14 @@
   "scripts": {
     "seed:food": "ts-node apps/api/prisma/seeds/food-seed.ts",
     "seed:exercise": "ts-node apps/api/prisma/seeds/exercise-seed.ts",
-    "seed:client-test": "ts-node apps/api/prisma/seeds/test-client-seed.ts"
+    "seed:client-test": "ts-node apps/api/prisma/seeds/test-client-seed.ts",
+    "test": "nx run-many --target=test --all",
+    "test:api": "nx test api",
+    "test:web": "nx test web",
+    "test:api:watch": "nx test api --watch",
+    "test:web:watch": "nx test web --watch",
+    "test:api:coverage": "nx test api --coverage",
+    "test:web:coverage": "nx test web --coverage"
   },
   "private": true,
   "dependencies": {

@@ -6,13 +6,29 @@ export class MailService {
   private resend: Resend;
 
   constructor() {
-    this.resend = new Resend(process.env['RESEND_API_KEY']);
+    const apiKey = process.env['RESEND_API_KEY'];
+
+    if (!apiKey) {
+      console.warn(
+        'RESEND_API_KEY is not set. Email functionality will be disabled.'
+      );
+      this.resend = null as any;
+    } else {
+      this.resend = new Resend(apiKey);
+    }
   }
 
   async sendClientPassword(
     clientEmail: string,
     password: string
   ): Promise<void> {
+    if (!this.resend) {
+      console.error('Cannot send email: RESEND_API_KEY is not configured');
+      throw new Error(
+        'Email service is not configured. Please set RESEND_API_KEY environment variable.'
+      );
+    }
+
     try {
       await this.resend.emails.send({
         from: process.env['MAIL_FROM'] || 'onboarding@resend.dev',
