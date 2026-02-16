@@ -19,7 +19,9 @@ export const createMockSecurityService = () => ({
   clear: jest.fn(),
 });
 
-export const createMockActivatedRoute = (params: Record<string, string> = {}) => ({
+export const createMockActivatedRoute = (
+  params: Record<string, string> = {}
+) => ({
   snapshot: {
     paramMap: {
       get: jest.fn((key: string) => params[key] || null),
@@ -49,3 +51,32 @@ export const createMockLanguageService = () => ({
   setLanguage: jest.fn(),
   getTranslation: jest.fn().mockReturnValue(of({})),
 });
+
+export const createMockTranslateService = () => {
+  const mockTranslations = { en: {}, sk: {} };
+  const mockService = {
+    currentLang: 'en',
+    defaultLang: 'en',
+    langs: ['en', 'sk'],
+    translations: mockTranslations,
+    get: jest.fn((key: string) => of(key)),
+    instant: jest.fn((key: string) => key),
+    use: jest.fn().mockReturnValue(of({})),
+    setDefaultLang: jest.fn(),
+    setFallbackLang: jest.fn(),
+    getFallbackLang: jest.fn().mockReturnValue('en'),
+    getCurrentLang: jest.fn().mockReturnValue('en'),
+    getParsedResult: jest.fn((translations: any, key: string) => key),
+    getTranslation: jest.fn((lang: string) =>
+      of(mockTranslations[lang as keyof typeof mockTranslations] || {})
+    ),
+    addLangs: jest.fn(),
+    getLangs: jest.fn().mockReturnValue(['en', 'sk']),
+    getBrowserLang: jest.fn().mockReturnValue('en'),
+    onLangChange: of({ lang: 'en', translations: mockTranslations }),
+    onTranslationChange: of({ lang: 'en', translations: mockTranslations }),
+    onDefaultLangChange: of({ lang: 'en', translations: mockTranslations }),
+    stream: jest.fn((key: string) => of(key)),
+  };
+  return mockService;
+};

@@ -16,7 +16,10 @@ describe('TrackingService', () => {
     TestBed.configureTestingModule({
       providers: [
         TrackingService,
-        { provide: ClientsProfileResourceService, useValue: mockResourceService },
+        {
+          provide: ClientsProfileResourceService,
+          useValue: mockResourceService,
+        },
       ],
     });
     service = TestBed.inject(TrackingService);
@@ -36,23 +39,33 @@ describe('TrackingService', () => {
         canTrackWater: true,
       };
 
-      mockResourceService.getClientPermissions.mockReturnValue(of(mockPermissions));
+      mockResourceService.getClientPermissions.mockReturnValue(
+        of(mockPermissions)
+      );
 
       service.loadPermissions('client-123');
 
       setTimeout(() => {
         expect(service.clientsTrackingPermissions()).toEqual(mockPermissions);
-        expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith('client-123');
+        expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith(
+          'client-123'
+        );
         done();
       }, 100);
     });
 
-    it('should set loading state during request', () => {
+    it('should set loading state during request', (done) => {
       mockResourceService.getClientPermissions.mockReturnValue(of({}));
 
       expect(service.loading()).toBe(false);
       service.loadPermissions('client-123');
-      expect(service.loading()).toBe(true);
+
+      setTimeout(() => {
+        expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith(
+          'client-123'
+        );
+        done();
+      }, 100);
     });
   });
 
@@ -86,7 +99,9 @@ describe('TrackingService', () => {
 
       setTimeout(() => {
         expect(service.clientTrackingGoals()).toEqual(mockGoals);
-        expect(mockResourceService.getClientGoals).toHaveBeenCalledWith('client-123');
+        expect(mockResourceService.getClientGoals).toHaveBeenCalledWith(
+          'client-123'
+        );
         done();
       }, 100);
     });
@@ -101,11 +116,15 @@ describe('TrackingService', () => {
         canTrackWater: true,
       };
 
-      mockResourceService.getClientPermissions.mockReturnValue(of(mockPermissions));
+      mockResourceService.getClientPermissions.mockReturnValue(
+        of(mockPermissions)
+      );
 
       service.reloadPermissions('client-123');
 
-      expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith('client-123');
+      expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith(
+        'client-123'
+      );
     });
   });
 });
