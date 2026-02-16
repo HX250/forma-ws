@@ -22,14 +22,6 @@ export class ClientSecurityService {
   ) {}
 
   async registerClient(dto: RegisterClientDto): Promise<Client> {
-    const existingClient = await this.prisma.client.findUnique({
-      where: { email: dto.email },
-    });
-
-    if (existingClient) {
-      throw new ConflictException('Client with this email already exists');
-    }
-
     const oneTimePassword = this.generateOTP();
 
     try {
@@ -66,8 +58,8 @@ export class ClientSecurityService {
 
       return prismaToPlain<Client>(client);
     } catch (error) {
-      if (error instanceof ConflictException) {
-        throw error;
+      if (error.code === 'P2002') {
+        throw new ConflictException('Client with this email already exists');
       }
       throw new InternalServerErrorException(
         'Failed to register client and send email. Transaction rolled back.'
