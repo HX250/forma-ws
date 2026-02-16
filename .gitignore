@@ -45,3 +45,10 @@ Thumbs.db
 
 error.log
 .angular
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+apps/api/env/*.env
+!apps/api/env/.env.example

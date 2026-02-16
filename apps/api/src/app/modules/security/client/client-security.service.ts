@@ -2,8 +2,9 @@ import {
   Injectable,
   ConflictException,
   BadRequestException,
+  InternalServerErrorException,
 } from '@nestjs/common';
-import { DatabaseService } from '@forma-ws/backend-shared';
+import { DatabaseService, MailService } from '@forma-ws/backend-shared';
 import {
   RegisterClientDto,
   SetClientPasswordDto,
@@ -15,7 +16,10 @@ import { prismaToPlain } from '../../../../../../libs/backend-shared/src/lib/uti
 
 @Injectable()
 export class ClientSecurityService {
-  constructor(private readonly prisma: DatabaseService) {}
+  constructor(
+    private readonly prisma: DatabaseService,
+    private readonly mailService: MailService
+  ) {}
 
   async registerClient(dto: RegisterClientDto): Promise<Client> {
     const existingClient = await this.prisma.client.findUnique({
@@ -28,29 +32,47 @@ export class ClientSecurityService {
 
     const oneTimePassword = this.generateOTP();
 
-    const client = await this.prisma.client.create({
-      data: {
-        email: dto.email,
-        firstName: dto.firstName,
-        lastName: dto.lastName,
-        gender: dto.gender,
-        birthDate: dto.birthDate,
-        currentWeight: dto.currentWeight,
-        height: dto.height,
-        activityLevel: dto.activityLevel,
-        medicalConditions: dto.medicalConditions,
-        fitnessExperience: dto.fitnessExperience,
-        coachId: dto.coachId,
-        oneTimePassword,
-        isFirstLogin: true,
-        canTrackExercise: dto.canTrackExercise,
-        canTrackSleep: dto.canTrackSleep,
-        canTrackNutrition: dto.canTrackNutrition,
-        canTrackWater: dto.canTrackWater,
-      },
-    });
+    try {
+      const client = await this.prisma.$transaction(async (tx) => {
+        const newClient = await tx.client.create({
+          data: {
+            email: dto.email,
+            firstName: dto.firstName,
+            lastName: dto.lastName,
+            gender: dto.gender,
+            birthDate: dto.birthDate,
+            currentWeight: dto.currentWeight,
+            height: dto.height,
+            activityLevel: dto.activityLevel,
+            medicalConditions: dto.medicalConditions,
+            fitnessExperience: dto.fitnessExperience,
+            coachId: dto.coachId,
+            oneTimePassword,
+            isFirstLogin: true,
+            canTrackExercise: dto.canTrackExercise,
+            canTrackSleep: dto.canTrackSleep,
+            canTrackNutrition: dto.canTrackNutrition,
+            canTrackWater: dto.canTrackWater,
+          },
+        });
 
-    return prismaToPlain<Client>(client);
+        await this.mailService.sendClientPassword(
+          newClient.email,
+          oneTimePassword
+        );
+
+        return newClient;
+      });
+
+      return prismaToPlain<Client>(client);
+    } catch (error) {
+      if (error instanceof ConflictException) {
+        throw error;
+      }
+      throw new InternalServerErrorException(
+        'Failed to register client and send email. Transaction rolled back.'
+      );
+    }
   }
 
   async setClientPassword(
