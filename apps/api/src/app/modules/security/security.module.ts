@@ -2,7 +2,11 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule, SecurityService } from '@forma-ws/backend-shared';
+import {
+  DatabaseModule,
+  SecurityService,
+  MailModule,
+} from '@forma-ws/backend-shared';
 
 import { SecurityController } from './common/auth.controller';
 import { AuthService } from './common/auth.service';
@@ -18,6 +22,7 @@ import { JwtStrategy } from '../strategies/jwt.strategy';
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     DatabaseModule,
+    MailModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
