@@ -4,6 +4,7 @@ import { SecurityService } from './core/auth/security.service';
 import { LanguageService } from '@forma-ws/frontend-shared';
 import { provideRouter } from '@angular/router';
 import { signal } from '@angular/core';
+import { UserType } from '@forma-ws/domain';
 
 describe('App', () => {
   let mockSecurityService: Partial<SecurityService>;
@@ -12,11 +13,18 @@ describe('App', () => {
   beforeEach(async () => {
     mockSecurityService = {
       getIsLoggedIn: jest.fn().mockReturnValue(false),
-      user: signal({ isFirstLogin: false }),
+      user: signal({
+        id: 'test-user-id',
+        email: 'test@example.com',
+        firstName: 'Test',
+        lastName: 'User',
+        userType: UserType.CLIENT,
+        isFirstLogin: false,
+      }),
     };
 
     mockLanguageService = {
-      getCurrentLanguage: jest.fn().mockReturnValue('en'),
+      currentLang: signal('en'),
     };
 
     await TestBed.configureTestingModule({
@@ -50,7 +58,14 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
 
-    mockSecurityService.user = signal({ isFirstLogin: true } as any);
+    mockSecurityService.user = signal({
+      id: 'test-user-id',
+      email: 'test@example.com',
+      firstName: 'Test',
+      lastName: 'User',
+      userType: UserType.CLIENT,
+      isFirstLogin: true,
+    });
 
     expect(app.isUserFirstTimeLogIn).toBe(true);
   });
