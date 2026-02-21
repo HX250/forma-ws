@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { LineChartConfig } from '@forma-ws/frontend-shared';
+import { LoggingDto } from '@forma-ws/domain';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class LoggingService {
+export class LoggingResourceService {
   private readonly http = inject(HttpClient);
 
-  getChartConfig(): Observable<LineChartConfig> {
-    return this.http.get<LineChartConfig>('dashboard/logging');
+  getLoggingActivity(): Observable<LoggingDto[]> {
+    return this.http.get<LoggingDto[]>('dashboard/logging');
   }
 }

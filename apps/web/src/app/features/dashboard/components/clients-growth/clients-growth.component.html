@@ -6,18 +6,48 @@
   @if (chartConfig(); as config) {
   <app-line-chart [config]="config"></app-line-chart>
   }
-  <div class="flex justify-evenly">
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        New This Month
-      </p>
-      <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+  <div class="flex flex-col gap-12">
+    <div class="flex justify-between">
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          New This Month
+        </p>
+        <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+      </div>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          Total Active
+        </p>
+        <p class="text-xl font-bold text-secondary dark:text-secondary-dark">
+          0
+        </p>
+      </div>
     </div>
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Total Active
-      </p>
-      <p class="text-xl font-bold text-secondary dark:text-secondary-dark">0</p>
+    <div class="flex gap-4 items-center justify-end flex-wrap">
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.DAY)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.WEEK'"
+        (clicked)="chartSpan.set(ChartSpaceValues.DAY)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.THREE_MONTHS)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.3_MONTHS'"
+        (clicked)="chartSpan.set(ChartSpaceValues.THREE_MONTHS)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.SIX_MONTHS)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.6_MONTHS'"
+        (clicked)="chartSpan.set(ChartSpaceValues.SIX_MONTHS)"
+      />
+      <app-button
+        [variant]="getFilterVariant(ChartSpaceValues.YEAR)"
+        [size]="ButtonProperties.ButtonSize.SMALL"
+        [text]="'TRACKING.WEIGHT.FILTERS.YEAR'"
+        (clicked)="chartSpan.set(ChartSpaceValues.YEAR)"
+      />
     </div>
   </div>
 </lib-dashboard-common>

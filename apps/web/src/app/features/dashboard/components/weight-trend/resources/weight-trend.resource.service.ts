@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { LineChartConfig } from '@forma-ws/frontend-shared';
+import { WeightTrendDto } from '@forma-ws/domain';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class WeightTrendService {
+export class WeightTrendResourceService {
   private readonly http = inject(HttpClient);
 
-  getChartConfig(): Observable<LineChartConfig> {
-    return this.http.get<LineChartConfig>('dashboard/weight-trend');
+  getWeightTrend(): Observable<WeightTrendDto> {
+    return this.http.get<WeightTrendDto>('dashboard/weight-trend');
   }
 }

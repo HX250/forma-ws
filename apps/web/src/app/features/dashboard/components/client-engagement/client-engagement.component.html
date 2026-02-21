@@ -3,21 +3,126 @@
   [isLoading]="isLoading()"
   (retry)="getDashBoardData(getData())"
 >
-  @if (chartConfig()) {
-  <app-line-chart [config]="chartConfig()!"></app-line-chart>
-  }
-  <div class="flex justify-evenly">
+  <div class="flex items-center justify-between mb-3">
+    <h2
+      class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+    >
+      <span class="text-xl">📈</span>
+      {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.TITLE' | translate }}
+    </h2>
+  </div>
+
+  <div class="space-y-3">
     <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        New This Month
-      </p>
-      <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">🏋️</span>
+          <p
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.EXERCISE' | translate }}
+          </p>
+        </div>
+        <span class="text-sm font-bold text-accent dark:text-accent-dark"
+          >{{
+            getEngagementPercentage(engagementData().workoutEngagement)
+          }}%</span
+        >
+      </div>
+      <div
+        class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+      >
+        <div
+          class="bg-accent dark:bg-accent-dark h-2 rounded-full transition-all"
+          [style.width.%]="
+            getEngagementPercentage(engagementData().workoutEngagement)
+          "
+        ></div>
+      </div>
     </div>
+
     <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Total Active
-      </p>
-      <p class="text-xl font-bold text-secondary dark:text-secondary-dark">0</p>
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">🍎</span>
+          <p
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.NUTRITION' | translate }}
+          </p>
+        </div>
+        <span class="text-sm font-bold text-utils-warning"
+          >{{
+            getEngagementPercentage(engagementData().nutritionEngagement)
+          }}%</span
+        >
+      </div>
+      <div
+        class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+      >
+        <div
+          class="bg-utils-warning h-2 rounded-full transition-all"
+          [style.width.%]="
+            getEngagementPercentage(engagementData().nutritionEngagement)
+          "
+        ></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">😴</span>
+          <p
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.SLEEP' | translate }}
+          </p>
+        </div>
+        <span class="text-sm font-bold text-secondary dark:text-secondary-dark"
+          >{{
+            getEngagementPercentage(engagementData().sleepEngagement)
+          }}%</span
+        >
+      </div>
+      <div
+        class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+      >
+        <div
+          class="bg-secondary dark:bg-secondary-dark h-2 rounded-full transition-all"
+          [style.width.%]="
+            getEngagementPercentage(engagementData().sleepEngagement)
+          "
+        ></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">💧</span>
+          <p
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ 'DASHBOARD.WIDGETS.CLIENT_ENGAGEMENT.WATER' | translate }}
+          </p>
+        </div>
+        <span class="text-sm font-bold text-utils-info"
+          >{{
+            getEngagementPercentage(engagementData().waterEngagement)
+          }}%</span
+        >
+      </div>
+      <div
+        class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+      >
+        <div
+          class="bg-utils-info h-2 rounded-full transition-all"
+          [style.width.%]="
+            getEngagementPercentage(engagementData().waterEngagement)
+          "
+        ></div>
+      </div>
     </div>
   </div>
 </lib-dashboard-common>

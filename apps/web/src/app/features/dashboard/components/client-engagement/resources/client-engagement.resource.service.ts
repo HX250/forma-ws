@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { LineChartConfig } from '@forma-ws/frontend-shared';
+import { ClientEngagementResponse } from '@forma-ws/domain';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ClientEngagementService {
+export class ClientEngagementResourceService {
   private readonly http = inject(HttpClient);
 
-  getChartConfig(): Observable<LineChartConfig> {
-    return this.http.get<LineChartConfig>('dashboard/client-engagement');
+  getClientEngagement(): Observable<ClientEngagementResponse> {
+    return this.http.get<ClientEngagementResponse>(
+      'dashboard/client-engagement'
+    );
   }
 }

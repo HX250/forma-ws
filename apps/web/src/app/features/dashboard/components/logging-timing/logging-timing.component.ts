@@ -10,30 +10,36 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   DashboardCommon,
   DashboardCommonComponent,
-  LineChartComponent,
-  LineChartConfig,
 } from '@forma-ws/frontend-shared';
 import { Observable } from 'rxjs';
-import { LoggingTimingService } from './resources/logging-timing.resource.service';
+import { LoggingTimingResourceService } from './resources/logging-timing.resource.service';
+import { LoggingTimingResponse } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-logging-timing',
-  imports: [
-    CommonModule,
-    TranslateModule,
-    LineChartComponent,
-    DashboardCommonComponent,
-  ],
+  imports: [CommonModule, TranslateModule, DashboardCommonComponent],
   templateUrl: './logging-timing.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LoggingTimingService],
+  providers: [LoggingTimingResourceService],
 })
-export class LoggingTimingComponent extends DashboardCommon<LineChartConfig> {
-  private loggingTimingService = inject(LoggingTimingService);
+export class LoggingTimingComponent extends DashboardCommon<LoggingTimingResponse> {
+  private loggingTimingResourceService = inject(LoggingTimingResourceService);
 
-  chartConfig = computed(() => this.dashBoardData());
+  timingData = computed(
+    () =>
+      this.dashBoardData() ?? {
+        morningTiming: 0,
+        lunchTiming: 0,
+        afternoonTiming: 0,
+        nightTiming: 0,
+      }
+  );
 
-  override getData(): Observable<LineChartConfig> {
-    return this.loggingTimingService.getChartConfig();
+  getLoggingTiming(timing: number): number {
+    return timing ?? 0;
+  }
+
+  override getData(): Observable<LoggingTimingResponse> {
+    return this.loggingTimingResourceService.getLoggingTiming();
   }
 }
