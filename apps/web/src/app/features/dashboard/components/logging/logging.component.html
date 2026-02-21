@@ -3,21 +3,65 @@
   [isLoading]="isLoading()"
   (retry)="getDashBoardData(getData())"
 >
-  @if (chartConfig()) {
-  <app-line-chart [config]="chartConfig()!"></app-line-chart>
-  }
-  <div class="flex justify-evenly">
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        New This Month
-      </p>
-      <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+  <div class="flex items-center justify-between mb-3">
+    <h2
+      class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+    >
+      <span class="text-xl">📊</span>
+      {{ 'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.TITLE' | translate }}
+    </h2>
+  </div>
+
+  <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
+    <div
+      class="flex items-center justify-between p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5 hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 transition-colors"
+    >
+      <div class="flex items-center gap-4 flex-1">
+        <div class="flex items-center gap-3 min-w-0 flex-1">
+          <div
+            class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
+          ></div>
+          @if(loggingActivity().length === 0) {
+          <div class="min-w-0 flex-1">
+            <p
+              class="text-sm font-medium text-secondary dark:text-secondary-dark"
+            >
+              {{
+                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.NO_RECENT_ACTIVITY'
+                  | translate
+              }}
+            </p>
+            <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+              {{
+                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.CLIENT_ACTIVITIES_APPEAR'
+                  | translate
+              }}
+            </p>
+          </div>
+          } @else { @for (item of loggingActivity(); track $index) {
+          <div class="min-w-0 flex-1">
+            <p
+              class="text-sm font-medium text-secondary dark:text-secondary-dark"
+            >
+              {{ item.client | userFullName }}
+              {{ 'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.PERFORMED' | translate }}
+              {{
+                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.ACTIVITY_TYPES.' +
+                  item.activityType | translate
+              }}
+            </p>
+            <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+              {{ item.timestamp }}
+            </p>
+          </div>
+          } }
+        </div>
+      </div>
     </div>
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Total Active
-      </p>
-      <p class="text-xl font-bold text-secondary dark:text-secondary-dark">0</p>
-    </div>
+    <span
+      class="text-xs text-secondary/50 dark:text-secondary-dark/50 flex-shrink-0 ml-4"
+    >
+      --
+    </span>
   </div>
 </lib-dashboard-common>

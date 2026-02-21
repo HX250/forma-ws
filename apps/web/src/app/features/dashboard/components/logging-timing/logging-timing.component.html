@@ -3,21 +3,117 @@
   [isLoading]="isLoading()"
   (retry)="getDashBoardData(getData())"
 >
-  @if (chartConfig()) {
-  <app-line-chart [config]="chartConfig()!"></app-line-chart>
-  }
-  <div class="flex justify-evenly">
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        New This Month
-      </p>
-      <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
-    </div>
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Total Active
-      </p>
-      <p class="text-xl font-bold text-secondary dark:text-secondary-dark">0</p>
+  <div class="flex items-center justify-between mb-3">
+    <h2
+      class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+    >
+      <span class="text-xl">⏳</span>
+      {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.TITLE' | translate }}
+    </h2>
+  </div>
+
+  <div class="space-y-4">
+    <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+      {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.DESCRIPTION' | translate }}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            🌅 {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.MORNING' | translate }}
+          </span>
+          <span class="text-sm font-bold text-accent dark:text-accent-dark">
+            {{ getLoggingTiming(timingData().morningTiming) }}%
+          </span>
+        </div>
+        <div
+          class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+        >
+          <div
+            class="w-full bg-accent dark:bg-accent-dark rounded-t-lg transition-all"
+            [style.height.%]="getLoggingTiming(timingData().morningTiming)"
+          ></div>
+        </div>
+        <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LOW_MORNING' | translate }}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            ☀️ {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LUNCH' | translate }}
+          </span>
+          <span class="text-sm font-bold text-utils-info">
+            {{ getLoggingTiming(timingData().lunchTiming) }}%
+          </span>
+        </div>
+        <div
+          class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+        >
+          <div
+            class="w-full bg-utils-info rounded-t-lg transition-all"
+            [style.height.%]="getLoggingTiming(timingData().lunchTiming)"
+          ></div>
+        </div>
+        <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.CONSISTENT_LUNCH' | translate }}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            🌤️
+            {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.AFTERNOON' | translate }}
+          </span>
+          <span class="text-sm font-bold text-utils-warning">
+            {{ getLoggingTiming(timingData().afternoonTiming) }}%
+          </span>
+        </div>
+        <div
+          class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+        >
+          <div
+            class="w-full bg-utils-warning rounded-t-lg transition-all"
+            [style.height.%]="getLoggingTiming(timingData().afternoonTiming)"
+          ></div>
+        </div>
+        <p class="text-xs text-secondary/60 dark:text-secondary-dark/60">
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.LOW_EVENING' | translate }}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span
+            class="text-xs font-medium text-secondary dark:text-secondary-dark"
+          >
+            🌙 {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.NIGHT' | translate }}
+          </span>
+          <span class="text-sm font-bold text-utils-error">
+            {{ getLoggingTiming(timingData().nightTiming) }}%
+          </span>
+        </div>
+        <div
+          class="relative h-32 bg-secondary/10 dark:bg-secondary-dark/10 rounded-lg flex items-end overflow-hidden"
+        >
+          <div
+            class="w-full bg-utils-error rounded-t-lg transition-all"
+            [style.height.%]="getLoggingTiming(timingData().nightTiming)"
+          ></div>
+        </div>
+        <p class="text-xs text-utils-error font-medium">
+          {{ 'DASHBOARD.WIDGETS.LOGGING_TIMING.HIGH_FRICTION' | translate }}
+        </p>
+      </div>
     </div>
   </div>
 </lib-dashboard-common>

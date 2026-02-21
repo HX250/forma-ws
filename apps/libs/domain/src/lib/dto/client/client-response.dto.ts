@@ -23,6 +23,11 @@ export interface Client {
   goals?: ClientGoal | null;
 }
 
+export interface ShortenedClient {
+  firstName: string;
+  lastName: string;
+}
+
 export interface ClientTable {
   id: string;
   firstName: string;

@@ -10,30 +10,30 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   DashboardCommon,
   DashboardCommonComponent,
-  LineChartComponent,
-  LineChartConfig,
+  UserFullNamePipe,
 } from '@forma-ws/frontend-shared';
 import { Observable } from 'rxjs';
-import { LoggingService } from './resources/logging.resource.service';
+import { LoggingResourceService } from './resources/logging.resource.service';
+import { LoggingDto } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-logging',
   imports: [
     CommonModule,
     TranslateModule,
-    LineChartComponent,
     DashboardCommonComponent,
+    UserFullNamePipe,
   ],
   templateUrl: './logging.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [LoggingService],
+  providers: [LoggingResourceService],
 })
-export class LoggingComponent extends DashboardCommon<LineChartConfig> {
-  private loggingService = inject(LoggingService);
+export class LoggingComponent extends DashboardCommon<LoggingDto[]> {
+  private loggingResourceService = inject(LoggingResourceService);
 
-  chartConfig = computed(() => this.dashBoardData());
+  loggingActivity = computed(() => this.dashBoardData() ?? []);
 
-  override getData(): Observable<LineChartConfig> {
-    return this.loggingService.getChartConfig();
+  override getData(): Observable<LoggingDto[]> {
+    return this.loggingResourceService.getLoggingActivity();
   }
 }

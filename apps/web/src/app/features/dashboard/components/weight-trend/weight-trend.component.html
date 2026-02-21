@@ -3,21 +3,44 @@
   [isLoading]="isLoading()"
   (retry)="getDashBoardData(getData())"
 >
-  @if (chartConfig()) {
-  <app-line-chart [config]="chartConfig()!"></app-line-chart>
-  }
-  <div class="flex justify-evenly">
+  <div class="flex items-center justify-between mb-3">
+    <h2
+      class="text-base font-semibold text-secondary dark:text-secondary-dark flex items-center gap-2"
+    >
+      <span class="text-xl">⚖️</span>
+      {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.TITLE' | translate }}
+    </h2>
+  </div>
+
+  <div class="space-y-3">
     <div>
       <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        New This Month
+        {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.PORTFOLIO_GOAL_STATUS' | translate }}
       </p>
-      <p class="text-xl font-bold text-accent dark:text-accent-dark">+0</p>
+      <div class="flex items-baseline gap-2">
+        <p class="text-3xl font-bold text-accent dark:text-accent-dark">
+          {{ getWeightPercentage(weightTrend().weightTrend) }}%
+        </p>
+        <span class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+          {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.ON_TRACK' | translate }}
+        </span>
+      </div>
     </div>
-    <div>
-      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
-        Total Active
+
+    <div
+      class="pt-3 border-t border-secondary/10 dark:border-secondary-dark/10"
+    >
+      <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-2">
+        {{ 'DASHBOARD.WIDGETS.WEIGHT_TREND.CLIENTS_TRENDING' | translate }}
       </p>
-      <p class="text-xl font-bold text-secondary dark:text-secondary-dark">0</p>
+      <div
+        class="w-full bg-secondary/10 dark:bg-secondary-dark/10 rounded-full h-2"
+      >
+        <div
+          class="bg-accent dark:bg-accent-dark h-2 rounded-full"
+          [style.width.%]="getWeightPercentage(weightTrend().weightTrend)"
+        ></div>
+      </div>
     </div>
   </div>
 </lib-dashboard-common>

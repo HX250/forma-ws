@@ -2,19 +2,24 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
+  signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  ButtonComponent,
+  ButtonProperties,
   DashboardCommon,
   DashboardCommonComponent,
   LineChartComponent,
-  LineChartConfig,
 } from '@forma-ws/frontend-shared';
-import { ClientsGrowthService } from './resources/clients-growth.resource.service';
+import { ClientsGrowthResourceService } from './resources/clients-growth.resource.service';
 import { Observable } from 'rxjs';
+import { ChartSpaceValues, WeightTrendResponse } from '@forma-ws/domain';
+import { ClientGrowthService } from './services/client-growth.service';
 
 @Component({
   selector: 'app-clients-growth',
@@ -23,17 +28,39 @@ import { Observable } from 'rxjs';
     TranslateModule,
     LineChartComponent,
     DashboardCommonComponent,
+    ButtonComponent,
   ],
   templateUrl: './clients-growth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ClientsGrowthService],
+  providers: [ClientGrowthService, ClientsGrowthResourceService],
 })
-export class ClientsGrowthComponent extends DashboardCommon<LineChartConfig> {
-  private clientsGrowthService = inject(ClientsGrowthService);
+export class ClientsGrowthComponent extends DashboardCommon<WeightTrendResponse> {
+  private clientsGrowthResourceService = inject(ClientsGrowthResourceService);
+  private clientGrowthService = inject(ClientGrowthService);
 
-  chartConfig = computed(() => this.dashBoardData());
+  chartSpan = signal<ChartSpaceValues>(ChartSpaceValues.YEAR);
+  chartConfig = computed(() =>
+    this.clientGrowthService.getChartConfig(this.dashBoardData())
+  );
 
-  override getData(): Observable<LineChartConfig> {
-    return this.clientsGrowthService.getChartConfig();
+  private chartSpanEffect = effect(() => {
+    const span = this.chartSpan();
+
+    if (span) {
+      this.getDashBoardData(this.getData());
+    }
+  });
+
+  ChartSpaceValues = ChartSpaceValues;
+  ButtonProperties = ButtonProperties;
+
+  getFilterVariant(filter: ChartSpaceValues): ButtonProperties.ButtonVariant {
+    return this.chartSpan() === filter
+      ? ButtonProperties.ButtonVariant.PRIMARY
+      : ButtonProperties.ButtonVariant.NEUTRAL;
+  }
+
+  override getData(): Observable<WeightTrendResponse> {
+    return this.clientsGrowthResourceService.getChartConfig();
   }
 }

@@ -10,30 +10,28 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   DashboardCommon,
   DashboardCommonComponent,
-  LineChartComponent,
-  LineChartConfig,
 } from '@forma-ws/frontend-shared';
-import { WeightTrendService } from './resources/weight-trend.resource.service';
+import { WeightTrendResourceService } from './resources/weight-trend.resource.service';
 import { Observable } from 'rxjs';
+import { WeightTrendDto } from '@forma-ws/domain';
 
 @Component({
   selector: 'app-weight-trend',
-  imports: [
-    CommonModule,
-    TranslateModule,
-    LineChartComponent,
-    DashboardCommonComponent,
-  ],
+  imports: [CommonModule, TranslateModule, DashboardCommonComponent],
   templateUrl: './weight-trend.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [WeightTrendService],
+  providers: [WeightTrendResourceService],
 })
-export class WeightTrendComponent extends DashboardCommon<LineChartConfig> {
-  private weightTrendService = inject(WeightTrendService);
+export class WeightTrendComponent extends DashboardCommon<WeightTrendDto> {
+  private weightTrendResourceService = inject(WeightTrendResourceService);
 
-  chartConfig = computed(() => this.dashBoardData());
+  weightTrend = computed(() => this.dashBoardData() ?? { weightTrend: 0 });
 
-  override getData(): Observable<LineChartConfig> {
-    return this.weightTrendService.getChartConfig();
+  getWeightPercentage(weightTrend: number): number {
+    return weightTrend ?? 0;
+  }
+
+  override getData(): Observable<WeightTrendDto> {
+    return this.weightTrendResourceService.getWeightTrend();
   }
 }
