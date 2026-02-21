@@ -3,8 +3,8 @@
   [isLoading]="isLoading()"
   (retry)="getDashBoardData(getData())"
 >
-  @if (chartConfig()) {
-  <app-line-chart [config]="chartConfig()!"></app-line-chart>
+  @if (chartConfig(); as config) {
+  <app-line-chart [config]="config"></app-line-chart>
   }
   <div class="flex justify-evenly">
     <div>

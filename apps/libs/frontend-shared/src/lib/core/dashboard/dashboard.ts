@@ -17,10 +17,6 @@ export abstract class DashboardCommon<T> implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  get loading() {
-    return this.isLoading();
-  }
-
   ngOnInit(): void {
     this.getDashBoardData(this.getData());
   }
