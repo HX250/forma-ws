@@ -13,27 +13,27 @@ import {
   LineChartComponent,
   LineChartConfig,
 } from '@forma-ws/frontend-shared';
-import { ClientsGrowthService } from './resources/clients-growth.resource.service';
 import { Observable } from 'rxjs';
+import { LoggingService } from './resources/logging.resource.service';
 
 @Component({
-  selector: 'app-clients-growth',
+  selector: 'app-logging',
   imports: [
     CommonModule,
     TranslateModule,
     LineChartComponent,
     DashboardCommonComponent,
   ],
-  templateUrl: './clients-growth.component.html',
+  templateUrl: './logging.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ClientsGrowthService],
+  providers: [LoggingService],
 })
-export class ClientsGrowthComponent extends DashboardCommon<LineChartConfig> {
-  private clientsGrowthService = inject(ClientsGrowthService);
+export class LoggingComponent extends DashboardCommon<LineChartConfig> {
+  private loggingService = inject(LoggingService);
 
   chartConfig = computed(() => this.dashBoardData());
 
   override getData(): Observable<LineChartConfig> {
-    return this.clientsGrowthService.getChartConfig();
+    return this.loggingService.getChartConfig();
   }
 }

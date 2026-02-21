@@ -82,6 +82,14 @@
       }
     }
   },
+  "BUTTON": {
+    "ADD": "Add",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "RETRY": "Retry"
+  },
   "COMPONENTS": {
     "FORM": {
       "ERRORS": {
@@ -248,6 +256,9 @@
         "NEW_THIS_MONTH": "New This Month",
         "TOTAL_ACTIVE": "Total Active"
       }
+    },
+    "ERRORS": {
+      "DESCRIPTION": "There was an issue fetching the dashboard data. Please try again later."
     }
   },
   "TRACKING": {

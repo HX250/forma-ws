@@ -1,0 +1,17 @@
+@if (isLoading()) {
+<div class="flex items-center justify-center h-full">
+  <forma-loading />
+</div>
+} @else if(isError()) {
+<div class="flex items-center flex-col gap-8 justify-center h-full">
+  <p>{{ 'DASHBOARD.ERRORS.DESCRIPTION' | translate }}</p>
+  <app-button
+    [text]="'BUTTON.RETRY'"
+    [variant]="ButtonVariant.DANGER"
+    icon="refresh"
+    (clicked)="retry.emit()"
+  />
+</div>
+} @else {
+<ng-content></ng-content>
+}
