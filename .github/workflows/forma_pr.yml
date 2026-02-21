@@ -45,10 +45,10 @@ jobs:
           path: node_modules
 
       - name: Generate Prisma Client
-        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma generate --schema=./apps/api/prisma/schema.prisma
 
       - name: Run API unit tests
-        run: npm run test:api
+        run: ./node_modules/.bin/nx test api
 
   test-frontend:
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
           path: node_modules
 
       - name: Run Web unit tests
-        run: npm run test:web
+        run: ./node_modules/.bin/nx test web
 
   build-backend:
     runs-on: ubuntu-latest
@@ -88,10 +88,10 @@ jobs:
           path: node_modules
 
       - name: Generate Prisma Client
-        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma generate --schema=./apps/api/prisma/schema.prisma
 
       - name: Build NestJS API with Nx
-        run: npx nx build api --prod
+        run: ./node_modules/.bin/nx build api --prod
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -116,4 +116,4 @@ jobs:
           API_END_POINT: ${{ secrets.API_END_POINT }}
 
       - name: Build Angular app with Nx
-        run: npx nx build web --prod
+        run: ./node_modules/.bin/nx build web --prod

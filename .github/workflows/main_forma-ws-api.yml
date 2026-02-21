@@ -48,10 +48,10 @@ jobs:
           path: node_modules
 
       - name: Generate Prisma Client
-        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma generate --schema=./apps/api/prisma/schema.prisma
 
       - name: Run API unit tests
-        run: npm run test:api
+        run: ./node_modules/.bin/nx test api
 
   test-frontend:
     runs-on: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
           path: node_modules
 
       - name: Run Web unit tests
-        run: npm run test:web
+        run: ./node_modules/.bin/nx test web
 
   database-migration-and-generate:
     runs-on: ubuntu-latest
@@ -104,13 +104,13 @@ jobs:
 
       - name: Run Prisma Migrations
         if: steps.check-schema.outputs.schema_changed == 'true'
-        run: npx prisma migrate deploy --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma migrate deploy --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Generate Prisma Client
         if: steps.check-schema.outputs.schema_changed == 'true'
-        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma generate --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
@@ -139,12 +139,12 @@ jobs:
           path: node_modules
 
       - name: Generate Prisma Client
-        run: npx prisma generate --schema=./apps/api/prisma/schema.prisma
+        run: ./node_modules/.bin/prisma generate --schema=./apps/api/prisma/schema.prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Build NestJS API with Nx
-        run: npx nx build api --prod
+        run: ./node_modules/.bin/nx build api --prod
 
       - name: Prepare deployment structure
         run: |
@@ -209,7 +209,7 @@ jobs:
           API_END_POINT: ${{ secrets.API_END_POINT }}
 
       - name: Build Angular app with Nx
-        run: npx nx build web --prod
+        run: ./node_modules/.bin/nx build web --prod
 
       - name: Build And Deploy
         id: builddeploy
