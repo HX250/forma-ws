@@ -82,6 +82,14 @@
       }
     }
   },
+  "BUTTON": {
+    "ADD": "Pridať",
+    "CANCEL": "Zrušiť",
+    "DELETE": "Smazat",
+    "EDIT": "Upravit",
+    "SAVE": "Uložit",
+    "RETRY": "Opakovať"
+  },
   "COMPONENTS": {
     "FORM": {
       "ERRORS": {
@@ -248,6 +256,9 @@
         "NEW_THIS_MONTH": "Nových tento mesiac",
         "TOTAL_ACTIVE": "Celkovo aktívnych"
       }
+    },
+    "ERRORS": {
+      "DESCRIPTION": "Došlo k problému pri načítaní dát pre dashboard. Skúste to prosím neskôr."
     }
   },
   "TRACKING": {

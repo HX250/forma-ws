@@ -41,6 +41,9 @@
         "NEW_THIS_MONTH": "Nových tento mesiac",
         "TOTAL_ACTIVE": "Celkovo aktívnych"
       }
+    },
+    "ERRORS": {
+      "DESCRIPTION": "Došlo k problému pri načítaní dát pre dashboard. Skúste to prosím neskôr."
     }
   }
 }

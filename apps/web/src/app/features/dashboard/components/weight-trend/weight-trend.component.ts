@@ -13,27 +13,27 @@ import {
   LineChartComponent,
   LineChartConfig,
 } from '@forma-ws/frontend-shared';
-import { ClientsGrowthService } from './resources/clients-growth.resource.service';
+import { WeightTrendService } from './resources/weight-trend.resource.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-clients-growth',
+  selector: 'app-weight-trend',
   imports: [
     CommonModule,
     TranslateModule,
     LineChartComponent,
     DashboardCommonComponent,
   ],
-  templateUrl: './clients-growth.component.html',
+  templateUrl: './weight-trend.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ClientsGrowthService],
+  providers: [WeightTrendService],
 })
-export class ClientsGrowthComponent extends DashboardCommon<LineChartConfig> {
-  private clientsGrowthService = inject(ClientsGrowthService);
+export class WeightTrendComponent extends DashboardCommon<LineChartConfig> {
+  private weightTrendService = inject(WeightTrendService);
 
   chartConfig = computed(() => this.dashBoardData());
 
   override getData(): Observable<LineChartConfig> {
-    return this.clientsGrowthService.getChartConfig();
+    return this.weightTrendService.getChartConfig();
   }
 }

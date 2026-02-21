@@ -1,0 +1,10 @@
+{
+  "BUTTON": {
+    "ADD": "Pridať",
+    "CANCEL": "Zrušiť",
+    "DELETE": "Smazat",
+    "EDIT": "Upravit",
+    "SAVE": "Uložit",
+    "RETRY": "Opakovať"
+  }
+}
