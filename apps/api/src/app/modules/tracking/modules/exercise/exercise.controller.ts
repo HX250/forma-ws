@@ -12,7 +12,8 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { ExerciseService } from './exercise.service';
-import { ExerciseEntryDto } from '@forma-ws/domain';
+import { AuthPayload, ExerciseEntryDto } from '@forma-ws/domain';
+import { CurrentUser } from '../../../security/common/decorators/current-user.decorator';
 
 @Controller('tracking/exercise')
 @UseGuards(JwtAuthGuard)
@@ -43,17 +44,17 @@ export class ExerciseController {
 
   @Post('/entries')
   async logEntry(
-    @Query('clientId') clientId: string,
+    @CurrentUser() user: AuthPayload,
     @Body() dto: ExerciseEntryDto
   ) {
-    return this.exerciseService.logExerciseEntry(dto, clientId);
+    return this.exerciseService.logExerciseEntry(dto, user.sub);
   }
 
   @Delete('/entries/:entryId')
   async deleteEntry(
     @Param('entryId') entryId: string,
-    @Query('clientId') clientId: string
+    @CurrentUser() user: AuthPayload
   ) {
-    return this.exerciseService.deleteExerciseEntry(entryId, clientId);
+    return this.exerciseService.deleteExerciseEntry(entryId, user.sub);
   }
 }

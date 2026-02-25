@@ -16,7 +16,15 @@
       "LOGGING_ACTIVITY": {
         "TITLE": "Logging activity",
         "NO_RECENT_ACTIVITY": "No recent logging activity",
-        "CLIENT_ACTIVITIES_APPEAR": "Client activities will appear here"
+        "CLIENT_ACTIVITIES_APPEAR": "Client activities will appear here",
+        "REFRESH": "Refresh",
+        "ACTIVITY_TYPES": {
+          "workout": "Workout",
+          "nutrition": "Meal",
+          "sleep": "Sleep",
+          "water": "Water",
+          "weigh_in": "Weigh-in"
+        }
       },
       "CLIENT_ENGAGEMENT": {
         "TITLE": "Client engagement",
@@ -39,7 +47,9 @@
       },
       "CLIENTS_GROWTH": {
         "NEW_THIS_MONTH": "New This Month",
-        "TOTAL_ACTIVE": "Total Active"
+        "TOTAL_ACTIVE": "Total Active",
+        "SERIES_NAME": "New Clients",
+        "CHART_TITLE": "Client Growth"
       }
     },
     "ERRORS": {

@@ -198,7 +198,7 @@ export class AddFoodRecordComponent
     };
 
     this.sendFormRequest(
-      this.foodResourceService.logNutritionEntry(mappedForm, this.clientId())
+      this.foodResourceService.logNutritionEntry(mappedForm)
     ).subscribe({
       next: (res) => {
         this.alertService.show(

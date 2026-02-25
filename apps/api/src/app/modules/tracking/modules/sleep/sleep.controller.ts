@@ -12,11 +12,13 @@ import {
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { SleepService } from './sleep.service';
 import {
+  AuthPayload,
   GetSleepEntryDto,
   SleepEntryData,
   AddSleepEntryDto,
   DeleteSleepEntryDto,
 } from '@forma-ws/domain';
+import { CurrentUser } from '../../../security/common/decorators/current-user.decorator';
 
 @Controller('tracking/sleep')
 @UseGuards(JwtAuthGuard)
@@ -32,12 +34,20 @@ export class SleepController {
   }
 
   @Post()
-  async logSleepEntry(@Body() dto: AddSleepEntryDto): Promise<boolean> {
+  async logSleepEntry(
+    @CurrentUser() user: AuthPayload,
+    @Body() dto: AddSleepEntryDto
+  ): Promise<boolean> {
+    dto.clientId = user.sub;
     return this.sleepService.logSleepEntry(dto);
   }
 
   @Delete()
-  async removeSleepEntry(@Query() dto: DeleteSleepEntryDto): Promise<boolean> {
+  async removeSleepEntry(
+    @CurrentUser() user: AuthPayload,
+    @Query() dto: DeleteSleepEntryDto
+  ): Promise<boolean> {
+    dto.clientId = user.sub;
     return this.sleepService.removeSleepEntry(dto);
   }
 }

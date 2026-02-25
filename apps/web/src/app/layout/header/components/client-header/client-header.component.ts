@@ -15,9 +15,7 @@ import {
 export class ClientHeaderComponent {
   linkClick = output<void>();
 
-  navLinks: NavLink[] = [
-    { route: '/dashboard', translationKey: 'HEADER.DASHBOARD', exact: true },
-  ];
+  navLinks: NavLink[] = [];
 
   onLinkClick() {
     this.linkClick.emit();

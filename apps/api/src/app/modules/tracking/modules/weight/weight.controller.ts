@@ -1,36 +1,51 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import {
   AddWeighInDto,
+  AuthPayload,
   ChartSpaceValues,
   WeighInResponse,
 } from '@forma-ws/domain';
+import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { WeightService } from './weight.service';
+import { CurrentUser } from '../../../security/common/decorators/current-user.decorator';
 
 @Controller('tracking/weight')
+@UseGuards(JwtAuthGuard)
+@UseInterceptors(ClassSerializerInterceptor)
 export class WeightController {
   constructor(private readonly weightService: WeightService) {}
 
   @Get(':clientId/chart')
   getWeightTracking(
     @Param('clientId') clientId: string,
-    @Query('span') span: string
+    @Query('span', new DefaultValuePipe(ChartSpaceValues.YEAR), ParseIntPipe)
+    span: number
   ) {
-    const spanValue = span ? Number(span) : ChartSpaceValues.YEAR;
-    return this.weightService.getWeightTracking(clientId, spanValue);
+    return this.weightService.getWeightTracking(clientId, span);
   }
 
   @Post()
   addDailyWeighIn(
-    @Query('clientId') clientId: string,
+    @CurrentUser() user: AuthPayload,
     @Body() dto: AddWeighInDto
   ): Promise<boolean> {
-    return this.weightService.logDailyWeighIn(clientId, dto);
+    return this.weightService.logDailyWeighIn(user.sub, dto);
   }
 
   @Get()
-  getTodayTracking(
-    @Query('clientId') clientId: string
-  ): Promise<WeighInResponse> {
-    return this.weightService.getTodayWeighIn(clientId);
+  getTodayTracking(@CurrentUser() user: AuthPayload): Promise<WeighInResponse> {
+    return this.weightService.getTodayWeighIn(user.sub);
   }
 }

@@ -81,11 +81,11 @@ export class AuthComponent
           AlertType.SUCCESS,
           'AUTH.ALERTS.LOGIN_SUCCESSFUL'
         );
-      },
-      complete: () => {
         const user = this.securityService.user();
         if (user?.isFirstLogin) {
           this.router.navigate(['/clients/set-up-password']);
+        } else if (user?.userType === UserType.CLIENT) {
+          this.router.navigate(['/clients/profile', user.id]);
         } else {
           this.router.navigate(['/dashboard']);
         }

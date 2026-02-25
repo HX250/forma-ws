@@ -8,6 +8,7 @@ import { SecurityModule } from './modules/security/security.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { CoachModule } from './modules/coach/coach.module';
 import { TrackingModule } from './modules/tracking/tracking.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -21,6 +22,7 @@ const isProduction = process.env.NODE_ENV === 'production';
       ignoreEnvFile: isProduction,
     }),
     DatabaseModule,
+    DashboardModule,
     SecurityModule,
     ClientsModule,
     CoachModule,

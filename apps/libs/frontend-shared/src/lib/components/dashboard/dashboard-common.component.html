@@ -1,4 +1,4 @@
-<!--@if (isLoading()) {
+@if (isLoading()) {
 <div class="flex items-center justify-center h-full">
   <forma-loading />
 </div>
@@ -12,5 +12,6 @@
     (clicked)="retry.emit()"
   />
 </div>
-} @else {} -->
+} @else {
 <ng-content></ng-content>
+}

@@ -87,11 +87,9 @@ export class FoodTrackingComponent {
 
     if (!confirmed) return;
 
-    this.foodResourceService
-      .removeNutritionEntry({ clientId: this.userId(), id: entryId })
-      .subscribe(() => {
-        this.loadTodayData();
-      });
+    this.foodResourceService.removeNutritionEntry(entryId).subscribe(() => {
+      this.loadTodayData();
+    });
   }
 
   async openLogMealModal(): Promise<void> {

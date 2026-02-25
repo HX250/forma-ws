@@ -41,28 +41,16 @@ export class FoodTrackingResourceService extends GlobalAuthService {
     });
   }
 
-  logNutritionEntry(
-    data: NutritionEntry,
-    clientId: string
-  ): Observable<boolean> {
+  logNutritionEntry(data: NutritionEntry): Observable<boolean> {
     return this.http.post<boolean>(
       this.endpoint + '/tracking/food/entries',
-      data,
-      { params: { clientId: clientId } }
+      data
     );
   }
 
-  removeNutritionEntry(params: {
-    clientId: string;
-    id: string;
-  }): Observable<void> {
+  removeNutritionEntry(id: string): Observable<void> {
     return this.http.delete<void>(
-      `${this.endpoint}/tracking/food/entries/${params.id}`,
-      {
-        params: {
-          clientId: params.clientId,
-        },
-      }
+      `${this.endpoint}/tracking/food/entries/${id}`
     );
   }
 }

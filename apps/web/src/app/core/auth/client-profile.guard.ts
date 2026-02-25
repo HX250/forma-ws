@@ -3,18 +3,18 @@ import { CanActivateFn, Router } from '@angular/router';
 import { SecurityService } from './security.service';
 import { UserType } from '@forma-ws/domain';
 
-export const loggedInGuard: CanActivateFn = (route, state) => {
+export const clientProfileGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const securityService = inject(SecurityService);
 
-  if (securityService.isAuthenticated()) {
-    if (securityService.userType() === UserType.CLIENT) {
-      const userId = securityService.userId();
+  if (securityService.userType() === UserType.CLIENT) {
+    const userId = securityService.userId();
+    const routeId = route.paramMap.get('id');
+
+    if (routeId !== userId) {
       router.navigate(['/clients/profile', userId]);
-    } else {
-      router.navigate(['/dashboard']);
+      return false;
     }
-    return false;
   }
 
   return true;
