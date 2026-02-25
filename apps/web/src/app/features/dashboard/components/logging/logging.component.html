@@ -10,58 +10,61 @@
       <span class="text-xl">📊</span>
       {{ 'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.TITLE' | translate }}
     </h2>
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [text]="'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.REFRESH'"
+      (clicked)="refresh()"
+    />
   </div>
 
   <div class="space-y-2 max-h-64 overflow-y-auto pr-2">
+    @if (loggingActivity().length === 0) {
+    <div
+      class="flex items-center gap-3 p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5"
+    >
+      <div
+        class="w-2 h-2 rounded-full bg-secondary/30 dark:bg-secondary-dark/30 flex-shrink-0"
+      ></div>
+      <div>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{
+            'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.NO_RECENT_ACTIVITY' | translate
+          }}
+        </p>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+          {{
+            'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.CLIENT_ACTIVITIES_APPEAR'
+              | translate
+          }}
+        </p>
+      </div>
+    </div>
+    } @else { @for (item of loggingActivity(); track $index) {
     <div
       class="flex items-center justify-between p-3 rounded-md bg-secondary/5 dark:bg-secondary-dark/5 hover:bg-secondary/10 dark:hover:bg-secondary-dark/10 transition-colors"
     >
-      <div class="flex items-center gap-4 flex-1">
-        <div class="flex items-center gap-3 min-w-0 flex-1">
-          <div
-            class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
-          ></div>
-          @if(loggingActivity().length === 0) {
-          <div class="min-w-0 flex-1">
-            <p
-              class="text-sm font-medium text-secondary dark:text-secondary-dark"
-            >
-              {{
-                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.NO_RECENT_ACTIVITY'
-                  | translate
-              }}
-            </p>
-            <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
-              {{
-                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.CLIENT_ACTIVITIES_APPEAR'
-                  | translate
-              }}
-            </p>
-          </div>
-          } @else { @for (item of loggingActivity(); track $index) {
-          <div class="min-w-0 flex-1">
-            <p
-              class="text-sm font-medium text-secondary dark:text-secondary-dark"
-            >
-              {{ item.client | userFullName }}
-              {{ 'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.PERFORMED' | translate }}
-              {{
-                'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.ACTIVITY_TYPES.' +
-                  item.activityType | translate
-              }}
-            </p>
-            <p class="text-xs text-secondary/70 dark:text-secondary-dark/70">
-              {{ item.timestamp }}
-            </p>
-          </div>
-          } }
-        </div>
+      <div class="flex items-center gap-3 min-w-0 flex-1">
+        <div
+          class="w-2 h-2 rounded-full bg-accent dark:bg-accent-dark flex-shrink-0"
+        ></div>
+        <p
+          class="text-sm font-medium text-secondary dark:text-secondary-dark truncate"
+        >
+          {{ item.client | userFullName }}
+          &mdash;
+          {{
+            'DASHBOARD.WIDGETS.LOGGING_ACTIVITY.ACTIVITY_TYPES.' +
+              item.activityType | translate
+          }}
+        </p>
       </div>
+      <span
+        class="text-xs text-secondary/60 dark:text-secondary-dark/60 flex-shrink-0 ml-3"
+      >
+        {{ item.timestamp | date : 'HH:mm' }}
+      </span>
     </div>
-    <span
-      class="text-xs text-secondary/50 dark:text-secondary-dark/50 flex-shrink-0 ml-4"
-    >
-      --
-    </span>
+    } }
   </div>
 </lib-dashboard-common>

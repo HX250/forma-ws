@@ -231,7 +231,15 @@
       "LOGGING_ACTIVITY": {
         "TITLE": "Aktivita zaznamenávania",
         "NO_RECENT_ACTIVITY": "Žiadna nedávna aktivita zaznamenávania",
-        "CLIENT_ACTIVITIES_APPEAR": "Aktivity klientov sa zobrazia tu"
+        "CLIENT_ACTIVITIES_APPEAR": "Aktivity klientov sa zobrazia tu",
+        "REFRESH": "Obnoviť",
+        "ACTIVITY_TYPES": {
+          "workout": "Cvičenie",
+          "nutrition": "Jedlo",
+          "sleep": "Spánok",
+          "water": "Voda",
+          "weigh_in": "Váženie"
+        }
       },
       "CLIENT_ENGAGEMENT": {
         "TITLE": "Zapojenie klientov",

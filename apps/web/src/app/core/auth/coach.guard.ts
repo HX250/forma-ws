@@ -8,7 +8,8 @@ export const coachGuard: CanActivateFn = (route, state) => {
   const securityService = inject(SecurityService);
 
   if (securityService.userType() === UserType.CLIENT) {
-    router.navigate(['/dashboard']);
+    const userId = securityService.userId();
+    router.navigate(['/clients/profile', userId]);
     return false;
   }
 

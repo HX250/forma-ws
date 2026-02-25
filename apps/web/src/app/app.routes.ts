@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { securityGuard } from './core/auth/auth.guard';
 import { loggedInGuard } from './core/auth/logged-in.guard';
+import { coachGuard } from './core/auth/coach.guard';
 
 export const appRoutes: Route[] = [
   // TODO pridat guardy
@@ -17,7 +18,7 @@ export const appRoutes: Route[] = [
       import('./features/dashboard/dashboard.routes').then(
         (m) => m.DashboardRoutingModule
       ),
-    canActivate: [securityGuard],
+    canActivate: [securityGuard, coachGuard],
   },
   {
     path: 'clients',
