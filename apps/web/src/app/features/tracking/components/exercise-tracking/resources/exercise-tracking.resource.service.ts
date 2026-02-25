@@ -36,28 +36,16 @@ export class ExerciseTrackingResourceService extends GlobalAuthService {
     );
   }
 
-  logExerciseEntry(
-    data: ExerciseEntryDto,
-    clientId: string
-  ): Observable<boolean> {
+  logExerciseEntry(data: ExerciseEntryDto): Observable<boolean> {
     return this.http.post<boolean>(
       `${this.endpoint}/tracking/exercise/entries`,
-      data,
-      {
-        params: { clientId },
-      }
+      data
     );
   }
 
-  removeExerciseEntry(params: {
-    clientId: string;
-    entryId: string;
-  }): Observable<void> {
+  removeExerciseEntry(entryId: string): Observable<void> {
     return this.http.delete<void>(
-      `${this.endpoint}/tracking/exercise/entries/${params.entryId}`,
-      {
-        params: { clientId: params.clientId },
-      }
+      `${this.endpoint}/tracking/exercise/entries/${entryId}`
     );
   }
 }

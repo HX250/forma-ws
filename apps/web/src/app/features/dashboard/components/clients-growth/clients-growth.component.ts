@@ -20,7 +20,6 @@ import { ClientsGrowthResourceService } from './resources/clients-growth.resourc
 import { Observable } from 'rxjs';
 import { ChartSpaceValues, ClientsGrowthResponse } from '@forma-ws/domain';
 import { ClientGrowthService } from './services/client-growth.service';
-import { SecurityService } from '../../../../core/auth/security.service';
 
 @Component({
   selector: 'app-clients-growth',
@@ -38,7 +37,6 @@ import { SecurityService } from '../../../../core/auth/security.service';
 export class ClientsGrowthComponent extends DashboardCommon<ClientsGrowthResponse> {
   private clientsGrowthResourceService = inject(ClientsGrowthResourceService);
   private clientGrowthService = inject(ClientGrowthService);
-  private securityService = inject(SecurityService);
 
   chartSpan = signal<ChartSpaceValues>(ChartSpaceValues.YEAR);
 
@@ -74,10 +72,6 @@ export class ClientsGrowthComponent extends DashboardCommon<ClientsGrowthRespons
   }
 
   override getData(): Observable<ClientsGrowthResponse> {
-    const coachId = this.securityService.user()?.id ?? '';
-    return this.clientsGrowthResourceService.getChartConfig(
-      coachId,
-      this.chartSpan()
-    );
+    return this.clientsGrowthResourceService.getChartConfig(this.chartSpan());
   }
 }

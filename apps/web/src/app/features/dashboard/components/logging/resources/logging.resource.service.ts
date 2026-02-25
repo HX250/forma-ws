@@ -8,9 +8,7 @@ import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 export class LoggingResourceService extends GlobalAuthService {
   private readonly http = inject(HttpClient);
 
-  getLoggingActivity(coachId: string): Observable<LoggingDto[]> {
-    return this.http.get<LoggingDto[]>(this.endpoint + '/dashboard/logging', {
-      params: { coachId },
-    });
+  getLoggingActivity(): Observable<LoggingDto[]> {
+    return this.http.get<LoggingDto[]>(this.endpoint + '/dashboard/logging');
   }
 }

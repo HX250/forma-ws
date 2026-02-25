@@ -144,7 +144,7 @@ export class AddExerciseRecordComponent
       notes: formValue.notes,
     };
 
-    this.exerciseService.logExerciseEntry(dto, this.clientId()).subscribe({
+    this.exerciseService.logExerciseEntry(dto).subscribe({
       next: (res) => {
         this.alertService.show(
           AlertType.SUCCESS,

@@ -8,13 +8,10 @@ import { Observable } from 'rxjs';
 export class ClientsGrowthResourceService extends GlobalAuthService {
   private readonly http = inject(HttpClient);
 
-  getChartConfig(
-    coachId: string,
-    span: number
-  ): Observable<ClientsGrowthResponse> {
+  getChartConfig(span: number): Observable<ClientsGrowthResponse> {
     return this.http.get<ClientsGrowthResponse>(
       this.endpoint + '/dashboard/clients-growth',
-      { params: { coachId, span: span.toString() } }
+      { params: { span: span.toString() } }
     );
   }
 }

@@ -5,9 +5,12 @@ import {
   UseGuards,
   UseInterceptors,
   ClassSerializerInterceptor,
+  ParseIntPipe,
+  Req,
 } from '@nestjs/common';
 import { CoachOnlyGuard, JwtAuthGuard } from '@forma-ws/backend-shared';
 import {
+  AuthPayload,
   ClientsGrowthResponse,
   WeightTrendDto,
   LoggingDto,
@@ -19,6 +22,7 @@ import { WeightTrendService } from './services/weight-trend.service';
 import { LoggingService } from './services/logging.service';
 import { ClientEngagementService } from './services/client-engagement.service';
 import { LoggingTimingService } from './services/logging-timing.service';
+import { CurrentUser } from '../security/common/decorators/current-user.decorator';
 
 @Controller('dashboard')
 @UseGuards(JwtAuthGuard, CoachOnlyGuard)
@@ -34,35 +38,35 @@ export class DashboardController {
 
   @Get('clients-growth')
   async getClientsGrowth(
-    @Query('coachId') coachId: string,
-    @Query('span') span: string
+    @CurrentUser() user: AuthPayload,
+    @Query('span', ParseIntPipe) span: number
   ): Promise<ClientsGrowthResponse> {
-    return this.clientsGrowthService.getClientsGrowth(coachId, Number(span));
+    return this.clientsGrowthService.getClientsGrowth(user.sub, span);
   }
 
   @Get('weight-trend')
   async getWeightTrend(
-    @Query('coachId') coachId: string
+    @CurrentUser() user: AuthPayload
   ): Promise<WeightTrendDto> {
-    return this.weightTrendService.getWeightTrend(coachId);
+    return this.weightTrendService.getWeightTrend(user.sub);
   }
 
   @Get('logging')
-  async getLogging(@Query('coachId') coachId: string): Promise<LoggingDto[]> {
-    return this.loggingService.getLoggingActivity(coachId);
+  async getLogging(@CurrentUser() user: AuthPayload): Promise<LoggingDto[]> {
+    return this.loggingService.getLoggingActivity(user.sub);
   }
 
   @Get('client-engagement')
   async getClientEngagement(
-    @Query('coachId') coachId: string
+    @CurrentUser() user: AuthPayload
   ): Promise<ClientEngagementResponse> {
-    return this.clientEngagementService.getClientEngagement(coachId);
+    return this.clientEngagementService.getClientEngagement(user.sub);
   }
 
   @Get('logging-timing')
   async getLoggingTiming(
-    @Query('coachId') coachId: string
+    @CurrentUser() user: AuthPayload
   ): Promise<LoggingTimingResponse> {
-    return this.loggingTimingService.getLoggingTiming(coachId);
+    return this.loggingTimingService.getLoggingTiming(user.sub);
   }
 }

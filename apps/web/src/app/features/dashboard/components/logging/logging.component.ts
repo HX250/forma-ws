@@ -19,7 +19,6 @@ import { interval, Subject, takeUntil } from 'rxjs';
 import { Observable } from 'rxjs';
 import { LoggingResourceService } from './resources/logging.resource.service';
 import { LoggingDto } from '@forma-ws/domain';
-import { SecurityService } from '../../../../core/auth/security.service';
 
 @Component({
   selector: 'app-logging',
@@ -40,7 +39,6 @@ export class LoggingComponent
   implements OnInit, OnDestroy
 {
   private loggingResourceService = inject(LoggingResourceService);
-  private securityService = inject(SecurityService);
   protected des$ = new Subject<void>();
 
   ButtonProperties = ButtonProperties;
@@ -64,7 +62,6 @@ export class LoggingComponent
   }
 
   override getData(): Observable<LoggingDto[]> {
-    const coachId = this.securityService.user()?.id ?? '';
-    return this.loggingResourceService.getLoggingActivity(coachId);
+    return this.loggingResourceService.getLoggingActivity();
   }
 }

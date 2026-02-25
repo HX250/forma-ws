@@ -12,11 +12,13 @@ import {
 import { JwtAuthGuard } from '@forma-ws/backend-shared';
 import { WaterService } from './water.service';
 import {
+  AuthPayload,
   GetWaterData,
   WaterData,
   AddWaterData,
   DeleteWaterData,
 } from '@forma-ws/domain';
+import { CurrentUser } from '../../../security/common/decorators/current-user.decorator';
 
 @Controller('tracking/water')
 @UseGuards(JwtAuthGuard)
@@ -30,12 +32,20 @@ export class WaterController {
   }
 
   @Post()
-  async logWaterTrackingData(@Body() dto: AddWaterData): Promise<boolean> {
+  async logWaterTrackingData(
+    @CurrentUser() user: AuthPayload,
+    @Body() dto: AddWaterData
+  ): Promise<boolean> {
+    dto.clientId = user.sub;
     return this.waterService.logWaterTrackingData(dto);
   }
 
   @Delete()
-  async removeWaterEntry(@Query() dto: DeleteWaterData): Promise<boolean> {
+  async removeWaterEntry(
+    @CurrentUser() user: AuthPayload,
+    @Query() dto: DeleteWaterData
+  ): Promise<boolean> {
+    dto.clientId = user.sub;
     return this.waterService.removeWaterEntry(dto);
   }
 }

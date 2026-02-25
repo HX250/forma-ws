@@ -83,7 +83,7 @@ export class ExerciseTrackingComponent {
     if (!confirmed) return;
 
     this.exerciseResourceService
-      .removeExerciseEntry({ clientId: this.userId(), entryId })
+      .removeExerciseEntry(entryId)
       .subscribe(() => this.loadTodayData());
   }
 

@@ -14,12 +14,14 @@ import {
 } from '@nestjs/common';
 import { FoodService } from './food.service';
 import {
+  AuthPayload,
   FoodDetail,
   FoodDetailList,
   GetTrackingData,
   NutritionEntryDto,
   NutritionSummary,
 } from '@forma-ws/domain';
+import { CurrentUser } from '../../../security/common/decorators/current-user.decorator';
 
 @Controller('tracking/food')
 @UseGuards(JwtAuthGuard)
@@ -58,17 +60,17 @@ export class FoodController {
 
   @Post('/entries')
   async logNutritionEntry(
-    @Query('clientId') clientId: string,
+    @CurrentUser() user: AuthPayload,
     @Body() dto: NutritionEntryDto
   ): Promise<boolean> {
-    return this.foodService.logNutritionEntry(dto, clientId);
+    return this.foodService.logNutritionEntry(dto, user.sub);
   }
 
   @Delete('/entries/:entryId')
   async deleteNutritionEntry(
     @Param('entryId') entryId: string,
-    @Query('clientId') clientId: string
+    @CurrentUser() user: AuthPayload
   ): Promise<boolean> {
-    return this.foodService.deleteNutritionEntry(entryId, clientId);
+    return this.foodService.deleteNutritionEntry(entryId, user.sub);
   }
 }
