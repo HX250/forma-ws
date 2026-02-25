@@ -47,7 +47,9 @@
       },
       "CLIENTS_GROWTH": {
         "NEW_THIS_MONTH": "Nových tento mesiac",
-        "TOTAL_ACTIVE": "Celkovo aktívnych"
+        "TOTAL_ACTIVE": "Celkovo aktívnych",
+        "SERIES_NAME": "Noví klienti",
+        "CHART_TITLE": "Rast klientov"
       }
     },
     "ERRORS": {

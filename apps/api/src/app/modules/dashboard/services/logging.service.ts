@@ -33,10 +33,7 @@ export class LoggingService {
       this.prisma.nutritionEntry.findMany({ where, select }),
       this.prisma.sleepEntry.findMany({ where, select }),
       this.prisma.waterEntry.findMany({ where, select }),
-      this.prisma.weighIn.findMany({
-        where: { clientId: { in: clientIds }, createdAt: { gte: since } },
-        select,
-      }),
+      this.prisma.weighIn.findMany({ where, select }),
     ]);
 
     const toDto = (
@@ -57,9 +54,6 @@ export class LoggingService {
       ...toDto(weighIn, ActivityEnum.WEIGH_IN),
     ];
 
-    return all.sort(
-      (a, b) =>
-        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-    );
+    return all.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
   }
 }

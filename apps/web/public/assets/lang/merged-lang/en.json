@@ -262,7 +262,9 @@
       },
       "CLIENTS_GROWTH": {
         "NEW_THIS_MONTH": "New This Month",
-        "TOTAL_ACTIVE": "Total Active"
+        "TOTAL_ACTIVE": "Total Active",
+        "SERIES_NAME": "New Clients",
+        "CHART_TITLE": "Client Growth"
       }
     },
     "ERRORS": {
