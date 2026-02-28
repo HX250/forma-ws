@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { DatabaseService } from '@forma-ws/backend-shared';
+import { DatabaseService, prismaToPlain } from '@forma-ws/backend-shared';
 import {
   Client,
   ClientGeneralDetails,
@@ -7,7 +7,6 @@ import {
   ClientPermissions,
   ClientTable,
 } from '@forma-ws/domain';
-import { prismaToPlain } from '../../../../../libs/backend-shared/src/lib/utils/prisma-to-plain';
 import { decimalInObjectToNumber } from '../../../../../libs/backend-shared/src/lib/utils/decimal-to-numbers';
 
 @Injectable()

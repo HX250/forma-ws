@@ -106,25 +106,4 @@ describe('TrackingService', () => {
       }, 100);
     });
   });
-
-  describe('reloadPermissions', () => {
-    it('should reload permissions by calling loadPermissions', () => {
-      const mockPermissions = {
-        canTrackExercise: true,
-        canTrackSleep: true,
-        canTrackNutrition: true,
-        canTrackWater: true,
-      };
-
-      mockResourceService.getClientPermissions.mockReturnValue(
-        of(mockPermissions)
-      );
-
-      service.reloadPermissions('client-123');
-
-      expect(mockResourceService.getClientPermissions).toHaveBeenCalledWith(
-        'client-123'
-      );
-    });
-  });
 });

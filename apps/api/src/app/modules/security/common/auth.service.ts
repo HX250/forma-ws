@@ -85,7 +85,7 @@ export class AuthService {
   }
 
   async getCurrentUser(payload: AuthPayload): Promise<UserAuthDetails> {
-    if (payload.userType === 'COACH') {
+    if (payload.userType === UserType.COACH) {
       const coach = await this.prisma.coach.findUnique({
         where: { id: payload.sub },
         select: {

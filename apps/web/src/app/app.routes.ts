@@ -4,7 +4,6 @@ import { loggedInGuard } from './core/auth/logged-in.guard';
 import { coachGuard } from './core/auth/coach.guard';
 
 export const appRoutes: Route[] = [
-  // TODO pridat guardy
   {
     path: '',
     loadChildren: () =>

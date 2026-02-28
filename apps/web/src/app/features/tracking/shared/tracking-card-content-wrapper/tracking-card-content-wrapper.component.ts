@@ -44,7 +44,7 @@ export class TrackingCardContentWrapperComponent {
           console.error('Error enabling permission:', err);
         },
         complete: () => {
-          this.trackingService.reloadPermissions(usedrId!);
+          this.trackingService.loadPermissions(usedrId!);
         },
       });
   }

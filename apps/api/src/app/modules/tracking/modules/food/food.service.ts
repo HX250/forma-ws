@@ -22,7 +22,7 @@ export class FoodService {
   constructor(private readonly prisma: DatabaseService) {}
 
   async searchFoods(query: string): Promise<FoodDetailList[]> {
-    const data = this.prisma.food.findMany({
+    const data = await this.prisma.food.findMany({
       where: {
         OR: [
           { name: { contains: query, mode: 'insensitive' } },

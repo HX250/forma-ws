@@ -27,7 +27,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(appRoutes),
-    provideHttpClient(),
     importProvidersFrom(TranslateModule.forRoot()),
     provideTranslateHttpLoader({
       prefix: '/assets/lang/merged-lang/',

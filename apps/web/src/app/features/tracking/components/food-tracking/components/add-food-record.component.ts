@@ -3,6 +3,7 @@ import {
   Component,
   effect,
   inject,
+  OnDestroy,
   OnInit,
   signal,
 } from '@angular/core';
@@ -33,6 +34,7 @@ import {
   FoodTrackingFromModel,
   SelectedFoodFormModel,
 } from '../models/food-tracking-form.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-food-record-meal',
@@ -51,7 +53,7 @@ import {
 })
 export class AddFoodRecordComponent
   extends PageFormComponent<FormGroup<FoodTrackingFromModel>>
-  implements OnInit
+  implements OnInit, OnDestroy
 {
   private readonly fb = inject(FormBuilder);
   private readonly foodResourceService = inject(FoodTrackingResourceService);
@@ -64,6 +66,7 @@ export class AddFoodRecordComponent
 
   searchResults = signal<AutocompleteItem<FoodDetailList>[]>([]);
 
+  subscription: Subscription | undefined;
   modalRef!: { close: (result?: any) => void };
 
   mealTypeOptions = signal<RatingOption[]>([
@@ -91,9 +94,13 @@ export class AddFoodRecordComponent
   ngOnInit() {
     this.form = this.buildForm();
 
-    this.control.servingSize.valueChanges.subscribe((v) =>
+    this.subscription = this.control.servingSize.valueChanges.subscribe((v) =>
       this.servingSize.set(v)
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   private buildForm(): FormaFormContainer<FormGroup<FoodTrackingFromModel>> {

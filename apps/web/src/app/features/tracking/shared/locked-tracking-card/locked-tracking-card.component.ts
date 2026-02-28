@@ -47,7 +47,7 @@ export class LockedTrackingCardComponent {
           );
         },
         complete: () => {
-          this.trackingService.reloadPermissions(userId!);
+          this.trackingService.loadPermissions(userId!);
         },
       });
   }

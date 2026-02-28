@@ -12,7 +12,6 @@ import { GlobalAuthService } from 'apps/web/src/app/core/auth/auth';
 @Injectable()
 export class FoodTrackingResourceService extends GlobalAuthService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = '/api/tracking/food';
 
   searchFoods(query: string): Observable<FoodDetailList[]> {
     return this.http.get<FoodDetailList[]>(

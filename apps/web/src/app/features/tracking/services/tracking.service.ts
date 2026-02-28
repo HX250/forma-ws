@@ -32,8 +32,4 @@ export class TrackingService {
       this.clientTrackingGoals.set(goals);
     });
   }
-
-  reloadPermissions(clientId: string) {
-    this.loadPermissions(clientId);
-  }
 }
