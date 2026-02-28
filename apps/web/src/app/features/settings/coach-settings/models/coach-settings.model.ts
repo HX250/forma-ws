@@ -18,7 +18,7 @@ export namespace CoachSettingsModel {
       yearsOfExperience: FormControl<number>;
       specializationFields: FormControl<SpecializationField[]>;
       bio: FormControl<string>;
-      pricing: FormControl<number>;
+      pricing: FormControl<number | null>;
     }
 
     export interface Availability {

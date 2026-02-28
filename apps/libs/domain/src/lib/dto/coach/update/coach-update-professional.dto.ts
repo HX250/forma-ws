@@ -21,7 +21,8 @@ export class UpdateCoachProfessionalDto {
   @IsString()
   bio?: string;
 
+  @IsOptional()
   @IsNumber()
   @Min(0)
-  pricing!: number;
+  pricing?: number | null;
 }

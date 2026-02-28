@@ -87,7 +87,7 @@ export class CoachProfessionalSettingsComponent
           yearsOfExperience: data.yearsOfExperience,
           specializationFields: data.specializationFields,
           bio: data.bio ?? '',
-          pricing: data.pricing ?? 0,
+          pricing: data.pricing ?? null,
         });
       });
   }
@@ -103,7 +103,7 @@ export class CoachProfessionalSettingsComponent
         yearsOfExperience: data.yearsOfExperience,
         specializationFields: data.specializationFields,
         bio: data.bio ?? '',
-        pricing: data.pricing ?? 0,
+        pricing: data.pricing ?? null,
       });
     }
     this.isEditMode.set(false);

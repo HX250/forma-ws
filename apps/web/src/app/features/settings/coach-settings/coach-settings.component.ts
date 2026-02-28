@@ -91,7 +91,7 @@ export class CoachSettingsComponent implements OnInit {
           Validators.required,
         ],
         bio: [''],
-        pricing: [0, [Validators.required, Validators.min(0)]],
+        pricing: [null as number | null, [Validators.min(0)]],
       }) as FormGroup<CoachSettingsModel.Form.Professional>
     );
 

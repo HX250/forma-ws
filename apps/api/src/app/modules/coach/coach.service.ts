@@ -17,13 +17,13 @@ export class CoachService {
   constructor(private readonly prisma: DatabaseService) {}
 
   async getPersonalProfile(coachId: string): Promise<CoachPersonalProfile> {
-    const coach = await this.prisma.coach.findUnique({
-      where: { id: coachId },
-      select: { firstName: true, lastName: true, gender: true },
-    });
-
-    if (!coach) throw new NotFoundException(`Coach ${coachId} not found`);
-
+    const coach = this.assertFound(
+      await this.prisma.coach.findUnique({
+        where: { id: coachId },
+        select: { firstName: true, lastName: true, gender: true },
+      }),
+      coachId
+    );
     return prismaToPlain<CoachPersonalProfile>(coach);
   }
 
@@ -49,18 +49,18 @@ export class CoachService {
   async getProfessionalProfile(
     coachId: string
   ): Promise<CoachProfessionalProfile> {
-    const coach = await this.prisma.coach.findUnique({
-      where: { id: coachId },
-      select: {
-        yearsOfExperience: true,
-        specializationFields: true,
-        bio: true,
-        pricing: true,
-      },
-    });
-
-    if (!coach) throw new NotFoundException(`Coach ${coachId} not found`);
-
+    const coach = this.assertFound(
+      await this.prisma.coach.findUnique({
+        where: { id: coachId },
+        select: {
+          yearsOfExperience: true,
+          specializationFields: true,
+          bio: true,
+          pricing: true,
+        },
+      }),
+      coachId
+    );
     return prismaToPlain<CoachProfessionalProfile>(coach);
   }
 
@@ -92,13 +92,13 @@ export class CoachService {
   async getAvailabilityProfile(
     coachId: string
   ): Promise<CoachAvailabilityProfile> {
-    const coach = await this.prisma.coach.findUnique({
-      where: { id: coachId },
-      select: { availability: true, communicationMethods: true },
-    });
-
-    if (!coach) throw new NotFoundException(`Coach ${coachId} not found`);
-
+    const coach = this.assertFound(
+      await this.prisma.coach.findUnique({
+        where: { id: coachId },
+        select: { availability: true, communicationMethods: true },
+      }),
+      coachId
+    );
     return prismaToPlain<CoachAvailabilityProfile>(coach);
   }
 
@@ -138,10 +138,17 @@ export class CoachService {
   }
 
   private async assertExists(coachId: string): Promise<void> {
-    const exists = await this.prisma.coach.findUnique({
-      where: { id: coachId },
-      select: { id: true },
-    });
-    if (!exists) throw new NotFoundException(`Coach ${coachId} not found`);
+    this.assertFound(
+      await this.prisma.coach.findUnique({
+        where: { id: coachId },
+        select: { id: true },
+      }),
+      coachId
+    );
+  }
+
+  private assertFound<T>(result: T | null, coachId: string): T {
+    if (!result) throw new NotFoundException(`Coach ${coachId} not found`);
+    return result;
   }
 }

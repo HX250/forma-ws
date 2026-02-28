@@ -25,6 +25,14 @@ import {
 } from '@forma-ws/domain';
 import { CoachService } from './coach.service';
 import { CurrentUser } from '../security/common/decorators/current-user.decorator';
+import { ResolveCoachIdGuard } from './guards/resolve-coach-id.guard';
+import { ResolvedCoachId } from './decorators/resolved-coach-id.decorator';
+
+const TOKEN_COOKIE_OPTIONS = {
+  httpOnly: true,
+  sameSite: 'lax',
+  path: '/',
+} as const;
 
 @Controller('coach')
 @UseGuards(JwtAuthGuard)
@@ -33,13 +41,10 @@ export class CoachController {
   constructor(private readonly coachService: CoachService) {}
 
   @Get('profile/personal')
-  async getPersonalProfile(
-    @CurrentUser() user: AuthPayload
+  @UseGuards(ResolveCoachIdGuard)
+  getPersonalProfile(
+    @ResolvedCoachId() coachId: string
   ): Promise<CoachPersonalProfile> {
-    const coachId = await this.coachService.resolveCoachId(
-      user.sub,
-      user.userType
-    );
     return this.coachService.getPersonalProfile(coachId);
   }
 
@@ -53,13 +58,10 @@ export class CoachController {
   }
 
   @Get('profile/professional')
-  async getProfessionalProfile(
-    @CurrentUser() user: AuthPayload
+  @UseGuards(ResolveCoachIdGuard)
+  getProfessionalProfile(
+    @ResolvedCoachId() coachId: string
   ): Promise<CoachProfessionalProfile> {
-    const coachId = await this.coachService.resolveCoachId(
-      user.sub,
-      user.userType
-    );
     return this.coachService.getProfessionalProfile(coachId);
   }
 
@@ -73,13 +75,10 @@ export class CoachController {
   }
 
   @Get('profile/availability')
-  async getAvailabilityProfile(
-    @CurrentUser() user: AuthPayload
+  @UseGuards(ResolveCoachIdGuard)
+  getAvailabilityProfile(
+    @ResolvedCoachId() coachId: string
   ): Promise<CoachAvailabilityProfile> {
-    const coachId = await this.coachService.resolveCoachId(
-      user.sub,
-      user.userType
-    );
     return this.coachService.getAvailabilityProfile(coachId);
   }
 
@@ -100,15 +99,7 @@ export class CoachController {
     @Res({ passthrough: true }) res: Response
   ): Promise<void> {
     await this.coachService.deleteAccount(user.sub);
-    res.clearCookie('accessToken', {
-      httpOnly: true,
-      sameSite: 'lax',
-      path: '/',
-    });
-    res.clearCookie('refreshToken', {
-      httpOnly: true,
-      sameSite: 'lax',
-      path: '/',
-    });
+    res.clearCookie('accessToken', TOKEN_COOKIE_OPTIONS);
+    res.clearCookie('refreshToken', TOKEN_COOKIE_OPTIONS);
   }
 }
