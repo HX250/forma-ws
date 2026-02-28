@@ -19,8 +19,6 @@ import { Observable } from 'rxjs';
 export class CoachSettingsResourceService extends GlobalAuthService {
   private http = inject(HttpClient);
 
-  // ── Personal ─────────────────────────────────────────────
-
   getPersonalProfile(): Observable<CoachPersonalProfile> {
     return this.http.get<CoachPersonalProfile>(
       `${this.endpoint}/coach/profile/personal`
@@ -35,8 +33,6 @@ export class CoachSettingsResourceService extends GlobalAuthService {
       dto
     );
   }
-
-  // ── Professional ─────────────────────────────────────────
 
   getProfessionalProfile(): Observable<CoachProfessionalProfile> {
     return this.http.get<CoachProfessionalProfile>(
@@ -53,8 +49,6 @@ export class CoachSettingsResourceService extends GlobalAuthService {
     );
   }
 
-  // ── Availability ─────────────────────────────────────────
-
   getAvailabilityProfile(): Observable<CoachAvailabilityProfile> {
     return this.http.get<CoachAvailabilityProfile>(
       `${this.endpoint}/coach/profile/availability`
@@ -69,8 +63,6 @@ export class CoachSettingsResourceService extends GlobalAuthService {
       dto
     );
   }
-
-  // ── Account ──────────────────────────────────────────────
 
   deleteAccount(): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/coach/account`);
