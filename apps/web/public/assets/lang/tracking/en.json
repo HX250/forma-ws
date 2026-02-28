@@ -100,6 +100,7 @@
       "NO_MEALS": "No meals logged today. Start tracking your nutrition!",
       "SUGAR": "Sugar",
       "REMOVE": "Remove",
+      "NUTRITIONAL_INFO": "Nutritional info per {{size}}g",
       "SEARCH_FOOD": "Search for a food item",
       "SERVING_SIZE": "Serving size (g)",
       "PLACEHOLDERS": {

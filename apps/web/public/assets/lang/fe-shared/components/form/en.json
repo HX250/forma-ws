@@ -12,6 +12,9 @@
       "SELECT": {
         "NO_ITEMS": "No items available",
         "SELECTED_COUNT": "{{count}} selected"
+      },
+      "AUTOCOMPLETE": {
+        "NO_RESULTS": "No results found"
       }
     }
   }

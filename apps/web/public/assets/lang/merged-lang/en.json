@@ -103,6 +103,9 @@
       "SELECT": {
         "NO_ITEMS": "No items available",
         "SELECTED_COUNT": "{{count}} selected"
+      },
+      "AUTOCOMPLETE": {
+        "NO_RESULTS": "No results found"
       }
     }
   },
@@ -125,6 +128,7 @@
     "CLIENTS": "Clients",
     "PROFILE": "Profile",
     "SETTINGS": "Settings",
+    "COACH_PROFILE": "My Coach",
     "LOGOUT": "Logout"
   },
   "REGISTER_CLIENT": {
@@ -372,6 +376,7 @@
       "NO_MEALS": "No meals logged today. Start tracking your nutrition!",
       "SUGAR": "Sugar",
       "REMOVE": "Remove",
+      "NUTRITIONAL_INFO": "Nutritional info per {{size}}g",
       "SEARCH_FOOD": "Search for a food item",
       "SERVING_SIZE": "Serving size (g)",
       "PLACEHOLDERS": {
@@ -532,5 +537,37 @@
     "BUILD_MUSCLE": "Build Muscle",
     "IMPROVE_ENDURANCE": "Improve Endurance",
     "GENERAL_FITNESS": "General Fitness"
+  },
+  "SETTINGS": {
+    "COACH_PROFILE": {
+      "TITLE": "Profile Settings",
+      "SAVE": "Save Changes",
+      "EDIT": "Edit",
+      "CANCEL": "Cancel",
+      "TABS": {
+        "PERSONAL": "Personal",
+        "PROFESSIONAL": "Professional",
+        "AVAILABILITY": "Availability & Communication"
+      },
+      "SECTIONS": {
+        "TITLE": "Sections",
+        "PERSONAL": "Personal Information",
+        "PROFESSIONAL": "Professional Information",
+        "AVAILABILITY": "Availability & Communication"
+      },
+      "ALERTS": {
+        "SUCCESS": "Profile updated successfully",
+        "ERROR": "Failed to update profile"
+      },
+      "DELETE_ACCOUNT": {
+        "BUTTON": "Delete Account",
+        "CONFIRM_TEXT": "This will permanently delete your account and all client data. This action cannot be undone.",
+        "CONFIRM_BUTTON": "Yes, Delete My Account",
+        "CANCEL": "Cancel",
+        "ALERTS": {
+          "ERROR": "Failed to delete account. Please try again."
+        }
+      }
+    }
   }
 }

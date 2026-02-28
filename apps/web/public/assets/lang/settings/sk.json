@@ -1,0 +1,34 @@
+{
+  "SETTINGS": {
+    "COACH_PROFILE": {
+      "TITLE": "Nastavenia profilu",
+      "SAVE": "Uložiť zmeny",
+      "EDIT": "Upraviť",
+      "CANCEL": "Zrušiť",
+      "TABS": {
+        "PERSONAL": "Osobné",
+        "PROFESSIONAL": "Profesionálne",
+        "AVAILABILITY": "Dostupnosť a komunikácia"
+      },
+      "SECTIONS": {
+        "TITLE": "Sekcie",
+        "PERSONAL": "Osobné informácie",
+        "PROFESSIONAL": "Profesionálne informácie",
+        "AVAILABILITY": "Dostupnosť a komunikácia"
+      },
+      "ALERTS": {
+        "SUCCESS": "Profil bol úspešne aktualizovaný",
+        "ERROR": "Aktualizácia profilu zlyhala"
+      },
+      "DELETE_ACCOUNT": {
+        "BUTTON": "Vymazať účet",
+        "CONFIRM_TEXT": "Týmto natrvalo vymažete svoj účet a všetky údaje klientov. Túto akciu nie je možné vrátiť späť.",
+        "CONFIRM_BUTTON": "Áno, vymazať môj účet",
+        "CANCEL": "Zrušiť",
+        "ALERTS": {
+          "ERROR": "Vymazanie účtu zlyhalo. Skúste to znova."
+        }
+      }
+    }
+  }
+}

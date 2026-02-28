@@ -28,4 +28,12 @@ export const appRoutes: Route[] = [
       ),
     canActivate: [securityGuard],
   },
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('./features/settings/settings.routes').then(
+        (m) => m.SettingsRoutingModule
+      ),
+    canActivate: [securityGuard],
+  },
 ];

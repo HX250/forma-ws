@@ -1,0 +1,109 @@
+@if (isDataLoading()) {
+<forma-loading />
+} @else {
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="material-icons text-xl text-accent dark:text-accent-dark"
+        >person</span
+      >
+      <h2
+        class="text-base font-semibold text-secondary dark:text-secondary-dark"
+      >
+        {{ 'SETTINGS.COACH_PROFILE.SECTIONS.PERSONAL' | translate }}
+      </h2>
+    </div>
+    @if (!isEditMode() && !isReadOnly()) {
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [icon]="'edit'"
+      [text]="'SETTINGS.COACH_PROFILE.EDIT'"
+      (clicked)="enterEditMode()"
+    />
+    }
+  </div>
+
+  <div class="border-t border-secondary/10 dark:border-secondary-dark/10 pt-4">
+    @if (!isEditMode()) {
+    <div class="space-y-3">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            {{ 'AUTH.REGISTER_COACH.FIRST_NAME' | translate }}
+          </p>
+          <p
+            class="text-sm font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ coachPersonal()?.firstName }}
+          </p>
+        </div>
+        <div>
+          <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+            {{ 'AUTH.REGISTER_COACH.LAST_NAME' | translate }}
+          </p>
+          <p
+            class="text-sm font-medium text-secondary dark:text-secondary-dark"
+          >
+            {{ coachPersonal()?.lastName }}
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          {{ 'AUTH.REGISTER_COACH.GENDER' | translate }}
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{
+            coachPersonal()?.gender ?? ''
+              | enumLabel : 'AUTH.REGISTER_COACH.GENDER_OPTIONS'
+          }}
+        </p>
+      </div>
+    </div>
+    } @else {
+    <div class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-page-input
+          [control]="form.controls.firstName"
+          [label]="'AUTH.REGISTER_COACH.FIRST_NAME'"
+          [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.FIRST_NAME'"
+        />
+        <app-page-input
+          [control]="form.controls.lastName"
+          [label]="'AUTH.REGISTER_COACH.LAST_NAME'"
+          [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.LAST_NAME'"
+        />
+      </div>
+      <app-page-select
+        [control]="form.controls.gender"
+        [items]="genderOptions"
+        [label]="'AUTH.REGISTER_COACH.GENDER'"
+        [placeholder]="'AUTH.REGISTER_COACH.PLACEHOLDERS.SELECT_GENDER'"
+        [required]="true"
+      />
+    </div>
+    }
+  </div>
+
+  @if (isEditMode()) {
+  <div
+    class="flex justify-end gap-2 pt-4 mt-4 border-t border-secondary/10 dark:border-secondary-dark/10"
+  >
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [text]="'SETTINGS.COACH_PROFILE.CANCEL'"
+      (clicked)="cancelEdit()"
+    />
+    <app-button
+      [type]="ButtonProperties.ButtonType.SUBMIT"
+      [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [loading]="loading"
+      [text]="'SETTINGS.COACH_PROFILE.SAVE'"
+    />
+  </div>
+  }
+</form>
+}

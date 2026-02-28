@@ -4,6 +4,7 @@
     "CLIENTS": "Clients",
     "PROFILE": "Profile",
     "SETTINGS": "Settings",
+    "COACH_PROFILE": "My Coach",
     "LOGOUT": "Logout"
   }
 }

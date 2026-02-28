@@ -6,6 +6,7 @@
     "clients",
     "dashboard",
     "tracking",
-    "client-profile"
+    "client-profile",
+    "settings"
   ]
 }

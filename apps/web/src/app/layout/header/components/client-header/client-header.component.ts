@@ -15,7 +15,9 @@ import {
 export class ClientHeaderComponent {
   linkClick = output<void>();
 
-  navLinks: NavLink[] = [];
+  navLinks: NavLink[] = [
+    { route: '/settings/profile', translationKey: 'HEADER.COACH_PROFILE' },
+  ];
 
   onLinkClick() {
     this.linkClick.emit();
