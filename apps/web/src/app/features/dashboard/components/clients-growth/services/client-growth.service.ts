@@ -11,7 +11,9 @@ export class ClientGrowthService {
     return {
       series: [
         {
-          name: this.translate.instant('DASHBOARD.CLIENTS_GROWTH.SERIES_NAME'),
+          name: this.translate.instant(
+            'DASHBOARD.WIDGETS.CLIENTS_GROWTH.SERIES_NAME'
+          ),
           data: data?.data ?? [],
         },
       ],
@@ -23,7 +25,9 @@ export class ClientGrowthService {
       dataLabels: { enabled: false },
       stroke: { curve: 'smooth' },
       title: {
-        text: this.translate.instant('DASHBOARD.CLIENTS_GROWTH.CHART_TITLE'),
+        text: this.translate.instant(
+          'DASHBOARD.WIDGETS.CLIENTS_GROWTH.CHART_TITLE'
+        ),
         align: 'left',
       },
       grid: {

@@ -1,0 +1,111 @@
+<div class="p-4 max-w-5xl mx-auto w-full flex flex-col overflow-hidden">
+  <h1 class="text-2xl font-bold text-secondary dark:text-secondary-dark mb-4">
+    {{ 'SETTINGS.COACH_PROFILE.TITLE' | translate }}
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+    <div
+      class="lg:col-span-2 md:col-span-2 rounded-lg border border-secondary/20 bg-primary p-4 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm h-fit"
+    >
+      <p
+        class="text-xs font-semibold text-secondary/50 dark:text-secondary-dark/50 uppercase tracking-wider mb-3 px-2"
+      >
+        {{ 'SETTINGS.COACH_PROFILE.SECTIONS.TITLE' | translate }}
+      </p>
+      <nav class="flex flex-col gap-1">
+        <app-button
+          [variant]="
+            activeTab() === 'personal'
+              ? ButtonProperties.ButtonVariant.COMPLEMENTARY
+              : ButtonProperties.ButtonVariant.NEUTRAL
+          "
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [icon]="'person'"
+          [text]="'SETTINGS.COACH_PROFILE.TABS.PERSONAL'"
+          (clicked)="setActiveTab('personal')"
+        />
+        <app-button
+          [variant]="
+            activeTab() === 'professional'
+              ? ButtonProperties.ButtonVariant.COMPLEMENTARY
+              : ButtonProperties.ButtonVariant.NEUTRAL
+          "
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [icon]="'work'"
+          [text]="'SETTINGS.COACH_PROFILE.TABS.PROFESSIONAL'"
+          (clicked)="setActiveTab('professional')"
+        />
+        <app-button
+          [variant]="
+            activeTab() === 'availability'
+              ? ButtonProperties.ButtonVariant.COMPLEMENTARY
+              : ButtonProperties.ButtonVariant.NEUTRAL
+          "
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [icon]="'calendar_month'"
+          [text]="'SETTINGS.COACH_PROFILE.TABS.AVAILABILITY'"
+          (clicked)="setActiveTab('availability')"
+        />
+      </nav>
+
+      @if (!isReadOnly()) {
+      <div
+        class="mt-4 pt-4 border-t border-secondary/10 dark:border-secondary-dark/10"
+      >
+        @if (!confirmDelete()) {
+        <app-button
+          [variant]="ButtonProperties.ButtonVariant.DANGER"
+          [size]="ButtonProperties.ButtonSize.SMALL"
+          [icon]="'delete_forever'"
+          [text]="'SETTINGS.COACH_PROFILE.DELETE_ACCOUNT.BUTTON'"
+          (clicked)="confirmDelete.set(true)"
+        />
+        } @else {
+        <p class="text-xs text-utils-error mb-2">
+          {{ 'SETTINGS.COACH_PROFILE.DELETE_ACCOUNT.CONFIRM_TEXT' | translate }}
+        </p>
+        <div class="flex flex-col gap-1">
+          <app-button
+            [variant]="ButtonProperties.ButtonVariant.DANGER"
+            [size]="ButtonProperties.ButtonSize.SMALL"
+            [text]="'SETTINGS.COACH_PROFILE.DELETE_ACCOUNT.CONFIRM_BUTTON'"
+            (clicked)="onDeleteAccount()"
+          />
+          <app-button
+            [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+            [size]="ButtonProperties.ButtonSize.SMALL"
+            [text]="'SETTINGS.COACH_PROFILE.DELETE_ACCOUNT.CANCEL'"
+            (clicked)="confirmDelete.set(false)"
+          />
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <div
+      class="lg:col-span-4 md:col-span-2 rounded-lg border border-secondary/20 bg-primary p-6 dark:border-secondary-dark/20 dark:bg-primary-dark shadow-sm"
+    >
+      <div [hidden]="activeTab() !== 'personal'">
+        <app-coach-personal-settings
+          [personalGroup]="personalForm"
+          [isReadOnly]="isReadOnly()"
+        />
+      </div>
+
+      <div [hidden]="activeTab() !== 'professional'">
+        <app-coach-professional-settings
+          [professionalGroup]="professionalForm"
+          [isReadOnly]="isReadOnly()"
+        />
+      </div>
+
+      <div [hidden]="activeTab() !== 'availability'">
+        <app-coach-availability-settings
+          [availabilityGroup]="availabilityForm"
+          [isReadOnly]="isReadOnly()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+@if (isDataLoading()) {
+<forma-loading />
+} @else {
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="material-icons text-xl text-accent dark:text-accent-dark"
+        >calendar_month</span
+      >
+      <h2
+        class="text-base font-semibold text-secondary dark:text-secondary-dark"
+      >
+        {{ 'SETTINGS.COACH_PROFILE.SECTIONS.AVAILABILITY' | translate }}
+      </h2>
+    </div>
+    @if (!isEditMode() && !isReadOnly()) {
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [icon]="'edit'"
+      [text]="'SETTINGS.COACH_PROFILE.EDIT'"
+      (clicked)="enterEditMode()"
+    />
+    }
+  </div>
+
+  <div class="border-t border-secondary/10 dark:border-secondary-dark/10 pt-4">
+    @if (!isEditMode()) {
+    <div class="space-y-3">
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-1">
+          {{ 'AUTH.REGISTER_COACH.COMMUNICATION_METHODS' | translate }}
+        </p>
+        <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
+          {{
+            coachAvailability()?.communicationMethods ?? []
+              | enumLabel : 'AUTH.REGISTER_COACH.COMMUNICATION_METHODS_OPTIONS'
+          }}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs text-secondary/70 dark:text-secondary-dark/70 mb-2">
+          {{ 'AUTH.REGISTER_COACH.AVAILABILITY' | translate }}
+        </p>
+        @if (enabledAvailabilityDays().length > 0) {
+        <div class="space-y-1">
+          @for (slot of enabledAvailabilityDays(); track slot.day) {
+          <div class="flex items-start gap-3">
+            <span
+              class="text-xs font-medium text-secondary dark:text-secondary-dark w-24 shrink-0"
+            >
+              {{
+                'AUTH.REGISTER_COACH.AVAILABILITY_DAYS.' + slot.day | translate
+              }}
+            </span>
+            <span class="text-xs text-secondary/70 dark:text-secondary-dark/70">
+              @for (time of slot.time; track $index) {
+              {{ time.from }} – {{ time.to }}@if ($index < slot.time.length - 1)
+              {, } }
+            </span>
+          </div>
+          }
+        </div>
+        } @else {
+        <p class="text-sm text-secondary/50 dark:text-secondary-dark/50 italic">
+          –
+        </p>
+        }
+      </div>
+    </div>
+    } @else {
+    <div class="space-y-4">
+      <app-availability-selector
+        [control]="form.controls.availability"
+        [label]="'AUTH.REGISTER_COACH.AVAILABILITY'"
+      />
+      <app-page-select
+        [control]="form.controls.communicationMethods"
+        [items]="communicationOptions"
+        [label]="'AUTH.REGISTER_COACH.COMMUNICATION_METHODS'"
+        [placeholder]="'AUTH.REGISTER_COACH.SELECT_COMMUNICATION_METHODS'"
+        [required]="true"
+        [multiple]="true"
+      />
+    </div>
+    }
+  </div>
+
+  @if (isEditMode()) {
+  <div
+    class="flex justify-end gap-2 pt-4 mt-4 border-t border-secondary/10 dark:border-secondary-dark/10"
+  >
+    <app-button
+      [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [text]="'SETTINGS.COACH_PROFILE.CANCEL'"
+      (clicked)="cancelEdit()"
+    />
+    <app-button
+      [type]="ButtonProperties.ButtonType.SUBMIT"
+      [variant]="ButtonProperties.ButtonVariant.PRIMARY"
+      [size]="ButtonProperties.ButtonSize.SMALL"
+      [loading]="loading"
+      [text]="'SETTINGS.COACH_PROFILE.SAVE'"
+    />
+  </div>
+  }
+</form>
+}

@@ -6,6 +6,10 @@ export type {
   RefreshTokenDto,
   AvailabilityModel,
   ClientGoalDto,
+  UpdateCoachProfileDto,
+  UpdateCoachPersonalDto,
+  UpdateCoachProfessionalDto,
+  UpdateCoachAvailabilityDto,
 } from './lib/dto';
 
 export type {

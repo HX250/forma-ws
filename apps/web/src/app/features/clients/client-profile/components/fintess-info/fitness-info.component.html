@@ -52,7 +52,10 @@
           {{ 'CLIENT_PROFILE.FITNESS_INFO.ACTIVITY_LEVEL' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-          {{ clientFitnessData().activityLevel }}
+          {{
+            clientFitnessData().activityLevel
+              | enumLabel : 'REGISTER_CLIENT.ACTIVITY_LEVEL_OPTIONS'
+          }}
         </p>
       </div>
 
@@ -61,7 +64,10 @@
           {{ 'CLIENT_PROFILE.FITNESS_INFO.FITNESS_EXPERIENCE' | translate }}
         </p>
         <p class="text-sm font-medium text-secondary dark:text-secondary-dark">
-          {{ clientFitnessData().fitnessExperience }}
+          {{
+            clientFitnessData().fitnessExperience
+              | enumLabel : 'REGISTER_CLIENT.FITNESS_EXPERIENCE_OPTIONS'
+          }}
         </p>
       </div>
       <div>

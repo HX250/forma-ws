@@ -1,12 +1,14 @@
 <div class="p-4 max-w-full mx-auto h-fit flex flex-col overflow-hidden">
   <div class="grid grid-cols-3 items-center gap-4 mb-6">
     <div class="flex items-center gap-3">
+      @if (user === UserType.COACH) {
       <app-button
         [variant]="ButtonProperties.ButtonVariant.NEUTRAL"
         [size]="ButtonProperties.ButtonSize.SMALL"
         [icon]="'arrow_back'"
         (clicked)="redirectToClientList()"
       />
+      }
     </div>
     <div class="place-self-center">
       <div class="flex items-center justify-center gap-2">

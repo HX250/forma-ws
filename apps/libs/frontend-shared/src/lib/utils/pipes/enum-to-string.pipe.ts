@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Pipe({
   name: 'enumLabel',
   pure: false,
+  standalone: true,
 })
 export class EnumLabelPipe implements PipeTransform {
   private translate = inject(TranslateService);

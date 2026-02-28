@@ -12,6 +12,9 @@
       "SELECT": {
         "NO_ITEMS": "Žiadne položky nie sú k dispozícii",
         "SELECTED_COUNT": "{{count}} vybraných"
+      },
+      "AUTOCOMPLETE": {
+        "NO_RESULTS": "Žiadne výsledky"
       }
     }
   }

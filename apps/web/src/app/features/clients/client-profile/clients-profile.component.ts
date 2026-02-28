@@ -18,7 +18,6 @@ import { FormControl, FormsModule } from '@angular/forms';
 import { UserType } from '@forma-ws/domain';
 import { WeightTrackingComponent } from '../../tracking/components/weight-tracking/weight-tracking.component';
 import { TrackingService } from '../../tracking/services/tracking.service';
-import { EditClientGoalComponent } from './components/client-goals/edit-client-goals.component';
 import {
   AlertService,
   AlertType,

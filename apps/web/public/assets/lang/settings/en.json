@@ -1,0 +1,34 @@
+{
+  "SETTINGS": {
+    "COACH_PROFILE": {
+      "TITLE": "Profile Settings",
+      "SAVE": "Save Changes",
+      "EDIT": "Edit",
+      "CANCEL": "Cancel",
+      "TABS": {
+        "PERSONAL": "Personal",
+        "PROFESSIONAL": "Professional",
+        "AVAILABILITY": "Availability & Communication"
+      },
+      "SECTIONS": {
+        "TITLE": "Sections",
+        "PERSONAL": "Personal Information",
+        "PROFESSIONAL": "Professional Information",
+        "AVAILABILITY": "Availability & Communication"
+      },
+      "ALERTS": {
+        "SUCCESS": "Profile updated successfully",
+        "ERROR": "Failed to update profile"
+      },
+      "DELETE_ACCOUNT": {
+        "BUTTON": "Delete Account",
+        "CONFIRM_TEXT": "This will permanently delete your account and all client data. This action cannot be undone.",
+        "CONFIRM_BUTTON": "Yes, Delete My Account",
+        "CANCEL": "Cancel",
+        "ALERTS": {
+          "ERROR": "Failed to delete account. Please try again."
+        }
+      }
+    }
+  }
+}

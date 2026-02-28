@@ -99,6 +99,7 @@
       "FIBER": "Vláknina",
       "SUGAR": "Cukor",
       "REMOVE": "Odstrániť",
+      "NUTRITIONAL_INFO": "Nutričné informácie na {{size}}g",
       "SEARCH_FOOD": "Vyhľadať potravinu",
       "SERVING_SIZE": "Veľkosť porcie (g)",
       "PLACEHOLDERS": {
