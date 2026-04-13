@@ -5,13 +5,14 @@ import { ClientsProfileComponent } from './client-profile/clients-profile.compon
 import { FirstLoginComponent } from './first-login/first-login.component';
 import { coachGuard } from '../../core/auth/coach.guard';
 import { clientProfileGuard } from '../../core/auth/client-profile.guard';
+import { passwordGuard } from '../../core/auth/password.guard';
 
 const routes: Routes = [
   { path: '', component: ClientsBoardComponent, canActivate: [coachGuard] },
   {
     path: 'profile/:id',
     component: ClientsProfileComponent,
-    canActivate: [clientProfileGuard],
+    canActivate: [clientProfileGuard, passwordGuard],
   },
   {
     path: 'set-up-password',
