@@ -14,6 +14,5 @@ export const passwordGuard: CanActivateFn = (route, state) => {
     }
   }
 
-  router.navigate(['/dashboard']);
   return true;
 };
