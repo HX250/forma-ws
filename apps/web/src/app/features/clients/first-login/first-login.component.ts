@@ -21,6 +21,7 @@ import {
 import { FirstLoginFormModel } from './models/first-login.model';
 import { Router } from '@angular/router';
 import { FirstLoginResourceService } from './resources/first-login.resource.service';
+import { SecurityService } from '../../../core/auth/security.service';
 
 @Component({
   selector: 'app-first-login',
@@ -39,6 +40,7 @@ export class FirstLoginComponent
   private readonly firstLoginResourceService = inject(
     FirstLoginResourceService
   );
+  private readonly securityService = inject(SecurityService);
 
   AlertType = AlertType;
 
@@ -59,9 +61,8 @@ export class FirstLoginComponent
           AlertType.SUCCESS,
           'FIRST_LOGIN.PASSWORD_CHANGED'
         );
-      },
-      complete: () => {
-        this.router.navigateByUrl('/dashboard');
+        this.securityService.updateCurrentUser({ isFirstLogin: false });
+        this.router.navigate(['/clients/profile', this.securityService.userId()]);
       },
     });
   }

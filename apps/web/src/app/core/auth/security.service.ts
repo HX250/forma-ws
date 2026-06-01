@@ -26,6 +26,13 @@ export class SecurityService {
     this.currentUser.set(user);
   }
 
+  updateCurrentUser(changes: Partial<UserAuthDetails>) {
+    const current = this.currentUser();
+    if (current) {
+      this.currentUser.set({ ...current, ...changes });
+    }
+  }
+
   clear() {
     this.isLoggedIn.set(false);
     this.currentUser.set(null);
